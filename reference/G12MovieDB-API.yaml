@@ -16,6 +16,11 @@ paths:
   '/users/{userId}':
     parameters:
       - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+      - schema:
           type: integer
         name: userId
         in: path
@@ -46,6 +51,32 @@ paths:
       description: Retrieve the information of the user with the matching user ID.
       x-stoplight:
         id: ptkiy1gf0z131
+    patch:
+      summary: Edit user info
+      tags: []
+      responses:
+        '200':
+          description: User info edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Patch /user/id:
+                  value:
+                    id: 14
+                    username: Jartsa
+                    email: jari.kariniemi@jartsanmaailma.fi
+                    password: null
+                    created_at: '2018-05-15'
+                    updated_at: '2024-03-27'
+        '400':
+          description: Cannot edit
+        '404':
+          description: User not found
+      operationId: patch-users-userId
+      x-stoplight:
+        id: 2yjjggdivqqph
   /user:
     post:
       summary: Create New User
@@ -103,6 +134,27 @@ paths:
       description: Create a new user.
       x-stoplight:
         id: vtd2tv1db1d60
+    delete:
+      summary: Delete user
+      tags: []
+      responses:
+        '200':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Delete /user/:
+                  value:
+                    id: 18
+        '400':
+          description: Cannot delete user
+        '404':
+          description: User not found
+      operationId: delete-user
+      x-stoplight:
+        id: ls3m621jz6i7j
   /upcoming:
     get:
       summary: Get a list of movies that are being released soon.
@@ -154,7 +206,7 @@ paths:
         id: t2i9qce1gh0co
   /group:
     get:
-      summary: Get User info of all groups
+      summary: Get info of all groups
       tags: []
       responses:
         '200':
@@ -167,7 +219,6 @@ paths:
         '404':
           description: Groups Not Found
       operationId: get-group
-      description: Retrieve the information of all group.
       x-stoplight:
         id: 9pi3bduveq5fx
   '/group/{groupId}':
@@ -178,7 +229,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get User info of all groups
+      summary: Get info one group
       tags: []
       responses:
         '200':
@@ -226,6 +277,50 @@ paths:
       operationId: get-favorites
       x-stoplight:
         id: ciof4v29mirse
+    post:
+      summary: Add movie to favorites
+      tags: []
+      responses:
+        '200':
+          description: Favorite added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorites'
+              examples:
+                Post /favorites/142:
+                  value:
+                    user_id: 142
+                    movie_id: 11
+                    created_at: '2019-02-18'
+                    updated_at: '2019-02-18'
+        '404':
+          description: Cannot add favorite
+      operationId: post-favorites
+      x-stoplight:
+        id: uc1zhlwzst21a
+    delete:
+      summary: Delete favorite from database
+      tags: []
+      responses:
+        '200':
+          description: Favorites deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorites'
+              examples:
+                Delete /favorites/142:
+                  value:
+                    user_id: 142
+                    movie_id: 11
+                    created_at: '2019-02-18'
+                    updated_at: '2019-02-18'
+        '404':
+          description: Favorites Not Found
+      operationId: delete-favorites
+      x-stoplight:
+        id: r073kzf1utsud
   /reviews:
     get:
       summary: Get reviews done by user
@@ -250,6 +345,71 @@ paths:
       operationId: get-reviews
       x-stoplight:
         id: rgosvn1j5q5lt
+    post:
+      summary: Post reviews done by user
+      tags: []
+      responses:
+        '200':
+          description: Reviews posted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+                    content: Tämä leffa on paras
+                    FK_user_id: 142
+                    FK_movie_id: 11
+                    FK_movie_scores_id: 123
+        '404':
+          description: Couldn't post review
+      operationId: post-reviews
+      x-stoplight:
+        id: e7kdohu4n8ajs
+    patch:
+      summary: Edit review done by user
+      tags: []
+      responses:
+        '200':
+          description: Review edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+                    content: Tämä leffa on paras
+                    FK_user_id: 142
+                    FK_movie_id: 11
+                    FK_movie_scores_id: 123
+        '404':
+          description: Couldn't edit review
+      operationId: patch-reviews
+      x-stoplight:
+        id: ptkzygc6zb4j4
+    delete:
+      summary: Delete review done by user
+      tags: []
+      responses:
+        '200':
+          description: Review deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+        '404':
+          description: Couldn't delete review
+      operationId: delete-reviews
+      x-stoplight:
+        id: 2nqshtnh8j8ax
   /watched:
     get:
       summary: Watched movies list
@@ -274,6 +434,52 @@ paths:
       operationId: get-watched_movies
       x-stoplight:
         id: cvfsjouduyz1s
+    post:
+      summary: Add movie to watched
+      tags: []
+      responses:
+        '200':
+          description: Added movie to watched list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watched'
+              examples:
+                Post /watched/142:
+                  value:
+                    user_id: 142
+                    movie_id: 17
+                    note: Olipa hyvä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot add movie to watched
+      operationId: post-watched
+      x-stoplight:
+        id: h8tw0zognafer
+    delete:
+      summary: Delete movie from watched
+      tags: []
+      responses:
+        '200':
+          description: Watched movie deleted from list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watched'
+              examples:
+                Delete /watched/142:
+                  value:
+                    user_id: 142
+                    movie_id: 17
+                    note: Olipa hyvä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot delete movie from watched
+      operationId: delete-watched
+      x-stoplight:
+        id: 7jm6t7m6ps90l
   /to_watch:
     get:
       summary: Get to watch movie list
@@ -298,6 +504,52 @@ paths:
       operationId: get-to_watch
       x-stoplight:
         id: f1b6qjzrt4kma
+    post:
+      summary: Add movie to to watch list
+      tags: []
+      responses:
+        '200':
+          description: Add movie to To watch movies list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/To_watch'
+              examples:
+                Post /watched/142:
+                  value:
+                    user_id: 142
+                    movie_id: 17
+                    note: Pakko nähdä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot add to To watch List
+      operationId: post-to_watch
+      x-stoplight:
+        id: b6yztgiczzuer
+    delete:
+      summary: Delete movie to to watch list
+      tags: []
+      responses:
+        '200':
+          description: Movie deleted from list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/To_watch'
+              examples:
+                Get /watched/142:
+                  value:
+                    user_id: 142
+                    movie_id: 17
+                    note: Pakko nähdä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot delete from to watch
+      operationId: delete-to_watch
+      x-stoplight:
+        id: gkpdvx5l60971
   /join_request:
     post:
       summary: Post group join request
@@ -496,8 +748,7 @@ components:
       type: object
       description: ''
       examples:
-        - value: null
-          id: 18
+        - id: 18
           username: Pertsa
           email: pertti.kariniemi@pertsanmaailma.fi
           password: JartsaOnPaska
@@ -513,6 +764,11 @@ components:
           type: string
           x-stoplight:
             id: c9745xdyo9mmj
+        password:
+          type: string
+          format: password
+          x-stoplight:
+            id: 4tv130gn73u2f
         email:
           type: string
           format: email
@@ -541,8 +797,7 @@ components:
       type: object
       description: Group
       examples:
-        - value: null
-          id: 142
+        - id: 142
           group_name: Jarin Leffakerho
           group_description: Jarin paras leffakerho
           created_at: '2019-11-07'
