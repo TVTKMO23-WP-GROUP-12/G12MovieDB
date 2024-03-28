@@ -16,11 +16,6 @@ paths:
   '/users/{userId}':
     parameters:
       - schema:
-          type: string
-        name: userId
-        in: path
-        required: true
-      - schema:
           type: integer
         name: userId
         in: path
@@ -42,7 +37,7 @@ paths:
                     id: 14
                     username: Jartsa
                     email: jari.kariniemi@jartsanmaailma.fi
-                    password: null
+                    password: PertsaOnPakana
                     created_at: '2018-05-15'
                     updated_at: '2024-03-27'
         '404':
@@ -67,7 +62,7 @@ paths:
                     id: 14
                     username: Jartsa
                     email: jari.kariniemi@jartsanmaailma.fi
-                    password: null
+                    password: PertsaOnPakana
                     created_at: '2018-05-15'
                     updated_at: '2024-03-27'
         '400':
@@ -127,7 +122,7 @@ paths:
               Post /user/:
                 value:
                   username: Pertsa
-                  password: JatsaOnPaska
+                  password: JartsaOnPaska
                   email: pertti.kariniemi@pertsanmaailma.fi
                   created_at: '2020-02-17'
         description: Post the necessary fields for the API to create a new user.
@@ -144,22 +139,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-              examples:
-                Delete /user/:
-                  value:
-                    id: 18
         '400':
           description: Cannot delete user
         '404':
           description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - id
+            examples:
+                Delete /user/:
+                  value:
+                    id: 18
+                    username: Pertsa
+                    password: JartsaOnPaska
+        description: Delete the user by id, enter username and password to confirm
+      description: Create a new user.
       operationId: delete-user
       x-stoplight:
         id: ls3m621jz6i7j
   /upcoming:
     get:
       summary: Get a list of movies that are being released soon.
-      tags:
-        - upcoming
       url: 'https://api.themoviedb.org/3/movie/upcoming'
       authorization: OKHTTP request
       accept: application/json
@@ -211,17 +222,17 @@ paths:
       responses:
         '200':
           description: Groups found
-          content:
+        '404':
+          description: Groups Not Found
+      content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Group'
               examples: Get /group/
-        '404':
-          description: Groups Not Found
       operationId: get-group
       x-stoplight:
         id: 9pi3bduveq5fx
-  '/group/{groupId}':
+  /group/{groupId}:
     parameters:
       - schema:
           type: string
@@ -644,7 +655,7 @@ paths:
       operationId: get-search
       x-stoplight:
         id: 1prr7tf36459u
-  '/movie/{movie_id}':
+  /movie/{movie_id}:
     get:
       summary: Get the top level details of a movie by ID.
       tags:
@@ -674,7 +685,7 @@ paths:
         name: movie_id
         in: path
         required: true
-  '/movie/{movie_id}/credits':
+  /movie/{movie_id}/credits:
     get:
       summary: Get the credits of a movie by ID.
       tags:
@@ -803,7 +814,7 @@ components:
           created_at: '2019-11-07'
           updated_at: '2021-04-15'
           joined_at: '2019-08-24'
-          left_at: null
+          left_at: '2022-07-12'
           FK_user_id: 12
       properties:
         id:
