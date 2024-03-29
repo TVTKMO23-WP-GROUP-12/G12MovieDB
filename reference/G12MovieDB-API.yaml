@@ -14,11 +14,11 @@ info:
     url: 'https://www.oamk.fi'
     email: t2lahe00@students.oamk.fi
 tags:
-  - name: C Global Tag"
+  - name: C Global Tag
     description: global alphabet tag for C
   - name: create users
     description: creates a new user
-  - name: D Global Tag"
+  - name: D Global Tag
     description: global alphabet tag for D
   - name: delete favorites
     description: deletes a favorite
@@ -30,11 +30,11 @@ tags:
     description: deletes a user
   - name: delete watched
     description: deletes a movie from watched list
-  - name: E Global Tag"
+  - name: E Global Tag
     description: global alphabet tag for E
   - name: edit reviews
     description: edits a user review
-  - name: G Global Tag"
+  - name: G Global Tag
     description: global alphabet tag for G
   - name: get favorites
     description: gets user favorites
@@ -60,11 +60,11 @@ tags:
     description: gets all group info
   - name: group id
     description: gets specific groups info
-  - name: L Global Tag"
+  - name: L Global Tag
     description: global alphabet tag for L
   - name: login
     description: login a user
-  - name: P Global Tag"
+  - name: P Global Tag
     description: global alphabet tag for P
   - name: popular
     description: gets popular movies from TMDB
@@ -78,11 +78,11 @@ tags:
     description: adds a movie to watch list
   - name: post watched
     description: adds a movie to watched list
-  - name: R Global Tag"
+  - name: R Global Tag
     description: global alphabet tag for R
   - name: register
     description: reqister a new user
-  - name: S Global Tag"
+  - name: S Global Tag
     description: global alphabet tag for S
   - name: search
     description: searches for movies fromn TMDB
@@ -276,6 +276,36 @@ paths:
       operationId: get-upcoming
       x-stoplight:
         id: u1lzxnbaxetxv
+      parameters:
+        - schema:
+            type: string
+          in: query
+          description: 'https://api.themoviedb.org/3/movie/upcoming'
+          name: url
+        - schema:
+            type: string
+          in: header
+          name: accept
+          description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
   /popular:
     get:
       summary: Get a list of movies ordered by popularity.
@@ -298,6 +328,36 @@ paths:
       operationId: get-popular
       x-stoplight:
         id: t2i9qce1gh0co
+      parameters:
+        - schema:
+            type: string
+          in: header
+          description: The API key for TMDB requests
+          name: accept
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+        - schema:
+            type: string
+          in: query
+          name: url
+          description: 'https://api.themoviedb.org/3/movie/popular'
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
   /group:
     get:
       summary: Get info of all groups
@@ -780,15 +840,21 @@ paths:
         - schema:
             type: string
           in: header
-          name: TMDB API KEY
+          name: accept
           description: The API key for TMDB requests
         - schema:
             type: string
           in: query
-          name: URL
+          name: url
           description: 'https://api.themoviedb.org/3/discover/movie'
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
       requestBody:
         description: |-
+          ```json
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
@@ -798,6 +864,7 @@ paths:
             .build();
 
           Response response = client.newCall(request).execute();
+          ```
         content: {}
   '/movie/{movie_id}':
     parameters:
@@ -835,15 +902,21 @@ paths:
         - schema:
             type: string
           in: header
-          name: TMDB API KEY
+          name: accept
           description: The API key for TMDB requests
         - schema:
             type: string
           in: query
-          name: URL
+          name: url
           description: 'https://api.themoviedb.org/3/movie/{movie_id}'
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
       requestBody:
         description: |-
+          ```json
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
@@ -853,6 +926,7 @@ paths:
             .build();
 
           Response response = client.newCall(request).execute();
+          ```
         content: {}
   '/movie/{movie_id}credits':
     parameters:
@@ -898,8 +972,14 @@ paths:
           in: header
           name: TMDB API KEY
           description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
       requestBody:
         description: |-
+          ```json
           OkHttpClient client = new OkHttpClient();
 
           Request request = new Request.Builder()
@@ -909,6 +989,7 @@ paths:
             .build();
 
           Response response = client.newCall(request).execute();
+          ```
         content: {}
   /login:
     get:
