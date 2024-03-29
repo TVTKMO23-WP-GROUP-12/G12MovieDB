@@ -1,8 +1,9 @@
 /* For testing */
-header {
+
+nav {
   background-color: var(--dark-grey);
   color: var(--accent-color);
-  height: 100px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;

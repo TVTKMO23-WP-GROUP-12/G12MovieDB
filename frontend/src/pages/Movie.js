@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Movie() {
   return (
-    <p>Movie</p>
+    <p>Movie details here</p>
   )
 }
