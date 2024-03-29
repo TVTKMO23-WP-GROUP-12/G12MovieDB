@@ -154,13 +154,6 @@ servers:
   - url: 'http://localhost:3000'
 paths:
   '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
     get:
       summary: Get User Info by User ID
       tags: [ get users]
@@ -186,6 +179,13 @@ paths:
       description: Retrieve the information of the user with the matching user ID.
       x-stoplight:
         id: ptkiy1gf0z131
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
     patch:
       summary: Edit user info
       tags: [ update users ]
@@ -274,6 +274,7 @@ paths:
     delete:
       summary: Delete user
       tags: [ delete user ]
+      description: Delete a user
       responses:
         '200':
           description: User deleted
@@ -306,7 +307,6 @@ paths:
                     username: Pertsa
                     password: JartsaOnPaska
         description: Delete the user by id, enter username and password to confirm
-      description: Create a new user.
       operationId: delete-user
       x-stoplight:
         id: ls3m621jz6i7j
@@ -315,9 +315,6 @@ paths:
       summary: Get a list of movies that are being released soon.
       tags: [ upcoming ]
       description: gets upcoming movies from TMDB
-      url: 'https://api.themoviedb.org/3/movie/upcoming'
-      authorization: OKHTTP request
-      accept: application/json
       responses:
         '200':
           description: Movies loaded
@@ -334,15 +331,11 @@ paths:
       operationId: get-upcoming
       x-stoplight:
         id: u1lzxnbaxetxv
-    parameters: []
   /popular:
     get:
       summary: Get a list of movies ordered by popularity.
       tags: [ popular ]
       description: Get a list of popular movies from TMDB
-      url: 'https://api.themoviedb.org/3/movie/popular'
-      authorization: OKHTTP request
-      accept: application/json
       responses:
         '200':
           description: Movies loaded
@@ -378,13 +371,6 @@ paths:
       x-stoplight:
         id: 9pi3bduveq5fx
   /group/{group_id}:
-    parameters:
-      - schema:
-          type: string
-        name: group_id
-        description: group id
-        in: path
-        required: true
     get:
       summary: Get info one group
       tags: [ group id ]
@@ -412,6 +398,13 @@ paths:
       operationId: get-group-groupId
       x-stoplight:
         id: 5zldztu198t8n
+    parameters:
+      - schema:
+          type: string
+        name: group_id
+        description: group id
+        in: path
+        required: true
   /favorites:
     get:
       summary: Get user favorites
@@ -1121,7 +1114,7 @@ components:
           format: varchar(255)
           example: Pakko nähä!
           x-stoplight:
-            id: p9q0r2s4t6u8
+            id: p0o9i2u3y6t
         created_at:
           type: string
           format: date
@@ -1153,21 +1146,21 @@ components:
         note:
           type: string
           format: varchar(255)
-          example: Pakko nähä!
+          example: Olipa hyvä!
           x-stoplight:
-            id: t9u0v2w4x6y8
+            id: q9w4e5r2t7y1
         created_at:
           type: string
           format: date
           example: '2019-05-13'
           x-stoplight:
-            id: z1a3b5c7d9e0
+            id: m8n7b4v5c2x0
         updated_at:
           type: string
           format: date
           example: '2022-06-15'
           x-stoplight:
-            id: f2g4h6i8j0k3
+            id: l5m7n9o1p2q4
     Join_request:
       title: Join_request
       x-stoplight:
@@ -1181,7 +1174,7 @@ components:
         requester_id:
           type: integer
           x-stoplight:
-            id: l5m7n9o1p2q4
+            id: h7a3k1f5z8x0
         message:
           type: string
           format: varchar(255)
