@@ -80,12 +80,12 @@ tags:
     description: adds a movie to watched list
   - name: R Global Tag
     description: global alphabet tag for R
-  - name: register
-    description: reqister a new user
   - name: S Global Tag
     description: global alphabet tag for S
   - name: search
     description: searches for movies fromn TMDB
+  - name: signup
+    description: signup a new user
   - name: U Global Tag"
     description: global alphabet tag for U
   - name: update users
@@ -1014,28 +1014,28 @@ paths:
       operationId: get-login
       x-stoplight:
         id: qd6vk2u70bgcp
-  /register:
+  /signup:
     post:
-      summary: Register an account
+      summary: signup an account
       tags:
-        - register
-      description: register a new user
+        - signup
+      description: signup a new user
       responses:
         '200':
-          description: Register succesfull
+          description: signup succesfull
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Register'
+                $ref: '#/components/schemas/Signup'
               examples:
-                Post /register:
+                Post /signup:
                   value:
                     username: Pertsa
                     password: JartsaOnPaska
                     email: pertti.kariniemi@pertsanmaailma.fi
         '404':
-          description: Register failed
-      operationId: post-register
+          description: signup failed
+      operationId: post-signup
       x-stoplight:
         id: cseph6lf8681c
 components:
@@ -1391,8 +1391,8 @@ components:
           example: PertsaOnPaska
           x-stoplight:
             id: t9u0v2w4x6y8
-    Register:
-      title: Register
+    Signup:
+      title: Signup
       x-stoplight:
         id: dd5b5ur58h8wa
       type: object
