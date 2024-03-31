@@ -27,8 +27,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.favorites (
     user_id integer NOT NULL,
     movie_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -41,9 +41,9 @@ ALTER TABLE public.favorites OWNER TO postgres;
 CREATE TABLE public.followers (
     follower_id integer NOT NULL,
     user_id integer,
-    joined_at timestamp without time zone NOT NULL,
-    left_at timestamp without time zone NOT NULL,
-    following boolean NOT NULL
+    following boolean NOT NULL,
+    joined_at timestamp with time zone DEFAULT now() NOT NULL,
+    left_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -71,7 +71,9 @@ CREATE TABLE public.members (
     member_id integer NOT NULL,
     user_id integer,
     group_id integer,
-    is_admin boolean DEFAULT false NOT NULL
+    is_admin boolean DEFAULT false NOT NULL,
+    joined_at timestamp with time zone DEFAULT now() NOT NULL,
+    left_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -99,8 +101,8 @@ CREATE TABLE public.message (
     message_id integer NOT NULL,
     creator_id integer NOT NULL,
     content text NOT NULL,
-    create_date timestamp without time zone NOT NULL,
-    parent_message_id integer
+    parent_message_id integer,
+    create_date timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -183,8 +185,8 @@ CREATE TABLE public.movie_scores (
     movie_score_id integer NOT NULL,
     movie_id integer NOT NULL,
     score integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -212,8 +214,8 @@ CREATE TABLE public.movies_to_watch (
     user_id integer NOT NULL,
     movie_id integer NOT NULL,
     note text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -227,8 +229,8 @@ CREATE TABLE public.movies_watched (
     user_id integer NOT NULL,
     movie_id integer NOT NULL,
     note text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -272,10 +274,8 @@ CREATE TABLE public.user_group (
     user_id integer,
     group_name character varying(255) NOT NULL,
     group_description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone,
-    joined_at timestamp without time zone NOT NULL,
-    left_at timestamp without time zone
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -304,9 +304,10 @@ CREATE TABLE public.users (
     username character varying(128) NOT NULL,
     password character varying(128) NOT NULL,
     email character varying(255) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone,
-    last_login timestamp without time zone
+    last_login timestamp without time zone,
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -324,6 +325,35 @@ ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY (
     NO MAXVALUE
     CACHE 1
 );
+
+
+--
+-- Name: users_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq1
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.users_id_seq1 OWNER TO postgres;
+
+--
+-- Name: users_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq1 OWNED BY public.users.id;
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq1'::regclass);
 
 
 --
