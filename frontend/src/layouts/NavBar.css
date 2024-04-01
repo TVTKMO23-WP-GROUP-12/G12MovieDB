@@ -1,0 +1,10 @@
+/* For testing */
+
+nav {
+  background-color: var(--dark-grey);
+  color: var(--accent-color);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

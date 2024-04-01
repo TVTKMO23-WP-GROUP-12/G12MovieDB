@@ -1,0 +1,1421 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 148xn1gfbeuvf
+info:
+  license:
+    name: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+    url: 'https://creativecommons.org/licenses/by-sa/4.0/'
+  title: G12MovieDB API
+  version: '1.0'
+  summary: G12MovieDB Rest API documentation
+  description: "This is the Rest API documentation for G12MovieDB project. \r\nThe project is done by Pasi Honka, Henri Laukka, Lari Lepistö and Sanna Mäki for TVT23KMO \r\nweb application project course."
+  contact:
+    name: Henri Laukka
+    url: 'https://www.oamk.fi'
+    email: t2lahe00@students.oamk.fi
+tags:
+  - name: C Global Tag
+    description: global alphabet tag for C
+  - name: create users
+    description: creates a new user
+  - name: D Global Tag
+    description: global alphabet tag for D
+  - name: delete favorites
+    description: deletes a favorite
+  - name: delete reviews
+    description: deletes a user review
+  - name: delete to watch
+    description: deletes a movie from to watch list
+  - name: delete user
+    description: deletes a user
+  - name: delete watched
+    description: deletes a movie from watched list
+  - name: E Global Tag
+    description: global alphabet tag for E
+  - name: edit reviews
+    description: edits a user review
+  - name: G Global Tag
+    description: global alphabet tag for G
+  - name: get favorites
+    description: gets user favorites
+  - name: get group members
+    description: gets a list of group members
+  - name: get movie credits
+    description: gets the credits (actors/actresses) of a movie from TMDB
+  - name: get movie details
+    description: gets the details of a movie from TMDB
+  - name: get pending request
+    description: gets pending request information
+  - name: get reviews
+    description: get user reviews
+  - name: get to watch
+    description: gets a list of users to watch movies
+  - name: upcoming
+    description: gets upcoming movies from TMDB
+  - name: get users
+    description: gets user info
+  - name: get watched
+    description: gets a list of users watched movies
+  - name: group
+    description: gets all group info
+  - name: group id
+    description: gets specific groups info
+  - name: L Global Tag
+    description: global alphabet tag for L
+  - name: login
+    description: login a user
+  - name: P Global Tag
+    description: global alphabet tag for P
+  - name: popular
+    description: gets popular movies from TMDB
+  - name: post favorites
+    description: posts user favorites
+  - name: post join request
+    description: sends a join request for a group
+  - name: post reviews
+    description: posts users review
+  - name: post to watch
+    description: adds a movie to watch list
+  - name: post watched
+    description: adds a movie to watched list
+  - name: R Global Tag
+    description: global alphabet tag for R
+  - name: S Global Tag
+    description: global alphabet tag for S
+  - name: search
+    description: searches for movies fromn TMDB
+  - name: signup
+    description: signup a new user
+  - name: U Global Tag"
+    description: global alphabet tag for U
+  - name: update users
+    description: updates user info
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/users/{userId}':
+    get:
+      summary: Get User Info by User ID
+      tags:
+        - get users
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Get /user/id:
+                  value:
+                    id: 14
+                    username: Jartsa
+                    email: jari.kariniemi@jartsanmaailma.fi
+                    password: PertsaOnPakana
+                    created_at: '2018-05-15'
+                    updated_at: '2024-03-27'
+        '404':
+          description: User Not Found
+      operationId: get-users-userId
+      description: Retrieve the information of the user with the matching user ID.
+      x-stoplight:
+        id: ptkiy1gf0z131
+    parameters:
+      - schema:
+          type: integer
+        name: userId
+        in: path
+        required: true
+        description: Id of an existing user.
+    patch:
+      summary: Edit user info
+      tags:
+        - update users
+      description: updates user info
+      responses:
+        '200':
+          description: User info edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Patch /user/id:
+                  value:
+                    id: 14
+                    username: Jartsa
+                    email: jari.kariniemi@jartsanmaailma.fi
+                    password: PertsaOnPakana
+                    created_at: '2018-05-15'
+                    updated_at: '2024-03-27'
+        '400':
+          description: Cannot edit
+        '404':
+          description: User not found
+      operationId: patch-users-userId
+      x-stoplight:
+        id: 2yjjggdivqqph
+  /user:
+    post:
+      summary: Create New User
+      tags:
+        - create users
+      operationId: post-user
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                Post /user/:
+                  value:
+                    id: 18
+                    username: Pertsa
+                    email: pertti.kariniemi@pertsanmaailma.fi
+                    password: JartsaOnPaska
+                    created_at: '2020-02-17'
+                    updated_at: null
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+        '410':
+          description: Username Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+                created_at:
+                  type: string
+                  format: date
+              required:
+                - username
+                - password
+                - email
+                - created_at
+            examples:
+              Post /user/:
+                value:
+                  username: Pertsa
+                  password: JartsaOnPaska
+                  email: pertti.kariniemi@pertsanmaailma.fi
+                  created_at: '2020-02-17'
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+      x-stoplight:
+        id: vtd2tv1db1d60
+    delete:
+      summary: Delete user
+      tags:
+        - delete user
+      description: Delete a user
+      responses:
+        '200':
+          description: User deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Cannot delete user
+        '404':
+          description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - id
+            examples:
+              Delete /user/:
+                value:
+                  id: 18
+                  username: Pertsa
+                  password: JartsaOnPaska
+        description: 'Delete the user by id, enter username and password to confirm'
+      operationId: delete-user
+      x-stoplight:
+        id: ls3m621jz6i7j
+  /upcoming:
+    get:
+      summary: Get a list of movies that are being released soon.
+      tags:
+        - upcoming
+      description: gets upcoming movies from TMDB
+      responses:
+        '200':
+          description: Movies loaded
+        '404':
+          description: Movies not found
+      content:
+        application/json:
+          examples:
+            request Get \:
+              value:
+                url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}'
+                authorization: OKHTTP request
+                header: application/json
+      operationId: get-upcoming
+      x-stoplight:
+        id: u1lzxnbaxetxv
+      parameters:
+        - schema:
+            type: string
+          in: query
+          description: 'https://api.themoviedb.org/3/movie/upcoming'
+          name: url
+        - schema:
+            type: string
+          in: header
+          name: accept
+          description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
+  /popular:
+    get:
+      summary: Get a list of movies ordered by popularity.
+      tags:
+        - popular
+      description: Get a list of popular movies from TMDB
+      responses:
+        '200':
+          description: Movies loaded
+        '404':
+          description: Movies not found
+      content:
+        application/json:
+          examples:
+            request Get \:
+              value:
+                url: 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc'
+                authorization: OKHTTP request
+                header: application/json
+      operationId: get-popular
+      x-stoplight:
+        id: t2i9qce1gh0co
+      parameters:
+        - schema:
+            type: string
+          in: header
+          description: The API key for TMDB requests
+          name: accept
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+        - schema:
+            type: string
+          in: query
+          name: url
+          description: 'https://api.themoviedb.org/3/movie/popular'
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
+  /group:
+    get:
+      summary: Get info of all groups
+      tags:
+        - group
+      description: get info of all groups
+      responses:
+        '200':
+          description: Groups found
+        '404':
+          description: Groups Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Group'
+          examples: Get /group/
+      operationId: get-group
+      x-stoplight:
+        id: 9pi3bduveq5fx
+  '/group/{group_id}':
+    get:
+      summary: Get info one group
+      tags:
+        - group id
+      description: get info of one group
+      responses:
+        '200':
+          description: Group found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                Get /group/142:
+                  value:
+                    id: 142
+                    group_name: Jarin Leffakerho
+                    group_description: Jarin paras leffakerho
+                    created_at: '2019-07-11'
+                    updated_at: '2021-04-15'
+                    joined_at: '2019-08-24'
+                    left_at: '2020-07-30'
+                    users_id: 12
+        '404':
+          description: Group Not Found
+      operationId: get-group-groupId
+      x-stoplight:
+        id: 5zldztu198t8n
+    parameters:
+      - schema:
+          type: string
+        name: group_id
+        description: group id
+        in: path
+        required: true
+  /favorites:
+    get:
+      summary: Get user favorites
+      tags:
+        - get favorites
+      description: get favorites of user
+      responses:
+        '200':
+          description: Favorites found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorites'
+              examples:
+                Get /favorites/190:
+                  value:
+                    users_id: 142
+                    movie_id: 11
+                    created_at: '2019-02-18'
+                    updated_at: '2019-02-18'
+        '404':
+          description: Favorites Not Found
+      operationId: get-favorites
+      x-stoplight:
+        id: ciof4v29mirse
+    post:
+      summary: Add movie to favorites
+      tags:
+        - post favorites
+      description: post a movie to favorites list
+      responses:
+        '200':
+          description: Favorite added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorites'
+              examples:
+                Post /favorites/142:
+                  value:
+                    users_id: 142
+                    movie_id: 11
+                    created_at: '2019-02-18'
+                    updated_at: '2019-02-18'
+        '404':
+          description: Cannot add favorite
+      operationId: post-favorites
+      x-stoplight:
+        id: uc1zhlwzst21a
+    delete:
+      summary: Delete favorite from database
+      tags:
+        - delete favorites
+      description: delete a movie from favorites list
+      responses:
+        '200':
+          description: Favorites deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorites'
+              examples:
+                Delete /favorites/142:
+                  value:
+                    users_id: 142
+                    movie_id: 11
+                    created_at: '2019-02-18'
+                    updated_at: '2019-02-18'
+        '404':
+          description: Favorites Not Found
+      operationId: delete-favorites
+      x-stoplight:
+        id: r073kzf1utsud
+  /reviews:
+    get:
+      summary: Get reviews done by user
+      tags:
+        - get reviews
+      description: get reviews done by user
+      responses:
+        '200':
+          description: Reviews found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                Get /reviews/142:
+                  value:
+                    id: 15
+                    content: Tämä leffa on paras
+                    users_id: 142
+                    movie_id: 11
+                    movie_scores_id: 123
+        '404':
+          description: Reviews Not Found
+      operationId: get-reviews
+      x-stoplight:
+        id: rgosvn1j5q5lt
+    post:
+      summary: Post reviews done by user
+      tags:
+        - post reviews
+      description: post a user review
+      responses:
+        '200':
+          description: Reviews posted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+                    content: Tämä leffa on paras
+                    users_id: 142
+                    movie_id: 11
+                    movie_scores_id: 123
+        '404':
+          description: Couldn't post review
+      operationId: post-reviews
+      x-stoplight:
+        id: e7kdohu4n8ajs
+    patch:
+      summary: Edit review done by user
+      tags:
+        - edit reviews
+      description: edit a review done by user
+      responses:
+        '200':
+          description: Review edited
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+                    content: Tämä leffa on paras
+                    users_id: 142
+                    movie_id: 11
+                    movie_scores_id: 123
+        '404':
+          description: Couldn't edit review
+      operationId: patch-reviews
+      x-stoplight:
+        id: ptkzygc6zb4j4
+    delete:
+      summary: Delete review done by user
+      tags:
+        - delete reviews
+      description: delete a review done by user
+      responses:
+        '200':
+          description: Review deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reviews'
+              examples:
+                post /reviews/:
+                  value:
+                    id: 15
+        '404':
+          description: Couldn't delete review
+      operationId: delete-reviews
+      x-stoplight:
+        id: 2nqshtnh8j8ax
+  /watched:
+    get:
+      summary: Watched movies list
+      tags:
+        - get watched
+      description: get a list of movies watched by user
+      responses:
+        '200':
+          description: Watched movies list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_watched'
+              examples:
+                Get /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Olipa hyvä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Watched List Not Found
+      operationId: get-watched_movies
+      x-stoplight:
+        id: cvfsjouduyz1s
+    post:
+      summary: Add movie to watched
+      tags:
+        - post watched
+      description: add a movie to watched list
+      responses:
+        '200':
+          description: Added movie to watched list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_watched'
+              examples:
+                Post /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Olipa hyvä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot add movie to watched
+      operationId: post-watched
+      x-stoplight:
+        id: h8tw0zognafer
+    delete:
+      summary: Delete movie from watched
+      tags:
+        - delete watched
+      description: delete a movie from watched list
+      responses:
+        '200':
+          description: Watched movie deleted from list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_watched'
+              examples:
+                Delete /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Olipa hyvä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot delete movie from watched
+      operationId: delete-watched
+      x-stoplight:
+        id: 7jm6t7m6ps90l
+  /to_watch:
+    get:
+      summary: Get to watch movie list
+      tags:
+        - get to watch
+      description: get a list of to watch movies by user
+      responses:
+        '200':
+          description: To watch movies list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_to_watch'
+              examples:
+                Get /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Pakko nähdä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: To watch List Not Found
+      operationId: get-to_watch
+      x-stoplight:
+        id: f1b6qjzrt4kma
+    post:
+      summary: Add movie to to watch list
+      tags:
+        - post to watch
+      description: post a movie to to watch list
+      responses:
+        '200':
+          description: Add movie to To watch movies list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_to_watch'
+              examples:
+                Post /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Pakko nähdä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot add to To watch List
+      operationId: post-to_watch
+      x-stoplight:
+        id: b6yztgiczzuer
+    delete:
+      summary: Delete movie to to watch list
+      tags:
+        - delete to watch
+      description: delete a movie from to watch list
+      responses:
+        '200':
+          description: Movie deleted from list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movies_to_watch'
+              examples:
+                Get /watched/142:
+                  value:
+                    users_id: 142
+                    movie_id: 17
+                    note: Pakko nähdä!
+                    created_at: '2020-12-18'
+                    updated_at: '2024-08-15'
+        '404':
+          description: Cannot delete from to watch
+      operationId: delete-to_watch
+      x-stoplight:
+        id: gkpdvx5l60971
+  /join_request:
+    post:
+      summary: Post group join request
+      tags:
+        - post join request
+      description: send a request to join a group
+      responses:
+        '200':
+          description: Group join request sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Join_request'
+              examples:
+                Post /group/142:
+                  value:
+                    id: 10
+                    requester_id: 15
+                    message: Saanko liittyä rakastan hevoselokuvia
+                    ctime: '2024-03-27'
+                    users_id: 15
+                    group_id: 142
+        '404':
+          description: Failed to send request
+      operationId: post-join_request
+      x-stoplight:
+        id: mrkobep7000k8
+  /user_pending_request:
+    get:
+      summary: Pending request
+      tags:
+        - get pending request
+      description: get pending group requests
+      responses:
+        '200':
+          description: Request pending
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_pending_request'
+              examples:
+                Get /group/72:
+                  value:
+                    parent_id: 72
+                    message: Haluan liittyä tykkään hevoselokuvista
+                    users_id: 15
+        '404':
+          description: Failed to fetch pending request
+      operationId: get-pending_request
+      x-stoplight:
+        id: mz05x7lqk8d5a
+  /group/members:
+    get:
+      summary: Get list of group members
+      tags:
+        - get group members
+      description: get a list of group members
+      responses:
+        '200':
+          description: List of group members found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members'
+              examples:
+                Get /group/142:
+                  value:
+                    id: 82
+                    is_admin: 'true'
+                    users_id: 15
+                    group_id: 152
+        '404':
+          description: Group members not found
+      operationId: get-group-members
+      x-stoplight:
+        id: cczqzec6hnt5k
+  /search:
+    get:
+      summary: 'Search a movie by name, language and year. Search for movies by their original, translated and alternative titles.'
+      tags:
+        - search
+      description: search a movie from TMDB
+      url: 'https://api.themoviedb.org/3/search/movie'
+      authorization: OKHTTP request
+      accept: application/json
+      responses:
+        '200':
+          description: Movies found
+        '404':
+          description: Movies not found
+      content:
+        application/json:
+          examples:
+            request Get \:
+              value:
+                url: 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&year=2013'
+                authorization: OKHTTP request
+                header: application/json
+      operationId: get-search
+      x-stoplight:
+        id: 1prr7tf36459u
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: accept
+          description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: query
+          name: url
+          description: 'https://api.themoviedb.org/3/discover/movie'
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
+  '/movie/{movie_id}':
+    parameters:
+      - schema:
+          type: integer
+        name: movie_id
+        description: movie id
+        in: path
+        required: true
+    get:
+      summary: Get the top level details of a movie by ID.
+      tags:
+        - get movie details
+      description: get movie details from TMDB
+      url: 'https://api.themoviedb.org/3/movie/{movie_id}'
+      authorization: OKHTTP request
+      accept: application/json
+      responses:
+        '200':
+          description: Movie loaded
+        '404':
+          description: Movie not found
+      content:
+        application/json:
+          examples:
+            request Get \:
+              value:
+                url: 'https://api.themoviedb.org/3/movie/movie_id?language=en-US'
+                authorization: OKHTTP request
+                header: application/json
+      operationId: get-movie
+      x-stoplight:
+        id: t9rsry8p2ogze
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: accept
+          description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: query
+          name: url
+          description: 'https://api.themoviedb.org/3/movie/{movie_id}'
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/movie_id?language=en-US")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
+  '/movie/{movie_id}credits':
+    parameters:
+      - schema:
+          type: integer
+        name: movie_id
+        description: movie id
+        in: path
+        required: true
+    get:
+      type: API request
+      summary: Get the credits of a movie by ID.
+      tags:
+        - get movie credits
+      description: get credits of a movie from TMDB
+      url: 'https://api.themoviedb.org/3/movie/{movie_id}/credits'
+      authorization: OKHTTP request
+      accept: application/json
+      responses:
+        '200':
+          description: Credits loaded
+        '404':
+          description: Credits not found
+      content:
+        application/json:
+          examples:
+            request Get \:
+              value:
+                url: 'https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US'
+                authorization: OKHTTP request
+                header: application/json
+      operationId: get-movie-credits
+      x-stoplight:
+        id: p5u1wssvfcrt6
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: URL
+          description: 'https://api.themoviedb.org/3/movie/{movie_id}/credits'
+        - schema:
+            type: string
+          in: header
+          name: TMDB API KEY
+          description: The API key for TMDB requests
+        - schema:
+            type: string
+          in: header
+          name: application/json
+          description: application/json
+      requestBody:
+        description: |-
+          ```json
+          OkHttpClient client = new OkHttpClient();
+
+          Request request = new Request.Builder()
+            .url("https://api.themoviedb.org/3/movie/movie_id/credits?language=en-US")
+            .get()
+            .addHeader("accept", "application/json")
+            .build();
+
+          Response response = client.newCall(request).execute();
+          ```
+        content: {}
+  /login:
+    get:
+      summary: Login page
+      tags:
+        - login
+      description: login a user
+      responses:
+        '200':
+          description: Login succesfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+              examples:
+                Get /login:
+                  value:
+                    username: Pertsa
+                    password: JartsaOnPaska
+        '404':
+          description: Login failed
+      operationId: get-login
+      x-stoplight:
+        id: qd6vk2u70bgcp
+  /signup:
+    post:
+      summary: signup an account
+      tags:
+        - signup
+      description: signup a new user
+      responses:
+        '200':
+          description: signup succesfull
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signup'
+              examples:
+                Post /signup:
+                  value:
+                    username: Pertsa
+                    password: JartsaOnPaska
+                    email: pertti.kariniemi@pertsanmaailma.fi
+        '404':
+          description: signup failed
+      operationId: post-signup
+      x-stoplight:
+        id: cseph6lf8681c
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 18
+          username: Pertsa
+          email: pertti.kariniemi@pertsanmaailma.fi
+          password: JartsaOnPaska
+          created_at: '2020-02-17'
+          updated_at: null
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+          x-stoplight:
+            id: nj55xwcgdxrd6
+        username:
+          type: string
+          x-stoplight:
+            id: c9745xdyo9mmj
+        password:
+          type: string
+          format: password
+          x-stoplight:
+            id: 4tv130gn73u2f
+        email:
+          type: string
+          format: email
+          x-stoplight:
+            id: 5bqrxidpi9gr6
+        created_at:
+          type: string
+          format: date
+          example: '1997-10-31'
+          x-stoplight:
+            id: 0zp2dzbu07li1
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+          x-stoplight:
+            id: gbanmqwefhxy6
+      required:
+        - id
+        - username
+        - password
+        - email
+      x-stoplight:
+        id: bopjydp7s9ul5
+    Group:
+      title: Group
+      type: object
+      description: Group
+      examples:
+        - id: 142
+          group_name: Jarin Leffakerho
+          group_description: Jarin paras leffakerho
+          created_at: '2019-11-07'
+          updated_at: '2021-04-15'
+          joined_at: '2019-08-24'
+          left_at: '2022-07-12'
+          users_id: 12
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given group.
+          x-stoplight:
+            id: fntj19ehga6o5
+        group_name:
+          type: string
+          x-stoplight:
+            id: d6786ghbnris0
+        'group_description:':
+          type: string
+          x-stoplight:
+            id: ldfgjk675gh53
+        created_at:
+          type: string
+          format: date
+          example: '1997-10-31'
+          x-stoplight:
+            id: 412cv7j80gfjd
+        updated_at:
+          type: string
+          format: date
+          example: '1997-10-31'
+          x-stoplight:
+            id: 8dfhbm90asitg
+        joined_at:
+          type: string
+          format: date
+          example: '1997-10-31'
+          x-stoplight:
+            id: 1d2c9hmygvb8l
+        left_at:
+          type: string
+          format: date
+          example: '1997-10-31'
+          x-stoplight:
+            id: fgm607342knfb
+        users_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: s70dfg89ank19
+      required:
+        - id
+        - group_name
+        - group_description
+        - created_at
+        - users_id
+      x-stoplight:
+        id: 4hf9ygaavwsh8
+    Favorites:
+      title: Favorites
+      x-stoplight:
+        id: 2y9359z39cxor
+      type: object
+      properties:
+        users_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: cwaklhvcefodi
+        movie_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: g4xm0378tlgsb
+        created_at:
+          type: string
+          format: date
+          example: '2019-02-18'
+          x-stoplight:
+            id: 4b3e7d9f1a2c5
+        updated_at:
+          type: string
+          format: date
+          example: '2019-02-18'
+          x-stoplight:
+            id: e8g2h4j6k0i3
+    Reviews:
+      title: Reviews
+      x-stoplight:
+        id: tghc3m6qrqanv
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: 0yy5ih08gahaj
+          content:
+            type: string
+            format: text
+            example: Tämä leffa on paras
+            x-stoplight:
+              id: l5m7n9o1p2q4
+          users_id:
+            type: integer
+            description: foreign key
+            x-stoplight:
+              id: r3s5t7u9v0w1
+          movie_id:
+            type: integer
+            description: foreign key
+            x-stoplight:
+              id: x2y4z6a8b0c3
+          movie_scores_id:
+            type: integer
+            description: foreign key
+            x-stoplight:
+              id: d5e7f9g1h2i4
+    Movies_to_watch:
+      title: Movies_to_watch
+      x-stoplight:
+        id: 3rk3y35tkcs0e
+      type: object
+      properties:
+        users_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: 3y1vxq4qxy7cd
+        movie_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: j6k8l0m3n5o7
+        note:
+          type: string
+          format: varchar(255)
+          example: Pakko nähä!
+          x-stoplight:
+            id: p0o9i2u3y6t
+        created_at:
+          type: string
+          format: date
+          example: '2019-05-13'
+          x-stoplight:
+            id: v1w3x5y7z9a0
+        updated_at:
+          type: string
+          format: date
+          example: '2022-06-15'
+          x-stoplight:
+            id: b2c4d6e8f1g3
+    Movies_watched:
+      title: Movies_watched
+      x-stoplight:
+        id: ddo1ksdny32gp
+      type: object
+      properties:
+        users_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: h5i7j9k0l2m4
+        movie_id:
+          type: integer
+          description: primary key
+          x-stoplight:
+            id: n6o8p1q3r5s7
+        note:
+          type: string
+          format: varchar(255)
+          example: Olipa hyvä!
+          x-stoplight:
+            id: q9w4e5r2t7y1
+        created_at:
+          type: string
+          format: date
+          example: '2019-05-13'
+          x-stoplight:
+            id: m8n7b4v5c2x0
+        updated_at:
+          type: string
+          format: date
+          example: '2022-06-15'
+          x-stoplight:
+            id: l5m7n9o1p2q4
+    Join_request:
+      title: Join_request
+      x-stoplight:
+        id: w1d6e2mz8u68l
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: asch1lokh1lhy
+        requester_id:
+          type: integer
+          x-stoplight:
+            id: h7a3k1f5z8x0
+        message:
+          type: string
+          format: varchar(255)
+          x-stoplight:
+            id: r3s5t7u9v0w1
+        ctime:
+          type: string
+          format: date
+          example: '2024-03-29'
+          x-stoplight:
+            id: x2y4z6a8b0c3
+        users_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: d5e7f9g1h2i4
+        group_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: j6k8l0m3n5o7
+    User_pending_request:
+      title: User_pending_request
+      x-stoplight:
+        id: pdo5hp03y7y2u
+      type: object
+      properties:
+        parent_id:
+          type: integer
+          x-stoplight:
+            id: 8cg5g27bdgpxh
+        message:
+          type: string
+          format: text
+          x-stoplight:
+            id: p9q0r2s4t6u8
+        users_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: v1w3x5y7z9
+    members:
+      title: members
+      x-stoplight:
+        id: pbpc9ysy4jr7s
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: jcek1xwm98181
+        is_admin:
+          type: string
+          format: enum
+          description: false/true
+          x-stoplight:
+            id: n6o8p1q3r5s7
+        users_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: h5i7j9k0l2m4
+        group_id:
+          type: integer
+          description: foreign key
+          x-stoplight:
+            id: b2c4d6e8f1g3
+    Search:
+      title: Search
+      x-stoplight:
+        id: pmo3fkve8s1ei
+      type: object
+      properties:
+        url:
+          type: string
+          format: url
+          example: 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&year=2013'
+          x-stoplight:
+            id: mfzsr79gb4qrt
+    Login:
+      title: Login
+      x-stoplight:
+        id: y980puyas9cyk
+      type: object
+      properties:
+        username:
+          type: string
+          format: varchar(255)
+          example: Jartsa
+          x-stoplight:
+            id: z12o24ntj8ox2
+        password:
+          type: string
+          format: 'varchar(255), password'
+          example: PertsaOnPaska
+          x-stoplight:
+            id: t9u0v2w4x6y8
+    Signup:
+      title: Signup
+      x-stoplight:
+        id: dd5b5ur58h8wa
+      type: object
+      properties:
+        username:
+          type: string
+          format: varchar(255)
+          example: Jartsa
+          x-stoplight:
+            id: 4w4xob1x4hvgd
+        email:
+          type: string
+          format: 'varchar(255), email'
+          example: jartsa.kariniemi@jartsanmaailma.fi
+          x-stoplight:
+            id: z1a3b5c7d9e0
+        password:
+          type: string
+          format: 'varchar(255), password'
+          example: PertsaOnPaska
+          x-stoplight:
+            id: f2g4h6i8j0k3
+      required:
+        - username
+        - email
+        - password
