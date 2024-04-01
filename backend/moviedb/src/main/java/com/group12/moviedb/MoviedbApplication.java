@@ -1,4 +1,4 @@
-package com.group12.moviedb.moviedb;
+package com.group12.moviedb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MoviedbApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MoviedbApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(MoviedbApplication.class, args);
+    }
+    
 }
