@@ -1,17 +1,26 @@
 package com.group12.moviedb.models;
 
 import jakarta.persistence.*;
-
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="users")
 public class User {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String username;
     private String email;
-    private String password; 
+    private String password;
+    
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
 
     private User() {}
 
@@ -38,9 +47,21 @@ public class User {
         return this.password;
     }
 
-  //  public void setId(int id) {
-    //    this.id = id;
-    //}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public LocalDateTime getLastLogin() {
+        return lastLogin;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -53,4 +74,22 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setLastLogin(LocalDateTime lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public User orElse(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
+    }
+
 }
