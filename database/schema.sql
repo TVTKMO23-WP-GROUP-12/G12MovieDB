@@ -1,5 +1,5 @@
---
--- PostgreSQL database dump
+-- Active: 1711955562629@@dpg-co55plv79t8c739g3c80-a.frankfurt-group12.render.com@5432@g12moviedb@public
+-- group12QL database dump
 --
 
 -- Dumped from database version 16.2
@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: favorites; Type: TABLE; Schema: public; Owner: postgres
+-- Name: favorites; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.favorites (
@@ -32,10 +32,10 @@ CREATE TABLE public.favorites (
 );
 
 
-ALTER TABLE public.favorites OWNER TO postgres;
+ALTER TABLE public.favorites OWNER TO group12;
 
 --
--- Name: followers; Type: TABLE; Schema: public; Owner: postgres
+-- Name: followers; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.followers (
@@ -47,10 +47,10 @@ CREATE TABLE public.followers (
 );
 
 
-ALTER TABLE public.followers OWNER TO postgres;
+ALTER TABLE public.followers OWNER TO group12;
 
 --
--- Name: followers_follower_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: followers_follower_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.followers ALTER COLUMN follower_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -64,7 +64,7 @@ ALTER TABLE public.followers ALTER COLUMN follower_id ADD GENERATED ALWAYS AS ID
 
 
 --
--- Name: members; Type: TABLE; Schema: public; Owner: postgres
+-- Name: members; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.members (
@@ -77,10 +77,10 @@ CREATE TABLE public.members (
 );
 
 
-ALTER TABLE public.members OWNER TO postgres;
+ALTER TABLE public.members OWNER TO group12;
 
 --
--- Name: members_member_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: members_member_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.members ALTER COLUMN member_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -94,7 +94,7 @@ ALTER TABLE public.members ALTER COLUMN member_id ADD GENERATED ALWAYS AS IDENTI
 
 
 --
--- Name: message; Type: TABLE; Schema: public; Owner: postgres
+-- Name: message; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.message (
@@ -106,10 +106,10 @@ CREATE TABLE public.message (
 );
 
 
-ALTER TABLE public.message OWNER TO postgres;
+ALTER TABLE public.message OWNER TO group12;
 
 --
--- Name: message_message_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: message_message_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.message ALTER COLUMN message_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -123,7 +123,7 @@ ALTER TABLE public.message ALTER COLUMN message_id ADD GENERATED ALWAYS AS IDENT
 
 
 --
--- Name: message_recipient; Type: TABLE; Schema: public; Owner: postgres
+-- Name: message_recipient; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.message_recipient (
@@ -135,10 +135,10 @@ CREATE TABLE public.message_recipient (
 );
 
 
-ALTER TABLE public.message_recipient OWNER TO postgres;
+ALTER TABLE public.message_recipient OWNER TO group12;
 
 --
--- Name: message_recipient_message_recipient_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: message_recipient_message_recipient_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.message_recipient ALTER COLUMN message_recipient_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -152,7 +152,7 @@ ALTER TABLE public.message_recipient ALTER COLUMN message_recipient_id ADD GENER
 
 
 --
--- Name: movie; Type: TABLE; Schema: public; Owner: postgres
+-- Name: movie; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.movie (
@@ -161,10 +161,10 @@ CREATE TABLE public.movie (
 );
 
 
-ALTER TABLE public.movie OWNER TO postgres;
+ALTER TABLE public.movie OWNER TO group12;
 
 --
--- Name: movie_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: movie_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.movie ALTER COLUMN movie_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -178,7 +178,7 @@ ALTER TABLE public.movie ALTER COLUMN movie_id ADD GENERATED ALWAYS AS IDENTITY 
 
 
 --
--- Name: movie_scores; Type: TABLE; Schema: public; Owner: postgres
+-- Name: movie_scores; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.movie_scores (
@@ -190,10 +190,10 @@ CREATE TABLE public.movie_scores (
 );
 
 
-ALTER TABLE public.movie_scores OWNER TO postgres;
+ALTER TABLE public.movie_scores OWNER TO group12;
 
 --
--- Name: movie_scores_movie_score_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: movie_scores_movie_score_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.movie_scores ALTER COLUMN movie_score_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -207,7 +207,7 @@ ALTER TABLE public.movie_scores ALTER COLUMN movie_score_id ADD GENERATED ALWAYS
 
 
 --
--- Name: movies_to_watch; Type: TABLE; Schema: public; Owner: postgres
+-- Name: movies_to_watch; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.movies_to_watch (
@@ -219,10 +219,10 @@ CREATE TABLE public.movies_to_watch (
 );
 
 
-ALTER TABLE public.movies_to_watch OWNER TO postgres;
+ALTER TABLE public.movies_to_watch OWNER TO group12;
 
 --
--- Name: movies_watched; Type: TABLE; Schema: public; Owner: postgres
+-- Name: movies_watched; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.movies_watched (
@@ -234,10 +234,10 @@ CREATE TABLE public.movies_watched (
 );
 
 
-ALTER TABLE public.movies_watched OWNER TO postgres;
+ALTER TABLE public.movies_watched OWNER TO group12;
 
 --
--- Name: review; Type: TABLE; Schema: public; Owner: postgres
+-- Name: review; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.review (
@@ -249,10 +249,10 @@ CREATE TABLE public.review (
 );
 
 
-ALTER TABLE public.review OWNER TO postgres;
+ALTER TABLE public.review OWNER TO group12;
 
 --
--- Name: review_review_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: review_review_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.review ALTER COLUMN review_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -266,7 +266,7 @@ ALTER TABLE public.review ALTER COLUMN review_id ADD GENERATED ALWAYS AS IDENTIT
 
 
 --
--- Name: user_group; Type: TABLE; Schema: public; Owner: postgres
+-- Name: user_group; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.user_group (
@@ -279,10 +279,10 @@ CREATE TABLE public.user_group (
 );
 
 
-ALTER TABLE public.user_group OWNER TO postgres;
+ALTER TABLE public.user_group OWNER TO group12;
 
 --
--- Name: user_group_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: user_group_group_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.user_group ALTER COLUMN group_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -296,7 +296,7 @@ ALTER TABLE public.user_group ALTER COLUMN group_id ADD GENERATED ALWAYS AS IDEN
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: postgres
+-- Name: users; Type: TABLE; Schema: public; Owner: group12
 --
 
 CREATE TABLE public.users (
@@ -311,10 +311,10 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE public.users OWNER TO group12;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -328,7 +328,7 @@ ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: users_id_seq1; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: users_id_seq1; Type: SEQUENCE; Schema: public; Owner: group12
 --
 
 CREATE SEQUENCE public.users_id_seq1
@@ -340,24 +340,24 @@ CREATE SEQUENCE public.users_id_seq1
     CACHE 1;
 
 
-ALTER SEQUENCE public.users_id_seq1 OWNER TO postgres;
+ALTER SEQUENCE public.users_id_seq1 OWNER TO group12;
 
 --
--- Name: users_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: users_id_seq1; Type: SEQUENCE OWNED BY; Schema: public; Owner: group12
 --
 
 ALTER SEQUENCE public.users_id_seq1 OWNED BY public.users.id;
 
 
 --
--- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq1'::regclass);
 
 
 --
--- Name: favorites favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: favorites favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.favorites
@@ -365,7 +365,7 @@ ALTER TABLE ONLY public.favorites
 
 
 --
--- Name: followers followers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: followers followers_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.followers
@@ -373,7 +373,7 @@ ALTER TABLE ONLY public.followers
 
 
 --
--- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: members members_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.members
@@ -381,7 +381,7 @@ ALTER TABLE ONLY public.members
 
 
 --
--- Name: message message_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message message_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message
@@ -389,7 +389,7 @@ ALTER TABLE ONLY public.message
 
 
 --
--- Name: message_recipient message_recipient_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message_recipient message_recipient_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message_recipient
@@ -397,7 +397,7 @@ ALTER TABLE ONLY public.message_recipient
 
 
 --
--- Name: movie movie_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movie movie_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movie
@@ -405,7 +405,7 @@ ALTER TABLE ONLY public.movie
 
 
 --
--- Name: movie_scores movie_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movie_scores movie_scores_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movie_scores
@@ -413,7 +413,7 @@ ALTER TABLE ONLY public.movie_scores
 
 
 --
--- Name: movies_to_watch movies_to_watch_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_to_watch movies_to_watch_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_to_watch
@@ -421,7 +421,7 @@ ALTER TABLE ONLY public.movies_to_watch
 
 
 --
--- Name: movies_watched movies_watched_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_watched movies_watched_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_watched
@@ -429,7 +429,7 @@ ALTER TABLE ONLY public.movies_watched
 
 
 --
--- Name: review review_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: review review_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.review
@@ -437,7 +437,7 @@ ALTER TABLE ONLY public.review
 
 
 --
--- Name: user_group user_group_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_group user_group_group_name_key; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.user_group
@@ -445,7 +445,7 @@ ALTER TABLE ONLY public.user_group
 
 
 --
--- Name: user_group user_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_group user_group_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.user_group
@@ -453,7 +453,7 @@ ALTER TABLE ONLY public.user_group
 
 
 --
--- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.users
@@ -461,7 +461,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.users
@@ -469,7 +469,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.users
@@ -477,7 +477,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: favorites favorites_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: favorites favorites_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.favorites
@@ -485,7 +485,7 @@ ALTER TABLE ONLY public.favorites
 
 
 --
--- Name: favorites favorites_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: favorites favorites_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.favorites
@@ -493,7 +493,7 @@ ALTER TABLE ONLY public.favorites
 
 
 --
--- Name: followers fk_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: followers fk_user_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.followers
@@ -501,7 +501,7 @@ ALTER TABLE ONLY public.followers
 
 
 --
--- Name: members group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: members group_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.members
@@ -509,7 +509,7 @@ ALTER TABLE ONLY public.members
 
 
 --
--- Name: message message_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message message_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message
@@ -517,7 +517,7 @@ ALTER TABLE ONLY public.message
 
 
 --
--- Name: message message_parent_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message message_parent_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message
@@ -525,7 +525,7 @@ ALTER TABLE ONLY public.message
 
 
 --
--- Name: message_recipient message_recipient_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message_recipient message_recipient_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message_recipient
@@ -533,7 +533,7 @@ ALTER TABLE ONLY public.message_recipient
 
 
 --
--- Name: message_recipient message_recipient_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message_recipient message_recipient_message_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message_recipient
@@ -541,7 +541,7 @@ ALTER TABLE ONLY public.message_recipient
 
 
 --
--- Name: message_recipient message_recipient_recipient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: message_recipient message_recipient_recipient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.message_recipient
@@ -549,7 +549,7 @@ ALTER TABLE ONLY public.message_recipient
 
 
 --
--- Name: movie_scores movie_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movie_scores movie_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movie_scores
@@ -557,7 +557,7 @@ ALTER TABLE ONLY public.movie_scores
 
 
 --
--- Name: review movie_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: review movie_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.review
@@ -565,7 +565,7 @@ ALTER TABLE ONLY public.review
 
 
 --
--- Name: review movie_score_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: review movie_score_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.review
@@ -573,7 +573,7 @@ ALTER TABLE ONLY public.review
 
 
 --
--- Name: movies_to_watch movies_to_watch_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_to_watch movies_to_watch_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_to_watch
@@ -581,7 +581,7 @@ ALTER TABLE ONLY public.movies_to_watch
 
 
 --
--- Name: movies_to_watch movies_to_watch_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_to_watch movies_to_watch_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_to_watch
@@ -589,7 +589,7 @@ ALTER TABLE ONLY public.movies_to_watch
 
 
 --
--- Name: movies_watched movies_watched_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_watched movies_watched_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_watched
@@ -597,7 +597,7 @@ ALTER TABLE ONLY public.movies_watched
 
 
 --
--- Name: movies_watched movies_watched_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: movies_watched movies_watched_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.movies_watched
@@ -605,7 +605,7 @@ ALTER TABLE ONLY public.movies_watched
 
 
 --
--- Name: review user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: review user_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.review
@@ -613,7 +613,7 @@ ALTER TABLE ONLY public.review
 
 
 --
--- Name: user_group user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: user_group user_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.user_group
@@ -621,7 +621,7 @@ ALTER TABLE ONLY public.user_group
 
 
 --
--- Name: members user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: members user_id; Type: FK CONSTRAINT; Schema: public; Owner: group12
 --
 
 ALTER TABLE ONLY public.members
@@ -629,6 +629,6 @@ ALTER TABLE ONLY public.members
 
 
 --
--- PostgreSQL database dump complete
+-- group12QL database dump complete
 --
 
