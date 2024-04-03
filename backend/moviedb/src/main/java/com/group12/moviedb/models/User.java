@@ -102,6 +102,7 @@ public class User {
 
     public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
+    }
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
