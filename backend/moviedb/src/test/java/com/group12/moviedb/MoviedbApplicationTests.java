@@ -1,4 +1,4 @@
-package com.group12.moviedb.moviedb;
+package com.group12.moviedb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,6 +8,7 @@ class MoviedbApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
