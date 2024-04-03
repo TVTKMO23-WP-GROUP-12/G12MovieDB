@@ -41,7 +41,7 @@ public class User {
     }
 
     public int getId() {
-    return this.id;
+        return this.id;
     }
 
     public String getUsername() {
@@ -118,3 +118,4 @@ public class User {
     }
 
 }
+

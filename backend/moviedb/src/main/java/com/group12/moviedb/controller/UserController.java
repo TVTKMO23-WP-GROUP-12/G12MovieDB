@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group12.moviedb.models.User;
 import com.group12.moviedb.repository.UserRepository;
-import com.group12.moviedb.services.*;
+import com.group12.moviedb.services.UserService;
+
 
 
 @RestController
