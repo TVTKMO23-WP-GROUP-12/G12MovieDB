@@ -62,7 +62,7 @@ public class UserController {
         });
     return this.userRepository.save(user);
     }
-    
+
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
       user.setId(id);
@@ -75,4 +75,3 @@ public class UserController {
   }
 
 }
-
