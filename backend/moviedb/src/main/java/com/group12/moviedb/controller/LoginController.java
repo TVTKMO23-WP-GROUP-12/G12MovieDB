@@ -1,9 +1,10 @@
 package com.group12.moviedb.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 public class LoginController {
-  @GetMapping("/")
+  @GetMapping("/login")
   public String home() {
     return
         "<html>\n" +
@@ -25,6 +26,12 @@ public class LoginController {
   @GetMapping("/users")
   public String getUsers() {
     return "Only users can see this";
+  }
+
+  @PostMapping("/register")
+  public String user() {
+    return "";
+
   }
 
   }

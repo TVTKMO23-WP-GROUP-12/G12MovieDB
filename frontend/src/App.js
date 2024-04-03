@@ -1,15 +1,16 @@
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import Layout from './layouts/Layout'
-import Home from './pages/Home'
-import SignUp from './pages/SignUp'
-import Login from './pages/Login'
-import Search from './pages/Search'
-import User from './pages/User'
-import Group from './pages/Group'
-import Movie from './pages/Movie'
-import Showtimes from './pages/Showtimes'
-import NotFound from './pages/NotFound'
+import React from 'react';
+import {Routes, Route } from 'react-router-dom';
+import './App.css';
+import Layout from './layouts/Layout';
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import Search from './pages/Search';
+import User from './pages/User';
+import Group from './pages/Group';
+import Movie from './pages/Movie';
+import Showtimes from './pages/Showtimes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (

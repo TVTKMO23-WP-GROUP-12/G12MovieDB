@@ -7,11 +7,12 @@ import jakarta.persistence.*;
 @Table(name="users")
 public class User {
     @Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String username;
     private String email;
-    private String password; 
+    private String password;
+
 
     private User() {}
 
@@ -22,9 +23,9 @@ public class User {
 
     }
 
-  //  public int getId() {
-   //     return this.id;
-   // }
+    public int getId() {
+        return this.id;
+    }
 
     public String getUsername() {
         return this.username;
@@ -38,9 +39,9 @@ public class User {
         return this.password;
     }
 
-  //  public void setId(int id) {
-    //    this.id = id;
-    //}
+   public void setId(int id) {
+        this.id = id;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -53,4 +54,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
+

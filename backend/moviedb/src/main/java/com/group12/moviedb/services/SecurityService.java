@@ -38,8 +38,7 @@ public class SecurityService {
      * Login user. Return JWT token or null if not found or wrong password.
      */
     public String login(String username, String password){
-     
-        User user = repo.findById(username).orElse(null);
+        User user = repo.findByUsername(username);
 
         if(user == null || !BCrypt.checkpw(password, user.getPassword())){
             return null;

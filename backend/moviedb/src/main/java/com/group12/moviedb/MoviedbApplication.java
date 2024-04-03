@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:database.properties")
+//@PropertySource("classpath:database.properties")
 @SpringBootApplication
 public class MoviedbApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MoviedbApplication.class, args);
     }
-    
+
 }
