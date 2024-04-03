@@ -29,9 +29,9 @@ public class SecurityRestApi {
     public ResponseEntity<String> register(
         @RequestParam String username,
         @RequestParam String email,
-        @RequestParam String pw)
+        @RequestParam String password)
     {
-        User u = secService.register(username, email, pw);
+        User u = secService.register(username, email, password);
         return new ResponseEntity<>(u.getUsername(), HttpStatus.OK);
     }
 
@@ -42,9 +42,9 @@ public class SecurityRestApi {
     @PostMapping("login")
     public ResponseEntity<Map<String,String>> login(
         @RequestParam String username, 
-        @RequestParam String pw)
+        @RequestParam String password)
     {
-        String token = secService.login(username, pw);
+        String token = secService.login(username, password);
 
          return createResponse(token);
     }

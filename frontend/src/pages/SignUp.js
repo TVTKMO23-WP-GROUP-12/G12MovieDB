@@ -25,7 +25,7 @@ function SignUpPage() {
             const response = await axios.post("http://localhost:8080/register", {
                 username: username,
                 email: email,
-                pw: password,
+                password: password,
             });
 
             //Handle successful signup

@@ -7,30 +7,34 @@ function LoginPage() {
 
 	const[username, setUsername] = useState('');
 	const[password, setPassword] = useState('');
-	const navigate = useNavigate();
+  	const [error, setError] = useState(''); //error handling msg
+    	const history = useNavigate(); // Redirect with history object
 
-	async function handleLogin(event) {
-		event.preventDefault();
-		try {
-			const response = await axios.post("http://localhost:8080/login", {
-				username: username,
-				pw: password,
-			});
+    	async function handleLogin(event) {
+        event.preventDefault();
+        try {
+            //check for empty fields
+            if (!username || !password) {
+                setError('Please enter both username and password.');
+                return;
+            }
+            
+            const response = await axios.post("http://loalhost:8080/login", {
+		    
+                username: username,
+                password: password,
+            });
 
-			const data = response.data;
-			if (data.message === "Username not exists") {
-				alert("Username not found.");
-			} else if (data.message === "Login success") {
-				navigate('/user');
-			} else {
-				alert("Username and Password do not match.");
-			}
-		} catch (error) {
-			console.error(error);
-			alert("An error occurred during login.");
-		}
-	}
-	
+            //Handle successful Login
+            console.log('Login successful:', response.data);
+            history('/login');
+        } catch (error) {
+            // Handle login error
+            console.error('Login failed:', error.response ? error.response.data : error.message);
+            setError('Invalid username or password.');
+        }
+    }
+
 
 	return (
 		<section className="main-content">
@@ -53,7 +57,8 @@ function LoginPage() {
 		}}
 		name="password" id="password" placeholder="Password"></input>
 		</div>
-
+		{error && <p className="text-danger">{error}</p>}
+		{/* render error message if exists*/} 
 		<button className="btn-login" type="submit" onClick={handleLogin}>
 		Login</button>
 		</form>

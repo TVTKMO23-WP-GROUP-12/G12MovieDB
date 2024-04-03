@@ -1,4 +1,4 @@
-package com.group12.moviedb.moviedb;
+package com.group12.moviedb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
