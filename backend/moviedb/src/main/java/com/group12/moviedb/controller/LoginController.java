@@ -1,7 +1,10 @@
 package com.group12.moviedb.controller;
 
+//import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class LoginController {
   @GetMapping("/")
   public String home() {
@@ -22,10 +25,15 @@ public class LoginController {
         "</html>\n";
   }
 
+  /*  KOMMENTOITU POIS, KOSKA USERCONTROLLERISSA ON JO TÄMÄ POLKU. 
+      TÄMÄ TARVII EHDON.
+
   @GetMapping("/users")
   public String getUsers() {
     return "Only users can see this";
   }
+  
+  */
 
   }
 
