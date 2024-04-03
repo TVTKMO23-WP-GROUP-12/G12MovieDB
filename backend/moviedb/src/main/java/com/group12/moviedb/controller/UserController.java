@@ -63,12 +63,6 @@ public class UserController {
     return this.userRepository.save(user);
     }
 
-    @DeleteMapping("/users/{id}")
-    public void deleteOneUser(@PathVariable int id) {
-        User user = this.userRepository.findById(id);
-    this.userRepository.delete(user);
-    }
-
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
       user.setId(id);
