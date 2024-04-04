@@ -39,31 +39,31 @@ public class GroupMembers {
         this.leftAt = leftAt;
     }
 
-    public int getId() {
-        return this.id;
+    public int getGroupMembersId() {
+        return id;
     }
 
     public boolean getIsAdmin() {
-        return this.isAdmin;
+        return isAdmin;
     }
 
     public Date getJoinedAt() {
-        return this.joinedAt;
+        return joinedAt;
     }
 
     public Date getLeftAt() {
-        return this.leftAt;
+        return leftAt;
     }
 
-    public int getUserId() {
-        return this.user.getId();
+    public User getUserId() {
+        return user;
     }
 
-    public int getGroupId() {
-        return this.group.getId();
+    public Group getGroupId() {
+        return group;
     }
 
-    public void setId(int memberId) {
+    public void setGrouMembersId(int memberId) {
         this.id = memberId;
     }
 

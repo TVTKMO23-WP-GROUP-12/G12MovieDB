@@ -13,6 +13,10 @@ public class Movie {
 
     @OneToMany(mappedBy="movieId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<Review> review;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<MovieScore> movieScores;
 
     @Column(name="title")
     private String title;

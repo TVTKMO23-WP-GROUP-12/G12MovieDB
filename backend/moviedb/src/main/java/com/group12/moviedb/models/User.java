@@ -17,6 +17,8 @@ public class User {
     private List<GroupMembers> groupMembers;
     @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
+    //@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    //private List<Reviews> reviews;
     
     @Column(name="username")
     private String username;
