@@ -40,27 +40,27 @@ public class GroupMembers {
     }
 
     public int getGroupMembersId() {
-        return id;
+        return this.id;
     }
 
     public boolean getIsAdmin() {
-        return isAdmin;
+        return this.isAdmin;
     }
 
     public Date getJoinedAt() {
-        return joinedAt;
+        return this.joinedAt;
     }
 
     public Date getLeftAt() {
-        return leftAt;
+        return this.leftAt;
     }
 
     public User getUserId() {
-        return user;
+        return this.user;
     }
 
     public Group getGroupId() {
-        return group;
+        return this.group;
     }
 
     public void setGrouMembersId(int memberId) {
