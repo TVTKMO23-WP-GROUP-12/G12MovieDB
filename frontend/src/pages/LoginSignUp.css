@@ -1,0 +1,81 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.content {
+  width: 300px;
+  padding: var(--gutter-large);
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--gutter-large);
+  color: var(--primary-text-color);
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  width: 100%;
+  padding: var(--gutter-small);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  background-color: var(--input-box-color);
+  color: var(--background-color);
+}
+
+.text-danger {
+  color: var(--secondary-text-color);
+  margin-bottom: var(--gutter-large);
+}
+
+.btn-login,
+.btn-signup {
+  width: 100%;
+  padding: var(--gutter-small);
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.btn-login:hover,
+.btn-signup:hover {
+  background-color: var(--accent-hover-color);
+}
+
+.forgot-pass {
+  margin-top: var(--gutter-small)
+}
+
+.new-user,
+.old-user {
+  width: 100%;
+  text-align: center;
+  color: var(--primary-text-color);
+  margin-top: var(--gutter-large);
+}
+
+.forgot-pass a,
+.new-user a,
+.old-user a {
+  color: var(--link-color);
+}
+
+.forgot-pass a:hover,
+.new-user a:hover,
+.old-user a:hover {
+  color: var(--link-hover-color);
+}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import './LoginSignUp.css';
 
 
 function LoginPage() {
@@ -20,7 +21,6 @@ function LoginPage() {
             }
             
             const response = await axios.post("http://loalhost:8080/login", {
-		    
                 username: username,
                 password: password,
             });

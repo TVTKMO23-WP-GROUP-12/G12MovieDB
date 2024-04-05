@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import './LoginSignUp.css';
 
 function SignUpPage() {
     const [username, setUsername] = useState('');
@@ -42,17 +43,15 @@ function SignUpPage() {
         <section className="main-content">
             <div className="content">
                 <h2 className="title">SignUp</h2>
-                <p>Create an account</p>
                 <form>
-                    {/*Render error message if exists*/}
-                    {error && <p className="text-danger">{error}</p>}
+
                     <div className="field">
                         <input type='text' autoComplete="off"
                             value={username}
                             onChange={(event) => {
                                 setUsername(event.target.value);
                             }}
-                            name="username" id="username" placeholder="username" />
+                            name="username" id="username" placeholder="Username" />
                     </div>
                     <div className="field">
                         <input type='email' autoComplete="off"
@@ -60,7 +59,7 @@ function SignUpPage() {
                             onChange={(event) => {
                                 setEmail(event.target.value);
                             }}
-                            name="email" id="email" placeholder="email" />
+                            name="email" id="email" placeholder="Email" />
                     </div>
 
                     <div className="field">
@@ -76,7 +75,8 @@ function SignUpPage() {
                             id='confirmPassword' placeholder={"Confirm Password"} value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
-
+                    {/*Render error message if exists*/}
+                    {error && <p className="text-danger">{error}</p>}
                     <button className="btn-signup" type="submit" onClick={handleSignUp}>
                         Signup
                     </button>
