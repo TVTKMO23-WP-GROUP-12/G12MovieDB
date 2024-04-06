@@ -1,0 +1,38 @@
+.user-container {
+  border: 1px solid var(--secondary-color);
+  padding: var(--gutter-large);
+  margin-bottom: var(--gutter-small);
+  padding: var(--gutter-large);
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user-info {
+  margin-top: var(--gutter-small);
+  margin-bottom: var(--gutter-small);
+  color: var(--primary-text-color);
+}
+
+.edit-btn, .delete-btn {
+  padding: var(--gutter-tiny) var(--gutter-small) var(--gutter-tiny) var(--gutter-small);
+  margin-right: var(--gutter-small);
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  background-color: var(--accent-hover-color);
+}

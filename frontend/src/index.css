@@ -1,6 +1,6 @@
 /* For testing */
 
-   :root {
+   /* :root {
   --background-color: #6e6e6e;
   --primary-color: #3f3f3f;
   --secondary-color: #5f5f5f;
@@ -14,7 +14,8 @@
   --button-text-color: #040404;
   --gutter-large: 20px;
   --gutter-small: 10px;
-  --border-radius: 5px;
+  --gutter-tiny: 5px;
+  --border-radius: 5px; */
 
    /* :root {
   --background-color: #6e6e6e;
@@ -30,6 +31,7 @@
   --button-text-color: #040404;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
   /* :root {
@@ -43,12 +45,13 @@
   --link-hover-color: #2c9f3fa4;
   --primary-text-color: #bdcc95;
   --secondary-text-color: #d3e997;
-    --button-text-color: #041C32;
+  --button-text-color: #041C32;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
-/*:root {
+/* :root {
   --background-color: #0F0F0F;
   --primary-color: #232D3F;
   --secondary-color: #005B41;
@@ -59,10 +62,11 @@
   --link-hover-color: #02a791a4;
   --primary-text-color: #e1e1e1;
   --secondary-text-color: #f7f7f7;
-    --button-text-color: #041C32;
+  --button-text-color: #041C32;
   --gutter-large: 20px;
   --gutter-small: 10px;
-  --border-radius: 5px;*/
+  --gutter-tiny: 5px;
+  --border-radius: 5px; */
 
   /* :root {
   --background-color: #040D12;
@@ -75,9 +79,10 @@
   --link-hover-color: #9fcabaa4;
   --primary-text-color: #dbfcef;
   --secondary-text-color: #e0faf0;
-    --button-text-color: #041C32;
+  --button-text-color: #041C32;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
    /* :root {
@@ -91,9 +96,10 @@
   --link-hover-color: #97FEEDa4;
   --primary-text-color: #031b6a;
   --secondary-text-color: #7bcdbf;
-    --button-text-color: #041C32;
+  --button-text-color: #7bcdbf;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
    /* :root {
@@ -106,10 +112,11 @@
   --link-color: #ab58ff;
   --link-hover-color: #ab58ffa4;
   --primary-text-color: #f8d6ff;
-  --secondary-text-color: #b942ab;
-    --button-text-color: #041C32;
+  --secondary-text-color: #fc8eef;
+  --button-text-color: #041C32;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
   /* :root {
@@ -126,9 +133,10 @@
   --button-text-color: #041C32;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
-  /* :root {
+  :root {
   --background-color: #121212;
   --primary-color: #082032;
   --secondary-color: #334756;
@@ -142,7 +150,8 @@
   --button-text-color: #082032;
   --gutter-large: 20px;
   --gutter-small: 10px;
-  --border-radius: 5px; */
+  --gutter-tiny: 5px;
+  --border-radius: 5px;
 
     /* :root {
   --background-color: #191919;
@@ -158,6 +167,7 @@
   --button-text-color: #082032;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
     /* :root {
@@ -174,6 +184,7 @@
   --button-text-color: #092635;
   --gutter-large: 20px;
   --gutter-small: 10px;
+  --gutter-tiny: 5px;
   --border-radius: 5px; */
 
 a {
