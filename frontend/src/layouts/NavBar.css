@@ -1,10 +1,69 @@
-/* For testing */
-
-nav {
+.navbar {
+  position: relative;
   background-color: var(--primary-color);
   color: var(--secondary-text-color);
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: var(--gutter-small);
+}
+
+.menu-icon {
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-item {
+  margin-left: var(--gutter-large);
+}
+
+.nav-item a {
+  color: var(--secondary-text-color);
+}
+
+.nav-item a:hover {
+  color: var(--primary-hover-color);
+}
+
+.nav-menu-mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--secondary-color);
+  width: 300px;
+  padding: var(--gutter-small) 0;
+  display: none;
+}
+
+.nav-menu-mobile.active {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+.nav-menu-mobile li {
+  margin: var(--gutter-small) 0;
+  display: flex;
+  margin-left: var(--gutter-large);
+}
+
+.nav-menu-mobile a {
+  color: var(--link-color);
+}
+
+.nav-menu-mobile a:hover {
+  color: var(--link-hover-color);
 }
