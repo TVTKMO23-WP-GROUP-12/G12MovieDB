@@ -11,8 +11,8 @@ import com.group12.moviedb.models.Message;
 public interface MessageRepository extends JpaRepository<Message, Integer> {
     List<Message> findByCreatorId(int creatorId);
     List<Message> findByParentMessageId(int parentMessageId);
-    List<Message> findByRecipientId(int recipientId);
-    List<Message> findByRead(boolean read);
-    Message findById(int messageId);
+    List<Message> findByRecipientsId(int recipientId);
+    List<Message> findById(int messageId);
     Message deleteById(int messageId);
+
 }

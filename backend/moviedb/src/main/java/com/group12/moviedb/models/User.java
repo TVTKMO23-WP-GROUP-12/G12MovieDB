@@ -1,6 +1,7 @@
 package com.group12.moviedb.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.*;
 
@@ -17,12 +18,12 @@ public class User {
     private List<GroupMembers> groupMembers;
     @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
-    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
-    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
-    //@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-    //private List<Reviews> reviews;
+    @ManyToMany(mappedBy = "recipients")
+    private List<Message> receivedMessages = new ArrayList<>();
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MessageRecipient> messageRecipient;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
@@ -42,7 +43,7 @@ public class User {
     private LocalDateTime lastLogin;
 
     @SuppressWarnings("unused")
-    private User() {}
+    public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;

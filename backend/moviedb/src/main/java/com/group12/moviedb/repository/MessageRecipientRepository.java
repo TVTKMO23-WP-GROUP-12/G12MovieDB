@@ -3,27 +3,32 @@ package com.group12.moviedb.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.group12.moviedb.models.Group;
+import com.group12.moviedb.models.Message;
 import com.group12.moviedb.models.MessageRecipient;
 import com.group12.moviedb.models.User;
 
 @Repository
 public interface MessageRecipientRepository extends JpaRepository<MessageRecipient, Integer> {
     List<MessageRecipient> findByGroup(Group group);
-    List<MessageRecipient> findByUserId(User user);
+    List<MessageRecipient> findByUser(User user);
+    List<MessageRecipient> findByMessage(MessageRecipient messageRecipient);
+    List<MessageRecipient> findByIsRead(boolean isRead);
+    MessageRecipient findByRecipient(User recipient);
+    List<MessageRecipient> findByIsReadAndUser(boolean isRead, User user); 
+    List<MessageRecipient> findByIsReadAndRecipient(boolean isRead, User recipient);
+    List<MessageRecipient> findByIsReadAndMessage(boolean isRead, Message message);
     List<MessageRecipient> findByMessageId(int messageId);
-    List<MessageRecipient> findByRead(boolean isRead);
-    List<MessageRecipient> findByRecipientId(int recipientId);
-    List<MessageRecipient> findByReadAndUserId(boolean isRead, User user);
-    List<MessageRecipient> findByReadAndGroup(boolean isRead, Group group);
-    List<MessageRecipient> findByReadAndRecipientId(boolean isRead, int recipientId);
-    List<MessageRecipient> findByReadAndMessageId(boolean isRead, int messageId);
-    MessageRecipient deleteById(int id);
-    MessageRecipient deleteByUserId(User user);
-    MessageRecipient deleteByGroup(Group group);
-    MessageRecipient deleteByRecipientId(int recipientId);
-    MessageRecipient deleteByMessageId(int messageId);
-    MessageRecipient findById(int memberId);
+    void deleteById(int id);
+    void deleteByUser(User user);
+    void deleteByGroup(Group group);
+    void deleteByRecipient(User recipient);
+    void deleteByMessage(Message message);
+
+    @Query("SELECT mr FROM MessageRecipient mr WHERE mr.isRead = :isRead AND mr.group = :group")
+    List<MessageRecipient> findByIsReadAndGroup(boolean isRead, Group group);    
+    
 }

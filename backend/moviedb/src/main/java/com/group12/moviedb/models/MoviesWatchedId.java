@@ -4,31 +4,31 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class MoviesWatchedId implements Serializable {
-    private Integer userId;
-    private Integer movieId;
+    private User user;
+    private Movie movie;
 
     public MoviesWatchedId() {
     }
 
-    public MoviesWatchedId(Integer userId, Integer movieId) {
-        this.userId = userId;
-        this.movieId = movieId;
+    public MoviesWatchedId(User user, Movie movie) {
+        this.user = user;
+        this.movie = movie;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUserId() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
-    public Integer getMovieId() {
-        return movieId;
+    public Movie getMovieId() {
+        return movie;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public void setMovieId(Movie movie) {
+        this.movie = movie;
     }
     
     @Override

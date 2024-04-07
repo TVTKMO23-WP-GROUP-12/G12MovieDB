@@ -26,7 +26,7 @@ public class Movie {
     private String title;
 
     @SuppressWarnings("unused")
-    private Movie() {}
+    public Movie() {}
 
     public Movie(String title) {
         this.title = title;

@@ -1,6 +1,7 @@
 package com.group12.moviedb.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -11,33 +12,33 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int messageId;
+    private int id;
 
-    @JoinTable(
-        name="message_recipient",
-        joinColumns=@JoinColumn(name="recipient_id"),
-        inverseJoinColumns=@JoinColumn(name="user_id")
-    )
-
-    @Column(name="creator_id")
+    @Column(name="creator_id", columnDefinition = "INTEGER")
     private int creatorId;
-    @OneToMany(mappedBy="message", cascade = CascadeType.ALL)
-    private List<MessageRecipient> messageRecipient;
-
-    @Column(name="content")
+    
+    @Column(name="content", columnDefinition = "TEXT")
     private String content;
-
-    @Column(name="parent_message_id")
+    
+    @Column(name="parent_message_id", columnDefinition = "INTEGER")
     private int parentMessageId;
     
-    @Column(name="create_date")
-    private LocalDateTime createDate;
+    @Column(name = "create_date", columnDefinition = "TIMESTAMP")
+    private LocalDate createDate;
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+        name = "message_recipient",
+        joinColumns = @JoinColumn(name = "message_id"),
+        inverseJoinColumns = @JoinColumn(name = "recipient_id")
+    )
+    private List<User> recipients = new ArrayList<>();
 
     @SuppressWarnings("unused")
     private Message() {}
 
-    public Message(Integer messageId, Integer creatorId, String content, Integer parentMessageId, LocalDateTime createDate) {
-        this.messageId = messageId;
+    public Message(Integer id, Integer creatorId, String content, Integer parentMessageId, LocalDate createDate) {
+        this.id = id;
         this.creatorId = creatorId;
         this.content = content;
         this.parentMessageId = parentMessageId;
@@ -45,7 +46,7 @@ public class Message {
     }
 
     public int getId() {
-        return this.messageId;
+        return this.id;
     }
 
     public int getCreatorId() {
@@ -60,12 +61,12 @@ public class Message {
         return this.parentMessageId;
     }
 
-    public LocalDateTime getCreateDate() {
+    public LocalDate getCreateDate() {
         return this.createDate;
     }
 
-    public void setId(int messageId) {
-        this.messageId = messageId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCreatorId(int creatorId) {
@@ -80,7 +81,7 @@ public class Message {
         this.parentMessageId = parentMessageId;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
     

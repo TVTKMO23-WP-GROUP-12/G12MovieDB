@@ -12,7 +12,7 @@ public class MessageRecipient {
 
     @ManyToOne
     @JoinColumn(name="recipient_id")
-    private int recipientId;
+    private User recipient;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -22,8 +22,9 @@ public class MessageRecipient {
     @JoinColumn(name="user_group_id")
     private Group group;
     
-    @Column(name="message_id")
-    private int messageId;
+    @ManyToOne
+    @JoinColumn(name="message_id")
+    private Message message;
 
     @Column(name="is_read")
     private boolean isRead;
@@ -31,10 +32,10 @@ public class MessageRecipient {
     @SuppressWarnings("unused")
     private MessageRecipient() {}
 
-    public MessageRecipient(Integer id, Integer recipientId, Integer messageId, Boolean isRead) {
+    public MessageRecipient(Integer id, User recipient, Message message, Boolean isRead) {
         this.id = id;
-        this.recipientId = recipientId;
-        this.messageId = messageId;
+        this.recipient = recipient;
+        this.message = message;
         this.isRead = isRead;
     }
 
@@ -42,12 +43,12 @@ public class MessageRecipient {
         return this.id;
     }
 
-    public int getRecipientId() {
-        return this.recipientId;
+    public User getRecipientId() {
+        return this.recipient;
     }
 
-    public int getMessageId() {
-        return this.messageId;
+    public Message getMessage() {
+        return this.message;
     }
 
     public boolean getIsRead() {
@@ -66,12 +67,12 @@ public class MessageRecipient {
         this.id = id;
     }
 
-    public void setRecipientId(int recipientId) {
-        this.recipientId = recipientId;
+    public void setRecipientId(User recipient) {
+        this.recipient = recipient;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setMessage(Message message) {
+        this.message = message;
     }
 
     public void setIsRead(boolean isRead) {

@@ -4,45 +4,44 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class MoviesToWatchId implements Serializable {
-    private Integer userId;
-    private Integer movieId;
+    private User user;
+    private Movie movie;
 
     public MoviesToWatchId() {
     }
 
-    public MoviesToWatchId(Integer userId, Integer movieId) {
-        this.userId = userId;
-        this.movieId = movieId;
+    public MoviesToWatchId(User user, Movie movie) {
+        this.user = user;
+        this.movie = movie;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getMovieId() {
-        return movieId;
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
     
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MoviesWatchedId)) return false;
-        MoviesWatchedId that = (MoviesWatchedId) o;
-        return Objects.equals(getUserId(), that.getUserId()) &&
-               Objects.equals(getMovieId(), that.getMovieId());
+        if (!(o instanceof MoviesToWatchId)) return false;
+        MoviesToWatchId that = (MoviesToWatchId) o;
+        return Objects.equals(getUser(), that.getUser()) &&
+               Objects.equals(getMovie(), that.getMovie());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId(), getMovieId());
+        return Objects.hash(getUser(), getMovie());
     }
 }
-
