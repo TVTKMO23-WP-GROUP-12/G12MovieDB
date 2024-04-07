@@ -31,20 +31,20 @@ public class MoviesToWatchController {
 
     @GetMapping("/movies_to_watch/user/{user_id}")
     public MoviesToWatch getMoviesToWatchById(@PathVariable("user_id") int userId) {
-        User user = new User(); // Create a User object using userId
+        User user = new User();
         return moviesToWatchRepository.findByUser(user).orElse(null);
     }
 
     @GetMapping("/movies_to_watch/movie/{movie_id}")
     public MoviesToWatch getMoviesToWatchByMovieId(@PathVariable("movie_id") int movieId) {
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        Movie movie = new Movie();
         return moviesToWatchRepository.findByMovie(movie).orElse(null);
     }
 
     @GetMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
     public MoviesToWatch getMoviesToWatchByIds(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId) {
-        User user = new User(); // Create a User object using userId
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        User user = new User();
+        Movie movie = new Movie(); 
         return moviesToWatchRepository.findByUserAndMovie(user, movie).orElse(null);
     }
 
@@ -55,15 +55,15 @@ public class MoviesToWatchController {
 
     @PostMapping("/movies_to_watch/user/{user_id}")
     public MoviesToWatch addMoviesToWatchById(@PathVariable("user_id") int userId, @RequestBody MoviesToWatch moviesToWatch) {
-        User user = new User(); // Create a User object using userId
+        User user = new User();
         moviesToWatch.setUser(user);
         return moviesToWatchRepository.save(moviesToWatch);
     }
 
     @PostMapping("/movies_to_watch/user/{user_id}&movie/{movie_id}")
     public MoviesToWatch addOrUpdateMoviesToWatch(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId, @RequestBody MoviesToWatch moviesToWatch) {
-        User user = new User(); // Create a User object using userId
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        User user = new User(); 
+        Movie movie = new Movie(); 
         moviesToWatch.setUser(user);
         moviesToWatch.setMovie(movie);
         return moviesToWatchRepository.save(moviesToWatch);
@@ -71,7 +71,7 @@ public class MoviesToWatchController {
     @PatchMapping("/movies_to_watch/user/{user_id}")
     public MoviesToWatch updateMoviesToWatchByUserId(@PathVariable("user_id") int userId,
                                                      @RequestBody MoviesToWatch moviesToWatch) {
-        User user = new User(); // Create a User object using userId
+        User user = new User();
         moviesToWatch.setUser(user);
         return moviesToWatchRepository.save(moviesToWatch);
     }
@@ -80,8 +80,8 @@ public class MoviesToWatchController {
     public MoviesToWatch updateMoviesToWatchByIds(@PathVariable("user_id") int userId,
                                                    @PathVariable("movie_id") int movieId,
                                                    @RequestBody MoviesToWatch moviesToWatch) {
-        User user = new User(); // Create a User object using userId
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        User user = new User();
+        Movie movie = new Movie(); 
         moviesToWatch.setUser(user);
         moviesToWatch.setMovie(movie);
         return moviesToWatchRepository.save(moviesToWatch);
@@ -92,8 +92,8 @@ public class MoviesToWatchController {
                                                    @PathVariable("movie_id") int movieId,
                                                    @PathVariable("note") String note,
                                                    @RequestBody MoviesToWatch moviesToWatch) {
-        User user = new User(); // Create a User object using userId
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        User user = new User(); 
+        Movie movie = new Movie(); 
         moviesToWatch.setUser(user);
         moviesToWatch.setMovie(movie);
         moviesToWatch.setNote(note);
@@ -102,15 +102,15 @@ public class MoviesToWatchController {
     
     @DeleteMapping("/movies_to_watch/user/{user_id}")
     public void deleteMoviesToWatchByUserId(@PathVariable("user_id") int userId) {
-        User user = new User(); // Create a User object using userId
+        User user = new User(); 
         moviesToWatchRepository.deleteByUser(user);
     }
     
     @DeleteMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
     public void deleteMoviesToWatchByIds(@PathVariable("user_id") int userId,
                                           @PathVariable("movie_id") int movieId) {
-        User user = new User(); // Create a User object using userId
-        Movie movie = new Movie(); // Create a Movie object using movieId
+        User user = new User();
+        Movie movie = new Movie(); 
         moviesToWatchRepository.deleteByUserAndMovie(user, movie);
     }
 }
