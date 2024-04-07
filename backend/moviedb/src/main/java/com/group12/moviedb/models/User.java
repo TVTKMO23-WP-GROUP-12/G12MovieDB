@@ -17,8 +17,16 @@ public class User {
     private List<GroupMembers> groupMembers;
     @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
+    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+    private List<MoviesWatched> moviesWatched;
+    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+    private List<MoviesToWatch> moviesToWatch;
     //@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     //private List<Reviews> reviews;
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    private List<MessageRecipient> messageRecipient;
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+    private List<Followers> followers;
     
     @Column(name="username")
     private String username;

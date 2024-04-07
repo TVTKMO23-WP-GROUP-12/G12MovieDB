@@ -14,6 +14,10 @@ public class Movie {
     @OneToMany(mappedBy="movieId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
     @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<MoviesWatched> moviesWatched;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<MoviesToWatch> moviesToWatch;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
     private List<Review> review;
     @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
     private List<MovieScore> movieScores;

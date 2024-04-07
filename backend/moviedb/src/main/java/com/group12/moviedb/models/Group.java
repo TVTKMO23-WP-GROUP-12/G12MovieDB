@@ -18,6 +18,8 @@ public class Group {
 
     @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
+    @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
+    private List<MessageRecipient> messageRecipient;
 
     @ManyToOne
     @JoinColumn(name="user_id")
