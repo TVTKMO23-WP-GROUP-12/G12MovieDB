@@ -39,11 +39,10 @@ public class SecurityService {
      */
     public String login(String username, String password){
 <<<<<<< HEAD
-        User user = repo.findByUsername(username);
 =======
      
+>>>>>>> 6fdc1ac889c838c81b6728bbee441f5bd543de87
         User user = repo.findByUsername(username).orElse(null);
->>>>>>> b5a3e94cba4b25d3fbf06557795f14a1def34509
 
         if(user == null || !BCrypt.checkpw(password, user.getPassword())){
             return null;

@@ -3,14 +3,14 @@ package com.group12.moviedb.controller;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 <<<<<<< HEAD
-import org.springframework.web.bind.annotation.PostMapping;
 =======
+//import org.springframework.web.bind.annotation.PostMapping;
+>>>>>>> 6fdc1ac889c838c81b6728bbee441f5bd543de87
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> b5a3e94cba4b25d3fbf06557795f14a1def34509
 
 @RestController
 public class LoginController {
-  @GetMapping("/login")
+  @GetMapping("/")
   public String home() {
     return
         "<html>\n" +
@@ -36,14 +36,11 @@ public class LoginController {
   public String getUsers() {
     return "Only users can see this";
   }
-  
   */
 
   @PostMapping("/register")
   public String user() {
     return "";
-
-  }
 
   }
 

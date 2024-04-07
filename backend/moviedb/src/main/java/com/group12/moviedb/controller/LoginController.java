@@ -2,11 +2,12 @@ package com.group12.moviedb.controller;
 
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
-  @GetMapping("/")
+  @GetMapping("/login")
   public String home() {
     return
         "<html>\n" +
