@@ -43,7 +43,11 @@ public class User {
     }
 
     public int getId() {
+<<<<<<< HEAD
     return this.id;
+=======
+        return this.id;
+>>>>>>> 6fdc1ac889c838c81b6728bbee441f5bd543de87
     }
 
     public String getUsername() {

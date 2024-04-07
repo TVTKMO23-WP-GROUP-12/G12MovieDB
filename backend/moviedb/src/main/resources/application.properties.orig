@@ -1,4 +1,8 @@
 spring.application.name=moviedb
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6fdc1ac889c838c81b6728bbee441f5bd543de87
 
 jwt.secret=asdf244jlkjsrasraljsalja
 
