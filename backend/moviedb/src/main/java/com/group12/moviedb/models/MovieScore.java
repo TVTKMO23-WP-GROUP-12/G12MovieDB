@@ -1,6 +1,6 @@
 package com.group12.moviedb.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,14 +25,14 @@ public class MovieScore {
     @Column(name="score")
     private int score;
     @Column(name="created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(name="updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     public MovieScore() {
     }
 
-    public MovieScore(int movieScoreId, Movie movie, int score, Date createdAt, Date updatedAt) {
+    public MovieScore(int movieScoreId, Movie movie, int score, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.movieScoreId = movieScoreId;
         this.movie = movie;
         this.score = score;
@@ -51,11 +51,11 @@ public class MovieScore {
         return this.score;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -71,11 +71,11 @@ public class MovieScore {
         this.score = score;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

@@ -1,6 +1,6 @@
 package com.group12.moviedb.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -24,15 +24,15 @@ public class GroupMembers {
     private boolean isAdmin;
     
     @Column(name="joined_at")
-    private Date joinedAt;
+    private LocalDateTime joinedAt;
     
     @Column(name="left_at")
-    private Date leftAt;
+    private LocalDateTime leftAt;
 
     @SuppressWarnings("unused")
     private GroupMembers() {}
 
-    public GroupMembers(Integer memberId, Boolean isAdmin, Date joinedAt, Date leftAt) {
+    public GroupMembers(Integer memberId, Boolean isAdmin, LocalDateTime joinedAt, LocalDateTime leftAt) {
         this.id = memberId;
         this.isAdmin = isAdmin;
         this.joinedAt = joinedAt;
@@ -47,11 +47,11 @@ public class GroupMembers {
         return this.isAdmin;
     }
 
-    public Date getJoinedAt() {
+    public LocalDateTime getJoinedAt() {
         return this.joinedAt;
     }
 
-    public Date getLeftAt() {
+    public LocalDateTime getLeftAt() {
         return this.leftAt;
     }
 
@@ -71,11 +71,11 @@ public class GroupMembers {
         this.isAdmin = isAdmin;
     }
 
-    public void setJoinedAt(Date joinedAt) {
+    public void setJoinedAt(LocalDateTime joinedAt) {
         this.joinedAt = joinedAt;
     }
 
-    public void setLeftAt(Date leftAt) {
+    public void setLeftAt(LocalDateTime leftAt) {
         this.leftAt = leftAt;
     }
 

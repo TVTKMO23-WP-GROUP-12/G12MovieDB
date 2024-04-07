@@ -1,7 +1,7 @@
 package com.group12.moviedb.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -20,14 +20,14 @@ public class Favorites implements Serializable{
     private int movieId;
 
     @Column(name="created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(name="updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     @SuppressWarnings("unused")
     private Favorites() {}
 
-    public Favorites(int userId, int movieId, Date createdAt, Date updatedAt) {
+    public Favorites(int userId, int movieId, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.userId = userId;
         this.movieId = movieId;
         this.createdAt = createdAt;
@@ -43,11 +43,11 @@ public class Favorites implements Serializable{
     }
    
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -59,11 +59,11 @@ public class Favorites implements Serializable{
         this.movieId = movieId;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

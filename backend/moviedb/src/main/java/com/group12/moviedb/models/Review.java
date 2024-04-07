@@ -12,7 +12,6 @@ public class Review {
     @Column(name="review_id")
     private int reviewId;
 
-    //@ManyToOne
     @Column(name="user_id")
     private int userId;
 

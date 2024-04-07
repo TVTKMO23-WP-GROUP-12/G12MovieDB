@@ -1,6 +1,6 @@
 package com.group12.moviedb.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -31,12 +31,12 @@ public class Message {
     private int parentMessageId;
     
     @Column(name="create_date")
-    private Date createDate;
+    private LocalDateTime createDate;
 
     @SuppressWarnings("unused")
     private Message() {}
 
-    public Message(Integer messageId, Integer creatorId, String content, Integer parentMessageId, Date createDate) {
+    public Message(Integer messageId, Integer creatorId, String content, Integer parentMessageId, LocalDateTime createDate) {
         this.messageId = messageId;
         this.creatorId = creatorId;
         this.content = content;
@@ -60,7 +60,7 @@ public class Message {
         return this.parentMessageId;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return this.createDate;
     }
 
@@ -80,7 +80,7 @@ public class Message {
         this.parentMessageId = parentMessageId;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
     
