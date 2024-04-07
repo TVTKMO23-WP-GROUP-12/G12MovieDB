@@ -1,6 +1,6 @@
 package com.group12.moviedb.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -55,7 +55,7 @@ public class GroupController {
                     group.setGroupDescription((String) value);
                     break;
                 case "updated_at":
-                    group.setUpdatedAt((Date) value);
+                    group.setUpdatedAt((LocalDateTime) value);
                     break;
                 default:
                      break;

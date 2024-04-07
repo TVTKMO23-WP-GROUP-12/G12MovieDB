@@ -9,8 +9,8 @@ import com.group12.moviedb.repository.GroupMembersRepository;
 import com.group12.moviedb.repository.GroupRepository;
 import com.group12.moviedb.repository.UserRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -77,10 +77,10 @@ public class GroupMembersController {
                     groupMembers.setIsAdmin((boolean) value);
                     break;
                 case "joined_at":
-                    groupMembers.setJoinedAt((Date) value);
+                    groupMembers.setJoinedAt((LocalDateTime) value);
                     break;
                 case "left_at":
-                    groupMembers.setLeftAt((Date) value);
+                    groupMembers.setLeftAt((LocalDateTime) value);
                     break;
                 default:
                     break;

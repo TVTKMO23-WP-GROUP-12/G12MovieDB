@@ -20,11 +20,11 @@ public class FavoritesId implements Serializable {
     }
 
     public int getUserId() {
-        return userId;
+        return this.userId;
     }
 
     public int getMovieId() {
-        return movieId;
+        return this.movieId;
     }
 
     public void setUserId(int userId) {

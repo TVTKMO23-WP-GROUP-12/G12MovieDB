@@ -1,6 +1,6 @@
 package com.group12.moviedb.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,6 +18,8 @@ public class Group {
 
     @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
+    @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
+    private List<MessageRecipient> messageRecipient;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -28,13 +30,13 @@ public class Group {
     @Column(name="group_description")
     private String groupDescription;
     @Column(name="created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(name="updated_at")
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     Group() {}
 
-    public Group(Integer id, String groupName, String groupDescription, Date createdAt, Date updatedAt) {
+    public Group(Integer id, String groupName, String groupDescription, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.groupName = groupName;
         this.groupDescription = groupDescription;
@@ -54,11 +56,11 @@ public class Group {
         return this.groupDescription;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -78,11 +80,11 @@ public class Group {
         this.groupDescription = groupDescription;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

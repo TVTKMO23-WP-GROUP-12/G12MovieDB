@@ -14,6 +14,10 @@ public class Movie {
     @OneToMany(mappedBy="movieId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
     @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<MoviesWatched> moviesWatched;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+    private List<MoviesToWatch> moviesToWatch;
+    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
     private List<Review> review;
     @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
     private List<MovieScore> movieScores;
@@ -22,7 +26,7 @@ public class Movie {
     private String title;
 
     @SuppressWarnings("unused")
-    private Movie() {}
+    public Movie() {}
 
     public Movie(String title) {
         this.title = title;

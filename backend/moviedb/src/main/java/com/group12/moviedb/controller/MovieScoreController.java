@@ -1,6 +1,6 @@
 package com.group12.moviedb.controller;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,10 +63,10 @@ public class MovieScoreController {
                     movieScore.setScore((int) value);
                     break;
                 case "created_at":
-                    movieScore.setCreatedAt((Date) value);
+                    movieScore.setCreatedAt((LocalDateTime) value);
                     break;
                 case "updated_at":
-                    movieScore.setUpdatedAt((Date) value);
+                    movieScore.setUpdatedAt((LocalDateTime) value);
                     break;
             }
         });
