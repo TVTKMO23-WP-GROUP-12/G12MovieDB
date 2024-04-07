@@ -1,7 +1,7 @@
 /* For testing*/
 
 footer {
-  background-color: var(--dark-grey);
+  background-color: var(--primary-color);
   display: flex;
   height: 50px;
   width: 100%;
@@ -12,5 +12,5 @@ footer {
 }
 
 footer p {
-  color: var(--accent-color);
+  color: var(--secondary-text-color);
 }
