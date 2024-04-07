@@ -1,0 +1,17 @@
+package com.group12.moviedb.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.group12.moviedb.models.User;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Integer> {
+<<<<<<< HEAD
+    User findById(Long id);
+=======
+>>>>>>> b5a3e94cba4b25d3fbf06557795f14a1def34509
+    User findByUsername(String username);
+    void deleteById(Long id);
+    User findById(int id);
+}

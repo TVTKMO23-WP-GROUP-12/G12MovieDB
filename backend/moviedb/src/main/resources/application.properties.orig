@@ -1,0 +1,10 @@
+spring.application.name=moviedb
+<<<<<<< HEAD
+
+=======
+>>>>>>> b5a3e94cba4b25d3fbf06557795f14a1def34509
+
+jwt.secret=asdf244jlkjsrasraljsalja
+
+#importataan tietokantaasetukset
+spring.config.location=classpath:database.properties
