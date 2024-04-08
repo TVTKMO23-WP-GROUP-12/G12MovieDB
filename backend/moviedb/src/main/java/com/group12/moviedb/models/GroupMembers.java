@@ -63,7 +63,7 @@ public class GroupMembers {
         return this.group;
     }
 
-    public void setGrouMembersId(int memberId) {
+    public void setGroupMembersId(int memberId) {
         this.id = memberId;
     }
 

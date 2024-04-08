@@ -1,5 +1,6 @@
 package com.group12.moviedb.controller;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,15 +16,13 @@ import com.group12.moviedb.models.User;
 import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.services.UserService;
 
-
-
 @RestController
 public class UserController {
 
     private final UserRepository userRepository;
     private final UserService userService;
 
-    public UserController (UserRepository userRepository, UserService userService) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
         this.userService = userService;
     }
@@ -35,44 +34,49 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User findOneUser(@PathVariable int id) {
-        return this.userRepository.findById(id);
+        return this.userRepository.findById(id).orElse(null);
     }
 
     @PostMapping("/users")
     public User addOneUser(@RequestBody User user) {
+        user.setCreatedAt(LocalDateTime.now());
+        user.setUpdatedAt(LocalDateTime.now());
         return this.userRepository.save(user);
     }
     
+
     @PatchMapping("/users/{id}")
     public User updateOneUser(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        User user = this.userRepository.findById(id);
-        updates.forEach((key, value) -> {
-            switch (key) {
-                  case "username":
-                    user.setUsername((String) value);
-                    break;
-                case "email":
-                    user.setEmail((String) value);
-                    break;
-                case "password":
-                    user.setPassword((String) value);
-                    break;
-                default:
-                    break;
-            }
-        });
-    return this.userRepository.save(user);
+        User user = this.userRepository.findById(id).orElse(null);
+        if (user != null) {
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "username":
+                        user.setUsername((String) value);
+                        break;
+                    case "email":
+                        user.setEmail((String) value);
+                        break;
+                    case "password":
+                        user.setPassword((String) value);
+                        break;
+                    default:
+                        break;
+                }
+            });
+            return this.userRepository.save(user);
+        }
+        return null;
     }
 
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
-      user.setId(id);
-      return this.userService.updateUser(user);
-  }
-    
-    @DeleteMapping("/users/{id}")
-      public void deleteUser(@PathVariable Long id) {
-      userService.deleteUser(id);
-  }
+        user.setId(id);
+        return this.userService.updateUser(user);
+    }
 
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
+        this.userService.deleteUser(id);
+    }
 }
