@@ -75,10 +75,12 @@ public class User {
         return updatedAt;
     }
 
+    
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
     
+
     public List<Group> getGroups() {
         return this.groups;
     }
@@ -110,11 +112,11 @@ public class User {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    
     public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
-
+    
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
@@ -126,6 +128,11 @@ public class User {
     public User orElse(Object object) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'orElse'");
+    }
+
+    public User orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 
 }
