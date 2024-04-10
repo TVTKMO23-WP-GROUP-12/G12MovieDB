@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,8 @@ public class GroupMembersController {
 
     @GetMapping("/group/members/group={group_id}")
     public List<GroupMembers> findGroupMembersByGroupId(@PathVariable int group_id) {
-        Group group = groupRepository.findById(group_id);
+        Group group = groupRepository.findById(group_id)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));
         if (group != null) {
             return this.groupMembersRepository.findByGroup(group);
         }
@@ -51,7 +53,8 @@ public class GroupMembersController {
     
     @GetMapping("/group/members/user={user_id}")
     public List<GroupMembers> findGroupMembersByUserId(@PathVariable int user_id) {
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(user_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             return this.groupMembersRepository.findByUser(user);
         }
@@ -60,13 +63,18 @@ public class GroupMembersController {
 
     @GetMapping("/group/members/{member_id}")
     public GroupMembers findGroupMember(@PathVariable int member_id) {
-        return this.groupMembersRepository.findById(member_id);
+        return this.groupMembersRepository.findById(member_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
     }
 
     @PostMapping("/group/members")
     public GroupMembers addOneGroupMembers(@RequestBody GroupMembers groupMembers,
-                                           @RequestParam("groupId") Group group,
-                                           @RequestParam("userId") User user) {
+                                           @RequestParam("groupId") int groupId,
+                                           @RequestParam("userId") int userId) {
+        Group group = groupRepository.findById(groupId)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         groupMembers.setJoinedAt(LocalDateTime.now());
         groupMembers.setGroup(group);
         groupMembers.setUser(user);
@@ -75,7 +83,8 @@ public class GroupMembersController {
 
     @PatchMapping("/group/members/{member_id}")
     public GroupMembers updateOneGroupMembers(@PathVariable int memberId, @RequestBody Map<String, Object> updates) {
-        GroupMembers groupMembers = this.groupMembersRepository.findById(memberId);
+        GroupMembers groupMembers = this.groupMembersRepository.findById(memberId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));;
         if (groupMembers != null) {
         updates.forEach((key, value) -> {
             switch (key) {
@@ -99,7 +108,8 @@ public class GroupMembersController {
 
     @DeleteMapping("/group/members/{memberId}")
     public void deleteOneGroupMembers(@PathVariable int memberId) {
-        GroupMembers groupMembers = this.groupMembersRepository.findById(memberId);
+        GroupMembers groupMembers = this.groupMembersRepository.findById(memberId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         this.groupMembersRepository.delete(groupMembers);
     }
     

@@ -9,8 +9,9 @@ import jakarta.persistence.*;
 @Table(name="users")
 public class User {
     @Id
+    @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userId;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Group> groups;
@@ -45,14 +46,15 @@ public class User {
     @SuppressWarnings("unused")
     public User() {}
 
-    public User(String username, String email, String password) {
+    public User(int userId, String username, String email, String password) {
+        this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
     public int getId() {
-    return this.id;
+    return this.userId;
     }
 
     public String getUsername() {
@@ -89,8 +91,8 @@ public class User {
         return this.favorites;
     }
 
-    public void setId(int id) {
-    this.id = id;
+    public void setId(int userId) {
+    this.userId = userId;
     }
 
     public void setUsername(String username) {
@@ -123,16 +125,6 @@ public class User {
 
     public void setFavorites(List<Favorites> favorites) {
         this.favorites = favorites;
-    }
-
-    public User orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-    }
-
-    public User orElseThrow(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 
 }

@@ -2,6 +2,7 @@ package com.group12.moviedb.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,8 @@ public class GroupController {
 
     @GetMapping("/group/{id}")
     public Group findOneGroup(@PathVariable int id) {
-        return this.groupRepository.findById(id);
+        return this.groupRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));
     }
 
     @GetMapping("/group/{group_name}")
@@ -47,7 +49,8 @@ public class GroupController {
     public Group addOneGroup(@RequestBody Group group, @RequestParam("userId") int userId) {
         group.setCreatedAt(LocalDateTime.now());
         group.setUpdatedAt(LocalDateTime.now());
-        User user = userRepository.findById(userId);
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         group.setUserId(user); 
         group.setGroupName(group.getGroupName());
         group.setGroupDescription(group.getGroupDescription());
@@ -57,7 +60,8 @@ public class GroupController {
     
     @PatchMapping("/group/{id}")
     public Group updateOneGroup(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        Group group = this.groupRepository.findById(id);
+        Group group = this.groupRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));
         updates.forEach((key, value) -> {
                 switch (key) {
                 case "group_name":
@@ -78,7 +82,8 @@ public class GroupController {
 
     @DeleteMapping("/group/{id}")
     public void deleteOneGroup(@PathVariable int id) {
-        Group group = this.groupRepository.findById(id);
+        Group group = this.groupRepository.findById(id)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));
         this.groupRepository.delete(group);
     }
 

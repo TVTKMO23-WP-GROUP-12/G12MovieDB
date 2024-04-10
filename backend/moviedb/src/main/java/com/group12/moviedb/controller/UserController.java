@@ -2,6 +2,7 @@ package com.group12.moviedb.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User findOneUser(@PathVariable int id) {
-        return this.userRepository.findById(id).orElse(null);
+    public User findOneUser(@PathVariable int UserId) {
+        return this.userRepository.findById(UserId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
     }
 
     @PostMapping("/users")
@@ -46,8 +48,9 @@ public class UserController {
     
 
     @PatchMapping("/users/{id}")
-    public User updateOneUser(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        User user = this.userRepository.findById(id).orElse(null);
+    public User updateOneUser(@PathVariable int UserId, @RequestBody Map<String, Object> updates) {
+        User user = this.userRepository.findById(UserId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             updates.forEach((key, value) -> {
                 switch (key) {
@@ -70,13 +73,13 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable int id, @RequestBody User user) {
-        user.setId(id);
+    public User updateUser(@PathVariable int UserId, @RequestBody User user) {
+        user.setId(UserId);
         return this.userService.updateUser(user);
     }
 
     @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable int id) {
-        this.userService.deleteUser(id);
+    public void deleteUser(@PathVariable int userId) {
+        this.userService.deleteUser(userId);
     }
 }
