@@ -10,7 +10,7 @@
 - [Sivusto](#sivusto)
 
 
-### <a name ="jasenet"></a> Ryhmän jäsenet:
+## <a name ="jasenet"></a> Ryhmän jäsenet:
 Pasi Honka - [Rapuska](www.github.com/rapuska)
 
 Henri Laukka - [MacStache](www.github.com/macstache)
@@ -19,7 +19,7 @@ Lari Lepistö - [LariLepisto](www.github.com/larilepisto)
 
 Sanna Mäki - [Rahukettu](www.github.com/rahukettu)
 
-### <a name ="esittely"></a> Esittely
+## <a name ="esittely"></a> Esittely
 Group 12 Movie Database on websovellus jonka välityksellä elokuvista pitävät voivat keskustella keskenään ja arvioida sekä listata näkemiään elokuvia. 
 
 Sivusto toimii sosiaalisen median sivuston kaltaisella periaatteella, eli käyttäjät voivat seurata toisiaan, lähettää toisilleen viestejä sekä liittyä erilaisiin ryhmiin joissa voi keskustella esimerkiksi samankaltaisista elokuvista pitävien käyttäjien kanssa. Ryhmien muodolla ja tarkoituksella ei ole rajoitetta, joten käyttäjä voi itse perustaa minkälaisen ryhmän tahansa. 
