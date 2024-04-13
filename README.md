@@ -11,11 +11,11 @@
 
 
 ## <a name ="jasenet"></a> Ryhmän jäsenet:
-Pasi Honka - [Rapuska](www.github.com/rapuska)
+Pasi Honka - [Rapuska](www.github.com/Rapuska)
 
-Henri Laukka - [MacStache](www.github.com/macstache)
+Henri Laukka - [MacStache](www.github.com/MacStache)
 
-Lari Lepistö - [LariLepisto](www.github.com/larilepisto)
+Lari Lepistö - [LariLepisto](www.github.com/LariLepisto)
 
 Sanna Mäki - [Rahukettu](www.github.com/rahukettu)
 
