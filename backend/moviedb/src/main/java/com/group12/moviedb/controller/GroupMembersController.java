@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,11 +37,13 @@ public class GroupMembersController {
         this.userRepository = userRepository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/group/members")
     public Iterable<GroupMembers> findAllGroupMembers() {
         return this.groupMembersRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/group/members/group={group_id}")
     public List<GroupMembers> findGroupMembersByGroupId(@PathVariable int group_id) {
         Group group = groupRepository.findById(group_id)
@@ -50,7 +53,8 @@ public class GroupMembersController {
         }
         return Collections.emptyList();
     }
-    
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/group/members/user={user_id}")
     public List<GroupMembers> findGroupMembersByUserId(@PathVariable int user_id) {
         User user = userRepository.findById(user_id)
@@ -61,12 +65,14 @@ public class GroupMembersController {
         return Collections.emptyList();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/group/members/{member_id}")
     public GroupMembers findGroupMember(@PathVariable int member_id) {
         return this.groupMembersRepository.findById(member_id)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/group/members")
     public GroupMembers addOneGroupMembers(@RequestBody GroupMembers groupMembers,
                                            @RequestParam("groupId") int groupId,
@@ -80,7 +86,8 @@ public class GroupMembersController {
         groupMembers.setUser(user);
         return this.groupMembersRepository.save(groupMembers);
     }
-
+    
+    @CrossOrigin(origins = "*")
     @PatchMapping("/group/members/{member_id}")
     public GroupMembers updateOneGroupMembers(@PathVariable int memberId, @RequestBody Map<String, Object> updates) {
         GroupMembers groupMembers = this.groupMembersRepository.findById(memberId)

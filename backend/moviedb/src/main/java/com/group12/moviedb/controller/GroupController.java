@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -29,20 +30,17 @@ public class GroupController {
         this.userRepository = userRepository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/group")
     public Iterable<Group> findAllGroups() {
         return this.groupRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/group/{id}")
     public Group findOneGroup(@PathVariable int id) {
         return this.groupRepository.findById(id)
             .orElseThrow(() -> new NoSuchElementException("Group not found"));
-    }
-
-    @GetMapping("/group/{group_name}")
-    public Group findOneGroup(@PathVariable String groupName) {
-        return this.groupRepository.findByGroupName(groupName);
     }
     
     @PostMapping("/group")

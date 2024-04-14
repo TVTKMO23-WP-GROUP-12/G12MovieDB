@@ -42,15 +42,18 @@ public class User {
     private LocalDateTime updatedAt;
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
+    @Column(name = "user_description")
+    private String userDescription;
 
     @SuppressWarnings("unused")
     public User() {}
 
-    public User(int userId, String username, String email, String password) {
+    public User(int userId, String username, String email, String password, String userDescription) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userDescription = userDescription;
     }
 
     public int getId() {
@@ -76,12 +79,10 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-
     
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
-    
 
     public List<Group> getGroups() {
         return this.groups;
@@ -89,6 +90,10 @@ public class User {
 
     public List<Favorites> getFavorites() {
         return this.favorites;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
     }
 
     public void setId(int userId) {
@@ -125,6 +130,10 @@ public class User {
 
     public void setFavorites(List<Favorites> favorites) {
         this.favorites = favorites;
+    }
+
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
     }
 
 }
