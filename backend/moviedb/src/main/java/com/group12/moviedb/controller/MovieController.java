@@ -7,6 +7,7 @@ import com.group12.moviedb.repository.MovieRepository;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,16 +23,19 @@ public class MovieController {
         this.movieRepository = movieRepository;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/movie")
     public Iterable<Movie> findAllMovies() {
         return this.movieRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/movie/{id}")
     public Movie findOneMovie(@PathVariable int id) {
         return this.movieRepository.findById(id);
     }
-
+    
+    @CrossOrigin(origins = "*")
     @PatchMapping("/movie/{id}")
     public Movie updateOneMovie(@PathVariable int id, @RequestBody Map<String, Object> updates) {
         Movie movie = this.movieRepository.findById(id);

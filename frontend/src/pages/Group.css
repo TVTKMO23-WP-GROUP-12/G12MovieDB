@@ -1,9 +1,7 @@
-.showtimes-container {
+.group-container {
     position: fixed;
-    top: 60px;
-    right: 0px;
-    bottom: 50px;
-    width: 350px; 
+    margin: 0em;
+    width: 100%; 
     overflow-y: auto;
     padding: 40px;
     background-color: var(--secondary-color); 
@@ -13,23 +11,30 @@
     color: var(--primary-text-color); 
   }
   
-  .showtimes-box {
+  .group-box {
     width: 100%;
   }
-  
-  .showtimes-list {
-    margin-top: 10px;
+
+  .group-box H2 {
+    margin: 0px 0px 100px 0px;
   }
   
-  .showtime-item {
+  .group-list {
+    margin-top: 10px;
+  }
+
+  .group-list H3 {
+    margin: 0px 0px 0px 0px;
+  }
+
+  .group-list p {
+    margin: 0px 0px 20px 0px;
+  }
+  
+  .group-item {
     margin-bottom: 10px;
   }
   
-  .showtime-start {
-    float: left;
-    margin-right: 10px;
-  }
-  
-  .movie-title {
+  .group-title {
     margin: 0;
   }

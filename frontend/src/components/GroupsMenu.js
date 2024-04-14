@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './Group.css'
+import './GroupsMenu.css';
 import { Link } from 'react-router-dom';
 
-export default function Group() {
+export default function GroupsMenu() {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('All');
 
@@ -19,10 +19,10 @@ export default function Group() {
     }, []); 
 
     return (
-        <div className="group-container">
-            <div className="group-box">
+        <div className="groupsmenu-container">
+            <div className="groupsmenu-box">
                 <h2>Groups</h2>
-                <div className="group-list">
+                <div className="groupsmenu-list">
                 {groups.map(group => (
                     <div key={group.id}>
                         <h3><Link to={`/group/${group.id}`}>{group.groupName}</Link></h3>

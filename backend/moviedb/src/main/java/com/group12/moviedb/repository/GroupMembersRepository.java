@@ -13,5 +13,4 @@ import com.group12.moviedb.models.GroupMembers;
 public interface GroupMembersRepository extends JpaRepository<GroupMembers, Integer> {
     List<GroupMembers> findByGroup(Group group);
     List<GroupMembers> findByUser(User user);
-    GroupMembers findById(int memberId);
 }
