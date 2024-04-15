@@ -29,6 +29,16 @@
     order: 2; 
     margin-left: 20px; 
   }
+
+  .groupdetail-bio h2 {
+    text-transform: uppercase;
+    font-size: normal; 
+  }
+
+  .groupdetail-bio p {
+    font-size: small;
+  }
+
   .groupdetail-tabs-content {
     order: 3; 
   }
@@ -93,4 +103,42 @@
 
   .active {
     background-color: var(--primary-color); 
+  }
+
+  .groupdetail-join-button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size:x-small;
+    width: 100px;
+  }
+
+  @media (max-width: 600px) {
+    .groupdetail-content-left,
+    .groupdetail-content-right {
+    width: 100%;
+    }
+    .groupdetail-content-right {
+      display: none;
+    }
+  
+    .groupdetail-tabs-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+  
+    .groupdetail-tabs-left,
+    .groupdetail-tabs-right {
+      flex: 1 0 auto;
+    }
+
+    .groupdetail-content-container {
+      display: flex;
+      flex-direction: column;
+    }
+
   }
