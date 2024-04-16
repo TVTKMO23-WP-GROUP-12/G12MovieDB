@@ -2,6 +2,8 @@ package com.group12.moviedb.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group12.moviedb.repository.MovieRepository;
 import com.group12.moviedb.repository.MoviesWatchedRepository;
+import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.models.MoviesWatched;
 import com.group12.moviedb.models.User;
@@ -18,124 +22,135 @@ import com.group12.moviedb.models.User;
 @RestController
 public class MoviesWatchedController {
 
-    private final MoviesWatchedRepository moviesWatchedRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private MovieRepository movieRepository;
+    @Autowired
+    private MoviesWatchedRepository MoviesWatchedRepository;
 
-    public MoviesWatchedController(MoviesWatchedRepository moviesWatchedRepository) {
-        this.moviesWatchedRepository = moviesWatchedRepository;
-    }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched")
     public List<MoviesWatched> getMoviesWatched() {
-        return moviesWatchedRepository.findAll();
+        return MoviesWatchedRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched getMoviesWatchedById(@PathVariable("user_id") int userId) {
-        User user = new User();
-        user.setId(userId);
-        return moviesWatchedRepository.findByUser(user).orElse(null);
-    }
-
-    @GetMapping("/movies_watched/movie/{movie_id}")
-    public MoviesWatched getMoviesWatchedByMovieId(@PathVariable("movie_id") int movieId) {
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        return moviesWatchedRepository.findByMovie(movie).orElse(null);
-    }
-
-    @GetMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
-    public MoviesWatched getMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                @PathVariable("movie_id") int movieId) {
-        User user = new User();
-        user.setId(userId);
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        return moviesWatchedRepository.findByUserAndMovie(user, movie);
-    }
-
-    @PostMapping("/movies_watched")
-    public MoviesWatched addMoviesWatched(@RequestBody MoviesWatched moviesWatched) {
-        return moviesWatchedRepository.save(moviesWatched);
-    }
-
-    @PostMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") int userId,
-                                              @RequestBody MoviesWatched moviesWatched) {
-        User user = new User();
-        user.setId(userId);
-        moviesWatched.setUser(user);
-        return moviesWatchedRepository.save(moviesWatched);
-    }
-
-    @PostMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
-    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") int userId,
-                                                  @PathVariable("movie_id") int movieId,
-                                                  @RequestBody MoviesWatched moviesWatched) {
-        User user = new User();
-        user.setId(userId);
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        MoviesWatched existingRecord = moviesWatchedRepository.findByUserAndMovie(user, movie);
-        if (existingRecord != null) {
-            existingRecord.setNote(moviesWatched.getNote());
-            return moviesWatchedRepository.save(existingRecord);
-        } else {
-            moviesWatched.setUser(user);
-            moviesWatched.setMovie(movie);
-            return moviesWatchedRepository.save(moviesWatched);
+    public List<MoviesWatched> getMoviesWatchedById(@PathVariable("user_id") int userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
         }
+        return MoviesWatchedRepository.findByUser(user);
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/movies_watched/movie/{movie_id}")
+    public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") int movieId) {
+        Movie movie = new Movie();
+        return MoviesWatchedRepository.findByMovie(movie);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
+    public List<MoviesWatched> getMoviesWatchedByIds(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId) {
+        User user = userRepository.findById(userId).orElse(null);
+        Movie movie = movieRepository.findById(movieId);
+        if (user == null || movie == null) {
+            return null;
+        }
+        return MoviesWatchedRepository.findByUserAndMovie(user, movie);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/movies_watched")
+    public MoviesWatched addMoviesWatched(@RequestBody MoviesWatched MoviesWatched) {
+        return MoviesWatchedRepository.save(MoviesWatched);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/movies_watched/user/{user_id}")
+    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") int userId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        MoviesWatched.setUser(user);
+        return MoviesWatchedRepository.save(MoviesWatched);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
+    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(userId).orElse(null);
+        Movie movie = movieRepository.findById(movieId);
+        if (user == null || movie == null) {
+            return null;
+        }
+        MoviesWatched.setUser(user);
+        MoviesWatched.setMovie(movie);
+        return MoviesWatchedRepository.save(MoviesWatched);
+    }
+    
     @PatchMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                  @RequestBody MoviesWatched moviesWatched) {
-        User user = new User();
-        user.setId(userId);
-        return moviesWatchedRepository.save(moviesWatched);
+    public MoviesWatched updateMoviesWatchedByUserId(@PathVariable("user_id") int userId,
+                                                     @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
+        MoviesWatched.setUser(user);
+        return MoviesWatchedRepository.save(MoviesWatched);
     }
-
-    @PatchMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
+    
+    @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
     public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                  @PathVariable("movie_id") int movieId,
-                                                  @RequestBody MoviesWatched moviesWatched) {
-        User user = new User();
-        user.setId(userId);
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        moviesWatched.setUser(user);
-        moviesWatched.setMovie(movie);
-        return moviesWatchedRepository.save(moviesWatched);
+                                                   @PathVariable("movie_id") int movieId,
+                                                   @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(userId).orElse(null);
+        Movie movie = movieRepository.findById(movieId);
+        if (user == null || movie == null) {
+            return null;
+        }
+        MoviesWatched.setUser(user);
+        MoviesWatched.setMovie(movie);
+        return MoviesWatchedRepository.save(MoviesWatched);
     }
-
-    @PatchMapping("/movies_watched/user/{user_id}&movie/{movie_id}&note/{note}")
+    
+    @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}/note/{note}")
     public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                  @PathVariable("movie_id") int movieId,
-                                                  @PathVariable("note") String note,
-                                                  @RequestBody MoviesWatched moviesWatched) {
-        User user = new User();
-        user.setId(userId);
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        moviesWatched.setUser(user);
-        moviesWatched.setMovie(movie);
-        moviesWatched.setNote(note);
-        return moviesWatchedRepository.save(moviesWatched);
+                                                   @PathVariable("movie_id") int movieId,
+                                                   @PathVariable("note") String note,
+                                                   @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(userId).orElse(null);
+        Movie movie = movieRepository.findById(movieId);
+        if (user == null || movie == null) {
+            return null;
+        }
+        MoviesWatched.setUser(user);
+        MoviesWatched.setMovie(movie);
+        MoviesWatched.setNote(note);
+        return MoviesWatchedRepository.save(MoviesWatched);
     }
-
+    
     @DeleteMapping("/movies_watched/user/{user_id}")
-    public void deleteMoviesWatchedById(@PathVariable("user_id") int userId) {
-        User user = new User();
-        user.setId(userId);
-        moviesWatchedRepository.deleteByUser(user);
+    public void deleteMoviesWatchedByUserId(@PathVariable("user_id") int userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return;
+        }
+        MoviesWatchedRepository.deleteByUser(user);
     }
-
-    @DeleteMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
+    
+    @DeleteMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
     public void deleteMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                         @PathVariable("movie_id") int movieId) {
-        User user = new User();
-        user.setId(userId);
-        Movie movie = new Movie();
-        movie.setId(movieId);
-        moviesWatchedRepository.deleteByUserAndMovie(user, movie);
+                                          @PathVariable("movie_id") int movieId) {
+        User user = userRepository.findById(userId).orElse(null);
+        Movie movie = movieRepository.findById(movieId);
+        if (user == null || movie == null) {
+            return;
+        }
+        MoviesWatchedRepository.deleteByUserAndMovie(user, movie);
     }
 }

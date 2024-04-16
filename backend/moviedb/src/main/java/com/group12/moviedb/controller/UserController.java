@@ -52,7 +52,7 @@ public class UserController {
     
     @CrossOrigin(origins = "*")
     @PatchMapping("/users/{id}")
-    public User updateOneUser(@PathVariable int UserId, @RequestBody Map<String, Object> updates) {
+    public User updateOneUser(@PathVariable("id") int UserId, @RequestBody Map<String, Object> updates){
         User user = this.userRepository.findById(UserId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
@@ -66,6 +66,9 @@ public class UserController {
                         break;
                     case "password":
                         user.setPassword((String) value);
+                        break;
+                    case "userDescription":
+                        user.setUserDescription((String) value);
                         break;
                     default:
                         break;
