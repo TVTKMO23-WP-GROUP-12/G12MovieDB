@@ -32,7 +32,6 @@
 
   .groupdetail-bio h2 {
     text-transform: uppercase;
-    font-size: normal; 
   }
 
   .groupdetail-bio p {
@@ -41,6 +40,7 @@
 
   .groupdetail-tabs-content {
     order: 3; 
+    margin-top: 5px; 
   }
   .groupdetail-tabs-content p{
     margin-top: 5px; 

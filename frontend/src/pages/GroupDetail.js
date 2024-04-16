@@ -290,8 +290,7 @@ const handleJoinLeaveGroup = () => {
         </>
         )}
       </div>
-        
-      <div className="groupdetail-content-right">
+    <div className="groupdetail-content-right">
       {!isMobile && (
         <>
           {selectedTabRight === 'Movies' && (

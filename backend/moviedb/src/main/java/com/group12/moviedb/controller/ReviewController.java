@@ -53,13 +53,14 @@ public class ReviewController {
     @GetMapping("/review/user={user_id}")
     public List<Review> findReviewsByUserId(@PathVariable("user_id") int userId) {
         Optional<User> user = userRepository.findById(userId);
-        if (user != null) {
+        if (user.isPresent()) {
             return reviewRepository.findByUserId(userId);
         } else {
             return Collections.emptyList();
         }
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/review/{review_id}")
     public Review findReviewById(@PathVariable int review_id) {
         return this.reviewRepository.findById(review_id);
