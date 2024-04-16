@@ -5,12 +5,12 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "followers")
+@Table(name="followers")
 public class Followers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @Column(name="follower_id")
+    private int followerId;
 
     @Column(name="joined_at")
     private LocalDateTime joinedAt;
@@ -26,15 +26,16 @@ public class Followers {
     public Followers() {
     }
 
-    public Followers(LocalDateTime joinedAt, LocalDateTime leftAt, boolean following, User user) {
+    public Followers(int FollowerId, LocalDateTime joinedAt, LocalDateTime leftAt, boolean following, User user) {
+        this.followerId = FollowerId;
         this.joinedAt = joinedAt;
         this.leftAt = leftAt;
         this.following = following;
         this.user = user;
     }
 
-    public int getId() {
-        return id;
+    public int getFollowerId() {
+        return followerId;
     }
 
     public LocalDateTime getJoinedAt() {
@@ -53,8 +54,8 @@ public class Followers {
         return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFollowerId(int followerId) {
+        this.followerId = followerId;
     }
 
     public void setJoinedAt(LocalDateTime joinedAt) {
@@ -71,11 +72,6 @@ public class Followers {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Followers orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
     }
 
 }

@@ -9,5 +9,4 @@ import com.group12.moviedb.models.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
     void deleteById(Long id);
-    User findById(int id);
 }

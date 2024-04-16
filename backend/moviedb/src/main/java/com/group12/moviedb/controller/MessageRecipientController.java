@@ -8,6 +8,7 @@ import com.group12.moviedb.models.User;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -55,7 +56,8 @@ public class MessageRecipientController {
 
     @GetMapping("/message/recipients/user={user_id}")
     public List<MessageRecipient> findMessageRecipientsByUserId(@PathVariable int user_id) {
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(user_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             return this.messageRecipientRepository.findByUser(user);
         }
@@ -86,7 +88,8 @@ public class MessageRecipientController {
 
     @GetMapping("/message/recipients/read/user={user_id}")
     public List<MessageRecipient> findReadMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(user_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             return this.messageRecipientRepository.findByIsReadAndUser(true, user);
         }
@@ -95,7 +98,8 @@ public class MessageRecipientController {
 
     @GetMapping("/message/recipients/unread/user={user_id}")
     public List<MessageRecipient> findUnreadMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(user_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             return this.messageRecipientRepository.findByIsReadAndUser(false, user);
         }
@@ -187,7 +191,8 @@ public class MessageRecipientController {
 
     @DeleteMapping("/message/recipients/user={user_id}")
     public void deleteMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id);
+        User user = userRepository.findById(user_id)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             this.messageRecipientRepository.deleteByUser(user);
         }
@@ -195,7 +200,8 @@ public class MessageRecipientController {
 
     @DeleteMapping("/message/recipients/group={group_id}")
     public void deleteMessageRecipientsByGroupId(@PathVariable("group_id") int group_id) {
-        Group group = groupRepository.findById(group_id);
+        Group group = groupRepository.findById(group_id)
+            .orElseThrow(() -> new NoSuchElementException("Group not found"));    
         if (group != null) {
             this.messageRecipientRepository.deleteByGroup(group);
         }

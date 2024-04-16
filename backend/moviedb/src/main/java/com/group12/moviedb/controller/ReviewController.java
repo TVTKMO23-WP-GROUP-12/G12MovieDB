@@ -3,12 +3,16 @@ package com.group12.moviedb.controller;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.group12.moviedb.models.Review;
+import com.group12.moviedb.models.User;
 import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.repository.MovieRepository;
 import com.group12.moviedb.repository.ReviewRepository;
+import com.group12.moviedb.repository.UserRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,10 +26,12 @@ public class ReviewController {
     
     private final ReviewRepository reviewRepository;
     private final MovieRepository movieRepository;
+    private final UserRepository userRepository;
 
-    public ReviewController(ReviewRepository reviewRepository, MovieRepository movieRepository) {
+    public ReviewController(ReviewRepository reviewRepository, MovieRepository movieRepository, UserRepository userRepository) {
         this.reviewRepository = reviewRepository;
         this.movieRepository = movieRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/review")
@@ -43,10 +49,11 @@ public class ReviewController {
         }
     }
     
+    @CrossOrigin(origins = "*")
     @GetMapping("/review/user={user_id}")
     public List<Review> findReviewsByUserId(@PathVariable("user_id") int userId) {
-        Movie movie = movieRepository.findById(userId);
-        if (movie != null) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user != null) {
             return reviewRepository.findByUserId(userId);
         } else {
             return Collections.emptyList();
