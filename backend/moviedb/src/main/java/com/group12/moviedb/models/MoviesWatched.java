@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class MoviesWatched implements Serializable{
     @Id
     @ManyToOne
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id

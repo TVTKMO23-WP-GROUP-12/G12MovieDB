@@ -6,12 +6,12 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "movies_watched")
+@Table(name = "movies_to_watch")
 @IdClass(MoviesToWatchId.class)
 public class MoviesToWatch implements Serializable{
     @Id
     @ManyToOne
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id
