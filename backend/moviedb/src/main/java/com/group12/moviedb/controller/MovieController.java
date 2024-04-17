@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -33,6 +34,12 @@ public class MovieController {
     @GetMapping("/movie/{id}")
     public Movie findOneMovie(@PathVariable int id) {
         return this.movieRepository.findById(id);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/movie")
+    public Movie createOneMovie(@RequestBody Movie movie) {
+        return this.movieRepository.save(movie);
     }
     
     @CrossOrigin(origins = "*")
