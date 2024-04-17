@@ -1,7 +1,10 @@
 package com.group12.moviedb.controller;
 
-import java.util.List;
 
+import java.util.Optional;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +28,7 @@ public class MessageController {
     }
 
     @GetMapping("/messages/{message_id}")
-    public List<Message> findMessageById(@PathVariable("message_id") int messageId) {
+    public Optional<Message> findMessageById(@PathVariable("message_id") int messageId) {
         return this.messageRepository.findById(messageId);
     }
 
@@ -55,8 +58,13 @@ public class MessageController {
     }
 
     @DeleteMapping("/messages/{message_id}")
-    public Message deleteMessage(@PathVariable("message_id") int messageId) {
-        return this.messageRepository.deleteById(messageId);
+    public ResponseEntity<String> deleteMessage(@PathVariable("message_id") int messageId) {
+        try {
+            messageRepository.deleteById(messageId);
+            return ResponseEntity.ok("Message deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete message: " + e.getMessage());
+        }
     }
     
 }

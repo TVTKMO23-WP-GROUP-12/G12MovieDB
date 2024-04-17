@@ -1,18 +1,18 @@
 import React, {useEffect, useState } from 'react';
-import axios from 'axios';
+import auth from '../auth/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
 
 
-function LoginPage() {
+const LoginPage = () => {
 
 	const[username, setUsername] = useState('');
 	const[password, setPassword] = useState('');
   	const [error, setError] = useState(''); //error handling msg
     	const history = useNavigate(); // Redirect with history object
 
-    	async function handleLogin(event) {
-        event.preventDefault();
+
+    	const handleLogin = async () => {
         try {
             //check for empty fields
             if (!username || !password) {
@@ -20,48 +20,41 @@ function LoginPage() {
                 return;
             }
             
-            const response = await axios.post("http://loalhost:8080/login", {
-                username: username,
-                password: password,
-            });
+            await auth.login(username, password); // attempt login
 
             //Handle successful Login
-            console.log('Login successful:', response.data);
-            history('/login');
+            console.log('Login successful');
+            history('/user');
         } catch (error) {
             // Handle login error
             console.error('Login failed:', error.response ? error.response.data : error.message);
             setError('Invalid username or password.');
         }
-    }
+    };
 
 
 	return (
 		<section className="main-content">
 		<div className="content">
 		<h2 className="title">Login</h2>
-		<form>
+		<div>
 		<div className="field">
-		<input type='text' autocomplete="off"
+		<input type='text' autoComplete="off"
 		value={username}
-		onChange={(event) => {
-			setUsername(event.target.value);
-		}}
-		name="username" id="username" placeholder="Username"></input>
+		onChange={(e) => setUsername(e.target.value)}
+		name="username" id="username" placeholder="Username"/>
 		</div>
 		<div className="field">
-		<input type='password' autocomplete="off"
+		<input type='password' autoComplete="off"
 		value={password}
-		onChange={(event) => {
-			setPassword(event.target.value);
-		}}
-		name="password" id="password" placeholder="Password"></input>
+		onChange={(e) => setPassword(e.target.value)}
+		name="password" id="password" placeholder="Password"/>
 		</div>
 		{error && <p className="text-danger">{error}</p>}
 		{/* render error message if exists*/} 
-		<button className="btn-login" type="submit" onClick={handleLogin}>
+		<button className="btn-login" onClick={handleLogin}>
 		Login</button>
-		</form>
+		</div>
 
 		<div className="forgot-pass"><Link to="#">Forgot password?</Link></div>
 

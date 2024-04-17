@@ -1,5 +1,8 @@
 package com.group12.moviedb.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,8 +15,10 @@ import com.group12.moviedb.models.User;
 
 @Repository
 public interface MoviesWatchedRepository extends JpaRepository<MoviesWatched, MoviesWatchedId> {
-    MoviesWatched findByUser(User user);
-    MoviesWatched findByMovie(Movie movie);
+    Optional<MoviesWatched> findByUser(User user);
+    Optional<MoviesWatched> findByMovie(Movie movie); 
+    Optional<MoviesWatched> findByMovieId(Integer movieId);
+    Optional<MoviesWatched> findByUserId(Integer userId);
     MoviesWatched findByUserAndMovie(User user, Movie movie);
 
     @Modifying
@@ -35,4 +40,8 @@ public interface MoviesWatchedRepository extends JpaRepository<MoviesWatched, Mo
     void deleteByUser(User user);
     void deleteByMovie(Movie movie);
     void deleteByUserAndMovie(User user, Movie movie);
+    void deleteByMovieId(Integer id);
+    void deleteByUserId(Integer id);
+    List<MoviesWatched> findByUserAndMovie(User user, Optional<Movie> movie);
+    void deleteByUserAndMovie(User user, Optional<Movie> movie);
 }

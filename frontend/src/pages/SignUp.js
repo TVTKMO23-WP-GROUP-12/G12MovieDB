@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import auth from '../auth/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
 
-function SignUpPage() {
+const SignUpPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,8 +11,8 @@ function SignUpPage() {
     const [error, setError] = useState(''); //error handling msg
     const history = useNavigate(); // Redirect with history object
 
-    async function handleSignUp(event) {
-        event.preventDefault();
+    const handleSignUp = async () => {
+     
         try {
             //check for empty fields
             if (!username || !email || !password) {
@@ -23,14 +23,11 @@ function SignUpPage() {
             if (password !== confirmPassword) {
                 throw new Error("Passwords do not match.");
             }
-            const response = await axios.post("http://localhost:8080/register", {
-                username: username,
-                email: email,
-                password: password,
-            });
+
+		await auth.signup(username, email, password);
 
             //Handle successful signup
-            console.log(response.data);
+            console.log('Signup successful.');
             history('/login');
         } catch (error) {
             // Handle signup error
@@ -43,31 +40,25 @@ function SignUpPage() {
         <section className="main-content">
             <div className="content">
                 <h2 className="title">SignUp</h2>
-                <form>
+                <div>
 
                     <div className="field">
                         <input type='text' autoComplete="off"
                             value={username}
-                            onChange={(event) => {
-                                setUsername(event.target.value);
-                            }}
+                            onChange={(e) => setUsername(e.target.value)} 
                             name="username" id="username" placeholder="Username" />
                     </div>
                     <div className="field">
                         <input type='email' autoComplete="off"
                             value={email}
-                            onChange={(event) => {
-                                setEmail(event.target.value);
-                            }}
+                            onChange={(e) => setEmail(e.target.value)}
                             name="email" id="email" placeholder="Email" />
                     </div>
 
                     <div className="field">
                         <input type='password' autoComplete="off"
                             value={password}
-                            onChange={(event) => {
-                                setPassword(event.target.value);
-                            }}
+                            onChange={(e) => setPassword(e.target.value)}
                             name="password" id="password" placeholder="Password" />
                     </div>
                     <div className="field">
@@ -77,10 +68,10 @@ function SignUpPage() {
                     </div>
                     {/*Render error message if exists*/}
                     {error && <p className="text-danger">{error}</p>}
-                    <button className="btn-signup" type="submit" onClick={handleSignUp}>
-                        Signup
+                    <button className="btn-signup" onClick={handleSignUp}>
+                        Sign Up
                     </button>
-                </form>
+                </div>
 
                 <div className="old-user">
                     <h5 className="new">Already a member? <Link to="/login">Login</Link></h5>

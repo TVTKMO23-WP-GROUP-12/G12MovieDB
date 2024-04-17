@@ -18,6 +18,7 @@ public class GroupMembers {
 
     @ManyToOne
     @JoinColumn(name="group_id")
+    private int groupId;
     private Group group;
 
     @Column(name="is_admin")
@@ -63,7 +64,7 @@ public class GroupMembers {
         return this.group;
     }
 
-    public void setGrouMembersId(int memberId) {
+    public void setGroupMembersId(int memberId) {
         this.id = memberId;
     }
 

@@ -26,7 +26,6 @@ public class LoginController {
         "  </body>\n" +
         "</html>\n";
   }
-
   /*  KOMMENTOITU POIS, KOSKA POLUT ON JO KÄYTÖSSÄ. 
       TÄMÄ TARVII EHDON.
 

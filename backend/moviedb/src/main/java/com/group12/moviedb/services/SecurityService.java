@@ -1,5 +1,5 @@
 package com.group12.moviedb.services;
-
+/* 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class SecurityService {
 
     /**
      * Register new user or update existing one
-     */
+     
     public User register(String username, String email, String password){
         
         User user = new User(username, email, BCrypt.hashpw(password, BCrypt.gensalt(10)));
@@ -36,7 +36,7 @@ public class SecurityService {
 
     /**
      * Login user. Return JWT token or null if not found or wrong password.
-     */
+     
     public String login(String username, String password){
         User user = repo.findByUsername(username).orElse(null);
 
@@ -50,7 +50,7 @@ public class SecurityService {
 
     /**
      * Verify jwt token and return username if token is valid
-     */
+     
     public String validateJwt(String jwtToken){
         Algorithm alg = Algorithm.HMAC256(jwtKey);
         JWTVerifier verifier = JWT.require(alg).build();
@@ -65,3 +65,4 @@ public class SecurityService {
         return null;
     }
 }
+*/

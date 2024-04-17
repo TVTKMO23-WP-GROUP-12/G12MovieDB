@@ -3,47 +3,79 @@ package com.group12.moviedb.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.persistence.*;
 
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name="users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Group> groups;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
-    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy="user_id", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
+
     @ManyToMany(mappedBy = "recipients")
     private List<Message> receivedMessages = new ArrayList<>();
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MessageRecipient> messageRecipient;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Followers> followers;
+
     
-    @Column(name="username")
+
+    
+    @Column(name= "username", nullable = false)
+    @Size(max = 120)
     private String username;
-    @Column(name="email")
+
+    @Column(name= "email", nullable = false)
+    @Size(max = 80)
     private String email;
-    @Column(name="password")
-    private String password; 
+
+    @Column(name = "password", nullable = false)
+    @Size(max = 100)
+    private String password;
+
+    @Column(nullable = false)
+    @Size(max = 100)
+    private String login;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+    
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
-    @SuppressWarnings("unused")
-    public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -51,7 +83,7 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
     return this.id;
     }
 
@@ -87,7 +119,7 @@ public class User {
         return this.favorites;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
     this.id = id;
     }
 
@@ -123,10 +155,7 @@ public class User {
         this.favorites = favorites;
     }
 
-    public User orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-    }
+
 
 }
 

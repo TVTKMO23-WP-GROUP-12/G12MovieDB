@@ -1,6 +1,6 @@
 package com.group12.moviedb.rest;
 
-
+/* 
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,22 +24,22 @@ public class SecurityRestApi {
 
     /**
      * Register user with request parameters
-     */
-    @PostMapping("register")
+     
+    @PostMapping("/signup")
     public ResponseEntity<String> register(
         @RequestParam String username,
         @RequestParam String email,
         @RequestParam String password)
     {
-        User u = secService.register(username, email, password);
-        return new ResponseEntity<>(u.getUsername(), HttpStatus.OK);
+        User user = secService.register(username, email, password);
+        return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
     }
 
     /**
      * Login user with request parameters.
      * Returns token if user is authorized.
-     */
-    @PostMapping("login")
+     
+    @PostMapping("/login")
     public ResponseEntity<Map<String,String>> login(
         @RequestParam String username, 
         @RequestParam String password)
@@ -51,7 +51,7 @@ public class SecurityRestApi {
  
     /**
      * Another version for login with basic authentication header. 
-     */
+     
     @PostMapping("loginbasic")
     public ResponseEntity<Map<String,String>> loginBasic(@RequestHeader("Authorization") String basicAuth)
     {
@@ -76,3 +76,4 @@ public class SecurityRestApi {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
+*/

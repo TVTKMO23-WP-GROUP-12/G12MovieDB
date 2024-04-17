@@ -2,6 +2,7 @@ package com.group12.moviedb.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -52,29 +53,38 @@ public class MovieScoreController {
     }
 
     @PatchMapping("/movie_scores/{id}")
-    public MovieScore updateOneMovieScore(@PathVariable int movie_score_id, @RequestBody Map<String, Object> updates) {
-        MovieScore movieScore = this.movieScoreRepository.findById(movie_score_id);
-        updates.forEach((key, value) -> {
-            switch (key) {
-                case "movie_score_id":
-                    movieScore.setMovieScoreId((int) value);
-                    break;
-                case "score":
-                    movieScore.setScore((int) value);
-                    break;
-                case "created_at":
-                    movieScore.setCreatedAt((LocalDateTime) value);
-                    break;
-                case "updated_at":
-                    movieScore.setUpdatedAt((LocalDateTime) value);
-                    break;
-            }
-        });
-        return this.movieScoreRepository.save(movieScore);
+    public MovieScore updateOneMovieScore(@PathVariable int id, @RequestBody Map<String, Object> updates) {
+        Optional<MovieScore> movieScoreOptional = this.movieScoreRepository.findById(id);
+    
+        if (movieScoreOptional.isPresent()) {
+            MovieScore movieScore = movieScoreOptional.get();
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "movie_score_id":
+                        movieScore.setMovieScoreId((int) value);
+                        break;
+                    case "score":
+                        movieScore.setScore((int) value);
+                        break;
+                    case "created_at":
+                        movieScore.setCreatedAt((LocalDateTime) value);
+                        break;
+                    case "updated_at":
+                        movieScore.setUpdatedAt((LocalDateTime) value);
+                        break;
+                    default:
+                            //other keys if there are some
+                        break;
+                }
+            });
+            return this.movieScoreRepository.save(movieScore);
+        } else {
+            throw new NoSuchElementException("Movie score not found");
+        }
     }
     
     @DeleteMapping("/movie_scores/{id}")
-    public void deleteOneMovieScore(@PathVariable int movie_score_id) {
-        this.movieScoreRepository.deleteById(movie_score_id);
+    public void deleteOneMovieScore(@PathVariable int id) {
+        this.movieScoreRepository.deleteById(id);
     }
 }

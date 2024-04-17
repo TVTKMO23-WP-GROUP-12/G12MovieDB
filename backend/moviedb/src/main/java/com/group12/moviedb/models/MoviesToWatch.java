@@ -2,16 +2,17 @@ package com.group12.moviedb.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "movies_watched")
+@Table(name = "movies_to_watch")
 @IdClass(MoviesToWatchId.class)
 public class MoviesToWatch implements Serializable{
     @Id
     @ManyToOne
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id
@@ -83,5 +84,10 @@ public class MoviesToWatch implements Serializable{
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'orElse'");
 	}
+
+    public void setMovie(Optional<Movie> movie2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setMovie'");
+    }
 
 }

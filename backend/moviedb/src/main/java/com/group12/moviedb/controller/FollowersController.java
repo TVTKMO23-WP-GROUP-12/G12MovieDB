@@ -1,6 +1,8 @@
 package com.group12.moviedb.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group12.moviedb.models.Followers;
@@ -37,7 +40,7 @@ public class FollowersController {
         if (user == null) {
             return null;
         }
-        return followersRepository.findByUserId(userId).orElse(null);
+        return followersRepository.findByUserId(userId);
     }
 
     @GetMapping("/followers/following={following}")
@@ -51,7 +54,7 @@ public class FollowersController {
         if (user == null) {
             return null;
         }
-        return followersRepository.findByUserIdAndFollowing(userId, following).orElse(null);
+        return followersRepository.findByUserIdAndFollowing(userId, following);
     }
 
     @PostMapping("/followers")
@@ -59,12 +62,18 @@ public class FollowersController {
         return followersRepository.save(followers);
     }
 
-    @PostMapping("/followers/user={user_id}")
-    public Followers addFollowersByUserId(@PathVariable int userId, @RequestBody Followers followers) {
-        User user = this.userRepository.findById(userId).orElse(null);
-        if (user == null) {
-            return null;
-        }
+    @PostMapping("/followers/")
+    public Followers addFollowersByUserId(  @RequestBody Followers followers,
+                                            @RequestParam("userId") int userId,
+                                            @RequestParam("followerId") int followerId){
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
+        User follower = userRepository.findById(followerId)
+            .orElseThrow(() -> new NoSuchElementException("Follower not found"));
+        followers.setFollowerId(follower.getId());
+        followers.setFollowing(true);
+        followers.setJoinedAt(LocalDateTime.now());
+        followers.setLeftAt(null);
         followers.setUser(user);
         return followersRepository.save(followers);
     }

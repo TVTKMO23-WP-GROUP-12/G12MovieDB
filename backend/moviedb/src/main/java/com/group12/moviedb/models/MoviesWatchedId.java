@@ -45,4 +45,3 @@ public class MoviesWatchedId implements Serializable {
         return Objects.hash(getUserId(), getMovieId());
     }
 }
-

@@ -8,7 +8,8 @@ import com.group12.moviedb.models.FavoritesId;
 
 @Repository
 public interface FavoritesRepository extends JpaRepository<Favorites, FavoritesId> {
-    Favorites findByUserId(int users_id);
-    Favorites findByMovieId(int movie_id);
+    Favorites findByUserId(Integer id);
+    Favorites findByMovieId(Integer id);
+ 
     
 }
