@@ -27,12 +27,12 @@ public class Movie {
     private String title;
 
     @Column(name="tmdb_id")
-    private int tmdbId;
+    private Integer tmdbId;
 
     @SuppressWarnings("unused")
     public Movie() {}
 
-    public Movie(int movieId, String title, int tmdbId) {
+    public Movie(int movieId, String title, Integer tmdbId) {
         this.movieId = movieId;
         this.title = title;
         this.tmdbId = tmdbId;
@@ -46,7 +46,7 @@ public class Movie {
         return this.title;
     }
 
-    public int getTmdbId() {
+    public Integer getTmdbId() {
         return this.tmdbId;
     }
 
@@ -62,7 +62,7 @@ public class Movie {
         this.title = title;
     }
 
-    public void setTmdbId(int tmdbId) {
+    public void setTmdbId(Integer tmdbId) {
         this.tmdbId = tmdbId;
     }
 
