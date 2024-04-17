@@ -8,8 +8,9 @@ import jakarta.persistence.*;
 @Table(name="movie")
 public class Movie {
     @Id
+    @Column(name="movie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int movie_id;
+    private int movieId;
 
     @OneToMany(mappedBy="movieId", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
@@ -25,31 +26,44 @@ public class Movie {
     @Column(name="title")
     private String title;
 
+    @Column(name="tmdb_id")
+    private int tmdbId;
+
     @SuppressWarnings("unused")
     public Movie() {}
 
-    public Movie(String title) {
+    public Movie(int movieId, String title, int tmdbId) {
+        this.movieId = movieId;
         this.title = title;
+        this.tmdbId = tmdbId;
     }
 
     public int getId() {
-        return this.movie_id;
+        return this.movieId;
     }
 
     public String getTitle() {
         return this.title;
     }
 
+    public int getTmdbId() {
+        return this.tmdbId;
+    }
+
     public List<Favorites> getFavorites() {
         return this.favorites;
     }
 
-    public void setId(int id) {
-        this.movie_id = id;
+    public void setId(int movieId) {
+        this.movieId = movieId;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setTmdbId(int tmdbId) {
+        this.tmdbId = tmdbId;
     }
 
     public void setFavorites(List<Favorites> favorites) {
