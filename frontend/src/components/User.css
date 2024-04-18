@@ -1,0 +1,52 @@
+/* CSS */
+  .user-info {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .user-profilepicture {
+    margin-right: 20px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-details h1 {
+    text-transform: uppercase;
+  }
+  
+  .user-details p {
+    font-size: small;
+  }
+  
+  .user-bio {
+    width: 100%;
+  }
+  
+  .user-bio p {
+    width: 100%;
+    font-size: small;
+  }
+
+  .user-update-description {
+    order: 4;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .user-update-description button{
+    float: right;
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size:x-small;
+    width: 100px;
+    color: var(--primary-text-color);
+  }

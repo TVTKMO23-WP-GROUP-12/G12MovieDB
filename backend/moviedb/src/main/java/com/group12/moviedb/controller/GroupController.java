@@ -62,19 +62,20 @@ public class GroupController {
             .orElseThrow(() -> new NoSuchElementException("Group not found"));
         updates.forEach((key, value) -> {
                 switch (key) {
-                case "group_name":
+                case "groupName":
                     group.setGroupName((String) value);
                     break;
-                case "group_description":
+                case "groupDescription":
                     group.setGroupDescription((String) value);
                     break;
-                case "updated_at":
+                case "updatedAt":
                     group.setUpdatedAt((LocalDateTime) value);
                     break;
                 default:
                      break;
           }
       });
+        group.setUpdatedAt(LocalDateTime.now());
         return this.groupRepository.save(group);
     }
 
