@@ -25,8 +25,10 @@ export default function GroupsMenu() {
                 <div className="groupsmenu-list">
                 {groups.map(group => (
                     <div key={group.id}>
-                        <h3><Link to={`/group/${group.id}`}>{group.groupName}</Link></h3>
+                        <h4><Link to={`/group/${group.id}`}>{group.groupName}</Link></h4>
                         <p>{group.groupDescription}</p>
+                        <Link><p className='groupsmenu-join-button'>Liity Ryhmään</p></Link>
+                        <hr></hr>
                     </div>
                 ))}
                 </div>

@@ -13,14 +13,34 @@
   align-items: flex-start; 
 }
 
-.user-tabs-container {
-  position: relative;
+.user-info {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.user-profilepicture {
+  margin-right: 20px;
+}
+
+.user-bio {
+  order: 2; 
+  margin-left: 20px;
+  width: 100%; 
+}
+
+.user-bio h2 {
+  text-transform: uppercase;
+}
+
+.user-bio p {
+  font-size: normal;
+  margin-top: 10px;
 }
 
 .user-tabs-content {
-  height: 100%;
+  order: 3; 
+  margin-top: 5px; 
 }
-
 .user-tabs-content p{
   margin-top: 5px; 
   margin-bottom: 10px;
@@ -39,8 +59,9 @@
 }
 
 .user-tabs-content h3{
-  margin-top: 5px; 
+  margin-top: 10px; 
   margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .user-content-container {
@@ -55,6 +76,17 @@
   color: var(--primary-text-color); 
 }
 
+.user-content-container h2, h3 {
+  margin-top: 5px; 
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.user-content-container p {
+  margin-top: 5px; 
+  margin-bottom: 20px;
+}
+
 .user-content-left, .user-content-right {
   text-align: left;
   width: 50%;
@@ -67,8 +99,9 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-top: 1px;
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
+  border-top: 1px solid var(--background-color);
+  border-bottom: 1px solid var(--background-color);
 }
 
 .user-tabs-left, .user-tabs-right {
@@ -89,9 +122,37 @@
   font-size: large;
 }
 
-.note-heading {
-  font-size: 1em;
-  font-weight: bold;
+.user-join-button {
+  background-color: var(--background-color);
+  border: 1px solid var(--primary-text-color);
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size:x-small;
+  width: 100px;
+}
+
+.user-update-description {
+  order: 4;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.user-update-description button{
+  float: right;
+  background-color: var(--background-color);
+  border: 1px solid var(--primary-text-color);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  font-size:x-small;
+  width: 100px;
+  color: var(--primary-text-color);
 }
 
 .active {

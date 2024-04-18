@@ -11,14 +11,14 @@ const Groups = ({ user }) => {
   }
 
   return (
-    <div className="user-tabs-content">
+    <div className="groupdetail-content">
       <h2>Ryhmät</h2>
       <ul>
         {groups.map(group => (  
         <div key={group.id}>
-          <p>
+          <h3>
             <Link to={`/group/${group.id}`}>{group.groupName}</Link>
-          </p>
+          </h3>
           <p>{group.groupDescription}</p>
           <hr></hr>
         </div>

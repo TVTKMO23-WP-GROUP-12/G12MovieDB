@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
-import './User.css';
+import { Link } from 'react-router-dom';
 
 function User({ id, setUser: setUserProp }) {
   const [user, setUser] = useState(null);
@@ -35,42 +35,36 @@ function User({ id, setUser: setUserProp }) {
   }
 
   return (
-          <div className="userdetail-container">
-          <div className="user-info">
-            <div className="user-profilepicture">
-              <img src={user.profilePicture} alt="Profile" />
-            </div>
-            <div className="user-details">
-              <h1>{user.username}</h1>
-              <p>Liittyi: {formattedDate}</p>
-              <p>Kirjautui viimeksi: {user.lastLogin}</p>
-            </div>
-          </div>
-          <div className="user-bio">
-            <p className="use-bio-text">{user.userDescription}</p>
-          </div>
-
-          <div className="user-update-description">
-            {isEditing ? (
-              <>
-                <input
-                  type="text"
-                  value={editedDescription}
-                  onChange={e => setEditedDescription(e.target.value)} 
-                />
-                <button onClick={() => {
-                  setIsEditing(false);
-                  submitDescription();
-                }}>Tallenna</button>
-              </>
-            ) : (
+    <div className="user-info">
+      <div className="user-profilepicture">
+        <img src={user.profilePicture} alt="Profile" />
+      </div>
+      <div className="user-bio">
+        <h2><Link to={`/users/${user.id}`}>{user.username}</Link></h2>
+        <p>Liittyi: {formattedDate}</p>
+        <p>Kirjautui viimeksi: {user.lastLogin}</p>
+        <p>{user.userDescription}</p>
+        <div className="user-update-description">
+          {isEditing ? (
+            <>
+              <input
+                type="text"
+                value={editedDescription}
+                onChange={e => setEditedDescription(e.target.value)} />
               <button onClick={() => {
-                setIsEditing(true);
-                setEditedDescription(user.userDescription);
-              }}>Muokkaa</button>
-            )}
-          </div>
-      </div>  
+                setIsEditing(false);
+                submitDescription();
+              } }>Tallenna</button>
+            </>
+          ) : (
+            <button onClick={() => {
+              setIsEditing(true);
+              setEditedDescription(user.userDescription);
+            } }>Muokkaa</button>
+          )}
+        </div>
+      </div>
+    </div>  
   );
 }
 

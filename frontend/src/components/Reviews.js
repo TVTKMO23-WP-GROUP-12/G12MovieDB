@@ -12,9 +12,9 @@ const Reviews = ({ id }) => {
     <h2>Arvostelut</h2>
       {reviews.map(review => (
         <div key={review.reviewId}>
-          <p>
+          <h3>
             <Link to={`/movie/${review.movie.id}`}>{review.movie.title}</Link>
-          </p>
+          </h3>
           <p>
             {review.content} | Pisteet: {review.movieScore.score}/5
           </p>

@@ -31,7 +31,6 @@ const GroupDetailTop = ({ group }) => {
         <img src={group.groupPicture} alt="Profile" />
         <Link><p className='groupdetail-join-button'>Liity Ryhmään</p></Link>
       </div>
-      <div></div>
       <div className="groupdetail-bio">
         <h2><Link to={`/group/${group.id}`}>{group.groupName}</Link></h2>
         {

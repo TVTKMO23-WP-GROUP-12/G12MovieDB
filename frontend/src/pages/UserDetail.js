@@ -38,7 +38,7 @@ function UserDetail() {
   }, []);
 
   return user ? (
-    <div>  
+    <div className="userdetail-container">  
         <User id={id} />
     <div className="user-tabs-container">
     <div className="user-tabs-left">

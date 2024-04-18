@@ -12,11 +12,9 @@ const ToWatch = ({ id }) => {
       <h2>Haluaa katsoa</h2>
       {toWatchMovies.map((toWatchMovies, toWatch) => (
         <div key={toWatch}>
-          <p>
             <Link to={`/movie/${toWatchMovies.movieId.id}`}>
-              {toWatchMovies.movieId.title}
+              <h3>{toWatchMovies.movieId.title}</h3>
             </Link>
-          </p>
             <div className="note">
               <span className="note-heading">Muistiinpano:</span>
               <p>{toWatchMovies.note}</p>

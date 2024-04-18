@@ -12,17 +12,15 @@ const Watched = ({ id }) => {
       <h2>On katsonut</h2>
       {watchedMovie.map((watchedMovie, index) => (
         <div key={index}>
-          <p>
             <Link to={`/movie/${watchedMovie.movieId.id}`}>
-              {watchedMovie.movieId.title}
+            <h3>{watchedMovie.movieId.title}</h3>
             </Link>
-          </p>
           <div className="note">
             <span className="note-heading">Muistiinpano:</span>
             <p>{watchedMovie.note}</p>
           </div>
           <hr></hr>
-          </div>
+        </div>
       ))}
     </div>
   );
