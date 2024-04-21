@@ -142,7 +142,7 @@
     color: var(--primary-text-color);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     .groupdetail-content-left,
     .groupdetail-content-right {
     width: 100%;
