@@ -60,5 +60,5 @@ Sivusto koostuu kotisivusta sekä useista sen alasivuista. Sivuston eri osiot ov
 
 #### Kirjautumisen takana olevat sivut:
 
-### Ruutukaappaukset (jos tarvetta erilliselle osiolle) 
+#### Ruutukaappaukset (jos tarvetta erilliselle osiolle) 
 
