@@ -1,3 +1,6 @@
 .vscode
 backend/moviedb/src/main/resources/database.properties
-documents/api-key.yaml
+backend/moviedb/src/main/resources/api-key.yaml
+
+# you can remove this if you already moved api-key.yaml:
+documents/api-key.yaml 
