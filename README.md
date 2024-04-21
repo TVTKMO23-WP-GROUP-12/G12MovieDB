@@ -9,7 +9,6 @@
 	- [Tietokanta](#tietokanta) 
 - [Sivusto](#sivusto)
 
-
 ## <a name ="jasenet"></a> Ryhmän jäsenet:
 - Pasi Honka - [Rapuska](https://www.github.com/Rapuska)
 
@@ -44,7 +43,7 @@ Sivuston frontend -- eli selainpuolen -- koodina käytetään [React JavaScript]
 - **Axios:** *1.6.8*
 
 ### <a name ="tietokanta"></a> Tietokanta
-Tietokantana toimii avoimeen lähdekoodiin perustuva PostgreSQL-tietokantajärjestelmä. PostgreSQL perustuu relaatiomallille, ja se on vaihtoehto muille vapaan lähdekoodin tietokantajärjestelmille, kuten MySQL, sekä myös kaupallisille järjestelmille, kuten Oracle sekä Sybase.
+Tietokantana toimii avoimeen lähdekoodiin perustuva [PostgreSQL](https://www.postgresql.org/) -tietokantajärjestelmä. PostgreSQL perustuu relaatiomallille, ja se on vaihtoehto muille vapaan lähdekoodin tietokantajärjestelmille, kuten MySQL, sekä myös kaupallisille järjestelmille, kuten Oracle sekä Sybase.
 
 Projektin tietokanta pyörii [Render](https://render.com/) -palvelussa.
 
