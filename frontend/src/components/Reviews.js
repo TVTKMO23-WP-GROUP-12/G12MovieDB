@@ -1,11 +1,28 @@
-import React from 'react'
+import { Link } from 'react-router-dom';
+import useFetchReviews from '../hooks/useFetchReviews';
 
-// On: 
-// - group page (Group)
+const Reviews = ({ id }) => {
+  const reviews = useFetchReviews(id);
+  
+// On:
 // - users own page (User)
 
-export default function Reviews() {
   return (
-    <p>User reviews here</p>
-  )
-}
+    <div className="user-tabs-content">
+    <h2>Arvostelut</h2>
+      {reviews.map(review => (
+        <div key={review.reviewId}>
+          <p>
+            <Link to={`/movie/${review.movie.id}`}>{review.movie.title}</Link>
+          </p>
+          <p>
+            {review.content} | Pisteet: {review.movieScore.score}/5
+          </p>
+          <hr></hr>
+        </div>
+      ))}
+  </div>
+  );
+};
+
+export default Reviews;

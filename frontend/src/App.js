@@ -21,16 +21,16 @@ function App() {
     <Layout>
       <Routes>
         <Route path='/' element={<Home />} /> {/*or Index?*/}
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/search' element={<Search />} />
+        <Route path='/public/signup' element={<SignUp />} />
+        <Route path='/public/login' element={<Login />} />
+        <Route path='/public/search' element={<Search />} />
         <Route path='/user' element={<User />} />
         <Route path='/group' element={<Group />} />
         <Route path='/group/:id' element={<GroupDetail />} />
         <Route path='/users/:id' element={<UserDetail />} />
         <Route path='/movie/:id' element={<MovieDetail />} />
-        <Route path='/movie' element={<Movie />} />
-        <Route path='/showtimes' element={<Showtimes />} />
+        <Route path='/public/movie' element={<Movie />} />
+        <Route path='/public/showtimes' element={<Showtimes />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </Layout>
