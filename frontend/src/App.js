@@ -15,7 +15,6 @@ import MovieDetail from './pages/MovieDetail';
 import Showtimes from './pages/Showtimes';
 import NotFound from './pages/NotFound';
 
-
 function App() {
   return (
     <Layout>
@@ -28,7 +27,7 @@ function App() {
         <Route path='/group' element={<Group />} />
         <Route path='/group/:id' element={<GroupDetail />} />
         <Route path='/users/:id' element={<UserDetail />} />
-        <Route path='/movie/:id' element={<MovieDetail />} />
+        <Route path='/public/movie/:id' element={<MovieDetail />} />
         <Route path='/public/movie' element={<Movie />} />
         <Route path='/public/showtimes' element={<Showtimes />} />
         <Route path='*' element={<NotFound />} />

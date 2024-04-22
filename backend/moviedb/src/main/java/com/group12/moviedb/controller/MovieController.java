@@ -2,11 +2,14 @@ package com.group12.moviedb.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group12.moviedb.TMDBAPI.movies.MovieCreditsService;
+import com.group12.moviedb.TMDBAPI.movies.MovieDetailsService;
 import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.repository.MovieRepository;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class MovieController {
-    
+    @Autowired
+    private MovieDetailsService movieDetailsService;
+    @Autowired
+    private MovieCreditsService movieCreditsService;
+
     private final MovieRepository movieRepository;
 
     public MovieController (MovieRepository movieRepository) {
@@ -31,9 +38,15 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/movie/{id}")
-    public Movie findOneMovie(@PathVariable int id) {
-        return this.movieRepository.findById(id);
+    @GetMapping("/public/movie/{movieId}")
+    public String getMovieDetails(@PathVariable String movieId) {
+        return movieDetailsService.getMovieDetails(movieId);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/public/movie/{movieId}/credits")
+    public String getMovieCredits(@PathVariable String movieId) {
+        return movieCreditsService.getMovieCredits(movieId);
     }
 
     @CrossOrigin(origins = "*")
@@ -43,9 +56,9 @@ public class MovieController {
     }
     
     @CrossOrigin(origins = "*")
-    @PatchMapping("/movie/{id}")
-    public Movie updateOneMovie(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        Movie movie = this.movieRepository.findById(id);
+    @PatchMapping("/movie/{movieId}")
+    public Movie updateOneMovie(@PathVariable int movieId, @RequestBody Map<String, Object> updates) {
+        Movie movie = this.movieRepository.findById(movieId);
         updates.forEach((key, value) -> {
             switch (key) {
                 case "id":
@@ -61,8 +74,8 @@ public class MovieController {
         return this.movieRepository.save(movie);
     }
 
-    @DeleteMapping("/movie/{id}")
-    public void deleteOneMovie(@PathVariable int id) {
-        this.movieRepository.deleteById(id);
+    @DeleteMapping("/movie/{movieId}")
+    public void deleteOneMovie(@PathVariable int movieId) {
+        this.movieRepository.deleteById(movieId);
     }
 }

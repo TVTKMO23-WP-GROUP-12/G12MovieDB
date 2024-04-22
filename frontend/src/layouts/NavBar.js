@@ -29,13 +29,13 @@ export default function NavBar() {
           <Link to="/group" onClick={closeMenu}>Group</Link>
         </li>
         <li className="nav-item" onClick={closeMenu}>
-          <Link to="/showtimes" onClick={closeMenu}>Showtimes</Link>
+          <Link to="/public/showtimes" onClick={closeMenu}>Showtimes</Link>
         </li>
         <li className="nav-item" onClick={closeMenu}>
-          <Link to="/search" onClick={closeMenu}>Search Portal</Link>
+          <Link to="/public/search" onClick={closeMenu}>Search Portal</Link>
         </li>
         <li className="nav-item" onClick={closeMenu}>
-          <Link to="/signup" onClick={closeMenu}>SignUp</Link>
+          <Link to="/public/signup" onClick={closeMenu}>SignUp</Link>
         </li>
       </ul>
     </nav>

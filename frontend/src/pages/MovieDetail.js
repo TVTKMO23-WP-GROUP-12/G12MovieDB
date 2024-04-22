@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './MovieDetail.css';
 import { Link, useParams } from 'react-router-dom';
+import MovieInfo from '../components/MovieInfo';
+import MovieCredits from '../components/MovieCredits';
+import useFetchMovie from '../hooks/useFetchMovie';
+import useFetchMovieCredits from '../hooks/useFetchMovieCredits';
+import useIsMobile from '../hooks/useIsMobile';
+import Movie from './Movie';
 
 function MovieDetail() {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/movie/${id}`)
-      .then(response => response.json())
-      .then(data => setMovie(data))
-      .catch(error => console.error('Error:', error));
-  }, [id]);
+  const isMobile = useIsMobile();
+  const movie = useFetchMovie(id);
+  const credits = useFetchMovieCredits(id);
 
   return movie ? (
-    <div className="movie-container">
-      <h2><Link to={`/movie/${movie.id}`}>{movie.title}</Link></h2>
-      <p>{movie.title}</p>
-      {/* Display other group details here */}
+    <>
+    <div>
+      <MovieInfo movie={movie} />
     </div>
+    <div>
+      <MovieCredits credits={credits} />
+    </div>
+    </>
   ) : (
     <div>Loading...</div>
   );

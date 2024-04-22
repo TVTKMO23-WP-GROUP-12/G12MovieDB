@@ -12,6 +12,7 @@ import useFetchFavorites from '../hooks/useFetchFavorites';
 import useFetchUser from '../hooks/useFetchUser';
 import useFetchWatched from '../hooks/useFetchWatched';
 import useFetchToWatch from '../hooks/useFetchToWatch';
+import useIsMobile from '../hooks/useIsMobile';
 
 function UserDetail() {
   const { id } = useParams();
@@ -24,18 +25,7 @@ function UserDetail() {
   const [selectedTab, setSelectedTab] = useState('News');
   const [selectedTabLeft, setSelectedTabLeft] = useState('News');
   const [selectedTabRight, setSelectedTabRight] = useState('Reviews');
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
-
-  // Listener for smartphone window size
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const isMobile = useIsMobile();
 
   return user ? (
     <div>  
