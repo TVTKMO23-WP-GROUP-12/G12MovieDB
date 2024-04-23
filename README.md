@@ -38,10 +38,10 @@ Sivuston backend-toiminnot on rakennettu käyttämällä Java-kielellä toimivaa
 - **Spring Boot:** *3.2.4*
 - **okhttp3:** *4.12.0*
 
-###Käyttäjän autentikointi
+Käyttäjän autentikointi
 Käyttäjän autentikointi tehdään Spring securityllä. 
 
-###Sivujen rakenne
+Sivujen rakenne
 
 - **Model-Controller -malli
 - **Repositoriot
