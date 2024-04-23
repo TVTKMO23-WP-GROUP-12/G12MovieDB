@@ -7,7 +7,9 @@
 	- [Backend](#backend)
 	- [Frontend](#frontend)
 	- [Tietokanta](#tietokanta) 
+	- [TMDB API](#tmdb_api) 
 - [Sivusto](#sivusto)
+- [Lähteet](#lähteet)
 
 ## <a name ="jasenet"></a> Ryhmän jäsenet:
 - Pasi Honka - [Rapuska](https://www.github.com/Rapuska)
@@ -26,7 +28,7 @@ Sivusto toimii sosiaalisen median sivuston kaltaisella periaatteella, eli käytt
 Käyttäjät voivat rekisteröityä palveluun, kirjautua omalle tililleen ja kirjautua tililtä ulos. Julkiset (ei-autentikoidut) käyttäjät pääsevät projektin julkisille sivuille.
 Autentikoidut käyttäjät pääsevät kaikille sivuille ja voivat lisäksi muodostaa uusia ryhmiä, julkaista arvosteluja, muokata kirjoittamiaan arvosteluja ja poistaa kirjoittamansa arvostelut ja luomansa ryhmät.
 
-Seuraavissa kappaleissa käydään läpi sivuston teknologisempaa puolta, alkaen [backendistä](#backend), jatkuen [frontendiin](#frontend) ja päättyen [tietokantaan](#tietokanta).
+Seuraavissa kappaleissa käydään läpi sivuston teknologisempaa puolta, alkaen [backendistä](#backend), jatkuen [frontendiin](#frontend) ja [tietokantaan](#tietokanta) ja päättyen [TMDB:n ohjelmistorajapintaan](#tmdb_api).
 
 ## <a name ="teknologia"></a>Teknologia
 
@@ -67,6 +69,15 @@ Projektin tietokanta toimii [Render](https://render.com/) -palvelussa.
 #### Tässä projektissa käytetyn tietokantasovelluksen versio:
 - **PostgreSQL**: *16*
 
+### <a name ="tmdb_api"></a> TMDB API
+Sivusto hyödyntää The Movie Databasen *(TMDB)* palveluita ohjelmistorajapinnan *(application programming interface, API)* avulla. TMDB tarjoaa sovelluskehittäjille ja muille käyttäjille API-avaimen, joka voidaan integroida omaan sovellukseen tietyin TMDB:n määrittelemin ehdoin.
+
+TMDB on elokuvien ja tv-sarjojen tietokanta, jota on rakennettu sen käyttäjien toimesta jo vuodesta 2008 alkaen. TMDB:n tietosisältö on hyvin laaja ja kansainvälisesti kohdistettu, mikä tekee siitä lähes verrattoman muihin vastaaviin palveluihin nähden. Palvelua käytetään päivittäin **jopa yli 180** maassa. TMDB:n vahva yhteisöllisyys tekee siitä erilaisen verrattaessa muihin vastaaviin palveluihin. (The Movie Database, 2024.)
+
+API-rajapinta mahdollistaa eri ohjelmistojen tai palveluiden välistä kommunikaatiota ja yhteistoimintaa. Se määrittelee, miten eri ohjelmistokomponentit voivat kommunikoida keskenään ja millaisia toimintoja ne voivat suorittaa. API:n avulla kehittäjät voivat käyttää valmiita toimintoja tai palveluita osana omaa ohjelmointityötään. Ohjelmistorajapintojen juuret juontavat 1940-1950-luvulle, kun *Maurice Wilkes*, *David Wheeler* ja *Stanley Gill* kehittivät ohjelmistokirjastoja ja algoritmisia ratkaisuja ensimmäisten tietokoneiden yhteyteen. Näitä varhaisia kirjastoja voidaan pitää ensimmäisinä API:n kaltaisina käytänteinä. (Kristopher Sandoval, 2018.) 
+
+TMDB:n rajapinnasta haetaan sivustolle muun muassa elokuvien ja tv-sarjojen tietoja, joita käyttäjät voivat hyödyntää sivuston eri osioissa esimerkiksi lisäämällä niitä suosikkilistalleen sekä katsottuihin ja katsottaviin. Esimerkiksi sovelluksen haku-sivu hakee rajapinnasta elokuvan ja tv-sarjan nimen, julisteen, tyylilajin, kielen, julkaisuajan sekä arvostelun. Osaa tiedoista käytetään hakusuodattimina ja osa näytetään hakutuloksissa.
+
 ## <a name ="sivusto"></a> Sivusto
 Sivusto koostuu kotisivusta sekä useista sen alasivuista. Sivuston eri osiot ovat näkyvissä riippuen siitä, että onko käyttäjä kirjautunut vai ei. Lisäksi sivusto on responsiivinen, eli skaalautuu tietokoneen näytöltä erikokoisille kädessä pidettäville laitteille.
 
@@ -78,3 +89,7 @@ Sivusto koostuu kotisivusta sekä useista sen alasivuista. Sivuston eri osiot ov
 
 #### Ruutukaappaukset (jos tarvetta erilliselle osiolle) 
 
+## <a name ="lähteet"></a> Lähteet
+The Movie Database (TMDB) 2024. About. Hakupäivä 23.4.2024. https://www.themoviedb.org/about.
+
+Sandoval, Kristopher 2018. Who Invented the API?. Hakupäivä 23.4.2024. https://nordicapis.com/who-invented-the-api/.
