@@ -27,14 +27,18 @@ function MovieCredits({ credits }) {
         <div className="movie-cast-container">
             {credits && credits.cast.slice(currentPage * actorsPerPage, (currentPage + 1) * actorsPerPage).map((actor, index) => (
                 <div key={index} className="movie-cast-item">
-                    <img src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt={actor.name} />
+                    {actor.profile_path ? (
+                        <img src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} alt={actor.name} />
+                    ) : (
+                        <img src={noImageAvailable} alt="Kuvaa ei saatavilla" />
+                    )}
                     <p>{actor.name}</p>
-                 </div>
+                </div>
             ))}
         </div>
         <div className="movie-cast-pagination">
-            <button className="credits-button" onClick={handlePrevClick}>Previous</button>
-            <button className="credits-button" onClick={handleNextClick}>Next</button>
+            <button className="credits-button" onClick={handlePrevClick}>Edellinen</button>
+            <button className="credits-button" onClick={handleNextClick}>Seuraava</button>
         </div>
     </div>
     )

@@ -6,7 +6,7 @@ export default async function handleSearch(searchTerm, isFilterActive, movieGenr
     let allResults = [];
 
     while (true) {
-      const response = await api.get('/search', {
+      const response = await api.get('/public/search', {
         params: {
           query: searchTerm,
           page: page
