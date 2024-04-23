@@ -18,7 +18,7 @@ public class MovieDetailsService {
         String apiKey = ApiKeyReader.readApiKey();
 
         Request request = new Request.Builder()
-            .url("https://api.themoviedb.org/3/movie/" + movieId + "?language=en-US")
+            .url("https://api.themoviedb.org/3/movie/" + movieId + "?language=fi-FI")
             .get()
             .addHeader("accept", "application/json")
             .addHeader("Authorization", "Bearer " + apiKey)
