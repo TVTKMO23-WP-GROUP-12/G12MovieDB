@@ -46,19 +46,7 @@
 			<artifactId>java-jwt</artifactId>
 			<version>4.2.1</version>
 		</dependency>
-		<http use-expressions="true">
-    <intercept-url pattern="/**" access="isAuthenticated()"/>
-    <http-basic/>
-</http>
-<authentication-manager>
-    <authentication-provider
-      ref="UserAuthenticationProvider" />
-</authentication-manager>
-<http>
-...
-<logout/>
-...
-</http>
+
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
