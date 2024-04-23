@@ -1,6 +1,7 @@
 package com.group12.moviedb.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,7 +38,7 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/user/{user_id}")
-    public List<MoviesWatched> getMoviesWatchedById(@PathVariable("user_id") int userId) {
+    public List<MoviesWatched> getMoviesWatchedById(@PathVariable("user_id") Integer userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return null;
@@ -47,16 +48,16 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/movie/{movie_id}")
-    public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") int movieId) {
-        Movie movie = new Movie();
+    public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") Integer movieId) {
+        Movie movie = new Movie(movieId, null, movieId);
         return MoviesWatchedRepository.findByMovie(movie);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
-    public List<MoviesWatched> getMoviesWatchedByIds(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId) {
+    public List<MoviesWatched> getMoviesWatchedByIds(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
         User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId);
+        Optional<Movie> movie = movieRepository.findById(movieId);
         if (user == null || movie == null) {
             return null;
         }
@@ -71,8 +72,8 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") int userId, @RequestBody MoviesWatched MoviesWatched) {
-        User user = userRepository.findById(userId).orElse(null);
+    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") Integer UserId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(UserId).orElse(null);
         if (user == null) {
             return null;
         }
@@ -82,9 +83,9 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
-    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId, @RequestBody MoviesWatched MoviesWatched) {
-        User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId);
+    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") Integer UserId, @PathVariable("movie_id") Integer movieId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(UserId).orElse(null);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
         if (user == null || movie == null) {
             return null;
         }
@@ -94,7 +95,7 @@ public class MoviesWatchedController {
     }
     
     @PatchMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched updateMoviesWatchedByUserId(@PathVariable("user_id") int userId,
+    public MoviesWatched updateMoviesWatchedByUserId(@PathVariable("user_id") Integer userId,
                                                      @RequestBody MoviesWatched MoviesWatched) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
@@ -105,11 +106,13 @@ public class MoviesWatchedController {
     }
     
     @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
-    public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                   @PathVariable("movie_id") int movieId,
+    public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") Integer userId,
+                                                   @PathVariable("movie_id") Integer movieId,
                                                    @RequestBody MoviesWatched MoviesWatched) {
         User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId);
+
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+
         if (user == null || movie == null) {
             return null;
         }
@@ -119,12 +122,14 @@ public class MoviesWatchedController {
     }
     
     @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}/note/{note}")
-    public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                                   @PathVariable("movie_id") int movieId,
+    public MoviesWatched updateMoviesWatchedByIds(@PathVariable("user_id") Integer userId,
+                                                   @PathVariable("movie_id") Integer movieId,
                                                    @PathVariable("note") String note,
                                                    @RequestBody MoviesWatched MoviesWatched) {
         User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId);
+
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+
         if (user == null || movie == null) {
             return null;
         }
@@ -135,7 +140,7 @@ public class MoviesWatchedController {
     }
     
     @DeleteMapping("/movies_watched/user/{user_id}")
-    public void deleteMoviesWatchedByUserId(@PathVariable("user_id") int userId) {
+    public void deleteMoviesWatchedByUserId(@PathVariable("user_id") Integer userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return;
@@ -144,10 +149,10 @@ public class MoviesWatchedController {
     }
     
     @DeleteMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
-    public void deleteMoviesWatchedByIds(@PathVariable("user_id") int userId,
-                                          @PathVariable("movie_id") int movieId) {
+    public void deleteMoviesWatchedByIds(@PathVariable("user_id") Integer userId,
+                                          @PathVariable("movie_id") Integer movieId) {
         User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
         if (user == null || movie == null) {
             return;
         }

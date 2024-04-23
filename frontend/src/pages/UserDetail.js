@@ -66,7 +66,24 @@ function UserDetail() {
           //Fetch a list of groups the user is a member of and display them.
           }
           {selectedTab === 'Groups' && (
+
+  
+            <div className="user-tabs-content">
+              <h2>Ryhmät</h2>
+                <ul>
+                 {user.groups.map(group => (
+                    <>
+                      <p key={group.id}>
+                        <Link to={`/group/${group.id}`}>{group.groupName}</Link>
+                      </p>
+                      <hr></hr>
+                    </>
+                  ))}
+                </ul>
+            </div>
+
             <Groups user={user}/>
+
           )}
           {
           //call the Favorites component and pass the userId as a prop

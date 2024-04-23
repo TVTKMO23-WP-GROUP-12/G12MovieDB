@@ -4,44 +4,44 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 @Table(name="favorites")
 @IdClass(FavoritesId.class)
-public class Favorites implements Serializable{
+public class Favorites implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private int userId;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Id
     @ManyToOne
-    @JoinColumn(name="movie_id")
-    private int movieId;
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
-    @Column(name="created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name="updated_at")
+
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @SuppressWarnings("unused")
-    private Favorites() {}
 
-    public Favorites(int userId, int movieId, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.userId = userId;
-        this.movieId = movieId;
+    public Favorites(User user, Movie movie, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.user = user;
+        this.movie = movie;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public User getUser() {
+        return this.user;
     }
     
-    public int getMovieId() {
-        return this.movieId;
+    public Movie getMovie() {
+        return this.movie;
     }
-   
 
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
@@ -51,12 +51,12 @@ public class Favorites implements Serializable{
         return this.updatedAt;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

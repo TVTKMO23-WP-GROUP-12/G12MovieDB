@@ -35,7 +35,7 @@ public class FollowersController {
     }
 
     @GetMapping("/followers/user={user_id}")
-    public Followers getFollowersById(@PathVariable int userId) {
+    public Followers getFollowersById(@PathVariable Integer userId) {
         User user = this.userRepository.findById(userId).orElse(null);
         if (user == null) {
             return null;
@@ -49,7 +49,7 @@ public class FollowersController {
     }
 
     @GetMapping("/followers/user={user_id}&following={following}")
-    public Followers getFollowersByUserIdAndFollowing(@PathVariable int userId, @PathVariable boolean following) {
+    public Followers getFollowersByUserIdAndFollowing(@PathVariable Integer userId, @PathVariable boolean following) {
         User user = this.userRepository.findById(userId).orElse(null);
         if (user == null) {
             return null;
@@ -64,13 +64,13 @@ public class FollowersController {
 
     @PostMapping("/followers/")
     public Followers addFollowersByUserId(  @RequestBody Followers followers,
-                                            @RequestParam("userId") int userId,
-                                            @RequestParam("followerId") int followerId){
+                                            @RequestParam("userId") Integer userId,
+                                            @RequestParam("followerId") Integer followerId){
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
         User follower = userRepository.findById(followerId)
             .orElseThrow(() -> new NoSuchElementException("Follower not found"));
-        followers.setFollowerId(follower.getId());
+        followers.setFollowerId(follower.getId(followerId));
         followers.setFollowing(true);
         followers.setJoinedAt(LocalDateTime.now());
         followers.setLeftAt(null);
@@ -79,7 +79,7 @@ public class FollowersController {
     }
 
     @PostMapping("/followers/user={user_id}&following={following}")
-    public Followers addFollowersByUserIdAndFollowing(@PathVariable int userId, @PathVariable boolean following, @RequestBody Followers followers) {
+    public Followers addFollowersByUserIdAndFollowing(@PathVariable Integer userId, @PathVariable boolean following, @RequestBody Followers followers) {
         User user = this.userRepository.findById(userId).orElse(null);
         if (user == null) {
             return null;
@@ -89,9 +89,9 @@ public class FollowersController {
         return followersRepository.save(followers);
     }
 
-    @PatchMapping("/followers/{id}")
-    public Followers updateFollowers(@PathVariable int id, @RequestBody Followers followers) {
-        Followers followersToUpdate = followersRepository.findById(id).orElse(null);
+    @PatchMapping("/followers/{user_id}")
+    public Followers updateFollowers(@PathVariable Integer followerId, @RequestBody Followers followers) {
+        Followers followersToUpdate = followersRepository.findById(followerId).orElse(null);
         if (followersToUpdate == null) {
             return null;
         }
@@ -101,9 +101,9 @@ public class FollowersController {
         return followersRepository.save(followersToUpdate);
     }
 
-    @PatchMapping("/followers/{id}&following={following}")
-    public Followers updateFollowersFollowing(@PathVariable int id, @PathVariable boolean following) {
-        Followers followersToUpdate = followersRepository.findById(id).orElse(null);
+    @PatchMapping("/followers/{user_id}&following={following}")
+    public Followers updateFollowersFollowing(@PathVariable Integer followerId, @PathVariable boolean following) {
+        Followers followersToUpdate = followersRepository.findById(followerId).orElse(null);
         if (followersToUpdate == null) {
             return null;
         }
@@ -111,13 +111,13 @@ public class FollowersController {
         return followersRepository.save(followersToUpdate);
     }
 
-    @DeleteMapping("/followers/{id}")
-    public void deleteFollowers(@PathVariable int id) {
-        followersRepository.deleteById(id);
+    @DeleteMapping("/followers/{user_id}")
+    public void deleteFollowers(@PathVariable Integer followerId ) {
+        followersRepository.deleteById(followerId);
     }
 
     @DeleteMapping("/followers/user={user_id}")
-    public void deleteFollowersByUserId(@PathVariable int userId) {
+    public void deleteFollowersByUserId(@PathVariable Integer userId) {
         User user = this.userRepository.findById(userId).orElse(null);
         if (user == null) {
             return;
@@ -126,7 +126,7 @@ public class FollowersController {
     }
 
     @DeleteMapping("/followers/user={user_id}&following={following}")
-    public void deleteFollowersByUserIdAndFollowing(@PathVariable int userId, @PathVariable boolean following) {
+    public void deleteFollowersByUserIdAndFollowing(@PathVariable Integer userId, @PathVariable boolean following) {
         User user = this.userRepository.findById(userId).orElse(null);
         if (user == null) {
             return;

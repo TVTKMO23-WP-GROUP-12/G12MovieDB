@@ -43,29 +43,29 @@ public class MessageRecipientController {
 
     }
 
-    @GetMapping("/message/recipients")
+    @GetMapping("/message/recipient")
     public Iterable<MessageRecipient> findAllMessageRecipients() {
         return this.messageRecipientRepository.findAll();
     }
 
-    @GetMapping("/message/recipients/{recipient_id}")
-    public MessageRecipient findMessageRecipientById(@PathVariable("recipient_id") int recipientId) {
+    @GetMapping("/message/recipient/{recipient_id}")
+    public MessageRecipient findMessageRecipientById(@PathVariable("recipient_id") Integer recipientId) {
         Optional<MessageRecipient> optionalRecipient = this.messageRecipientRepository.findById(recipientId);
         return optionalRecipient.orElse(null);
     }
 
-    @GetMapping("/message/recipients/user={user_id}")
-    public List<MessageRecipient> findMessageRecipientsByUserId(@PathVariable int user_id) {
-        User user = userRepository.findById(user_id)
+    @GetMapping("/message/recipient/user={user_id}")
+    public List<MessageRecipient> findMessageRecipientByUserId(@PathVariable Integer userId) {
+        User recipient = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (user != null) {
-            return this.messageRecipientRepository.findByUser(user);
+        if (recipient != null) {
+            return this.messageRecipientRepository.findByUserId(userId);
         }
         return Collections.emptyList();
     }
 
-    @GetMapping("/message/recipients/message={message_id}")
-    public List<MessageRecipient> findMessageRecipientsByMessageId(@PathVariable("message_id") int messageId) {
+    @GetMapping("/message/recipient/message={message_id}")
+    public List<MessageRecipient> findMessageRecipientsByMessageId(@PathVariable("message_id") Integer messageId) {
         MessageRecipient messageRecipient = messageRecipientRepository.findById(messageId).orElse(null);
         if (messageRecipient != null) {
             Message message = messageRecipient.getMessage();
@@ -77,121 +77,109 @@ public class MessageRecipientController {
     }
 
     @GetMapping("/message/recipients/read")
-    public Iterable<MessageRecipient> findReadMessageRecipients() {
+    public Iterable<MessageRecipient> findReadMessageRecipient() {
         return this.messageRecipientRepository.findByIsRead(true);
     }
 
     @GetMapping("/message/recipients/unread")
-    public Iterable<MessageRecipient> findUnreadMessageRecipients() {
+    public Iterable<MessageRecipient> findUnreadMessageRecipient() {
         return this.messageRecipientRepository.findByIsRead(false);
     }
 
     @GetMapping("/message/recipients/read/user={user_id}")
-    public List<MessageRecipient> findReadMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id)
+    public List<MessageRecipient> findReadMessageRecipientsByUserId(User userId) {
+        User recipient = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (user != null) {
-            return this.messageRecipientRepository.findByIsReadAndUser(true, user);
+        if (recipient != null) {
+            return this.messageRecipientRepository.findByIsReadAndUser(true, userId);
         }
         return this.messageRecipientRepository.findByIsReadAndUser(true, null);
     }
 
     @GetMapping("/message/recipients/unread/user={user_id}")
-    public List<MessageRecipient> findUnreadMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id)
+    public List<MessageRecipient> findUnreadMessageRecipientsByUserId(User userId) {
+        User recipient = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (user != null) {
-            return this.messageRecipientRepository.findByIsReadAndUser(false, user);
+        if (recipient != null) {
+            return this.messageRecipientRepository.findByIsReadAndUser(false, userId);
         }
         return this.messageRecipientRepository.findByIsReadAndUser(false, null);
     }
 
-    @GetMapping("/message/recipients/read/message={message_id}")
-    public Iterable<MessageRecipient> findReadMessageRecipientsByMessageId(@PathVariable("message_id") int messageId) {
-        List<Message> messages = messageRepository.findById(messageId);
-        if (!messages.isEmpty()) {
-            Message message = messages.get(0);
-            return this.messageRecipientRepository.findByIsReadAndMessage(true, message);
-        } else {
-            return Collections.emptyList();
-        }
-    }
-    
-    @GetMapping("/message/recipients/unread/message={message_id}")
-    public Iterable<MessageRecipient> findUnreadMessageRecipientsByMessageId(@PathVariable("message_id") int messageId) {
-        List<Message> messages = messageRepository.findById(messageId);
-        if (!messages.isEmpty()) {
-            Message message = messages.get(0);
+   
+     @GetMapping("/message/recipient/unread/message={message_id}")
+        public Iterable<MessageRecipient> findUnreadMessageRecipientsByMessageId(@PathVariable("message_id") Integer messageId) {
+        Message message = messageRepository.findById(messageId)
+            .orElseThrow(() -> new NoSuchElementException("Message not found with id: " + messageId));
+        
             return this.messageRecipientRepository.findByIsReadAndMessage(false, message);
-        } else {
-            return Collections.emptyList();
-        }
-    }    
+}
 
-    @PostMapping("/message/recipients")
-    public MessageRecipient addOneMessageRecipient(MessageRecipient messageRecipient) {
-        return this.messageRecipientRepository.save(messageRecipient);
+
+    @PostMapping("/message/recipient")
+    public MessageRecipient addOneMessageRecipient(MessageRecipient recipient) {
+        return this.messageRecipientRepository.save(recipient);
     }
 
-    @PostMapping("/message/recipients/read")
-    public Iterable<MessageRecipient> addReadMessageRecipients(Iterable<MessageRecipient> messageRecipients) {
-        for (MessageRecipient messageRecipient : messageRecipients) {
+    @PostMapping("/message/recipient/read")
+    public Iterable<MessageRecipient> addReadMessageRecipient(Iterable<MessageRecipient> recipient) {
+        for (MessageRecipient messageRecipient : recipient) {
             messageRecipient.setIsRead(true);
         }
-        return this.messageRecipientRepository.saveAll(messageRecipients);
+        return this.messageRecipientRepository.saveAll(recipient);
     }
 
-    @PostMapping("/message/recipients/unread")
-    public Iterable<MessageRecipient> addUnreadMessageRecipients(Iterable<MessageRecipient> messageRecipients) {
-        for (MessageRecipient messageRecipient : messageRecipients) {
+    @PostMapping("/message/recipient/unread")
+    public Iterable<MessageRecipient> addUnreadMessageRecipients(Iterable<MessageRecipient> recipient) {
+        for (MessageRecipient messageRecipient : recipient) {
             messageRecipient.setIsRead(false);
         }
-        return this.messageRecipientRepository.saveAll(messageRecipients);
+        return this.messageRecipientRepository.saveAll(recipient);
     }
 
-    @PatchMapping("/message/recipients/{recipient_id}")
-    public MessageRecipient updateMessageRecipient(@PathVariable("recipient_id") int recipientId, @RequestBody MessageRecipient messageRecipient) {
+    @PatchMapping("/message/recipient/{recipient_id}")
+    public MessageRecipient updateMessageRecipient(@PathVariable("recipient_id") Integer recipientId, @RequestBody MessageRecipient recipient) {
         Optional<MessageRecipient> optionalRecipient = this.messageRecipientRepository.findById(recipientId);
         if (optionalRecipient.isPresent()) {
-            MessageRecipient recipient = optionalRecipient.get();
-            recipient.setIsRead(messageRecipient.getIsRead());
+            MessageRecipient messageRecipient = optionalRecipient.get();
+            messageRecipient.setIsRead(recipient.getIsRead());
             return this.messageRecipientRepository.save(recipient);
         }
         return null;
     }
 
-    @PatchMapping("/message/recipients/read")
-    public Iterable<MessageRecipient> updateReadMessageRecipients(Iterable<MessageRecipient> messageRecipients) {
-        for (MessageRecipient messageRecipient : messageRecipients) {
+    @PatchMapping("/message/recipient/read")
+    public Iterable<MessageRecipient> updateReadMessageRecipients(Iterable<MessageRecipient> recipient) {
+        for (MessageRecipient messageRecipient : recipient) {
             messageRecipient.setIsRead(true);
         }
-        return this.messageRecipientRepository.saveAll(messageRecipients);
+        return this.messageRecipientRepository.saveAll(recipient);
     }
 
-    @PatchMapping("/message/recipients/unread")
-    public Iterable<MessageRecipient> updateUnreadMessageRecipients(Iterable<MessageRecipient> messageRecipients) {
-        for (MessageRecipient messageRecipient : messageRecipients) {
+    @PatchMapping("/message/recipient/unread")
+    public Iterable<MessageRecipient> updateUnreadMessageRecipient(Iterable<MessageRecipient> recipient) {
+        for (MessageRecipient messageRecipient : recipient) {
             messageRecipient.setIsRead(false);
         }
-        return this.messageRecipientRepository.saveAll(messageRecipients);
+        return this.messageRecipientRepository.saveAll(recipient);
     }
 
     @DeleteMapping("/message/recipients")
-    public void deleteById(int id) {
-        this.messageRecipientRepository.deleteById(id);
+    public void deleteById(Integer recipientId) {
+        this.messageRecipientRepository.deleteById(recipientId);
     }
 
     @DeleteMapping("/message/recipients/{recipient_id}")
-    public void deleteMessageRecipient(@PathVariable("recipient_id") int recipientId) {
-        User recipient = userRepository.findById(recipientId).orElse(null);
+    public void deleteMessageRecipient(@PathVariable("recipient_id") Integer userId) {
+        User recipient = userRepository.findById(userId).orElse(null);
         if (recipient != null) {
-            messageRecipientRepository.deleteByRecipient(recipient);
+            messageRecipientRepository.deleteByUserId(userId);
         }
     }
 
     @DeleteMapping("/message/recipients/user={user_id}")
-    public void deleteMessageRecipientsByUserId(int user_id) {
-        User user = userRepository.findById(user_id)
+    public void deleteMessageRecipientByUserId(Integer userId) {
+        User user = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (user != null) {
             this.messageRecipientRepository.deleteByUser(user);
@@ -199,8 +187,8 @@ public class MessageRecipientController {
     }
 
     @DeleteMapping("/message/recipients/group={group_id}")
-    public void deleteMessageRecipientsByGroupId(@PathVariable("group_id") int group_id) {
-        Group group = groupRepository.findById(group_id)
+    public void deleteMessageRecipientsByGroupId(@PathVariable("group_id") Integer groupId) {
+        Group group = groupRepository.findById(groupId)
             .orElseThrow(() -> new NoSuchElementException("Group not found"));    
         if (group != null) {
             this.messageRecipientRepository.deleteByGroup(group);
@@ -208,7 +196,7 @@ public class MessageRecipientController {
     }
 
     @DeleteMapping("/message/recipients/message={message_id}")
-    public void deleteMessageRecipientsByMessageId(@PathVariable("message_id") int messageId) {
+    public void deleteMessageRecipientsByMessageId(@PathVariable("message_id") Integer messageId) {
         List<MessageRecipient> messageRecipients = messageRecipientRepository.findByMessageId(messageId);
         if (!messageRecipients.isEmpty()) {
             messageRecipientRepository.deleteAll(messageRecipients);

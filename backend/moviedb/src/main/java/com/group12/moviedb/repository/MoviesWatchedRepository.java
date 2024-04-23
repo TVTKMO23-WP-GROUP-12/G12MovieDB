@@ -1,6 +1,7 @@
 package com.group12.moviedb.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,5 @@ public interface MoviesWatchedRepository extends JpaRepository<MoviesWatched, Mo
     void deleteByUser(User user);
     void deleteByMovie(Movie movie);
     void deleteByUserAndMovie(User user, Movie movie);
+    List<MoviesWatched> findByUserAndMovie(User user, Optional<Movie> movie);
 }

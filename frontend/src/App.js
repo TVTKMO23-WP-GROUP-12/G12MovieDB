@@ -1,5 +1,6 @@
 import React from 'react';
 import {Routes, Route } from 'react-router-dom';
+
 import './App.css';
 import Layout from './layouts/Layout';
 import Home from './pages/Home';
@@ -20,6 +21,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas)
 
+
 function App() {
   return (
     <Layout>
@@ -39,6 +41,7 @@ function App() {
       </Routes>
     </Layout>
   );
+
 }
 
 export default App;

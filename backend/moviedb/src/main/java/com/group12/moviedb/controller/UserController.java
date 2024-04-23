@@ -2,15 +2,17 @@ package com.group12.moviedb.controller;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,7 @@ import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.services.UserService;
 
 @RestController
+@ControllerAdvice
 public class UserController {
 
     private final UserRepository userRepository;
@@ -36,13 +39,17 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/users/{id}")
-    public User findOneUser(@PathVariable int id) {
-        return this.userRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("User not found"));
+    @GetMapping("/users/{user_id}")
+    public ResponseEntity<?> findOneUser(@PathVariable Integer userId) {
+    try {
+        Optional<User> optionalUser = this.userRepository.findById(userId);
+        return optionalUser.map(user -> ResponseEntity.ok(user))
+                          .orElse(ResponseEntity.notFound().build());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body("An error occurred while fetching the user.");
     }
-
-    @CrossOrigin(origins = "*")
+}
     @PostMapping("/users")
     public User addOneUser(@RequestBody User user) {
         user.setCreatedAt(LocalDateTime.now());
@@ -51,43 +58,39 @@ public class UserController {
     }
     
     @CrossOrigin(origins = "*")
-    @PatchMapping("/users/{id}")
-    public User updateOneUser(@PathVariable("id") int UserId, @RequestBody Map<String, Object> updates){
-        User user = this.userRepository.findById(UserId)
-            .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (user != null) {
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "username":
-                        user.setUsername((String) value);
-                        break;
-                    case "email":
-                        user.setEmail((String) value);
-                        break;
-                    case "password":
-                        user.setPassword((String) value);
-                        break;
-                    case "userDescription":
-                        user.setUserDescription((String) value);
-                        break;
-                    default:
-                        break;
-                }
-            });
-            return this.userRepository.save(user);
+    @PatchMapping("/users/{user_id}")
+    public ResponseEntity<?> updateOneUser(@PathVariable Integer userId, @RequestBody Map<String, Object> updates) {
+        try {
+            Optional<User> optionalUser = this.userRepository.findById(userId);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                updates.forEach((key, value) -> {
+                    switch (key) {
+                        case "username":
+                            user.setUsername((String) value);
+                            break;
+                        case "email":
+                            user.setEmail((String) value);
+                            break;
+                        case "password":
+                            user.setPassword((String) value);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                return ResponseEntity.ok(this.userRepository.save(user));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("An error occurred while updating the user.");
         }
-        return null;
     }
-
-    @CrossOrigin(origins = "*")
-    @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable int UserId, @RequestBody User user) {
-        user.setId(UserId);
-        return this.userService.updateUser(user);
-    }
-
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable int userId) {
-        this.userService.deleteUser(userId);
-    }
+    
+    @DeleteMapping("/users/{user_id}")
+      public void deleteUser(@PathVariable Integer userId) {
+      userService.deleteUser(userId);
+  }
 }

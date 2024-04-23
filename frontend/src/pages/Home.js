@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ShowtimesMenu from '../components/ShowtimesMenu';
 import GroupsMenu from '../components/GroupsMenu';
 export default function Home() {
@@ -11,7 +11,10 @@ export default function Home() {
       <div style={{ float: 'right' }}>
         <ShowtimesMenu />
       </div>
-    </div>
+      <div style={{ float: 'right' }}>
+        <ShowtimesMenu />
+      </div>
+	  </>
   );
   
 }

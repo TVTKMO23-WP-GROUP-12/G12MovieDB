@@ -38,10 +38,14 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/movie/{movie_id}")
+    public Movie findOneMovie(@PathVariable Integer movieId) {
+        return this.movieRepository.findById(movieId).orElse(null);
+
     @GetMapping("/public/movie/{movieId}")
     public String getMovieDetails(@PathVariable String movieId) {
         return movieDetailsService.getMovieDetails(movieId);
-    }
+    
 
     @CrossOrigin(origins = "*")
     @GetMapping("/public/movie/{movieId}/credits")
@@ -56,13 +60,13 @@ public class MovieController {
     }
     
     @CrossOrigin(origins = "*")
-    @PatchMapping("/movie/{movieId}")
-    public Movie updateOneMovie(@PathVariable int movieId, @RequestBody Map<String, Object> updates) {
-        Movie movie = this.movieRepository.findById(movieId);
+    @PatchMapping("/movie/{movie_id}")
+    public Movie updateOneMovie(@PathVariable Integer movieId, @RequestBody Map<String, Object> updates) {
+        Movie movie = this.movieRepository.findById(movieId).orElse(null);
         updates.forEach((key, value) -> {
             switch (key) {
-                case "id":
-                    movie.setId((int) value);
+                case "movieId":
+                    movie.setmovieId((Integer) value);
                     break;
                 case "title":
                     movie.setTitle((String) value);
@@ -74,8 +78,8 @@ public class MovieController {
         return this.movieRepository.save(movie);
     }
 
-    @DeleteMapping("/movie/{movieId}")
-    public void deleteOneMovie(@PathVariable int movieId) {
+    @DeleteMapping("/movie/{movie_id}")
+    public void deleteOneMovie(@PathVariable Integer movieId) {
         this.movieRepository.deleteById(movieId);
     }
 }

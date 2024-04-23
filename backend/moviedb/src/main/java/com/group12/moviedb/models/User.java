@@ -11,53 +11,66 @@ public class User {
     @Id
     @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Integer id;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Group> groups;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
-    @OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
+
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
-    @ManyToMany(mappedBy = "recipients")
+
+    @ManyToMany(mappedBy = "recipient")
     private List<Message> receivedMessages = new ArrayList<>();
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+
     private List<MessageRecipient> messageRecipient;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Followers> followers;
     
-    @Column(name="username")
+    @Column(name="username", unique = true)
     private String username;
-    @Column(name="email")
+
+    @Column(name="email", unique = true)
     private String email;
+
     @Column(name="password")
-    private String password; 
-    @Column(name = "created_at", nullable = false)
+    private String password;
+    
+    @Column(unique = true)
+    private String login;
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
+
     @Column(name = "user_description")
     private String userDescription;
 
-    @SuppressWarnings("unused")
-    public User() {}
 
-    public User(int userId, String username, String email, String password, String userDescription) {
-        this.userId = userId;
+    public User(Integer userId, String username, String email, String password, String userDescription) {
+        this.id = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.userDescription = userDescription;
     }
 
-    public int getId() {
-    return this.userId;
+    public Integer getId(Integer UserId) {
+    return this.id;
     }
 
     public String getUsername() {
@@ -96,8 +109,8 @@ public class User {
         return userDescription;
     }
 
-    public void setId(int userId) {
-    this.userId = userId;
+    public void setId(Integer userId) {
+    this.id = userId;
     }
 
     public void setUsername(String username) {
@@ -136,5 +149,6 @@ public class User {
         this.userDescription = userDescription;
     }
 
-}
 
+
+}

@@ -35,7 +35,7 @@
   color: var(--primary-hover-color);
 }
 
-.nav-menu-mobile {
+.nav-menu-mobile-active {
   position: absolute;
   top: 100%;
   left: 0;
@@ -46,11 +46,14 @@
   z-index: 1;
 }
 
-.nav-menu-mobile.active {
+.nav-menu-mobile-closed {
+  display: none;
+ }
+
+.nav-menu-mobile-active {
   display: flex;
   flex-direction: column;
   align-items: left;
-
   background-color: var(--secondary-color);
   border-radius: var(--border-radius);
   box-shadow: 0 0 5px var(--accent-color);

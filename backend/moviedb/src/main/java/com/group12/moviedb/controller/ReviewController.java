@@ -40,8 +40,8 @@ public class ReviewController {
     }
 
     @GetMapping("/review/movie={movie_id}")
-    public List<Review> findReviewsByMovieId(@PathVariable("movie_id") int movieId) {
-        Movie movie = movieRepository.findById(movieId);
+    public List<Review> findReviewsByMovieId(@PathVariable("movie_id") Integer movieId) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
         if (movie != null) {
             return reviewRepository.findByMovie(movie);
         } else {
@@ -51,7 +51,7 @@ public class ReviewController {
     
     @CrossOrigin(origins = "*")
     @GetMapping("/review/user={user_id}")
-    public List<Review> findReviewsByUserId(@PathVariable("user_id") int userId) {
+    public List<Review> findReviewsByUserId(@PathVariable("user_id") Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             return reviewRepository.findByUserId(userId);
@@ -62,8 +62,8 @@ public class ReviewController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/review/{review_id}")
-    public Review findReviewById(@PathVariable int review_id) {
-        return this.reviewRepository.findById(review_id);
+    public Review findReviewById(@PathVariable Integer reviewId) {
+        return this.reviewRepository.findById(reviewId).orElse(null);
     }
 
     @PostMapping("/review")
@@ -71,27 +71,35 @@ public class ReviewController {
         return this.reviewRepository.save(review);
     }
 
-    @PatchMapping("/review/{id}")
-    public Review updateOneReview(@PathVariable int review_id, @RequestBody Map<String, Object> updates) {
-        Review review = this.reviewRepository.findById(review_id);
-        updates.forEach((key, value) -> {
-            switch (key) {
-                case "review_id":
-                    review.setReviewId((int) value);
-                    break;
-                case "content":
-                    review.setContent((String) value);
-                    break;
-                default:
-                    break;
-            }
-        });
-    return this.reviewRepository.save(review);
+    @PatchMapping("/review/{review_id}")
+    public Review updateOneReview(@PathVariable Integer reviewId, @RequestBody Map<String, Object> updates) {
+        Review review = this.reviewRepository.findById(reviewId).orElse(null);
+        if (review != null) {
+            updates.forEach((key, value) -> {
+                switch (key) {
+                    case "review_id":
+                        review.setReviewId((Integer) value);
+                        break;
+                    case "content":
+                        review.setContent((String) value);
+                        break;
+                    case "user_id":
+                        review.setUserId((Integer) value);
+                        break; // Add break statement here
+                    default:
+                        break;
+                }
+            });
+            return this.reviewRepository.save(review);
+        } else {
+            return null;
+        }
     }
 
-    @DeleteMapping("/review/{id}")
-    public void deleteReview(@PathVariable int id) {
-        this.reviewRepository.deleteById(id);
+
+    @DeleteMapping("/review/{user_id}")
+    public void deleteReview(@PathVariable Integer reviewId) {
+        this.reviewRepository.deleteById(reviewId);
     }
 
 }

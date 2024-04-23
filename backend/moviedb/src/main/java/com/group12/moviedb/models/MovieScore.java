@@ -7,41 +7,46 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
+
 @Entity
-@Table(name="movie_scores")
+@Data
+@Table(name = "movie_scores")
 public class MovieScore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="movie_score_id")
-    private int movieScoreId;
-    @OneToMany(mappedBy="movieScoreId", cascade = CascadeType.ALL)
+    @Column(name = "movie_score_id")
+    private Integer id;
+    @OneToMany(mappedBy = "movieScoreId", cascade = CascadeType.ALL)
     private List<Review> review;
 
     @ManyToOne
-    @JoinColumn(name="movie_id")
+    @JoinColumn(name = "movie_id")
     @JsonIgnoreProperties("favorites")
     private Movie movie;
 
-    @Column(name="score")
+    @Column(name = "score")
     private int score;
-    @Column(name="created_at")
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name="updated_at")
+    
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public MovieScore() {
     }
 
-    public MovieScore(int movieScoreId, Movie movie, int score, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.movieScoreId = movieScoreId;
+    public MovieScore(Integer movieScoreId, Movie movie, int score, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = movieScoreId;
         this.movie = movie;
         this.score = score;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public int getMovieScoreId() {
-        return this.movieScoreId;
+    public Integer getMovieScoreId() {
+        return this.id;
     }
     public Movie getMovie() {
         return this.movie;
@@ -59,8 +64,8 @@ public class MovieScore {
         return this.updatedAt;
     }
 
-    public void setMovieScoreId(int movieScoreId) {
-        this.movieScoreId = movieScoreId;
+    public void setMovieScoreId(Integer movieScoreId) {
+        this.id = movieScoreId;
     }
 
     public void setMovie(Movie movie) {
