@@ -1,7 +1,12 @@
 import * as React from 'react';
 import './NavBar.css';
-import { Link } from 'react-router-dom';
+import { Link, useState } from 'react-router-dom';
 import auth from '../auth/auth.js';
+import ReactDOM from 'react-dom'
+import React, { useState } from 'react';
+import './NavBar.css';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -20,6 +25,7 @@ class NavBar extends React.Component {
 			this.fetchUsername();
 		}
 	}
+
 
 	fetchUsername() { //TODO
 	/* axios.get('/user')
@@ -59,44 +65,48 @@ class NavBar extends React.Component {
 		return (
 			<nav className="navbar">
 			<div className="menu-icon" onClick={this.toggleMenu}>
-			HAMBURGER
+			 <FontAwesomeIcon icon="fa-solid fa-bars" />
 			</div>
 			<ul className={isMenuOpen ? 'nav-menu-mobile-active' : 'nav-menu-mobile-closed'}>
 			<li className="nav-item">
-			<Link to="/" onClick={this.toggleMenu}>Home</Link>
+			<Link to="/" onClick={this.toggleMenu}>Etusivu</Link>
 			</li>
 			<li className="nav-item">
-			<Link to="/user" onClick={this.toggleMenu}>User</Link>
+			<Link to="/user" onClick={this.toggleMenu}>Käyttäjä</Link>
 			</li>
 			<li className="nav-item">
-			<Link to="/group" onClick={this.toggleMenu}>Group</Link>
+			<Link to="/group" onClick={this.toggleMenu}>Ryhmät</Link>
 			</li>
 			<li className="nav-item">>
-			<Link to="/showtimes" onClick={this.toggleMenu}>Showtimes</Link>
+			<Link to="/showtimes" onClick={this.toggleMenu}>Näytösajat</Link>
 			</li>
 			<li className="nav-item">
-			<Link to="/search" onClick={this.toggleMenu}>Search Portal</Link>
+			<Link to="/search" onClick={this.toggleMenu}>Hakuportaali</Link>
 			</li>
 			{isAuthenticated ? (
 			<li className="nav-item">
 				{username}</li>
 			) : (
 			<li className="nav-item">
-				<Link to="/login" onClick={this.toggleMenu}>Login</Link>
+				<Link to="/login" onClick={this.toggleMenu}>Kirjaudu sisään</Link>
 				</li>
+        <li className="nav-item" onClick={this.toggleMenu}>
+          <Link to="/public/signup" onClick={this.ToggleMenu}>Rekisteröidy</Link>
+        </li>
 			)}
 			{isAuthenticated && (
 				<li className="nav-item">
-				onClick={this.handleLogout}Logout
+				onClick={this.handleLogout}Kirjaudu ulos
 				</li>
-        <li className="nav-item" onClick={closeMenu}>
-          <Link to="/signup" onClick={closeMenu}>SignUp</Link>
-        </li>
+
+  return (
+    <nav className="navbar">
+      <div className="menu-icon" onClick={toggleMenu}>
+       
+
 			)}
 		</ul>
 		</nav>
 		);
-}
-
 }
 export default NavBar;

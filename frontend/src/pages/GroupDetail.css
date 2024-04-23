@@ -24,6 +24,11 @@
   .groupdetail-picture {
     order: 1;
   }
+
+  .groupdetail-admin {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
   
   .groupdetail-bio {
     order: 2; 
@@ -102,11 +107,11 @@
   }
 
   .active {
-    background-color: var(--primary-color); 
+    background-color: var(--background-color); 
   }
 
   .groupdetail-join-button {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
     border: 1px solid var(--primary-text-color);
     border-radius: 5px;
     padding: 10px;
@@ -116,7 +121,28 @@
     width: 100px;
   }
 
-  @media (max-width: 600px) {
+  .groupdetail-update-description {
+    order: 4;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .groupdetail-update-description button{
+    float: right;
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-size:x-small;
+    width: 100px;
+    color: var(--primary-text-color);
+  }
+
+  @media (max-width: 800px) {
     .groupdetail-content-left,
     .groupdetail-content-right {
     width: 100%;

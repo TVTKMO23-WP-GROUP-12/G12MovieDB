@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--background-color); 
+  }
+  
+  .showtimes-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 90vh;
+    padding: var(--gutter-large);
+    background-image: url('C:\G12MovieDB\G12MovieDB\frontend\src\media\popcorn.png'); 
+    background-size: contain;
+    background-position: center;
+  }
+  
+  h1 {
+    color: #deb883;
+    margin-bottom: var(--gutter-large);
+    text-shadow:
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000; 
+  }
+  
+  .selects-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--gutter-small);
+    width: 200%;
+    max-width: 1000px;   
+    padding: 70px;
+    border-radius: var(--border-radius);
+  }
+  
+  .select-container,
+  .date-picker-container,
+  .genre-select-container {
+    width: 100%;
+    padding: var(--gutter-small);
+    background-color: rgba(4, 28, 50, 0.5);
+    border-radius: var(--border-radius);
+    color: var(--button-text-color);
+    cursor: pointer;
+    transition: background-color 0.1s ease, transform 0.1s ease;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+  }
+  .select-container:hover,
+  .date-picker-container:hover,
+  .genre-select-container:hover {
+  transform: scale(1.0); 
+  }
+  
+  .showtimes-list {
+    width: 100%;
+    background-color: rgba(4, 28, 50, 0.5);;
+    border-radius: var(--border-radius);
+    padding: var(--gutter-small);
+    margin-top: var(--gutter-large);
+  }
+  
+  .showtime-item {
+    background-color: rgba(4, 28, 50, 0.5);;
+    color: var(--secondary-text-color);
+    padding: var(--gutter-small);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--gutter-small);
+  }
+
+  
+  .select-label {
+    width: 100%; 
+    padding: 10px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold; 
+    text-transform: uppercase; 
+  }
+
+  .prompt-select {
+    padding: 20px; 
+    margin-top: 50px; 
+    text-align: center; 
+    color: #deb883; 
+    font-size: 50px; 
+    font-weight: bold;
+    text-shadow:
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000; 
+  }
+
+  .footer {
+    width: 100%;
+    padding: var(--gutter-small);
+    text-align: center;
+    position: relative; 
+    bottom: 0;
+  }
