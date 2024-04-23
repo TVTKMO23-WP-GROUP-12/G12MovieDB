@@ -85,8 +85,8 @@
 
   .movie-cast-item p {
     order: 3px;
+    max-width: 15vh;
     margin-top: 10px;
-    text-align: justify;
   }
 
   .movie-cast-pagination{
