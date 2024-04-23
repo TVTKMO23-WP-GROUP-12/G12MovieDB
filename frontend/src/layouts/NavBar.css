@@ -20,6 +20,7 @@
   padding: 0;
   margin: 0;
   display: flex;
+  z-index: 1;
 }
 
 .nav-item {
@@ -42,6 +43,7 @@
   width: 300px;
   padding: var(--gutter-small) 0;
   display: none;
+  z-index: 1;
 }
 
 .nav-menu-mobile-closed {

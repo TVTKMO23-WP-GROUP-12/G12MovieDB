@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -56,15 +58,13 @@ public class MoviesToWatchController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
-    public List<MoviesToWatch> getMoviesToWatchByIds(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId) {
-        User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        if (user == null || movie == null) {
-            return null;
-        }
-        return moviesToWatchRepository.findByUserAndMovie(user, movie);
+    public MoviesToWatch getMoviesToWatchByIds(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId) {
+        User user = new User();
+        Movie movie = new Movie(); 
+        return moviesToWatchRepository.findByUserAndMovie(user, movie).orElse(null);
     }
 
+    @CrossOrigin(origins = "*")
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_to_watch")
     public MoviesToWatch addMoviesToWatch(@RequestBody MoviesToWatch moviesToWatch) {
@@ -72,8 +72,13 @@ public class MoviesToWatchController {
     }
 
     @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*")
     @PostMapping("/movies_to_watch/user/{user_id}")
     public MoviesToWatch addMoviesToWatchById(@PathVariable("user_id") int userId, @RequestBody MoviesToWatch moviesToWatch) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) {
             return null;
@@ -86,7 +91,7 @@ public class MoviesToWatchController {
     @PostMapping("/movies_to_watch/user/{user_id}&movie/{movie_id}")
     public MoviesToWatch addOrUpdateMoviesToWatch(@PathVariable("user_id") int userId, @PathVariable("movie_id") int movieId, @RequestBody MoviesToWatch moviesToWatch) {
         User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
+        Movie movie = movieRepository.findById(movieId);
         if (user == null || movie == null) {
             return null;
         }
@@ -102,6 +107,10 @@ public class MoviesToWatchController {
         if (user == null) {
             return null;
         }
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
+        }
         moviesToWatch.setUser(user);
         return moviesToWatchRepository.save(moviesToWatch);
     }
@@ -110,11 +119,8 @@ public class MoviesToWatchController {
     public MoviesToWatch updateMoviesToWatchByIds(@PathVariable("user_id") int userId,
                                                    @PathVariable("movie_id") int movieId,
                                                    @RequestBody MoviesToWatch moviesToWatch) {
-        User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        if (user == null || movie == null) {
-            return null;
-        }
+        User user = new User();
+        Movie movie = new Movie(); 
         moviesToWatch.setUser(user);
         moviesToWatch.setMovie(movie);
         return moviesToWatchRepository.save(moviesToWatch);
@@ -125,15 +131,13 @@ public class MoviesToWatchController {
                                                    @PathVariable("movie_id") int movieId,
                                                    @PathVariable("note") String note,
                                                    @RequestBody MoviesToWatch moviesToWatch) {
-        User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        if (user == null || movie == null) {
-            return null;
-        }
+        User user = new User(); 
+        Movie movie = new Movie(); 
         moviesToWatch.setUser(user);
         moviesToWatch.setMovie(movie);
         moviesToWatch.setNote(note);
-        return moviesToWatchRepository.save(moviesToWatch);
+        
+	return moviesToWatchRepository.save(moviesToWatch);
     }
     
     @DeleteMapping("/movies_to_watch/user/{user_id}")
@@ -148,15 +152,9 @@ public class MoviesToWatchController {
     @DeleteMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
     public void deleteMoviesToWatchByIds(@PathVariable("user_id") int userId,
                                           @PathVariable("movie_id") int movieId) {
-        User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
-        if (user == null) {
-            return; // User not found, no need to proceed further
-        }
-        if (movie == null) {
-            // Movie not found, you may want to return an error response or throw an exception
-            throw new NoSuchElementException("Movie not found");
-        }
+        User user = new User();
+        Movie movie = new Movie(); 
         moviesToWatchRepository.deleteByUserAndMovie(user, movie);
     }
 }
+    

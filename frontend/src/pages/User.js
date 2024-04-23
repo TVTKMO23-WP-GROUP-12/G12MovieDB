@@ -26,7 +26,7 @@ function UserPage() {
       } catch (error) {
         // Handle error
         console.error('Failed to fetch user data:', error.response ? error.response.data : error.message);
-        setError(error.response ? error.response.data : error.message);
+        setError(error.response ? JSON.stringify(error.response.data) : error.message);
       }
     }
 

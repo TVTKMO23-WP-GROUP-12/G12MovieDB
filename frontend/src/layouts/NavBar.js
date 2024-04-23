@@ -89,6 +89,9 @@ class NavBar extends React.Component {
 				<li className="nav-item">
 				onClick={this.handleLogout}Logout
 				</li>
+        <li className="nav-item" onClick={closeMenu}>
+          <Link to="/signup" onClick={closeMenu}>SignUp</Link>
+        </li>
 			)}
 		</ul>
 		</nav>

@@ -1,0 +1,42 @@
+.groupsmenu-container {
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    bottom: 50px;
+    width: 350px; 
+    overflow-y: auto;
+    padding: 40px;
+    background-color: var(--secondary-color); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    border-radius: 0px;
+    overflow-y: auto;
+    color: var(--primary-text-color); 
+  }
+  
+  .groupsmenu-box {
+    width: 100%;
+  }
+
+  .groupsmenu-box H2 {
+    margin: 0px 0px 30px 0px;
+  }
+  
+  .groupsmenu-list {
+    margin-top: 10px;
+  }
+
+  .groupsmenu-list H3 {
+    margin: 0px 0px 0px 0px;
+  }
+
+  .groupsmenu-list p {
+    margin: 0px 0px 20px 0px;
+  }
+  
+  .groupsmenu-item {
+    margin-bottom: 10px;
+  }
+  
+  .group-title {
+    margin: 0;
+  }

@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
+    @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -75,12 +76,16 @@ public class User {
     
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
+    @Column(name = "user_description")
+    private String userDescription;
 
 
-    public User(String username, String email, String password) {
+    public User(int userId, String username, String email, String password, String userDescription) {
+        this.userId = userId;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userDescription = userDescription;
     }
 
     public Integer getId() {
@@ -106,11 +111,11 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-
+    
     public LocalDateTime getLastLogin() {
         return lastLogin;
     }
-    
+
     public List<Group> getGroups() {
         return this.groups;
     }
@@ -142,11 +147,11 @@ public class User {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    
     public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
-
+    
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
@@ -155,7 +160,9 @@ public class User {
         this.favorites = favorites;
     }
 
-
+    public void setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
+    }
 
 }
 

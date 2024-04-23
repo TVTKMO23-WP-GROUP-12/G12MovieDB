@@ -6,10 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.group12.moviedb.models.Review;
+import com.group12.moviedb.models.User;
 import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.repository.MovieRepository;
 import com.group12.moviedb.repository.ReviewRepository;
+import com.group12.moviedb.repository.UserRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -21,25 +24,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReviewController {
     
-    @SuppressWarnings("rawtypes")
     private final ReviewRepository reviewRepository;
     private final MovieRepository movieRepository;
+    private final UserRepository userRepository;
 
-    public ReviewController(@SuppressWarnings("rawtypes") ReviewRepository reviewRepository, MovieRepository movieRepository) {
+    public ReviewController(ReviewRepository reviewRepository, MovieRepository movieRepository, UserRepository userRepository) {
         this.reviewRepository = reviewRepository;
         this.movieRepository = movieRepository;
+        this.userRepository = userRepository;
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/review")
     public Iterable<Review> findAllreview() {
         return this.reviewRepository.findAll();
     }
 
-    @SuppressWarnings("unchecked")
     @GetMapping("/review/movie={movie_id}")
-    public List<Review> findReviewsByMovieId(@PathVariable("movie_id") Integer movieId) {
-        Optional<Movie> movie = movieRepository.findById(movieId);
+    public List<Review> findReviewsByMovieId(@PathVariable("movie_id") int movieId) {
+        Movie movie = movieRepository.findById(movieId);
         if (movie != null) {
             return reviewRepository.findByMovieId(movieId);
         } else {
@@ -47,55 +49,49 @@ public class ReviewController {
         }
     }
     
-    @SuppressWarnings("unchecked")
+    @CrossOrigin(origins = "*")
     @GetMapping("/review/user={user_id}")
-    public List<Review> findReviewsByUserId(@PathVariable("user_id") Integer userId) {
-        Optional<Movie> movie = movieRepository.findById(userId);
-        if (movie != null) {
+    public List<Review> findReviewsByUserId(@PathVariable("user_id") int userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
             return reviewRepository.findByUserId(userId);
         } else {
             return Collections.emptyList();
         }
     }
 
-    @SuppressWarnings("unchecked")
+    @CrossOrigin(origins = "*")
     @GetMapping("/review/{review_id}")
-    public Optional<Review> findReviewById(@PathVariable Integer review_id) {
+    public Review findReviewById(@PathVariable int review_id) {
         return this.reviewRepository.findById(review_id);
     }
 
-    @SuppressWarnings("unchecked")
     @PostMapping("/review")
-    public Object addOneReview(@RequestBody Review review) {
+    public Review addOneReview(@RequestBody Review review) {
         return this.reviewRepository.save(review);
     }
 
-    @SuppressWarnings("unchecked")
     @PatchMapping("/review/{id}")
-    public Object updateOneReview(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
-        Optional<Review> optionalReview = this.reviewRepository.findById(id);
-        if (optionalReview.isPresent()) {
-            Review review = optionalReview.get();
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "content":
-                        review.setContent((String) value);
-                        break;
-                    // Add other fields here if needed...
-                    default:
-                        break;
-                }
-            });
-            return this.reviewRepository.save(review);
-        } else { 
-            // Handle the case where review with given id is not found... 
-            throw new RuntimeException("Review not found with id: " + id);
-        }
+    public Review updateOneReview(@PathVariable int review_id, @RequestBody Map<String, Object> updates) {
+        Review review = this.reviewRepository.findById(review_id);
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "review_id":
+                    review.setReviewId((int) value);
+                    break;
+                case "content":
+                    review.setContent((String) value);
+                    break;
+                default:
+                    break;
+            }
+        });
+    return this.reviewRepository.save(review);
     }
 
     @SuppressWarnings("unchecked")
     @DeleteMapping("/review/{id}")
-    public void deleteReview(@PathVariable Integer id) {
+    public void deleteReview(@PathVariable int id) {
         this.reviewRepository.deleteById(id);
     }
 

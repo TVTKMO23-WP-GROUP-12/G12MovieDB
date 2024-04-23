@@ -1,0 +1,40 @@
+.group-container {
+    position: fixed;
+    margin: 0em;
+    width: 100%; 
+    overflow-y: auto;
+    padding: 40px;
+    background-color: var(--secondary-color); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    border-radius: 0px;
+    overflow-y: auto;
+    color: var(--primary-text-color); 
+  }
+  
+  .group-box {
+    width: 100%;
+  }
+
+  .group-box H2 {
+    margin: 0px 0px 100px 0px;
+  }
+  
+  .group-list {
+    margin-top: 10px;
+  }
+
+  .group-list H3 {
+    margin: 0px 0px 0px 0px;
+  }
+
+  .group-list p {
+    margin: 0px 0px 20px 0px;
+  }
+  
+  .group-item {
+    margin-bottom: 10px;
+  }
+  
+  .group-title {
+    margin: 0;
+  }

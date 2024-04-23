@@ -92,7 +92,6 @@ public class GroupMembersController {
     public GroupMembers updateOneGroupMembers(@PathVariable int memberId, @RequestBody Map<String, Object> updates) {
         GroupMembers groupMembers = this.groupMembersRepository.findById(memberId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
-    
         if (groupMembers != null) {
             updates.forEach((key, value) -> {
                 switch (key) {
@@ -121,7 +120,6 @@ public class GroupMembersController {
     public void deleteOneGroupMembers(@PathVariable int memberId) {
         GroupMembers groupMembers = this.groupMembersRepository.findById(memberId)
             .orElseThrow(() -> new NoSuchElementException("Group member not found"));
-        
         // Delete the group member
         this.groupMembersRepository.delete(groupMembers);
     }

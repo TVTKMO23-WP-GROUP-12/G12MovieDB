@@ -631,4 +631,3 @@ ALTER TABLE ONLY public.members
 --
 -- group12QL database dump complete
 --
-

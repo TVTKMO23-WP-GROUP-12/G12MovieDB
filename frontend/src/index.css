@@ -119,7 +119,7 @@
   --gutter-tiny: 5px;
   --border-radius: 5px; */
 
-  /* :root {
+  :root {
   --background-color: #041C32;
   --primary-color: #04293A;
   --secondary-color: #064663;
@@ -134,9 +134,9 @@
   --gutter-large: 20px;
   --gutter-small: 10px;
   --gutter-tiny: 5px;
-  --border-radius: 5px; */
+  --border-radius: 5px;
 
-  :root {
+  /* :root {
   --background-color: #121212;
   --primary-color: #082032;
   --secondary-color: #334756;
@@ -151,7 +151,7 @@
   --gutter-large: 20px;
   --gutter-small: 10px;
   --gutter-tiny: 5px;
-  --border-radius: 5px;
+  --border-radius: 5px; */
 
     /* :root {
   --background-color: #191919;

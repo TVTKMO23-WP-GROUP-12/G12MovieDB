@@ -1,7 +1,7 @@
 .showtimes-container {
     position: fixed;
     top: 60px;
-    right: 10px;
+    right: 0px;
     bottom: 50px;
     width: 350px; 
     overflow-y: auto;

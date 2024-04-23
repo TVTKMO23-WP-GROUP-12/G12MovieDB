@@ -37,33 +37,8 @@ public class UserService {
         return userMapper.toUserDto(user);
     }
 
-    public UserDto login(CredentialsDto credentialsDto) {
-        User user = userRepository.findByLogin(credentialsDto.getLogin())
-            .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) { //hashing the password
-            return userMapper.toUserDto(user);
-        }
-
-        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
-    }
-
-    public UserDto register(SignUpDto userDto) {
-        Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
-        
-        if(optionalUser.isPresent()) {
-            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
-        }
-
-        User user = userMapper.signUpToUser(userDto);
-        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword()))); //hashing the password
-
-        User savedUser = userRepository.save(user);
-        return userMapper.toUserDto(savedUser);
-    }
-
-    public void deleteUser(Integer id) {
-        userRepository.deleteById(id);
+    public void deleteUser(Integer userId) {
+        userRepository.deleteById(userId);
     }
 
     @Transactional
@@ -93,6 +68,11 @@ public class UserService {
                 ", userMapper=" + userMapper +
                 ", passwordEncoder=" + passwordEncoder +
                 '}';
+    }
+
+    public User updateUser(User user) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
     }
  
 }
