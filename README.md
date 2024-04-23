@@ -43,10 +43,10 @@ Käyttäjän autentikointi tehdään Spring securityllä.
 
 Sivujen rakenne
 
-- **Model-Controller -malli
-- **Repositoriot
+- Model-Controller -malli
+- Repositoriot
 
-###API
+API
 
 
 
