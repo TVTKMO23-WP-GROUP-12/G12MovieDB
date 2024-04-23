@@ -1,4 +1,4 @@
-package com.group12.moviedb.dataTransfer;
+package com.group12.moviedb.dataSources;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

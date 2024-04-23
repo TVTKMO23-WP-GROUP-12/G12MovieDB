@@ -174,9 +174,9 @@ function UserDetail() {
           }
           {selectedTab === 'Groups' && (
             <div className="user-tabs-content">
-              <h2>Ryhmät</h2>
+              <h2>Ryhmät</h2>/*
                 <ul>
-                  {user.groups.map(group => (
+                 {user.groups.map(group => (
                     <>
                       <p key={group.id}>
                         <Link to={`/group/${group.id}`}>{group.groupName}</Link>

@@ -1,6 +1,5 @@
 package com.group12.moviedb.request;
 
-import java.util.Set;
 
 
 public class SignUpRequest {

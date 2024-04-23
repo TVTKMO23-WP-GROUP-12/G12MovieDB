@@ -37,29 +37,27 @@ public class GroupController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/group/{id}")
-    public Group findOneGroup(@PathVariable int id) {
-        return this.groupRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Group not found"));
+    @GetMapping("/group/{group_id}")
+    public Group findOneGroup(@PathVariable Integer groupId) {
+        return this.groupRepository.findById(groupId).orElse(null);
     }
     
     @PostMapping("/group")
-    public Group addOneGroup(@RequestBody Group group, @RequestParam("userId") int userId) {
+    public Group addOneGroup(@RequestBody Group group, @RequestParam("userId") Integer userId) {
         group.setCreatedAt(LocalDateTime.now());
         group.setUpdatedAt(LocalDateTime.now());
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
-        group.setUserId(user); 
+        group.setUser(user); 
         group.setGroupName(group.getGroupName());
         group.setGroupDescription(group.getGroupDescription());
         return groupRepository.save(group);
     }
     
     
-    @PatchMapping("/group/{id}")
-    public Group updateOneGroup(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        Group group = this.groupRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Group not found"));
+    @PatchMapping("/group/{group_id}")
+    public Group updateOneGroup(@PathVariable Integer groupId, @RequestBody Map<String, Object> updates) {
+        Group group = this.groupRepository.findById(groupId).orElse(null);
         updates.forEach((key, value) -> {
                 switch (key) {
                 case "group_name":
@@ -78,10 +76,9 @@ public class GroupController {
         return this.groupRepository.save(group);
     }
 
-    @DeleteMapping("/group/{id}")
-    public void deleteOneGroup(@PathVariable int id) {
-        Group group = this.groupRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Group not found"));
+    @DeleteMapping("/group/{group_id}")
+    public void deleteOneGroup(@PathVariable Integer groupId) {
+        Group group = this.groupRepository.findById(groupId).orElse(null);
         this.groupRepository.delete(group);
     }
 

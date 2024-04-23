@@ -10,10 +10,10 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="review_id")
-    private int reviewId;
+    private Integer id;
 
     @Column(name="user_id")
-    private int userId;
+    private Integer userId;
 
     @ManyToOne
     @JoinColumn(name="movie_id")
@@ -30,19 +30,19 @@ public class Review {
     public Review() {
     }
 
-    public Review(int reviewId, int userId, Movie movie, MovieScore movieScoreId, String content) {
-        this.reviewId = reviewId;
+    public Review(Integer reviewId, Integer userId, Movie movie, MovieScore movieScoreId, String content) {
+        this.id = reviewId;
         this.userId = userId;
         this.movie = movie;
         this.movieScoreId = movieScoreId;
         this.content = content;
     }
 
-    public int getReviewId() {
-        return this.reviewId;
+    public Integer getReviewId(Integer reviewId) {
+        return this.id;
     }
 
-    public int getUser() {
+    public Integer getUser() {
         return this.userId;
     }
 
@@ -58,16 +58,16 @@ public class Review {
         return this.content;
     }
 
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
+    public void setReviewId(Integer reviewId) {
+        this.id = reviewId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public void setMovieId(Movie movie) {
-        this.movie = movie;
+    public Movie setMovie(Movie movie) {
+        return this.movie = movie;
     }
 
     public void setMovieScoreId(MovieScore movieScoreId) {

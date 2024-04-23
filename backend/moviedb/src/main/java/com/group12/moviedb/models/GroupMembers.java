@@ -4,34 +4,33 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
+
 @Entity
-@Table(name="members")
+@Data
+@Table(name = "members")
 public class GroupMembers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
-    private int id;
+    @Column(name = "member_id")
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="group_id")
-    private int groupId;
+    @JoinColumn(name = "group_id")
     private Group group;
 
-    @Column(name="is_admin")
+    @Column(name = "is_admin")
     private boolean isAdmin;
     
-    @Column(name="joined_at")
+    @Column(name = "joined_at")
     private LocalDateTime joinedAt;
     
-    @Column(name="left_at")
+    @Column(name = "left_at")
     private LocalDateTime leftAt;
-
-    @SuppressWarnings("unused")
-    private GroupMembers() {}
 
     public GroupMembers(Integer memberId, Boolean isAdmin, LocalDateTime joinedAt, LocalDateTime leftAt) {
         this.id = memberId;
@@ -40,7 +39,7 @@ public class GroupMembers {
         this.leftAt = leftAt;
     }
 
-    public int getGroupMembersId() {
+    public Integer getGroupMemberId() {
         return this.id;
     }
 
@@ -56,15 +55,15 @@ public class GroupMembers {
         return this.leftAt;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return this.user;
     }
 
-    public Group getGroupId() {
+    public Group getGroup() {
         return this.group;
     }
 
-    public void setGroupMembersId(int memberId) {
+    public void setGroupMemberId(Integer memberId) {
         this.id = memberId;
     }
 

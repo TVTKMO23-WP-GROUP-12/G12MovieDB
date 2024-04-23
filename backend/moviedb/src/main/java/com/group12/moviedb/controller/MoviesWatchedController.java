@@ -49,7 +49,7 @@ public class MoviesWatchedController {
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/movie/{movie_id}")
     public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") Integer movieId) {
-        Movie movie = new Movie();
+        Movie movie = new Movie(movieId, null, movieId);
         return MoviesWatchedRepository.findByMovie(movie);
     }
 
@@ -72,8 +72,8 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_watched/user/{user_id}")
-    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") Integer userId, @RequestBody MoviesWatched MoviesWatched) {
-        User user = userRepository.findById(userId).orElse(null);
+    public MoviesWatched addMoviesWatchedById(@PathVariable("user_id") Integer UserId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(UserId).orElse(null);
         if (user == null) {
             return null;
         }
@@ -83,9 +83,9 @@ public class MoviesWatchedController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_watched/user/{user_id}&movie/{movie_id}")
-    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId, @RequestBody MoviesWatched MoviesWatched) {
-        User user = userRepository.findById(userId).orElse(null);
-        Optional<Movie> movie = movieRepository.findById(movieId);
+    public MoviesWatched addOrUpdateMoviesWatched(@PathVariable("user_id") Integer UserId, @PathVariable("movie_id") Integer movieId, @RequestBody MoviesWatched MoviesWatched) {
+        User user = userRepository.findById(UserId).orElse(null);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
         if (user == null || movie == null) {
             return null;
         }

@@ -4,42 +4,46 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
+import lombok.Data;
+
 @Entity
-@Table(name="movie")
+@Data
+@Table(name = "movie")
 public class Movie {
     @Id
     @Column(name="movie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int movieId;
+    private Integer id;
 
-    @OneToMany(mappedBy="movieId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
-    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
-    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
-    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Review> review;
-    @OneToMany(mappedBy="movie", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MovieScore> movieScores;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="tmdb_id")
+    @Column(name = "tmdb_id")
     private Integer tmdbId;
 
-    @SuppressWarnings("unused")
-    public Movie() {}
-
-    public Movie(int movieId, String title, Integer tmdbId) {
-        this.movieId = movieId;
+    public Movie(Integer movieId, String title, Integer tmdbId) {
+        this.id = movieId;
         this.title = title;
         this.tmdbId = tmdbId;
     }
 
-    public int getId() {
-        return this.movieId;
+    public Integer getmovieId(Integer movieId) {
+        return this.id;
     }
 
     public String getTitle() {
@@ -54,8 +58,8 @@ public class Movie {
         return this.favorites;
     }
 
-    public void setId(int movieId) {
-        this.movieId = movieId;
+    public void setmovieId(Integer movieId) {
+        this.id = movieId;
     }
 
     public void setTitle(String title) {

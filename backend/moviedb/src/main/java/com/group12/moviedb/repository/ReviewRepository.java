@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.group12.moviedb.models.Review;
+import com.group12.moviedb.models.Movie;
 
 @Repository
-public interface ReviewRepository<Movie> extends JpaRepository<Review, Integer> {
-    List<Review> findByUserId(Integer user_id);
-    List<Review> findByMovie(Movie movie_id);
-    Optional<Review> findById(@SuppressWarnings("null") Integer review_id);
-    List<Review> findByMovieId(Integer movie_id);
+public interface ReviewRepository extends JpaRepository<Review, Integer> {
+    List<Review> findByUserId(Integer id);
+    Optional<Review> findById(Integer reviewId);
+    List<Review> findByMovie(Movie movie);
+   
 }

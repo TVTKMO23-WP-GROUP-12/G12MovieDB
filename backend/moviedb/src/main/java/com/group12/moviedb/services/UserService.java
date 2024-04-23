@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 import com.group12.moviedb.models.User;
 import com.group12.moviedb.mappers.UserMapper;
 import com.group12.moviedb.repository.UserRepository;
-import com.group12.moviedb.dataTransfer.CredentialsDto;
-import com.group12.moviedb.dataTransfer.SignUpDto;
-import com.group12.moviedb.dataTransfer.UserDto;
+import com.group12.moviedb.dataSources.CredentialsDto;
+import com.group12.moviedb.dataSources.SignUpDto;
+import com.group12.moviedb.dataSources.UserDto;
 import com.group12.moviedb.exceptions.AppException;
 
 @Service
@@ -37,8 +37,33 @@ public class UserService {
         return userMapper.toUserDto(user);
     }
 
-    public void deleteUser(Integer userId) {
-        userRepository.deleteById(userId);
+    public UserDto login(CredentialsDto credentialsDto) {
+        User user = userRepository.findByLogin(credentialsDto.getLogin())
+            .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.getPassword()), user.getPassword())) { //hashing the password
+            return userMapper.toUserDto(user);
+        }
+
+        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+    }
+
+    public UserDto register(SignUpDto userDto) {
+        Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
+        
+        if(optionalUser.isPresent()) {
+            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        User user = userMapper.signUpToUser(userDto);
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword()))); //hashing the password
+
+        User savedUser = userRepository.save(user);
+        return userMapper.toUserDto(savedUser);
+    }
+
+    public void deleteUser(Integer id) {
+        userRepository.deleteById(id);
     }
 
     @Transactional
@@ -70,9 +95,4 @@ public class UserService {
                 '}';
     }
 
-    public User updateUser(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
-    }
- 
 }

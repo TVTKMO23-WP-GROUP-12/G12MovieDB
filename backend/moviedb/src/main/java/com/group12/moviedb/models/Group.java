@@ -5,19 +5,23 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="user_group")
+@Data
+@Table(name = "user_group")
 @JsonIgnoreProperties({"userId"})
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="group_id")
-    private int id;
+    private Integer id;
 
     @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
+
     @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
     private List<MessageRecipient> messageRecipient;
 
@@ -27,24 +31,25 @@ public class Group {
 
     @Column(name="group_name")
     private String groupName;
+
     @Column(name="group_description")
     private String groupDescription;
+
     @Column(name="created_at")
     private LocalDateTime createdAt;
+
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    Group() {}
-
-    public Group(Integer id, String groupName, String groupDescription, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
+    public Group(Integer groupId, String groupName, String groupDescription, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = groupId;
         this.groupName = groupName;
         this.groupDescription = groupDescription;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public Integer getGroupId(Integer groupId) {
         return this.id;
     }
 
@@ -64,12 +69,12 @@ public class Group {
         return this.updatedAt;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return this.user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGroupId(Integer groupId) {
+        this.id = groupId;
     }
 
     public void setGroupName(String groupName) {
@@ -88,13 +93,9 @@ public class Group {
         this.updatedAt = updatedAt;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public Group orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-    }
 
 }

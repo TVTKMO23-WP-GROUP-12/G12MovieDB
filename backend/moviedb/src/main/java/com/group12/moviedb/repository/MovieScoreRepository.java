@@ -9,7 +9,7 @@ import com.group12.moviedb.models.MovieScore;
 
 @Repository
 public interface MovieScoreRepository extends JpaRepository<MovieScore, Integer> {
-    MovieScore findByMovieId(int movie_id);
-    Optional<MovieScore> findById(int movie_score_id);
-    void deleteById(int movie_score_id);
+    MovieScore findByMovieId(Integer movieId);
+    Optional<MovieScore> findById(Integer movie_scoreId);
 }
+

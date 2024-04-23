@@ -2,10 +2,12 @@ package com.group12.moviedb.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import jakarta.persistence.*;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 @Entity
 @Table(name = "movies_to_watch")
 @IdClass(MoviesToWatchId.class)
@@ -29,9 +31,7 @@ public class MoviesToWatch implements Serializable{
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public MoviesToWatch() {
-    }
-
+   
     public MoviesToWatch(User user, Movie movie, String note, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.user = user;
         this.movie = movie;
@@ -40,11 +40,11 @@ public class MoviesToWatch implements Serializable{
         this.updatedAt = updatedAt;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public Movie getMovieId() {
+    public Movie getMovie() {
         return movie;
     }
 
@@ -80,14 +80,6 @@ public class MoviesToWatch implements Serializable{
         this.updatedAt = updatedAt;
     }
 
-	public MoviesToWatch orElse(Object object) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'orElse'");
-	}
 
-    public void setMovie(Optional<Movie> movie2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setMovie'");
-    }
 
 }

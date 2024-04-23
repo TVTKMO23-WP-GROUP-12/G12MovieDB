@@ -1,5 +1,6 @@
 import React from 'react';
 import {Routes, Route } from 'react-router-dom';
+
 import './App.css';
 import Layout from './layouts/Layout';
 import Home from './pages/Home';
@@ -14,6 +15,7 @@ import Movie from './pages/Movie';
 import MovieDetail from './pages/MovieDetail';
 import Showtimes from './pages/Showtimes';
 import NotFound from './pages/NotFound';
+
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
       </Routes>
     </Layout>
   );
+
 }
 
 export default App;

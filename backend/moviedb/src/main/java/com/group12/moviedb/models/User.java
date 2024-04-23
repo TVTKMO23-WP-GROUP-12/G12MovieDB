@@ -3,23 +3,11 @@ package com.group12.moviedb.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
 @Entity
 @Table(name="users")
 public class User {
-
     @Id
     @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +19,7 @@ public class User {
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
 
-    @OneToMany(mappedBy="user_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
@@ -40,55 +28,48 @@ public class User {
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
 
-    @ManyToMany(mappedBy = "recipients")
+    @ManyToMany(mappedBy = "recipient")
     private List<Message> receivedMessages = new ArrayList<>();
-
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-    private List<MessageRecipient> messageRecipient;
 
+    private List<MessageRecipient> messageRecipient;
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Followers> followers;
-
     
-
-    
-    @Column(name= "username", nullable = false)
-    @Size(max = 120)
+    @Column(name="username", unique = true)
     private String username;
 
-    @Column(name= "email", nullable = false)
-    @Size(max = 80)
+    @Column(name="email", unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    @Size(max = 100)
+    @Column(name="password")
     private String password;
-
-    @Column(nullable = false)
-    @Size(max = 100)
+    
+    @Column(unique = true)
     private String login;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    
+
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
+
     @Column(name = "user_description")
     private String userDescription;
 
 
-    public User(int userId, String username, String email, String password, String userDescription) {
-        this.userId = userId;
+    public User(Integer userId, String username, String email, String password, String userDescription) {
+        this.id = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.userDescription = userDescription;
     }
 
-    public Integer getId() {
+    public Integer getId(Integer UserId) {
     return this.id;
     }
 
@@ -124,8 +105,12 @@ public class User {
         return this.favorites;
     }
 
-    public void setId(Integer id) {
-    this.id = id;
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public void setId(Integer userId) {
+    this.id = userId;
     }
 
     public void setUsername(String username) {
@@ -164,5 +149,6 @@ public class User {
         this.userDescription = userDescription;
     }
 
-}
 
+
+}

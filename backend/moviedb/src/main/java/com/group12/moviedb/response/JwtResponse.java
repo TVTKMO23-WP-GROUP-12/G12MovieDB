@@ -4,11 +4,11 @@ package com.group12.moviedb.response;
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
-    private Long id;
+    private Integer id;
     private String username;
     private String email;
   
-    public JwtResponse(String accessToken, Long id, String username, String email) {
+    public JwtResponse(String accessToken, Integer id, String username, String email) {
       this.token = accessToken;
       this.id = id;
       this.username = username;
@@ -31,11 +31,11 @@ public class JwtResponse {
       this.type = tokenType;
     }
   
-    public Long getId() {
+    public Integer getId() {
       return id;
     }
   
-    public void setId(Long id) {
+    public void setId(Integer id) {
       this.id = id;
     }
   

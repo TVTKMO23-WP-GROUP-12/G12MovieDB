@@ -1,25 +1,28 @@
 package com.group12.moviedb.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 
 @Entity
+@Data
 public class MovieSearch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    private Integer movieId;
     private String name;
     private String genre;
     private Long releaseYear;
     private String person;
     private String poster;
 
-    public Integer getId() {
-        return id;
+    public Integer getMovieId() {
+        return this.movieId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMovieId(Integer movieId) {
+        this.movieId = movieId;
     }
 
     public String getName() {

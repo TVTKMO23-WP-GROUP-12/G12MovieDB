@@ -3,7 +3,7 @@ import auth from '../auth/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
 
-const SignUpPage = () => {
+function SignUpPage () {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,7 +11,8 @@ const SignUpPage = () => {
     const [error, setError] = useState(''); //error handling msg
     const history = useNavigate(); // Redirect with history object
 
-    const handleSignUp = async () => {
+    const handleSubmit= async (e) => {
+        e.preventDefault();
      
         try {
             //check for empty fields
@@ -31,8 +32,8 @@ const SignUpPage = () => {
             history('/login');
         } catch (error) {
             // Handle signup error
-            console.error('Signup failed:', error.response ? error.response.data : error.message);
-            setError(error.response ? error.response.data : error.message);
+            console.error('Signup failed:', error);
+            setError(error.message || 'Register failed'); 
         }
     }
 
@@ -41,7 +42,8 @@ const SignUpPage = () => {
             <div className="content">
                 <h2 className="title">SignUp</h2>
                 <div>
-
+                <form onSubmit={handleSubmit}>
+                <div className='form-group'>
                     <div className="field">
                         <input type='text' autoComplete="off"
                             value={username}
@@ -66,16 +68,17 @@ const SignUpPage = () => {
                             id='confirmPassword' placeholder={"Confirm Password"} value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
-                    {/*Render error message if exists*/}
-                    {error && <p className="text-danger">{error}</p>}
-                    <button className="btn-signup" onClick={handleSignUp}>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <button type="submit" className="btn-signup" onClick={handleSubmit}>
                         Sign Up
                     </button>
-                </div>
+                    </div>
+                </form>
 
                 <div className="old-user">
                     <h5 className="new">Already a member? <Link to="/login">Login</Link></h5>
                 </div>
+            </div>
             </div>
         </section>
     );

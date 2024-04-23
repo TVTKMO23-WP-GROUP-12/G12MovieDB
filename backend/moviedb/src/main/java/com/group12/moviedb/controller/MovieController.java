@@ -6,9 +6,8 @@ import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.repository.MovieRepository;
 
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,9 +31,9 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/movie/{id}")
-    public Movie findOneMovie(@PathVariable int id) {
-        return this.movieRepository.findById(id);
+    @GetMapping("/movie/{movie_id}")
+    public Movie findOneMovie(@PathVariable Integer movieId) {
+        return this.movieRepository.findById(movieId).orElse(null);
     }
 
     @CrossOrigin(origins = "*")
@@ -44,13 +43,13 @@ public class MovieController {
     }
     
     @CrossOrigin(origins = "*")
-    @PatchMapping("/movie/{id}")
-    public Movie updateOneMovie(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        Movie movie = this.movieRepository.findById(id);
+    @PatchMapping("/movie/{movie_id}")
+    public Movie updateOneMovie(@PathVariable Integer movieId, @RequestBody Map<String, Object> updates) {
+        Movie movie = this.movieRepository.findById(movieId).orElse(null);
         updates.forEach((key, value) -> {
             switch (key) {
-                case "id":
-                    movie.setId((int) value);
+                case "movieId":
+                    movie.setmovieId((Integer) value);
                     break;
                 case "title":
                     movie.setTitle((String) value);
@@ -61,8 +60,8 @@ public class MovieController {
         });
         return this.movieRepository.save(movie);
     }
-    @DeleteMapping("/movie/{id}")
-    public void deleteOneMovie(@PathVariable int id) {
-        this.movieRepository.deleteById(id);
+    @DeleteMapping("/movie/{movie_id}")
+    public void deleteOneMovie(@PathVariable Integer movieId) {
+        this.movieRepository.deleteById(movieId);
     }
 }

@@ -10,11 +10,10 @@ import com.group12.moviedb.models.Followers;
 
 @Repository
 public interface FollowersRepository extends JpaRepository<Followers, Integer> {
-    Followers findByUserId(Integer userId);
+    Followers findByUserId(Integer id);
     List<Followers> findByFollowing(boolean following);
     Followers findByUserIdAndFollowing(Integer userId, boolean following);
-    @SuppressWarnings("null")
-    Optional<Followers> findById(Integer id);
-    void deleteByUserId(Integer user_id);
-    void deleteByUserIdAndFollowing(Integer user_id, boolean following);
+    Optional<Followers> findById(Integer follwerId);
+    void deleteByUserId(Integer id);
+    void deleteByUserIdAndFollowing(Integer userId,boolean following);
 }

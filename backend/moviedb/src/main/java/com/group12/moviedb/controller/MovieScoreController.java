@@ -1,8 +1,8 @@
 package com.group12.moviedb.controller;
 
+
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -31,9 +31,9 @@ public class MovieScoreController {
         return this.movieScoreRepository.findAll();
     }
 
-    @GetMapping("/movie_scores/movie={movie_id}")
-    public ResponseEntity<MovieScore> findOneMovieScoreByMovieId(@PathVariable("movie_id") Integer movie_id) {
-        MovieScore movieScore = this.movieScoreRepository.findByMovieId(movie_id);
+    @GetMapping("/movie_scores/movie={movie_score_id}")
+    public ResponseEntity<MovieScore> findOneMovieScoreByMovieId(@PathVariable("movieScoreId") Integer movieScoreId) {
+        MovieScore movieScore = this.movieScoreRepository.findByMovieId(movieScoreId);
         if (movieScore != null) {
             return ResponseEntity.ok(movieScore);
         } else {
@@ -42,8 +42,8 @@ public class MovieScoreController {
     }
 
     @GetMapping("/movie_scores/{movie_score_id}")
-    public ResponseEntity<MovieScore> findOneMovieScoreById(@PathVariable("movie_score_id") Integer movie_score_id) {
-        Optional<MovieScore> optionalMovieScore = this.movieScoreRepository.findById(movie_score_id);
+    public ResponseEntity<MovieScore> findOneMovieScoreById(@PathVariable("movie_score_id") Integer movieScoreId) {
+        Optional<MovieScore> optionalMovieScore = this.movieScoreRepository.findById(movieScoreId);
         return optionalMovieScore.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
@@ -52,39 +52,30 @@ public class MovieScoreController {
         return this.movieScoreRepository.save(movieScore);
     }
 
-    @PatchMapping("/movie_scores/{id}")
-    public MovieScore updateOneMovieScore(@PathVariable int id, @RequestBody Map<String, Object> updates) {
-        Optional<MovieScore> movieScoreOptional = this.movieScoreRepository.findById(id);
-    
-        if (movieScoreOptional.isPresent()) {
-            MovieScore movieScore = movieScoreOptional.get();
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "movie_score_id":
-                        movieScore.setMovieScoreId((int) value);
-                        break;
-                    case "score":
-                        movieScore.setScore((int) value);
-                        break;
-                    case "created_at":
-                        movieScore.setCreatedAt((LocalDateTime) value);
-                        break;
-                    case "updated_at":
-                        movieScore.setUpdatedAt((LocalDateTime) value);
-                        break;
-                    default:
-                            //other keys if there are some
-                        break;
-                }
-            });
-            return this.movieScoreRepository.save(movieScore);
-        } else {
-            throw new NoSuchElementException("Movie score not found");
-        }
+    @PatchMapping("/movie_scores/{movie_score_id}")
+    public MovieScore updateOneMovieScore(@PathVariable Integer movieScoreId, @RequestBody Map<String, Object> updates) {
+        MovieScore movieScore = this.movieScoreRepository.findById(movieScoreId).orElse(null);
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "movieScoreId":
+                    movieScore.setMovieScoreId((Integer) value);
+                    break;
+                case "score":
+                    movieScore.setScore((int) value);
+                    break;
+                case "created_at":
+                    movieScore.setCreatedAt((LocalDateTime) value);
+                    break;
+                case "updated_at":
+                    movieScore.setUpdatedAt((LocalDateTime) value);
+                    break;
+            }
+        });
+        return this.movieScoreRepository.save(movieScore);
     }
     
-    @DeleteMapping("/movie_scores/{id}")
-    public void deleteOneMovieScore(@PathVariable int id) {
-        this.movieScoreRepository.deleteById(id);
+    @DeleteMapping("/movie_scores/{movie_score_id}")
+    public void deleteOneMovieScore(@PathVariable Integer movieScoreId) {
+        this.movieScoreRepository.deleteById(movieScoreId);
     }
 }

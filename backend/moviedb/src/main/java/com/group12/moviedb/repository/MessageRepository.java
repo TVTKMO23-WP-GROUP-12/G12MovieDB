@@ -1,6 +1,5 @@
 package com.group12.moviedb.repository;
 
-import java.nio.LongBuffer;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +10,9 @@ import com.group12.moviedb.models.Message;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
-    List<Message> findByCreatorId(Integer creator_id);
-    List<Message> findByParentMessageId(Integer parentMessage_id);
-    List<Message> findByRecipientsId(Integer recipient_id);
-    Optional<Message> findById(Integer message_id);
-
+    List<Message> findByRecipientId(Integer recipientId);
+    List<Message> findByCreatorId(Integer creatorId);
+    List<Message> findByParentMessageId(Integer parentMessageId);
+    void deleteById(Integer messageId);
+    Optional<Message> findById(Integer messageId);
 }

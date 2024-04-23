@@ -4,24 +4,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="message")
+@Data
+@Table(name = "message")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @Column(name = "message_id")
+    private Integer id;
 
-    @Column(name="creator_id", columnDefinition = "INTEGER")
-    private int creatorId;
+    @Column(name = "creator_id", columnDefinition = "INTEGER")
+    private Integer creatorId;
     
-    @Column(name="content", columnDefinition = "TEXT")
+    @Column(name = "content", columnDefinition = "TEXT")
     private String content;
     
-    @Column(name="parent_message_id", columnDefinition = "INTEGER")
-    private int parentMessageId;
+    @Column(name = "parent_message_id", columnDefinition = "INTEGER")
+    private Integer parentMessageId;
     
     @Column(name = "create_date", columnDefinition = "TIMESTAMP")
     private LocalDate createDate;
@@ -32,24 +34,24 @@ public class Message {
         joinColumns = @JoinColumn(name = "message_id"),
         inverseJoinColumns = @JoinColumn(name = "recipient_id")
     )
-    private List<User> recipients = new ArrayList<>();
+    private List<User> recipient = new ArrayList<>();
 
     @SuppressWarnings("unused")
     private Message() {}
 
-    public Message(Integer id, Integer creatorId, String content, Integer parentMessageId, LocalDate createDate) {
-        this.id = id;
+    public Message(Integer messageId, Integer creatorId, String content, Integer parentMessageId, LocalDate createDate) {
+        this.id = messageId;
         this.creatorId = creatorId;
         this.content = content;
         this.parentMessageId = parentMessageId;
         this.createDate = createDate;
     }
 
-    public int getId() {
+    public Integer getMessageId(Integer messageId) {
         return this.id;
     }
 
-    public int getCreatorId() {
+    public Integer getCreatorId() {
         return this.creatorId;
     }
 
@@ -57,7 +59,7 @@ public class Message {
         return this.content;
     }
 
-    public int getParentMessageId() {
+    public Integer getParentMessageId() {
         return this.parentMessageId;
     }
 
@@ -65,11 +67,11 @@ public class Message {
         return this.createDate;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMessageId(Integer messageId) {
+        this.id = messageId;
     }
 
-    public void setCreatorId(int creatorId) {
+    public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
     }
 
@@ -77,7 +79,7 @@ public class Message {
         this.content = content;
     }
 
-    public void setParentMessageId(int parentMessageId) {
+    public void setParentMessageId(Integer parentMessageId) {
         this.parentMessageId = parentMessageId;
     }
 

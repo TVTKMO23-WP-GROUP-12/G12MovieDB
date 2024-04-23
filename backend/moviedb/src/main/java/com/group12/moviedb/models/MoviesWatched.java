@@ -2,7 +2,6 @@ package com.group12.moviedb.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import jakarta.persistence.*;
 
@@ -78,11 +77,6 @@ public class MoviesWatched implements Serializable {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public void setMovie(Optional<Movie> movie2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setMovie'");
     }
 
   

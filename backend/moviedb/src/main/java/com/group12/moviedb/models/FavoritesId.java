@@ -1,38 +1,32 @@
 package com.group12.moviedb.models;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import java.io.Serializable;
-import jakarta.persistence.*;
 
-@Embeddable
+@AllArgsConstructor
+@EqualsAndHashCode
 public class FavoritesId implements Serializable {
-    @Column(name = "user_id")
-    private int userId;
-
-    @Column(name = "movie_id")
-    private int movieId;
-
-    public FavoritesId() {
-    }
-
-    public FavoritesId(int userId, int movieId) {
-        this.userId = userId;
-        this.movieId = movieId;
-    }
-
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public int getMovieId() {
-        return this.movieId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
     
+    private User user;
+    private Movie movie;
+
+    public User getUser() {
+        return user;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public User setUser(User user) {
+        return this.user = user;
+    }
+
+  
+
+    public Movie setMovie(Movie movie) {
+        return this.movie = movie;
+    }
 }
+
