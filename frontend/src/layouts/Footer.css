@@ -3,14 +3,25 @@
 footer {
   background-color: var(--primary-color);
   display: flex;
+  flex-direction: row;
   height: 50px;
   width: 100%;
   justify-content: center;
-  align-items: center;
   position: fixed;
   bottom: 0;
 }
 
 footer p {
+  order: 1;
   color: var(--secondary-text-color);
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+footer img {
+  order: 2;
+  height: 20px;
+  margin-top: 15px;
+  box-shadow: none;
+  border: none;
 }

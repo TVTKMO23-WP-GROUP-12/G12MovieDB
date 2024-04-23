@@ -5,6 +5,7 @@ import defaultGroupPicture from '../media/defaultGroupPicture.png';
 import GroupMembers from '../components/GroupMembers';
 import GroupReviews from '../components/GroupReviews';
 import GroupDetailTop from '../components/GroupDetailTop';
+import useIsMobile from '../hooks/useIsMobile';
 //import { useAuth } from './auth-context'; // Import the useAuth hook from the auth-context file. change the file to the actual parameter
 
 function GroupDetail() {
@@ -14,22 +15,11 @@ function GroupDetail() {
   const [selectedTabLeft, setSelectedTabLeft] = useState('News');
   const [selectedTabRight, setSelectedTabRight] = useState('Movies');
   const [reviews, setReviews] = useState([]);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+  const isMobile = useIsMobile();
 
   //const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
   //const { id: groupId } = useParams(); // get group ID from URL parameter
   //const { user: { id: userId } } = useAuth();// get user ID from auth context
-  
-  // Listener for smartphone window size
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   // Fetch group members and their reviews
   useEffect(() => {

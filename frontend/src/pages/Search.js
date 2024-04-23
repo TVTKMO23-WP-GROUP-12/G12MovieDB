@@ -209,7 +209,7 @@ export default function Search() {
             <ul>
               {movies.map(movie => (
                 <li key={movie.id}>
-                  <Link to={`/movie/${movie.id}`}>
+                  <Link to={`/public/movie/${movie.id}`}>
                     <div className="movie-info">
                       <div className="poster">
                         {movie.poster_path ? (
