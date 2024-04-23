@@ -19,7 +19,7 @@
     width: 100%;
     min-height: 90vh;
     padding: var(--gutter-large);
-    background-image: url('C:\Users\OMISTAJA\OneDrive\Pictures\Opiskelukuvat\Popcorn.webp'); /* Update this with the actual path to the image */
+    background-image: url('C:\G12MovieDB\G12MovieDB\frontend\src\media\popcorn.png'); 
     background-size: contain;
     background-position: center;
   }
