@@ -60,6 +60,7 @@ public class User {
     @Column(name = "user_description")
     private String userDescription;
 
+    public User() {}
 
     public User(Integer userId, String username, String email, String password, String userDescription) {
         this.id = userId;

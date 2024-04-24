@@ -7,6 +7,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class FavoritesId implements Serializable {
+
+    public FavoritesId() {}
     
     private User user;
     private Movie movie;

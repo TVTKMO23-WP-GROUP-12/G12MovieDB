@@ -10,6 +10,8 @@ public class MoviesWatchedId implements Serializable {
         private User user;
         private Movie movie;
 
+        public MoviesWatchedId() {}
+
         public User getUser() {
             return user;
         }

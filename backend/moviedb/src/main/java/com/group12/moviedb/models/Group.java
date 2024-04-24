@@ -41,6 +41,8 @@ public class Group {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
+    public Group() {}
+
     public Group(Integer groupId, String groupName, String groupDescription, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = groupId;
         this.groupName = groupName;
