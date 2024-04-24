@@ -41,14 +41,15 @@ Sovelluksen backend-toiminnot on rakennettu käyttämällä Java-kielellä toimi
 - **okhttp3:** *4.12.0*
 - **Spring Security:** *6.2.4*
 
-Käyttäjän autentikointi
-
+### Käyttäjän autentikointi
 Käyttäjän autentikoinnissa käytetään Spring Bootin autentikointiin ja kulunvalvontaan tarkoitettua Spring Securityä, jota on kustomoitu sovelluksen tarpeisiin. Autentikoinnissa käytetään ns. tilatonta istuntoa, eli käyttäjälle tehdään autentikoinnin yhteydessä ainutkertainen, yksilöllinen istuntotunnus, joka kryptataan ja hävitetään uloskirjautumisen yhteydessä. Istuntotunnukselle on myös määrätty maksimivoimassaoloaika. Käyttäjätiedot on keskitetty palvelinpuolelle ja palvelun jokaisen osan, joka vaatii jonkinlaista tietoa käyttäjästä, täytyy ottaa erikseen yhteyttä palvelimeen. Tämä tekee palvelusta tietoturvallisemman: Käyttäjätietoja ei voi väärentää ja yksilöllisestä, läpinäkymättömästä istuntotunnuksesta ei voi saada tietoja, toisin kuin esimerkiksi jatkuvasti toiminnassa olevasta salausavaimesta.
 
-Backendin rakenne
 
+
+### Backendin rakenne
 Backend pohjautuu model-controller-repositorio -malliin, joka on yleinen Spring Boot -sovelluksissa. Ohjauskerros (controller) on yksin vastuussa toiminnallisuuksien ylläpidosta ja muut kerrokset käyttävät sitä toimiakseen yhdessä. Tietovarastokerros (repository) on vastuussa tietojen tallentamisesta ja hakemisesta. Tietotaso (model) pitää sisällään yksityiskohtaiset tiedot. Jos toimintalogiikka vaatii tietojen hakemista tai tallentamista, se kytkeytyy tietovarastoon. 
 Näiden peruselementtien lisäksi backendissä on palvelun konfiguraatiolle sekä palvelussa käytössä olevalle APIlle omat osiot. 
+ 
 
 
 
@@ -60,7 +61,7 @@ Sivuston frontend - eli selainpuolen - koodina käytetään [React JavaScript](h
 - **Axios:** *1.6.8*
 
 ### <a name ="tietokanta"></a> Tietokanta
-Tietokantana toimii avoimeen lähdekoodiin perustuva [PostgreSQL](https://www.postgresql.org/) -tietokantapalvelin. PostgreSQL perustuu relaatiomallille, ja se on vaihtoehto muille vapaan lähdekoodin tietokantajärjestelmille, kuten MySQL sekä myös kaupallisille järjestelmille, kuten Oracle sekä Sybase.
+Tietokantana toimii avoimen lähdekoodin [PostgreSQL](https://www.postgresql.org/) -tietokantapalvelin. Yhteisölähtöisiä, avoimen lähdekoodin tietokantapalvelimia ovat myös esimerkiksi MariDB ja Percona, jotka ovat MySQL:n haaroja. Suurimpana erona Postgresin ja MySQL:n välillä on se, että Postgres on objektirelaatiotietokanta, kun taas MySQL on puhtaasti relaatiotietokanta. Tämä tarkoittaa, että Postgresissa olioita, luokkia ja periytymistä tuetaan suoraan tietokantaskeemoissa ja kyselykielessä. Postgres on myös erittäin laajennettavissa: Se tukee useita kehittyneitä tietotyyppejä, joita ei ole saatavilla MySQL:ssä (geometrinen/GIS, verkko-osoitetyypit, JSONB, joka voidaan indeksoida, natiivi UUID, aikavyöhyketietoiset aikaleimat). Postgresiin voi lisätä myös omia tietotyyppejä, operaattoreita ja indeksityyppejä. Postgresia pidetään joissakin tapauksissa hitaana sen kompleksisuuden vuoksi.
 
 Projektin tietokantaa ajetaan [Render](https://render.com/) -palvelussa.
 
@@ -82,7 +83,7 @@ Sivusto koostuu kotisivusta sekä useista sen alasivuista. Sivuston eri osiot ov
 #### Julkiset sivut:
 Näytösajat (Showtimes)
 
-Näytösajat sivusto tarjoaa käyttäjille mahdollisuuden tutustua Finnkinon elokuvaohjelmistoon ja näytösaikoihin. Sivustolla voi selata elokuvia, näytösaikoja ja teattereita eri paikkakunnilla. Lisäksi käyttäjä voi halutessaan selailla elokuvia valitsemansa genren perusteella. Projektissamme olemme hyödyntäneet Finnkinon XML-pohjaista rajapintaa, joka mahdollistaa reaaliaikaisten tietojen hakemisen Finnkinon palvelusta. Käytämme tähän JavaScriptiä yhdessä React-kirjaston kanssa. XML-tietojen käsittelyyn ja parsimiseen käytämme selaimen `DOMParser`-objektia, joka mahdollistaa XML-dokumenttien tehokkaan käsittelyn ja datan uuttamisen tarpeidemme mukaisesti. Tämä toiminnallisuus tarjoaa käyttäjillemme pääsyn ajankohtaisiin tietoihin elokuvanäytöksistä, teatterien sijainneista ja elokuvien genreistä suoraan Finnkinon tietokannoista, mikä parantaa merkittävästi käyttäjäkokemusta sivustollamme.
+Näytösajat-sivusto tarjoaa käyttäjille mahdollisuuden tutustua Finnkinon elokuvaohjelmistoon ja näytösaikoihin. Sivustolla voi selata elokuvia, näytösaikoja ja teattereita eri paikkakunnilla. Lisäksi käyttäjä voi halutessaan selailla elokuvia valitsemansa tyylilajin perusteella. Projektissamme olemme hyödyntäneet Finnkinon XML-pohjaista rajapintaa, joka mahdollistaa reaaliaikaisten tietojen hakemisen Finnkinon palvelusta. Käytämme tähän JavaScriptiä yhdessä React-kirjaston kanssa. XML-tietojen käsittelyyn ja parsimiseen käytämme selaimen `DOMParser`-objektia, joka mahdollistaa XML-dokumenttien tehokkaan käsittelyn ja datan uuttamisen tarpeidemme mukaisesti. Tämä toiminnallisuus tarjoaa käyttäjillemme pääsyn ajankohtaisiin tietoihin elokuvanäytöksistä, teatterien sijainneista ja elokuvien genreistä suoraan Finnkinon tietokannoista, mikä parantaa merkittävästi käyttäjäkokemusta sivustollamme.
 
 Haku (Search)
 
