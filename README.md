@@ -21,12 +21,11 @@
 - Sanna Mäki - [Rahukettu](https://www.github.com/rahukettu)
 
 ## <a name ="esittely"></a> Esittely
-Group 12 Movie Database on websovellus, jonka välityksellä elokuvista pitävät voivat keskustella keskenään ja arvioida sekä listata näkemiään elokuvia. 
+Group 12 Movie Database on websovellus, jonka välityksellä elokuvista pitävät voivat keskustella keskenään, arvioida elokuvia sekä tehdä listoja elokuvista eri mittareiden perusteella. 
 
-Sivusto toimii sosiaalisen median sivuston kaltaisella periaatteella, eli käyttäjät voivat seurata toisiaan, lähettää toisilleen viestejä sekä liittyä erilaisiin ryhmiin joissa voi keskustella esimerkiksi samankaltaisista elokuvista pitävien käyttäjien kanssa. Ryhmien muodolla ja tarkoituksella ei ole rajoitetta, joten käyttäjä voi itse perustaa minkälaisen ryhmän tahansa. 
+Sivusto toimii sosiaalisen median sivuston kaltaisella periaatteella, eli käyttäjät voivat seurata toisiaan, lähettää toisilleen viestejä sekä liittyä erilaisiin ryhmiin, joissa voi keskustella esimerkiksi samankaltaisista elokuvista pitävien käyttäjien kanssa. Ryhmien muodolla ja tarkoituksella ei ole rajoitetta, joten käyttäjä voi itse perustaa minkälaisen ryhmän tahansa. 
 
-Käyttäjät voivat rekisteröityä palveluun, kirjautua omalle tililleen ja kirjautua tililtä ulos. Julkiset (ei-autentikoidut) käyttäjät pääsevät projektin julkisille sivuille.
-Autentikoidut käyttäjät pääsevät kaikille sivuille ja voivat lisäksi muodostaa uusia ryhmiä, julkaista arvosteluja, muokata kirjoittamiaan arvosteluja ja poistaa kirjoittamansa arvostelut ja luomansa ryhmät.
+Käyttäjät voivat rekisteröityä palveluun, kirjautua omalle tililleen ja kirjautua tililtä ulos. Julkiset (ei-autentikoidut) käyttäjät pääsevät projektin julkisille sivuille. Autentikoidut käyttäjät pääsevät kaikille sivuille ja voivat lisäksi muodostaa uusia ryhmiä, julkaista arvosteluja, muokata kirjoittamiaan arvosteluja, poistaa kirjoittamansa arvostelut ja luomansa ryhmät.
 
 Seuraavissa kappaleissa käydään läpi sivuston teknologisempaa puolta, alkaen [backendistä](#backend), jatkuen [frontendiin](#frontend) ja [tietokantaan](#tietokanta) ja päättyen [TMDB:n ohjelmistorajapintaan](#tmdb_api).
 
