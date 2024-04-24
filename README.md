@@ -32,7 +32,8 @@ Seuraavissa kappaleissa käydään läpi sivuston teknologisempaa puolta, alkaen
 ## <a name ="teknologia"></a>Teknologia
 
 ### <a name ="backend"></a> Backend 
-Sivuston backend-toiminnot on rakennettu käyttämällä Java-kielellä toimivaa [Spring Boot](https://spring.io/projects/spring-boot) -sovelluskehystä. Spring Boot on avoimen lähdekoodin Java-projektikirjasto, joka on tarkoitettu esimerkiksi tämän projektin tyylisten mikropalveluiden kehittämiseen. Se on hyvin mukautuvainen ja helppokäyttöinen kehys, jonka avulla on helppo luoda itsenäisiä, tuotantotasoisia Springiin perustuvia sovelluksia. Spring Boot tarjoaa monenlaisia mahdollisuuksia. Yksi sen ydinkonsepteista on riippuvuusinjektio, mikä tarkoittaa, että niin kauan kuin koodissa käytetään oikeanlaisia riippuvuuskuvauksia, Spring huolehtii sovelluksen eri komponenttien alustamisesta.
+Backend sisältää sovelluksen kaikki palvelimella suoritettavat osa-alueet, kuten yhteydet tietokantaan, tiedostojen, lomakkeiden ja hakujen käsittelyt, sovellukseen kirjautuminen sekä käyttäjän autentikointi. Backend vastaa käyttöliittymästä tuleviin pyyntöihin ja käsittelee, siirtää ja vastaanottaa sovelluksen tietoja. 
+Sovelluksen backend-toiminnot on rakennettu käyttämällä Java-kielellä toimivaa [Spring Boot](https://spring.io/projects/spring-boot) -sovelluskehystä. Spring Boot on avoimen lähdekoodin Java-projektikirjasto, joka on tarkoitettu esimerkiksi tämän projektin tyylisten mikropalveluiden kehittämiseen. Se on hyvin mukautuvainen ja helppokäyttöinen kehys, jonka avulla on helppo luoda itsenäisiä, tuotantotasoisia Springiin perustuvia sovelluksia. Spring Boot tarjoaa monenlaisia mahdollisuuksia. Yksi sen ydinkonsepteista on riippuvuusinjektio, mikä tarkoittaa, että niin kauan kuin koodissa käytetään oikeanlaisia riippuvuuskuvauksia, Spring huolehtii sovelluksen eri komponenttien alustamisesta.
 
 #### Tämän projektin backendin käyttämien riippuvuuksien versiot:
 - **Java:** *17*
@@ -59,9 +60,9 @@ Sivuston frontend - eli selainpuolen - koodina käytetään [React JavaScript](h
 - **Axios:** *1.6.8*
 
 ### <a name ="tietokanta"></a> Tietokanta
-Tietokantana toimii avoimeen lähdekoodiin perustuva [PostgreSQL](https://www.postgresql.org/) -tietokantapalvelin. PostgreSQL perustuu relaatiomallille, ja se on vaihtoehto muille vapaan lähdekoodin tietokantajärjestelmille, kuten MySQL, sekä myös kaupallisille järjestelmille, kuten Oracle sekä Sybase.
+Tietokantana toimii avoimeen lähdekoodiin perustuva [PostgreSQL](https://www.postgresql.org/) -tietokantapalvelin. PostgreSQL perustuu relaatiomallille, ja se on vaihtoehto muille vapaan lähdekoodin tietokantajärjestelmille, kuten MySQL sekä myös kaupallisille järjestelmille, kuten Oracle sekä Sybase.
 
-Projektin tietokanta toimii [Render](https://render.com/) -palvelussa.
+Projektin tietokantaa ajetaan [Render](https://render.com/) -palvelussa.
 
 #### Tässä projektissa käytetyn tietokantasovelluksen versio:
 - **PostgreSQL**: *16*
