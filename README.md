@@ -38,18 +38,15 @@ Sivuston backend-toiminnot on rakennettu käyttämällä Java-kielellä toimivaa
 - **Java:** *17*
 - **Spring Boot:** *3.2.4*
 - **okhttp3:** *4.12.0*
+- **Spring Security:** *6.2.4*
 
 Käyttäjän autentikointi
-Käyttäjän autentikointi tehdään Spring securityllä. 
 
-Sivujen rakenne
+Käyttäjän autentikoinnissa käytetään Spring Bootin autentikointiin ja kulunvalvontaan tarkoitettua Spring Securityä, jota on kustomoitu sovelluksen tarpeisiin. Autentikoinnissa käytetään ns. tilatonta istuntoa, eli käyttäjälle tehdään autentikoinnin yhteydessä ainutkertainen, yksilöllinen istuntotunnus, joka kryptataan ja hävitetään uloskirjautumisen yhteydessä. Istuntotunnukselle on myös määrätty maksimivoimassaoloaika. Käyttäjätiedot on keskitetty palvelinpuolelle ja palvelun jokaisen osan, joka vaatii jonkinlaista tietoa käyttäjästä, täytyy ottaa erikseen yhteyttä palvelimeen. Tämä tekee palvelusta tietoturvallisemman: Käyttäjätietoja ei voi väärentää ja yksilöllisestä, läpinäkymättömästä istuntotunnuksesta ei voi saada tietoja, toisin kuin esimerkiksi jatkuvasti toiminnassa olevasta salausavaimesta.
 
-- Model-Controller -malli
-- Repositoriot
-
-API
-
-
+Backendin rakenne
+Backend pohjautuu model-controller-repositorio -malliin, joka on yleinen Spring Boot -sovelluksissa. Ohjauskerros (controller) on yksin vastuussa toiminnallisuuksien ylläpidosta ja muut kerrokset käyttävät sitä toimiakseen yhdessä. Tietovarastokerros (repository) on vastuussa tietojen tallentamisesta ja hakemisesta. Tietotaso (model) pitää sisällään yksityiskohtaiset tiedot. Jos toimintalogiikka vaatii tietojen hakemista/tallentamista, se kytkeytyy tietovarastoon. 
+Näiden peruselementtien lisäksi backendissä on palvelun konfiguraatiolle sekä palvelussa käytössä olevalle APIlle omat osiot. 
 
 
 
