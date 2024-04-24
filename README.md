@@ -52,7 +52,7 @@ Näiden peruselementtien lisäksi backendissä on palvelun konfiguraatiolle sek�
 
 
 ### <a name ="frontend"></a> Frontend
-Sivuston frontend -- eli selainpuolen -- koodina käytetään [React JavaScript](https://react.dev/) -kirjastoa. Kirjasto on Metan (Facebook) alunperin julkaisema avoimen lähdekoodin kirjasto, joka on tarkoitettu verkkosivustojen käyttöliittymien kehittämiseen, mutta sitä voi käyttää nykyisin myös mobiili- sekä työpöytäsovellusten kehittämiseen.
+Sivuston frontend - eli selainpuolen - koodina käytetään [React JavaScript](https://react.dev/) -kirjastoa. Kirjasto on Metan (Facebook) alunperin julkaisema avoimen lähdekoodin kirjasto, joka on tarkoitettu verkkosivustojen käyttöliittymien kehittämiseen, mutta sitä voi käyttää nykyisin myös mobiili- sekä työpöytäsovellusten kehittämiseen.
 
 #### Tämän projektin frontend käyttämien riippuvuuksien versiot:
 - **React:** *18.2.0*
