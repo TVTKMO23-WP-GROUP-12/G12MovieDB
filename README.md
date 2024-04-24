@@ -80,16 +80,9 @@ TMDB:n rajapinnasta haetaan sivustolle muun muassa elokuvien ja tv-sarjojen tiet
 Sivusto koostuu kotisivusta sekä useista sen alasivuista. Sivuston eri osiot ovat näkyvissä riippuen siitä, että onko käyttäjä kirjautunut vai ei. Lisäksi sivusto on responsiivinen, eli skaalautuu tietokoneen näytöltä erikokoisille kädessä pidettäville laitteille.
 
 #### Julkiset sivut:
-Näytösajat
+Näytösajat (Showtimes)
 
 Näytösajat sivusto tarjoaa käyttäjille mahdollisuuden tutustua Finnkinon elokuvaohjelmistoon ja näytösaikoihin. Sivustolla voi selata elokuvia, näytösaikoja ja teattereita eri paikkakunnilla. Lisäksi käyttäjä voi halutessaan selailla elokuvia valitsemansa genren perusteella. Projektissamme olemme hyödyntäneet Finnkinon XML-pohjaista rajapintaa, joka mahdollistaa reaaliaikaisten tietojen hakemisen Finnkinon palvelusta. Käytämme tähän JavaScriptiä yhdessä React-kirjaston kanssa. XML-tietojen käsittelyyn ja parsimiseen käytämme selaimen `DOMParser`-objektia, joka mahdollistaa XML-dokumenttien tehokkaan käsittelyn ja datan uuttamisen tarpeidemme mukaisesti. Tämä toiminnallisuus tarjoaa käyttäjillemme pääsyn ajankohtaisiin tietoihin elokuvanäytöksistä, teatterien sijainneista ja elokuvien genreistä suoraan Finnkinon tietokannoista, mikä parantaa merkittävästi käyttäjäkokemusta sivustollamme.
-
-Kirjautuminen (Login)
-
-Kirjautumissivulla käyttäjät voivat kirjautua sisään antamalla käyttäjätunnuksensa ja salasanansa. Tämä sivu on tarkoitettu rekisteröityneille käyttäjille, joiden avulla he pääsevät käsiksi laajempiin palveluihin.
-Rekisteröityminen (Signup)
-
-Rekisteröitymissivulla uudet käyttäjät voivat luoda käyttäjätilin täyttämällä vaadittavat tiedot, kuten käyttäjänimi, sähköpostiosoite ja salasana. Rekisteröityminen mahdollistaa täyden pääsyn sivuston toiminnallisuuksiin.
 
 Haku (Search)
 
@@ -98,6 +91,13 @@ Hakusivulla käyttäjät voivat etsiä tietoa eri elokuvista ja TV-sarjoista. K�
 #### Tähän alle otsikot eri sivuista ja lyhyt selitys niiden sisällöstä sekä tarvittaessa ruutukaappaus
 
 #### Kirjautumisen takana olevat sivut:
+Kirjautuminen (Login)
+
+Kirjautumissivulla käyttäjät voivat kirjautua sisään antamalla käyttäjätunnuksensa ja salasanansa. Tämä sivu on tarkoitettu rekisteröityneille käyttäjille, joiden avulla he pääsevät käsiksi laajempiin palveluihin.
+
+Rekisteröityminen (Signup)
+
+Rekisteröitymissivulla uudet käyttäjät voivat luoda käyttäjätilin täyttämällä vaadittavat tiedot, kuten käyttäjänimi, sähköpostiosoite ja salasana. Rekisteröityminen mahdollistaa täyden pääsyn sivuston toiminnallisuuksiin.
 
 #### Ruutukaappaukset (jos tarvetta erilliselle osiolle) 
 
