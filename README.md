@@ -46,7 +46,7 @@ Käyttäjän autentikoinnissa käytetään Spring Bootin autentikointiin ja kulu
 
 Backendin rakenne
 
-Backend pohjautuu model-controller-repositorio -malliin, joka on yleinen Spring Boot -sovelluksissa. Ohjauskerros (controller) on yksin vastuussa toiminnallisuuksien ylläpidosta ja muut kerrokset käyttävät sitä toimiakseen yhdessä. Tietovarastokerros (repository) on vastuussa tietojen tallentamisesta ja hakemisesta. Tietotaso (model) pitää sisällään yksityiskohtaiset tiedot. Jos toimintalogiikka vaatii tietojen hakemista/tallentamista, se kytkeytyy tietovarastoon. 
+Backend pohjautuu model-controller-repositorio -malliin, joka on yleinen Spring Boot -sovelluksissa. Ohjauskerros (controller) on yksin vastuussa toiminnallisuuksien ylläpidosta ja muut kerrokset käyttävät sitä toimiakseen yhdessä. Tietovarastokerros (repository) on vastuussa tietojen tallentamisesta ja hakemisesta. Tietotaso (model) pitää sisällään yksityiskohtaiset tiedot. Jos toimintalogiikka vaatii tietojen hakemista tai tallentamista, se kytkeytyy tietovarastoon. 
 Näiden peruselementtien lisäksi backendissä on palvelun konfiguraatiolle sekä palvelussa käytössä olevalle APIlle omat osiot. 
 
 
