@@ -29,7 +29,7 @@ function SignUpPage () {
 
             //Handle successful signup
             console.log('Signup successful.');
-            history('/login');
+            history('/public/login');
         } catch (error) {
             // Handle signup error
             console.error('Signup failed:', error);
@@ -76,7 +76,7 @@ function SignUpPage () {
                 </form>
 
                 <div className="old-user">
-                    <h5 className="new">Already a member? <Link to="/login">Login</Link></h5>
+                    <h5 className="new">Already a member? <Link to="/public/login">Login</Link></h5>
                 </div>
             </div>
             </div>

@@ -6,11 +6,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor 
 @Table(name = "user_group")
 @JsonIgnoreProperties({"userId"})
 public class Group {

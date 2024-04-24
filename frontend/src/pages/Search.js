@@ -26,6 +26,10 @@ export default function Search() {
   };
 
   const formatRating = (rating) => {
+    if (rating === undefined) {
+      // Handle the case where rating is undefined, e.g. by returning a default value
+      return 'N/A';
+    }
     return rating.toFixed(2);
   };
 
