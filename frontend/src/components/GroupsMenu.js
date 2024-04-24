@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function GroupsMenu() {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('All');
-/*
+
     useEffect(() => {
         fetch('http://localhost:8080/group')    //get the groups from the backend
                                                 //need to change the url to match our final backend
@@ -32,5 +32,5 @@ export default function GroupsMenu() {
                 </div>
             </div>
         </div>
-    )*/
+    )
 }

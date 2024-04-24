@@ -2,6 +2,7 @@ package com.group12.moviedb.controller;
 
 import java.util.NoSuchElementException;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,21 +31,25 @@ public class FavoritesController {
         this.movieRepository = movieRepository;
         this.userRepository = userRepository;
     }
+    @CrossOrigin(origins = "*")
     @GetMapping("/favorites")
     public Iterable<Favorites> findAllFavorites() {
         return this.favoritesRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/favorites/{user_id}")
     public Favorites findOneFavoriteByUser(Integer userId) {
         return this.favoritesRepository.findByUser(null);
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping("/favorites")
     public Favorites addOneFavorite(@RequestBody Favorites favorite) {
         return this.favoritesRepository.save(favorite);
     }
 
+    @CrossOrigin(origins = "*")
     @PatchMapping("/favorites/{user_id}/{movie_id}")
     public Favorites updateOneFavorite(@PathVariable Integer userId, @PathVariable Integer movieId, @RequestBody Favorites favorite) {
         // Retrieve the User and Movie entities using their userId:s

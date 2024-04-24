@@ -116,6 +116,8 @@ public class GroupMembersController {
         // if group member is not found (throw an exception maybe...)
         return null;
     }
+
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/group/members/{group_id}")
     public void deleteOneGroupMembers(@PathVariable Integer groupId) {
         GroupMembers groupMembers = this.groupMembersRepository.findById(groupId)

@@ -3,9 +3,7 @@ import './NavBar.css';
 import { Link, useState } from 'react-router-dom';
 import auth from '../auth/auth.js';
 import ReactDOM from 'react-dom'
-import React, { useState } from 'react';
 import './NavBar.css';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -52,8 +50,8 @@ class NavBar extends React.Component {
 	};
 
 	handleClickOutside = (event) =>  {
-		//close the menu when clicking a link
-		if (event.target.tagName === {Link} && this.state.isMenuOpen) {
+		// close the menu when clicking a link
+		if (event.target.tagName === "A" && this.state.isMenuOpen) {
 			this.setState({ isMenuOpen: false });
 		}
 	};
@@ -77,36 +75,34 @@ class NavBar extends React.Component {
 			<li className="nav-item">
 			<Link to="/group" onClick={this.toggleMenu}>Ryhmät</Link>
 			</li>
-			<li className="nav-item">>
-			<Link to="/showtimes" onClick={this.toggleMenu}>Näytösajat</Link>
+			<li className="nav-item">
+			<Link to="/public/showtimes" onClick={this.toggleMenu}>Näytösajat</Link>
 			</li>
 			<li className="nav-item">
-			<Link to="/search" onClick={this.toggleMenu}>Hakuportaali</Link>
+			<Link to="/public/search" onClick={this.toggleMenu}>Hakuportaali</Link>
 			</li>
 			{isAuthenticated ? (
 			<li className="nav-item">
 				{username}</li>
 			) : (
+			<>
 			<li className="nav-item">
 				<Link to="/login" onClick={this.toggleMenu}>Kirjaudu sisään</Link>
-				</li>
-        <li className="nav-item" onClick={this.toggleMenu}>
-          <Link to="/public/signup" onClick={this.ToggleMenu}>Rekisteröidy</Link>
-        </li>
+			</li>
+			<li className="nav-item" onClick={this.toggleMenu}>
+				<Link to="/public/signup" onClick={this.ToggleMenu}>Rekisteröidy</Link>
+			</li>
+			</>
 			)}
 			{isAuthenticated && (
-				<li className="nav-item">
+			<li className="nav-item">
 				onClick={this.handleLogout}Kirjaudu ulos
-				</li>
-
-  return (
-    <nav className="navbar">
-      <div className="menu-icon" onClick={toggleMenu}>
-       
-
+			</li>		
 			)}
-		</ul>
-		</nav>
+			</ul>
+			</nav>
 		);
+	}
 }
+
 export default NavBar;

@@ -11,10 +11,5 @@ export default function Home() {
       <div style={{ float: 'right' }}>
         <ShowtimesMenu />
       </div>
-      <div style={{ float: 'right' }}>
-        <ShowtimesMenu />
-      </div>
-	  </>
-  );
-  
-}
+    </div>
+  )};

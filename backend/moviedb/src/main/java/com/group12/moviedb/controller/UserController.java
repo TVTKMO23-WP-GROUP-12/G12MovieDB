@@ -45,11 +45,13 @@ public class UserController {
         Optional<User> optionalUser = this.userRepository.findById(userId);
         return optionalUser.map(user -> ResponseEntity.ok(user))
                           .orElse(ResponseEntity.notFound().build());
-    } catch (Exception e) {
+        } catch (Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .body("An error occurred while fetching the user.");
+        }
     }
-}
+
+    @CrossOrigin(origins = "*") 
     @PostMapping("/users")
     public User addOneUser(@RequestBody User user) {
         user.setCreatedAt(LocalDateTime.now());
@@ -89,6 +91,7 @@ public class UserController {
         }
     }
     
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/users/{user_id}")
       public void deleteUser(@PathVariable Integer userId) {
       userService.deleteUser(userId);

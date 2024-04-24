@@ -42,6 +42,7 @@ public class GroupController {
         return this.groupRepository.findById(groupId).orElse(null);
     }
     
+    @CrossOrigin(origins = "*")
     @PostMapping("/group")
     public Group addOneGroup(@RequestBody Group group, @RequestParam("userId") Integer userId) {
         group.setCreatedAt(LocalDateTime.now());
@@ -54,7 +55,7 @@ public class GroupController {
         return groupRepository.save(group);
     }
     
-    
+    @CrossOrigin(origins = "*")
     @PatchMapping("/group/{group_id}")
     public Group updateOneGroup(@PathVariable Integer groupId, @RequestBody Map<String, Object> updates) {
         Group group = this.groupRepository.findById(groupId).orElse(null);
@@ -77,6 +78,7 @@ public class GroupController {
         return this.groupRepository.save(group);
     }
 
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/group/{group_id}")
     public void deleteOneGroup(@PathVariable Integer groupId) {
         Group group = this.groupRepository.findById(groupId).orElse(null);

@@ -1,6 +1,5 @@
 package com.group12.moviedb.dataSources;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import com.group12.moviedb.mappers.UserMapper;

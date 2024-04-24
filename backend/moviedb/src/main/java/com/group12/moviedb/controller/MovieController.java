@@ -41,12 +41,14 @@ public class MovieController {
     @GetMapping("/movie/{movie_id}")
     public Movie findOneMovie(@PathVariable Integer movieId) {
         return this.movieRepository.findById(movieId).orElse(null);
-
+    }
+    @CrossOrigin(origins = "*")
     @GetMapping("/public/movie/{movieId}")
     public String getMovieDetails(@PathVariable String movieId) {
         return movieDetailsService.getMovieDetails(movieId);
-    
 
+    }
+    
     @CrossOrigin(origins = "*")
     @GetMapping("/public/movie/{movieId}/credits")
     public String getMovieCredits(@PathVariable String movieId) {

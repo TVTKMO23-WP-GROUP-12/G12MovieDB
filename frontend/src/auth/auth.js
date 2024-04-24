@@ -20,7 +20,7 @@ const auth = {
     // Signup function
     signup: async (username, email, password) => {
         try {
-            const response = await axios.post(`${BASE_URL}/signup`, { 
+            const response = await axios.post(`${BASE_URL}/public/signup`, { 
                 username, 
                 email, 
                 password },
