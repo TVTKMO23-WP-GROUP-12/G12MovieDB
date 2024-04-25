@@ -36,6 +36,8 @@ public class Movie {
     @Column(name = "tmdb_id")
     private Integer tmdbId;
 
+    public Movie() {}
+
     public Movie(Integer movieId, String title, Integer tmdbId) {
         this.id = movieId;
         this.title = title;

@@ -27,6 +27,7 @@ public class MessageRecipient {
     @Column(name = "is_read")
     private boolean isRead;
 
+    public MessageRecipient() {}
 
     public MessageRecipient(Integer recipientId, User recipient, Message message, Boolean isRead) {
         this.id = recipientId;
