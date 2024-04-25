@@ -32,7 +32,9 @@ public class GroupMembers {
     @Column(name = "left_at")
     private LocalDateTime leftAt;
 
+  
     public GroupMembers() {}
+
 
     public GroupMembers(Integer memberId, Boolean isAdmin, LocalDateTime joinedAt, LocalDateTime leftAt) {
         this.id = memberId;

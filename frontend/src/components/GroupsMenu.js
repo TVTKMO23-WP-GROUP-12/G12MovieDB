@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom';
 export default function GroupsMenu() {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('All');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:8080/group')    //get the groups from the backend
-                                                //need to change the url to match our final backend
+        // Check if the user is logged in
+        // This is just a placeholder, replace it with the actual check
+        setIsLoggedIn(/* check if the user is logged in */);
+
+        fetch('http://localhost:8080/group')
             .then(response => response.json())
             .then(data => {
                 setGroups(data);
@@ -25,7 +29,7 @@ export default function GroupsMenu() {
                 <div className="groupsmenu-list">
                 {groups.map(group => (
                     <div key={group.id}>
-                        <h3><Link to={`/group/${group.id}`}>{group.groupName}</Link></h3>
+                        <h3><Link to={`group/${group.id}`}>{group.groupName}</Link></h3>
                         <p>{group.groupDescription}</p>
                     </div>
                 ))}

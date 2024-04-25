@@ -79,7 +79,7 @@ public class GroupController {
     }
 
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/group/{group_id}")
+    @DeleteMapping("group/{group_id}")
     public void deleteOneGroup(@PathVariable Integer groupId) {
         Group group = this.groupRepository.findById(groupId).orElse(null);
         this.groupRepository.delete(group);
