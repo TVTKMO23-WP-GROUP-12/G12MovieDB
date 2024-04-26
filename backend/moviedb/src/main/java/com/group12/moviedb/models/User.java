@@ -7,6 +7,8 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.group12.moviedb.dataSources.SignUpDto;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -41,15 +43,13 @@ public class User {
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Followers> followers;
     
-    @NotNull
     @Column(name="username", unique = true, updatable = false, length = 128)
     private String username;
 
-    @NotNull
     @Column(name="email", unique = true, length = 128)
     private String email;
 
-    @NotNull
+    
     @Column(name="password", length = 255)
     private String password;
     
@@ -171,6 +171,12 @@ public class User {
         
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+
+    public void addNewUser(String string, SignUpDto signUpDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addNewUser'");
     }
 
 

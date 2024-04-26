@@ -40,10 +40,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/group", "/login", "/login", "/login", "/public/**").permitAll()
+                    .requestMatchers("/group/**", "/signup/**",  "/login/**", "/public/**").permitAll()
                     .anyRequest().authenticated()) 
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(userAuthenticationEntryPoint))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authFilter, BasicAuthenticationFilter.class)
                 .addFilterBefore(new JwtAuthFilter(userAuthenticationProvider),BasicAuthenticationFilter.class)

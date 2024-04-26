@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import axios
-import auth from '../auth/auth.js';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import auth from '../auth/auth';
 import './NavBar.css';
+import Showtimes from '../pages/Showtimes.js';
+import Search from '../pages/Search.js';
+import Group from '../pages/Group.js';
+import User from '../pages/User.js';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(auth.isLoggedIn());
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated) {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       axios.get('/user')
         .then((response) => {
           setUsername(response.data.username);
@@ -24,24 +31,37 @@ const NavBar = () => {
           console.error('Error fetching user data:', error);
         })
         .finally(() => {
-          setIsLoading(false); // Stop loading
+          setIsLoading(false);
         });
     }
   }, [isAuthenticated]);
 
+ 
   const handleLogout = () => {
-    auth.logout();
-    setIsAuthenticated(false);
+    localStorage.removeItem('accessToken');
     setUsername('');
-    setProfilePicture('');
+    setProfilePicture('');  
+    // Redirect to login page
+    history('/login');
+    // Close the menu on logout
+    setIsMenuOpen(false);
+    // Make a request to backend to logout
+    axios.post('/logout')
+      .then(() => {
+        setIsAuthenticated(false);
+        console.log('User logged out successfully');
+      })
+      .catch((error) => {
+        console.error('Error logging out:', error);
+      });
   };
+  
 
   const toggleMenu = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
 
   const handleClickOutside = (event) => {
-    // Close the menu when clicking outside it
     if (!event.target.closest('.navbar')) {
       setIsMenuOpen(false);
     }
@@ -50,44 +70,63 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="menu-icon" onClick={toggleMenu}>
-        <FontAwesomeIcon icon="fa-solid fa-bars" />
+        <FontAwesomeIcon icon={faBars} />
       </div>
-      <ul className={isMenuOpen ? 'nav-menu-mobile-active' : 'nav-menu-mobile-closed'}>
+      <ul className={isMenuOpen ? 'nav-menu-mobile-active' : 'nav-menu-mobile-closed'} onClick={handleClickOutside}>
         <li className="nav-item">
           <Link to="/" onClick={toggleMenu}>
             Etusivu
           </Link>
         </li>
+        <li className="nav-item">
+          <Link to=<Showtimes/> onClick={toggleMenu}>
+            Näytösajat
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to=<Search/>  onClick={toggleMenu}>
+            Hakuportaali
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to= <Group/> onClick={toggleMenu}>
+            Ryhmät
+          </Link>
+        </li>
         {isAuthenticated ? (
-          // Render username and profile picture if authenticated
-          <li className="nav-item user-info">
-            <div className="profile-picture">
-              {isLoading ? (
-                <span>Loading...</span>
-              ) : (
-                profilePicture && <img src={profilePicture} alt="Profile" />
-              )}
-            </div>
-            <span>{username}</span>
+          <>
+            <li className="nav-item user-info">
+              <div className="profile-picture">
+                {isLoading ? (
+                  <span>Loading...</span>
+                ) : (
+                  profilePicture && <img src={profilePicture} alt="Profile" />
+                )}
+              </div>
+              <span>{username}</span>
+            </li>
+            <li className="nav-item">
+            <Link to={'user/userId'} onClick={toggleMenu}>
+              Oma sivu
+            </Link>
           </li>
+            <li className="nav-item">
+              <button onClick={handleLogout}>Kirjaudu ulos</button>
+            </li>
+          </>
         ) : (
-          // Render login and signup links if not authenticated
           <>
             <li className="nav-item">
               <Link to="/login" onClick={toggleMenu}>
                 Kirjaudu sisään
               </Link>
             </li>
-            <li className="nav-item" onClick={toggleMenu}>
-              <Link to="/public/signup">Rekisteröidy</Link>
+            <li className="nav-item">
+              <Link to="/signup" onClick={toggleMenu}>
+                Rekisteröidy
+              </Link>
             </li>
           </>
-        )}
-        {/* Render logout link if authenticated */}
-        {isAuthenticated && (
-          <li className="nav-item">
-            <button onClick={handleLogout}>Kirjaudu ulos</button>
-          </li>
         )}
       </ul>
     </nav>
