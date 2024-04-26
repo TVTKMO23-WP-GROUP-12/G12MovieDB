@@ -12,7 +12,7 @@ export default function GroupsMenu() {
         // This is just a placeholder, replace it with the actual check
         setIsLoggedIn(/* check if the user is logged in */);
 
-        fetch('http://localhost:8080/group')
+        fetch('http://localhost:8080/group/')
             .then(response => response.json())
             .then(data => {
                 setGroups(data);
@@ -28,8 +28,8 @@ export default function GroupsMenu() {
                 <h2>Groups</h2>
                 <div className="groupsmenu-list">
                 {groups.map(group => (
-                    <div key={group.id}>
-                        <h3><Link to={`group/${group.id}`}>{group.groupName}</Link></h3>
+                    <div key={group.groupId}>
+                        <h3><Link to={`group/${group.groupId}`}>{group.groupName}</Link></h3>
                         <p>{group.groupDescription}</p>
                     </div>
                 ))}

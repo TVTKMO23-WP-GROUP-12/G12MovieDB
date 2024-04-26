@@ -4,15 +4,15 @@ import useFetchFavorites from '../hooks/useFetchFavorites';
 // On: 
 // - users own page (User)
 
-const Favorites = ({ id }) => {
-  const favorites = useFetchFavorites(id);
+const Favorites = ({ favoriteId }) => {
+  const favorites = useFetchFavorites(favoriteId);
 
   return (
     <div className="user-tabs-content">
       <h2>Suosikit</h2>
       <ul>
         {favorites.map(favorite => (
-          <div key={favorite.id}>
+          <div key={favorite.favoriteId}>
             <p>
               <Link to={`/movie/${favorite.movieId}`}>{favorite.title}</Link>
             </p>

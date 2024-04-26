@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
-function useFetchMovieReviews(id) {
+function useFetchMovieReviews(reviewId) {
   const [reviews, setReviews] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/public/review/movie=${id}`)
+    fetch(`http://localhost:8080/public/review/movie=${reviewId}`)
       .then(response => response.json())
       .then(data => setReviews(data))
       .catch(error => console.error('Error:', error));
-  }, [id]);
+  }, [reviewId]);
   
   return reviews;
 }

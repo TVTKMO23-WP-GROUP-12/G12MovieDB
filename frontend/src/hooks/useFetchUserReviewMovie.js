@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-function UserReview({ id, token }) {
+function UserReview({ userId, token }) {
   const [review, setReview] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/review/user=${id}`, {
+    fetch(`http://localhost:8080/review/user=${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -15,14 +15,14 @@ function UserReview({ id, token }) {
         setReview(data);
       })
       .catch(error => console.error('Error:', error));
-  }, [id, token]);
+  }, [userId, token]);
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    fetch(`http://localhost:8080/review/user=${id}`, {
+    fetch(`http://localhost:8080/review/user=${userId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

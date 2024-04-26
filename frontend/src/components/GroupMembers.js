@@ -6,9 +6,9 @@ const GroupMembers = ({ group }) => {
     <div className="groupdetail-tabs-content">
       <h2>Jäsenet</h2>
       {group.members.map(member => (
-        <div key={member.groupMembersId}>
+        <div key={member.memberId}>
           <p>
-            <Link to={`/users/${member.userId.id}`}>
+            <Link to={`/users/${member.userId.userId}`}>
               {member.userId.username}
               {member.isAdmin && <span> [ADMIN]</span>}
             </Link>

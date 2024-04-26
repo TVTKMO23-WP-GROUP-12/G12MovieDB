@@ -7,7 +7,7 @@ const GroupDetailTop = ({ group }) => {
 
   // Function to update the group description
   const submitDescription = () => {
-    fetch(`http://localhost:8080/group/${group.id}`, {
+    fetch(`http://localhost:8080/group/${group.groupId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const GroupDetailTop = ({ group }) => {
       </div>
       <div></div>
       <div className="groupdetail-bio">
-        <h2><Link to={`/group/${group.id}`}>{group.groupName}</Link></h2>
+        <h2><Link to={`/group/${group.groupId}`}>{group.groupName}</Link></h2>
         {
         // Get the admin of the group and add a [ADMIN] tag after their name
         }
@@ -41,9 +41,9 @@ const GroupDetailTop = ({ group }) => {
           {group.members.map(member => { 
             if (member.isAdmin) {
               return (
-                <React.Fragment key={member.userId.id}>
+                <React.Fragment key={member.userId.userId}>
                   <p>
-                    Admin: <Link to={`/users/${member.userId.id}`}>{member.userId.username}</Link>
+                    Admin: <Link to={`/users/${member.userId.userId}`}>{member.userId.username}</Link>
                   </p>
                   {/* Below finished link when useAuth is implemented. Remove comment and curly brackets to use
                   <Link to="#" onClick={handleJoinLeaveGroup}>{isMember ? 'Poistu ryhmästä' : 'Liity ryhmään'}</Link>
