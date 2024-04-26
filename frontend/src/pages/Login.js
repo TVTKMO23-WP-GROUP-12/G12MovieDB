@@ -28,7 +28,7 @@ function LoginPage() {
     return (
         <section className="main-content">
             <div className="content">
-                <h2 className="title">Login</h2>
+                <h2 className="title">Kirjaudu sisään</h2>
                 <form onSubmit={handleSubmit}>
                 <div className='form-group'>    
                 <div className="field">
@@ -39,7 +39,7 @@ function LoginPage() {
                             onChange={(e) => setUsername(e.target.value)}
                             name="username"
                             id="username"
-                            placeholder="Username"
+                            placeholder="Käyttäjätunnus"
                         />
                     </div>
                     <div className="field">
@@ -50,21 +50,21 @@ function LoginPage() {
                             onChange={(e) => setPassword(e.target.value)}
                             name="password"
                             id="password"
-                            placeholder="Password"
+                            placeholder="Salasana"
                         />
                     </div>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     <button type="submit" className="btn-login">
-                        Login
+                        Kirjaudu
                     </button>
                     </div>
                 </form>
                 <div className="forgot-pass">
-                    <Link to="#">Forgot password?</Link>
+                    <Link to="#">Unohtuiko salasana?</Link>
                 </div>
                 <div className="new-user">
                     <h5 className="new">
-                        Not a member yet? <Link to="/public/signup">SignUp</Link>
+                       Eikö sinulla ole tiliä? <Link to="/signup">Rekisteröidy</Link>
                     </h5>
                 </div>
             </div>

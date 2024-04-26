@@ -27,8 +27,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path='/' element={<Home />} /> {/*or Index?*/}
-        <Route path='/public/signup' element={<SignUp />} />
-        <Route path='/public/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/public/search' element={<Search />} />
         <Route path='/user' element={<User />} />
         <Route path='/public/group' element={<Group />} />

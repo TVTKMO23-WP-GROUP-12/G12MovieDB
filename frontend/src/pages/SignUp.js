@@ -17,12 +17,12 @@ function SignUpPage () {
         try {
             //check for empty fields
             if (!username || !email || !password) {
-                setError('Please fill in all fields.');
+                setError('Täytä kaikki kentät.');
                 return;
             }
             
             if (password !== confirmPassword) {
-                throw new Error("Passwords do not match.");
+                throw new Error('Salasanat eivät täsmää. ');
             }
 
 		await auth.signup(username, email, password);
@@ -33,14 +33,14 @@ function SignUpPage () {
         } catch (error) {
             // Handle signup error
             console.error('Signup failed:', error);
-            setError(error.message || 'Register failed'); 
+            setError(error.message || 'Rekisteröitymisessä tapahtui virhe. '); 
         }
     }
 
     return (
         <section className="main-content">
             <div className="content">
-                <h2 className="title">SignUp</h2>
+                <h2 className="title">Rekisteröidy</h2>
                 <div>
                 <form onSubmit={handleSubmit}>
                 <div className='form-group'>
@@ -48,35 +48,35 @@ function SignUpPage () {
                         <input type='text' autoComplete="off"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)} 
-                            name="username" id="username" placeholder="Username" />
+                            name="username" id="username" placeholder="Käyttäjätunnus" />
                     </div>
                     <div className="field">
                         <input type='email' autoComplete="off"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            name="email" id="email" placeholder="Email" />
+                            name="email" id="email" placeholder="Sähköposti" />
                     </div>
 
                     <div className="field">
                         <input type='password' autoComplete="off"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            name="password" id="password" placeholder="Password" />
+                            name="password" id="password" placeholder="Salasana" />
                     </div>
                     <div className="field">
                         <input type='password' autoComplete="off"
-                            id='confirmPassword' placeholder={"Confirm Password"} value={confirmPassword}
+                            id='confirmPassword' placeholder="Salasana uudelleen" value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                     <button type="submit" className="btn-signup" onClick={handleSubmit}>
-                        Sign Up
+                        Rekisteröidy
                     </button>
                     </div>
                 </form>
 
                 <div className="old-user">
-                    <h5 className="new">Already a member? <Link to="/public/login">Login</Link></h5>
+                    <h5 className="new">Onko sinulla jo tili? <Link to="/public/login">Kirjaudu sisään</Link></h5>
                 </div>
             </div>
             </div>
