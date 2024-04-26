@@ -3,6 +3,9 @@ package com.group12.moviedb.models;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -17,6 +20,7 @@ public class MovieScore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_score_id")
     private Integer id;
+
     @OneToMany(mappedBy = "movieScoreId", cascade = CascadeType.ALL)
     private List<Review> review;
 
@@ -28,9 +32,11 @@ public class MovieScore {
     @Column(name = "score")
     private int score;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

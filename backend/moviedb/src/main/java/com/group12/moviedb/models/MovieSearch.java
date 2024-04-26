@@ -20,7 +20,7 @@ public class MovieSearch {
     public Integer getMovieId() {
         return this.movieId;
     }
-
+    
     public void setMovieId(Integer movieId) {
         this.movieId = movieId;
     }

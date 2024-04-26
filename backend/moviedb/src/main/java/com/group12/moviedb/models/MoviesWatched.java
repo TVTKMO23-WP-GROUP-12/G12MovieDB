@@ -3,6 +3,9 @@ package com.group12.moviedb.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,12 +22,14 @@ public class MoviesWatched implements Serializable {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @Column(name = "note")
+    @Column(name = "note", nullable = false)
     private String note;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

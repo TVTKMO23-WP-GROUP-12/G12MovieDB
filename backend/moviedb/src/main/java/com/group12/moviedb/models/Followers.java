@@ -2,6 +2,8 @@ package com.group12.moviedb.models;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Data;
 import jakarta.persistence.*;
 
@@ -14,9 +16,11 @@ public class Followers {
     @Column(name="follower_id") //@Column let's us customize the database column name
     private Integer id;
 
+    @CreationTimestamp
     @Column(name = "joined_at")
     private LocalDateTime joinedAt;
     
+    @CreationTimestamp
     @Column(name = "left_at")
     private LocalDateTime leftAt;
     
