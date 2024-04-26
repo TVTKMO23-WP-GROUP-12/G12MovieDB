@@ -64,7 +64,7 @@ function LoginPage() {
                 </div>
                 <div className="new-user">
                     <h5 className="new">
-                        Not a member yet? <Link to="/signup">SignUp</Link>
+                        Not a member yet? <Link to="/public/signup">SignUp</Link>
                     </h5>
                 </div>
             </div>

@@ -5,8 +5,15 @@ function useFetchMovie(id) {
 
   useEffect(() => {
     fetch(`http://localhost:8080/public/movie/${id}`)
-      .then(response => response.json())
-      .then(data => setMovie(data))
+      .then(response => response.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const movieData = JSON.parse(reader.result);
+          setMovie(movieData);
+        };
+        reader.readAsText(blob, 'ISO-8859-1');
+      })
       .catch(error => console.error('Error:', error));
   }, [id]);
   

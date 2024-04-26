@@ -38,8 +38,9 @@ public class ReviewController {
     public Iterable<Review> findAllreview() {
         return this.reviewRepository.findAll();
     }
-
-    @GetMapping("/review/movie={movie_id}")
+    
+    @CrossOrigin(origins = "*")
+    @GetMapping("/public/review/movie={movie_id}")
     public List<Review> findReviewsByMovieId(@PathVariable("movie_id") Integer movieId) {
         Movie movie = movieRepository.findById(movieId).orElse(null);
         if (movie != null) {

@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Search from './pages/Search';
 import User from './pages/User';
 import UserDetail from './pages/UserDetail';
-import Group from './pages/Group';
+import Group from './components/GroupsMenu';
 import GroupDetail from './pages/GroupDetail';
 import Movie from './pages/Movie';
 import MovieDetail from './pages/MovieDetail';
@@ -31,7 +31,7 @@ function App() {
         <Route path='/public/login' element={<Login />} />
         <Route path='/public/search' element={<Search />} />
         <Route path='/user' element={<User />} />
-        <Route path='/group' element={<Group />} />
+        <Route path='/public/group' element={<Group />} />
         <Route path='/group/:id' element={<GroupDetail />} />
         <Route path='/users/:id' element={<UserDetail />} />
         <Route path='/public/movie/:id' element={<MovieDetail />} />

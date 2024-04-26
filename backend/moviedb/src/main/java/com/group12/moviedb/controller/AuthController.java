@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/public/signup")
+    @PostMapping("/signup")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto user) {
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));

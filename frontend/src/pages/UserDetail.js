@@ -35,8 +35,8 @@ function UserDetail() {
           <Link className={isMobile ? (selectedTab === 'News' ? 'active' : '') : (selectedTabLeft === 'News' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('News') : setSelectedTabLeft('News')}><p>Uutiset</p></Link>
           <Link className={isMobile ? (selectedTab === 'Groups' ? 'active' : '') : (selectedTabLeft === 'Groups' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('Groups') : setSelectedTabLeft('Groups')}><p>Ryhmät</p></Link>
           <Link className={isMobile ? (selectedTab === 'Favorites' ? 'active' : '') : (selectedTabLeft === 'Favorites' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('Favorites') : setSelectedTabLeft('Favorites')}><p>Suosikit</p></Link>
-        </div>
-        <div className="user-tabs-right">
+    </div>
+    <div className="user-tabs-right">
           <Link className={isMobile ? (selectedTab === 'Reviews' ? 'active' : '') : (selectedTabRight === 'Reviews' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('Reviews') : setSelectedTabRight('Reviews')}><p>Arvostelut</p></Link>
           <Link className={isMobile ? (selectedTab === 'Watched' ? 'active' : '') : (selectedTabRight === 'Watched' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('Watched') : setSelectedTabRight('Watched')}><p>On katsonut</p></Link>
           <Link className={isMobile ? (selectedTab === 'ToWatch' ? 'active' : '') : (selectedTabRight === 'ToWatch' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('ToWatch') : setSelectedTabRight('ToWatch')}><p>Haluaa katsoa</p></Link>

@@ -17,7 +17,7 @@ const Groups = ({ user }) => {
         {groups.map(group => (  
         <div key={group.id}>
           <p>
-            <Link to={`/group/${group.id}`}>{group.groupName}</Link>
+            <Link to={`/public/group/${group.id}`}>{group.groupName}</Link>
           </p>
           <p>{group.groupDescription}</p>
           <hr></hr>

@@ -9,7 +9,7 @@ function MovieInfo({ movie }) {
     return (
         <><div className="movie-container">
             <div className="movie-container-image">
-                {movie && movie.poster_path ? ( // Check if movie and movie.poster_path are defined
+                {movie && movie.poster_path ? (
                     <img className="image" src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
                 ) : (
                     <img src={noImageAvailable} alt="Kuvaa ei saatavilla" />

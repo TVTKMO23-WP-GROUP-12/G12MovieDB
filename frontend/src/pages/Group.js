@@ -7,7 +7,7 @@ export default function Group() {
     const [selectedGroup, setSelectedGroup] = useState('All');
 
     useEffect(() => {
-        fetch('http://localhost:8080/group')    //get the groups from the backend
+        fetch('http://localhost:8080/public/group')    //get the groups from the backend
                                                 //need to change the url to match our final backend
             .then(response => response.json())
             .then(data => {
@@ -25,7 +25,7 @@ export default function Group() {
                 <div className="group-list">
                 {groups.map(group => (
                     <div key={group.id}>
-                        <h3><Link to={`/group/${group.id}`}>{group.groupName}</Link></h3>
+                        <h3><Link to={`/public/group/${group.id}`}>{group.groupName}</Link></h3>
                         <p>{group.groupDescription}</p>
                     </div>
                 ))}
