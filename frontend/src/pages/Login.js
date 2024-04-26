@@ -1,75 +1,98 @@
 import React, { useState } from 'react';
-import auth from '../auth/auth.js';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
 
 function LoginPage() {
+    const [error, setError] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [login, setLogin] = useState('');
     const history = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
+    let isLoggedIn = false;
+
+    const onChangeHandler = (event) => {
+            const { name, value } = event.target;
+            switch (name) {
+                case 'login':
+                    setLogin(value);
+                    break;
+                case 'password':
+                    setPassword(value);
+                    break;
+                default:
+                    break;
+            }
+        };
+            
+
+
+    const onSubmitLogin = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
         try {
-            if (!username || !password) {
+            if (!login || !password) {
                 setError('Please enter both username and password.');
                 return;
             }
-            await auth.login(username, password);
-            console.log('Login successful');
-            history('/'); // Redirect to home page after successful login
         } catch (error) {
             setError('Invalid username or password');
         }
+            // Perform login operation here
+            console.log('Login successful');
+
+            isLoggedIn = true;
+            history("/user/{userId}"); // Redirect to user page after successful login  
+
+       
     };
 
     return (
         <section className="main-content">
             <div className="content">
-                <h2 className="title">Login</h2>
-                <form onSubmit={handleSubmit}>
-                <div className='form-group'>    
-                <div className="field">
-                        <input
-                            type="text"
-                            autoComplete="off"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            name="username"
-                            id="username"
-                            placeholder="Username"
-                        />
-                    </div>
-                    <div className="field">
-                        <input
-                            type="password"
-                            autoComplete="off"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            name="password"
-                            id="password"
-                            placeholder="Password"
-                        />
-                    </div>
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
-                    <button type="submit" className="btn-login">
-                        Login
-                    </button>
+                <h2 className="title">Kirjaudu sisään</h2>
+                <form onSubmit={onSubmitLogin}>
+                    <div className='form-group'>    
+                        <div className="field">
+                            <input
+                                type="login"
+                                autoComplete="off"
+                                name="login"
+                                value={login}
+                                onChange={onChangeHandler}
+                                id="username"
+                                placeholder="Käyttäjätunnus"
+                            />
+                        </div>
+                        <div className="field">
+                            <input
+                                type="password"
+                                autoComplete="off"
+                                name="password"
+                                id="password"
+                                value={password}
+                                onChange={onChangeHandler}
+                                placeholder="Salasana"
+                            />
+                        </div>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}
+                        <button type="submit" className="btn-login" onClick={onSubmitLogin}>
+                            Kirjaudu
+                        </button>
                     </div>
                 </form>
                 <div className="forgot-pass">
-                    <Link to="#">Forgot password?</Link>
+                    <Link to="#">Unohtuiko salasana?</Link>
                 </div>
                 <div className="new-user">
                     <h5 className="new">
-                        Not a member yet? <Link to="/public/signup">SignUp</Link>
+                        Eikö sinulla ole tiliä? <Link to="/signup">Rekisteröidy</Link>
                     </h5>
                 </div>
             </div>
         </section>
     );
+
 };
 
 export default LoginPage;

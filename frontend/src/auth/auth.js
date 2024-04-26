@@ -1,65 +1,52 @@
-import axios from 'axios';
+import * as React from 'react';
+import { request, setAuthHeader } from './auth-headers.js';
 
-const BASE_URL = 'http://localhost:8080'; // FIXME
 
-const auth = {
-    // Login function
-    login: async (username, password) => {
-        try {
-        	 const response = await axios.post(`${BASE_URL}/public/login`,{ username, password },
-            );
-            const { token } = response.data;
-            localStorage.setItem('token', token); // Store token in local storage
-            return token;
-        } catch (error) {
-            console.error('Login failed:', error.message);
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.error('Response data:', error.response.data);
-                console.error('Response status:', error.response.status);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error('No response received:', error.request);
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.error('Error', error.message);
-            }
-            throw error; 
+export default class AuthContent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
         }
-    },
+    };
 
-    // Signup function
-    signup: async (username, email, password) => {
-        try {
-            const response = await axios.post(`${BASE_URL}/public/signup`, { 
-                username, 
-                email, 
-                password },
+    componentDidMount() {
+        request(
+            "GET",
+            "/user",
+            (response) => {
+                this.setState({data: response.data})
+            }).catch(
+                (error) => {
+                    if (error.response.status === 401) {
+                        setAuthHeader(null);
+                    }else {
+                        this.setState({data: error.response.code})
+                    }
+                }
             );
-            const { token } = response.data;
-            localStorage.setItem('token',token); // Store token in local storage
-            return token;
-        } catch (error) {
-            console.error('SignUp failed:', error);
-            throw error; // Error handling
+        };
+          
+        render() {
+            return (
+                <div className="row justify-content-center">
+                    <div className="container">
+                        <div className="card" style={{width: "18rem"}}>
+                            <div className="card-body">
+                                <h5 className="card-title">Backend response</h5>
+                                <p className="card-text">Content:</p>
+                                <ul>
+                                    {this.state.data && this.state.data
+                                        .map((line) =>
+                                            <li key={line}>{line}</li>
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+          };
         }
-    },
-
-    // Function to logout
-    logout: () => {
-        localStorage.removeItem('token'); // Remove token from storage
-    },
-
-    // Check if the user is logged in
-    isLoggedIn: () => {
-        return localStorage.getItem('token') !== null;
-    },
-
-    // Get JWT token
-    getToken: () => {
-        return localStorage.getItem('token');
-    }
-};
-
-export default auth;

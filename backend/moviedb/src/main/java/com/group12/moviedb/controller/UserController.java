@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.group12.moviedb.models.User;
 import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.services.UserService;
@@ -93,6 +94,7 @@ public class UserController {
         }
     }
     
+
     @CrossOrigin(origins = "*")
     @DeleteMapping("/users/{user_id}")
       public void deleteUser(@PathVariable Integer userId) {
