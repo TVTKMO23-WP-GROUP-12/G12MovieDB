@@ -3,7 +3,7 @@ import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
 
 function User({ userId }) {
-  const { user, profilePicture } = useFetchUser(userId);
+  const { user, setUser, profilePicture } = useFetchUser(userId);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
 

@@ -179,8 +179,8 @@ public class UserDto {
 
 
     public UserDto findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        return userMapper.toUserDto(user);
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        return userMapper.toUserDto(userOptional);
     }
 
 

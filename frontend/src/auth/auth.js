@@ -6,7 +6,7 @@ const auth = {
     // Login function
     login: async (username, password) => {
         try {
-        	 const response = await axios.post(`${BASE_URL}/public/login`,{ username, password },
+        	 const response = await axios.post(`${BASE_URL}/login`,{ username, password },
             );
             const { token } = response.data;
             localStorage.setItem('token', token); // Store token in local storage

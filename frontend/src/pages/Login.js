@@ -19,6 +19,7 @@ function LoginPage() {
             }
             await auth.login(username, password);
             console.log('Login successful');
+            localStorage.setItem('username');
             history('/'); // Redirect to home page after successful login
         } catch (error) {
             setError('Invalid username or password');

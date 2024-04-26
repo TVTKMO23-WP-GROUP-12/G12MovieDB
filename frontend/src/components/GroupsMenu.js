@@ -8,9 +8,6 @@ export default function GroupsMenu() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        // Check if the user is logged in
-        // This is just a placeholder, replace it with the actual check
-        setIsLoggedIn(/* check if the user is logged in */);
 
         fetch('http://localhost:8080/group')
             .then(response => response.json())

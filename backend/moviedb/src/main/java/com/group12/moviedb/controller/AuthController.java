@@ -25,7 +25,7 @@ public class AuthController {
     private final UserAuthenticationProvider userAuthenticationProvider;
     
     @CrossOrigin(origins = "*")
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userService.login(credentialsDto);
         userDto.setToken(userAuthenticationProvider.createToken(userDto.getLogin()));
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto user) {
         UserDto createdUser = userService.register(user);
         createdUser.setToken(userAuthenticationProvider.createToken(user.getLogin()));

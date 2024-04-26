@@ -24,7 +24,6 @@ class NavBar extends React.Component {
 		}
 	}
 
-
 	fetchUsername() { //TODO
 	/* axios.get('/user')
 	 * .then((response) => {
@@ -94,9 +93,8 @@ class NavBar extends React.Component {
 			</li>
 			</>
 			)}
-			{isAuthenticated && (
-			<li className="nav-item">
-				onClick={this.handleLogout}Kirjaudu ulos
+			{(
+			<li className="nav-item" onClick={this.handleLogout}>Kirjaudu ulos
 			</li>		
 			)}
 			</ul>

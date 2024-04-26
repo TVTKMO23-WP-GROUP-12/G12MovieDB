@@ -3,13 +3,15 @@ package com.group12.moviedb.response;
 public class AuthResponse {
     private String token;
     private String message;
+    private String userId;
 
 
 
-    public AuthResponse (String token, String message) {
+    public AuthResponse (String token, String message, String userId) {
         super();
         this.token = token;
         this.message = message;
+        this.userId = userId;
     }
 
         protected String getToken()  {
@@ -26,5 +28,13 @@ public class AuthResponse {
 
         protected void setMessage(String message) {
             this.message = message;
+        }
+
+        protected String getUserId() {
+            return this.userId;
+        }
+
+        protected void setUserId(String userId) {
+            this.userId = userId;
         }
 }

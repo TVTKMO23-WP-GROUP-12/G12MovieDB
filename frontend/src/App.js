@@ -1,6 +1,5 @@
 import React from 'react';
 import {Routes, Route } from 'react-router-dom';
-
 import './App.css';
 import Layout from './layouts/Layout';
 import Home from './pages/Home';
@@ -15,12 +14,14 @@ import Movie from './pages/Movie';
 import MovieDetail from './pages/MovieDetail';
 import Showtimes from './pages/Showtimes';
 import NotFound from './pages/NotFound';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import useFetchUserId from './hooks/useFetchUserId';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fas)
-
+console.log(localStorage.getItem("token"));
+console.log(localStorage.getItem("username"));
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} /> {/*or Index?*/}
         <Route path='/public/signup' element={<SignUp />} />
-        <Route path='/public/login' element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/public/search' element={<Search />} />
         <Route path='/user' element={<User />} />
         <Route path='/public/group' element={<Group />} />
