@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-function useFetchMovie(id) {
+function useFetchMovie(movieId) {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/public/movie/${id}`)
+    fetch(`http://localhost:8080/public/movie/${movieId}`)
       .then(response => response.blob())
       .then(blob => {
         const reader = new FileReader();
@@ -15,7 +15,7 @@ function useFetchMovie(id) {
         reader.readAsText(blob, 'ISO-8859-1');
       })
       .catch(error => console.error('Error:', error));
-  }, [id]);
+  }, [movieId]);
   
   return movie;
 }

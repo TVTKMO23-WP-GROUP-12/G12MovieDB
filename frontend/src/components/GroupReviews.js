@@ -12,10 +12,10 @@ const GroupReviews = ({ reviews, users }) => {
             return (
                 <div key={review.reviewId}>
                 <p>
-                    {user && <span> Arvostelu käyttäjältä <Link to={`/users/${user.userId.id}`}> {user.userId.username} </Link></span>}
+                    {user && <span> Arvostelu käyttäjältä <Link to={`/users/${user.userId.userId}`}> {user.userId.username} </Link></span>}
                 </p>
                 <p>
-                    <Link to={`/movie/${review.movie.id}`}>{review.movie.title}</Link>
+                    <Link to={`/movie/${review.movie.movieId}`}>{review.movie.title}</Link>
                 </p>
                 <p>
                     {review.content} | Pisteet: {review.movieScore.score}/5

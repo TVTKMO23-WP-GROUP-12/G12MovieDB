@@ -2,17 +2,17 @@ import { useState, useEffect } from 'react';
 
 //Fetches watched movies from the database.
 
-const useFetchWatched = (id) => {
+const useFetchWatched = (userId) => {
     const [watched, setWatchedMovies] = useState([]);
 
     useEffect(() => {
-      fetch(`http://localhost:8080/movies_watched/user/${id}`)
+      fetch(`http://localhost:8080/movies_watched/user/${userId}`)
         .then(response => response.json())
         .then(data => {
           setWatchedMovies(data);
         })
         .catch(error => console.error('Error:', error));
-    }, [id]);
+    }, [userId]);
     
 return watched;
 };

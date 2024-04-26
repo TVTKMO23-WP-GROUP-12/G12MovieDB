@@ -6,6 +6,7 @@ function User({ userId }) {
   const { user, profilePicture } = useFetchUser(userId);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
+  const [userData, setUserData] = useState ('');
 
   const joinedAt = user ? new Date(user.createdAt) : null;
   const formattedDate = joinedAt ? `${("0" + joinedAt.getDate()).slice(-2)}.${("0" + (joinedAt.getMonth() + 1)).slice(-2)}.${joinedAt.getFullYear()}` : '';
@@ -24,7 +25,7 @@ function User({ userId }) {
       .then(response => response.json())
       .then(data => {
         // Update user state
-        setUser(prevUser => ({ ...prevUser, userDescription: data.userDescription }));
+        setUserData(prevUser => ({ ...prevUser, userDescription: data.userDescription }));
         setEditedDescription("");
       })
       .catch(error => console.error('Error:', error));

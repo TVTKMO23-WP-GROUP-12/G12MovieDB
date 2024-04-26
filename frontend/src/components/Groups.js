@@ -15,9 +15,9 @@ const Groups = ({ user }) => {
       <h2>Ryhmät</h2>
       <ul>
         {groups.map(group => (  
-        <div key={group.id}>
+        <div key={group.groupId}>
           <p>
-            <Link to={`/public/group/${group.id}`}>{group.groupName}</Link>
+            <Link to={`/public/group/${group.groupId}`}>{group.groupName}</Link>
           </p>
           <p>{group.groupDescription}</p>
           <hr></hr>
