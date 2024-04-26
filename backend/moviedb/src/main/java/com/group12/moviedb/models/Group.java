@@ -9,14 +9,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Data
-@NoArgsConstructor 
 @Table(name = "user_group")
 @JsonIgnoreProperties({"userId"})
 public class Group {
