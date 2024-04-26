@@ -3,7 +3,12 @@ package com.group12.moviedb.models;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
@@ -36,30 +41,41 @@ public class User {
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Followers> followers;
     
-    @Column(name="username", unique = true)
+    @NotNull
+    @Column(name="username", unique = true, updatable = false, length = 128)
     private String username;
 
-    @Column(name="email", unique = true)
+    @NotNull
+    @Column(name="email", unique = true, length = 128)
     private String email;
 
-    @Column(name="password")
+    @NotNull
+    @Column(name="password", length = 255)
     private String password;
     
     @Column(unique = true)
     private String login;
 
-    @Column(name = "created_at")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @UpdateTimestamp
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
-    @Column(name = "user_description")
+
+    @Column(name = "user_description", nullable = true, length = 255)
     private String userDescription;
 
+    @Column(name = "profilePicture", nullable = true, length = 100)
+    private String profilePicture;
+
+    
     public User() {}
 
     public User(Integer userId, String username, String email, String password, String userDescription) {
@@ -110,6 +126,10 @@ public class User {
         return userDescription;
     }
 
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
     public void setId(Integer userId) {
     this.id = userId;
     }
@@ -149,7 +169,10 @@ public class User {
     public void setUserDescription(String userDescription) {
         this.userDescription = userDescription;
     }
-
+        
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
 
 }

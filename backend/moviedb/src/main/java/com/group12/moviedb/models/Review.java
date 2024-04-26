@@ -24,7 +24,7 @@ public class Review {
     @JoinColumn(name="movie_score_id")
     private MovieScore movieScoreId;
 
-    @Column(name="content")
+    @Column(name="content", nullable = false)
     private String content;
 
     public Review() {

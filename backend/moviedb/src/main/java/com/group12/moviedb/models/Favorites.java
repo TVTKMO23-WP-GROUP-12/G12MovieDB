@@ -3,6 +3,9 @@ package com.group12.moviedb.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -21,9 +24,11 @@ public class Favorites implements Serializable {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

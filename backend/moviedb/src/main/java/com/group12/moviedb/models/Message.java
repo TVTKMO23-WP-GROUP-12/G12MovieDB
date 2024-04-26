@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import lombok.Data;
 import jakarta.persistence.*;
 
@@ -25,6 +27,7 @@ public class Message {
     @Column(name = "parent_message_id", columnDefinition = "INTEGER")
     private Integer parentMessageId;
     
+    @CreationTimestamp
     @Column(name = "create_date", columnDefinition = "TIMESTAMP")
     private LocalDate createDate;
 
@@ -36,8 +39,7 @@ public class Message {
     )
     private List<User> recipient = new ArrayList<>();
 
-    @SuppressWarnings("unused")
-    private Message() {}
+    public Message() {}
 
     public Message(Integer messageId, Integer creatorId, String content, Integer parentMessageId, LocalDate createDate) {
         this.id = messageId;

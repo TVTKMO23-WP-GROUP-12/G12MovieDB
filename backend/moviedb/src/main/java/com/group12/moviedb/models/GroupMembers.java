@@ -2,6 +2,9 @@ package com.group12.moviedb.models;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -26,9 +29,11 @@ public class GroupMembers {
     @Column(name = "is_admin")
     private boolean isAdmin;
     
+    @CreationTimestamp
     @Column(name = "joined_at")
     private LocalDateTime joinedAt;
     
+    @UpdateTimestamp
     @Column(name = "left_at")
     private LocalDateTime leftAt;
 

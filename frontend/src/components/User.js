@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
 
-function User({ id, setUser: setUserProp }) {
-  const [user, setUser] = useState(null);
+function User({ userId }) {
+  const { user, profilePicture } = useFetchUser(userId);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
-  useFetchUser(id, setUser);
+
   const joinedAt = user ? new Date(user.createdAt) : null;
   const formattedDate = joinedAt ? `${("0" + joinedAt.getDate()).slice(-2)}.${("0" + (joinedAt.getMonth() + 1)).slice(-2)}.${joinedAt.getFullYear()}` : '';
 
-  // Function to update the user description
+  // Update the user description
   const submitDescription = () => {
-    fetch(`http://localhost:8080/users/${id}`, {
+    fetch(`http://localhost:8080/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -23,8 +23,8 @@ function User({ id, setUser: setUserProp }) {
     })
       .then(response => response.json())
       .then(data => {
+        // Update user state
         setUser(prevUser => ({ ...prevUser, userDescription: data.userDescription }));
-        // Clear the editedDescription state
         setEditedDescription("");
       })
       .catch(error => console.error('Error:', error));
@@ -35,42 +35,43 @@ function User({ id, setUser: setUserProp }) {
   }
 
   return (
-          <div className="userdetail-container">
-          <div className="user-info">
-            <div className="user-profilepicture">
-              <img src={user.profilePicture} alt="Profile" />
-            </div>
-            <div className="user-details">
-              <h1>{user.username}</h1>
-              <p>Liittyi: {formattedDate}</p>
-              <p>Kirjautui viimeksi: {user.lastLogin}</p>
-            </div>
-          </div>
-          <div className="user-bio">
-            <p className="use-bio-text">{user.userDescription}</p>
-          </div>
+    <div className="userdetail-container">
+      <div className="user-info">
+        <div className="user-profilepicture">
+          {/* Render profile picture with the fetched URL */}
+          <img src={profilePicture} alt="Profile" />
+        </div>
+        <div className="user-details">
+          <h1>{user.username}</h1>
+          <p>Liittyi: {formattedDate}</p>
+          <p>Kirjautui viimeksi: {user.lastLogin}</p>
+        </div>
+      </div>
+      <div className="user-bio">
+        <p className="use-bio-text">{user.userDescription}</p>
+      </div>
 
-          <div className="user-update-description">
-            {isEditing ? (
-              <>
-                <input
-                  type="text"
-                  value={editedDescription}
-                  onChange={e => setEditedDescription(e.target.value)} 
-                />
-                <button onClick={() => {
-                  setIsEditing(false);
-                  submitDescription();
-                }}>Tallenna</button>
-              </>
-            ) : (
-              <button onClick={() => {
-                setIsEditing(true);
-                setEditedDescription(user.userDescription);
-              }}>Muokkaa</button>
-            )}
-          </div>
-      </div>  
+      <div className="user-update-description">
+        {isEditing ? (
+          <>
+            <input
+              type="text"
+              value={editedDescription}
+              onChange={e => setEditedDescription(e.target.value)} 
+            />
+            <button onClick={() => {
+              setIsEditing(false);
+              submitDescription();
+            }}>Tallenna</button>
+          </>
+        ) : (
+          <button onClick={() => {
+            setIsEditing(true);
+            setEditedDescription(user.userDescription);
+          }}>Muokkaa</button>
+        )}
+      </div>
+    </div>
   );
 }
 

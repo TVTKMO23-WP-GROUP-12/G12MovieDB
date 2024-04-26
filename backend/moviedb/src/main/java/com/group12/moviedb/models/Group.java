@@ -3,11 +3,15 @@ package com.group12.moviedb.models;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -29,15 +33,18 @@ public class Group {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Column(name="group_name")
+    @NotNull
+    @Column(name="group_name", unique = true, length = 100)
     private String groupName;
 
     @Column(name="group_description")
     private String groupDescription;
 
+    @CreationTimestamp
     @Column(name="created_at")
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
