@@ -1,32 +1,39 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
+import { setAuthHeader } from '../auth/authContent';
 
 function LoginPage() {
     const [error, setError] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [login, setLogin] = useState('');
+    const [email, setEmail] = useState ('');
     const history = useNavigate();
 
-    let isLoggedIn = false;
+  const onLoginSubmit = async (e) => {
+    e.preventDefault();
 
-    const onChangeHandler = (event) => {
-            const { name, value } = event.target;
-            switch (name) {
-                case 'login':
-                    setLogin(value);
-                    break;
-                case 'password':
-                    setPassword(value);
-                    break;
-                default:
-                    break;
-            }
-        };
-            
+    try {
+      const response = await axios.post('http://localhost:8080/login', {
+        username,
+        password,
+        email
+      });
+
+      const token = response.data; // Backend sends JWT token upon successful login
+      localStorage.setItem('token', token); // Store token in local storage
 
 
+      setError('');
+      console.log('Login successful');
+      history("/user/{userId}"); // Redirect user
+    } catch (error) {
+      setError('Invalid username or password');
+      console.error('Login failed:', error);
+    }
+};
+            // Redirect 
     const onSubmitLogin = (e) => {
         e.preventDefault(); // Prevent default form submission behavior
 
@@ -51,15 +58,15 @@ function LoginPage() {
         <section className="main-content">
             <div className="content">
                 <h2 className="title">Kirjaudu sisään</h2>
-                <form onSubmit={onSubmitLogin}>
+                <form onSubmit={onLoginSubmit}>
                     <div className='form-group'>    
                         <div className="field">
                             <input
-                                type="login"
+                                type="text"
                                 autoComplete="off"
-                                name="login"
-                                value={login}
-                                onChange={onChangeHandler}
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                                 id="username"
                                 placeholder="Käyttäjätunnus"
                             />
@@ -69,14 +76,14 @@ function LoginPage() {
                                 type="password"
                                 autoComplete="off"
                                 name="password"
-                                id="password"
                                 value={password}
-                                onChange={onChangeHandler}
+                                onChange={(e) => setPassword(e.target.value)}
+                                id="password"
                                 placeholder="Salasana"
                             />
                         </div>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
-                        <button type="submit" className="btn-login" onClick={onSubmitLogin}>
+                        <button type="submit" className="btn-login">
                             Kirjaudu
                         </button>
                     </div>
@@ -92,7 +99,6 @@ function LoginPage() {
             </div>
         </section>
     );
-
-};
+  }
 
 export default LoginPage;
