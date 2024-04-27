@@ -24,6 +24,7 @@ function LoginPage() {
       const token = response.data; // Backend sends JWT token upon successful login
       localStorage.setItem('token', token); // Store token in local storage
 
+
       setError('');
       console.log('Login successful');
       history("/user/{userId}"); // Redirect user
@@ -33,6 +34,25 @@ function LoginPage() {
     }
 };
             // Redirect 
+    const onSubmitLogin = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
+        try {
+            if (!login || !password) {
+                setError('Please enter both username and password.');
+                return;
+            }
+        } catch (error) {
+            setError('Invalid username or password');
+        }
+            // Perform login operation here
+            console.log('Login successful');
+            localStorage.setItem('username', login);
+            isLoggedIn = true;
+            history("/"); // Redirect to user page after successful login  
+
+       
+    };
 
     return (
         <section className="main-content">
