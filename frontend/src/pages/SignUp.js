@@ -26,11 +26,11 @@ function SignUpPage() {
                 return;
             }
 
-            const response = await axios.post('http://localhost:8080/signup', {
+            const response = await axios.post('http://localhost:8080/signup', JSON.stringify({
                 username,
                 password,
                 email
-              });
+              }));
 
             // Assuming the response contains a token
             setAuthHeader(response.data.token);
