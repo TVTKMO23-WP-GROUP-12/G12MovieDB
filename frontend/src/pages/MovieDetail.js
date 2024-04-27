@@ -14,6 +14,7 @@ function MovieDetail() {
   const credits = useFetchMovieCredits(id);
   const reviews = useFetchMovieReviews(id);
   const [selectedTab, setSelectedTab] = useState('Cast');
+  const user = 1;
 
   return movie ? (
     <>
@@ -35,12 +36,12 @@ function MovieDetail() {
       </div>
     </div>
     <div className="movie-content-container">
-    {selectedTab === 'Cast' && (
-      <MovieCredits credits={credits} />
-    )}
-    {selectedTab === 'reviews' && (
-      <MovieReviews reviews={reviews} />
-    )}
+      {selectedTab === 'Cast' && (
+        <MovieCredits credits={credits} />
+      )}
+      {selectedTab === 'Reviews' && (  
+        <MovieReviews reviews={reviews} user={user} />
+      )}
     </div>
     </>
   ) : (

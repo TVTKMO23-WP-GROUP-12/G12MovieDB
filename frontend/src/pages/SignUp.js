@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import './LoginSignUp.css';
 
 function SignUpPage() { 
@@ -29,9 +30,8 @@ function SignUpPage() {
                 break;
         }
     };
-        
 
-    const onSubmitSignUp = (e) => {
+    const onSubmitSignUp = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
         
         try {
@@ -40,13 +40,25 @@ function SignUpPage() {
                 setError('Täytä kaikki kentät.');
                 return;
             }
-
+    
             if (password !== confirmPassword) {
                 throw new Error('Salasanat eivät täsmää. ');
             }
-            // Handle successful signup
-            console.log('Signup successful.');
-            history("/user/{userid}");
+    
+            // Send a post request to your Spring Boot backend
+            const response = await axios.post('http://localhost:8080/signup', {
+                username,
+                email,
+                password
+            });
+    
+            // Handle response
+            if (response.data.success) {
+                console.log('Signup successful.');
+                history(`/user/${response.data.userId}`);
+            } else {
+                throw new Error(response.data.message || 'Rekisteröitymisessä tapahtui virhe. ');
+            }
         } catch (error) {
             // Handle signup error
             console.error('Signup failed:', error);
