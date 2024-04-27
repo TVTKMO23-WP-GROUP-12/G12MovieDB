@@ -1,121 +1,100 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
+import { request, setAuthHeader } from '../auth/auth-headers';
 
-function SignUpPage() { 
+function SignUpPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [error, setError] = useState(''); //error handling msg
     const [confirmPassword, setConfirmPassword] = useState('');
-    const history = useNavigate(); // Redirect with history object
+    const [error, setError] = useState('');
+    const history = useNavigate();
 
-    const onChangeHandler = (event) => {
-        const { name, value } = event.target;
-        switch (name) {
-            case 'username':
-                setUsername(value);
-                break;
-            case 'email':
-                setEmail(value);
-                break;
-            case 'password':
-                setPassword(value);
-                break;
-            case 'confirmPassword':
-                setConfirmPassword(value);
-                break;
-            default:
-                break;
-        }
-    };
-        
+    const onSubmitSignUp = async (e) => {
+        e.preventDefault();
 
-    const onSubmitSignUp = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-        
         try {
-            // Check for empty fields
             if (!username || !email || !password) {
-                setError('Täytä kaikki kentät.');
+                setError('Please fill in all fields.');
                 return;
             }
 
             if (password !== confirmPassword) {
-                throw new Error('Salasanat eivät täsmää. ');
+                setError('Passwords do not match.');
+                return;
             }
-            // Handle successful signup
-            console.log('Signup successful.');
-            history("/user/{userid}");
+
+            const response = await axios.post('http://localhost:8080/signup', {
+                username,
+                password,
+                email
+              });
+
+            // Assuming the response contains a token
+            setAuthHeader(response.data.token);
+
+            // Redirect to the user's profile page
+            history(`/user/${response.data.userId}`);
         } catch (error) {
-            // Handle signup error
-            console.error('Signup failed:', error);
-            setError(error.message || 'Rekisteröitymisessä tapahtui virhe. ');
+            setError('Registration failed. Please try again later.');
+            console.error('Registration error:', error);
         }
     };
 
     return (
         <section className="main-content">
             <div className="content">
-                <h2 className="title">Rekisteröidy</h2>
-                <div>
-                    <form onSubmit={onSubmitSignUp}>
-                        <div className='form-group'>
-                            <div className="field">
-                                <input
-                                    type='text'
-                                    autoComplete="off"
-                                    name="username"
-                                    id="username"
-                                    value={username}
-                                    onChange={onChangeHandler}
-                                    placeholder="Käyttäjätunnus"
-                                />
-                            </div>
-                            <div className="field">
-                                <input
-                                    type='email'
-                                    autoComplete="off"
-                                    name="email"
-                                    id="email"
-                                    value={email}
-                                    onChange={onChangeHandler}
-                                    placeholder="Sähköposti"
-                                />
-                            </div>
-
-                            <div className="field">
-                                <input
-                                    type='password'
-                                    autoComplete="off"
-                                    name="password"
-                                    id="password"
-                                    value={password}
-                                    onChange={onChangeHandler}
-                                    placeholder="Salasana"
-                                />
-                            </div>
-                            <div className="field">
-                                <input
-                                    type='password'
-                                    autoComplete="off"
-                                    id='confirmPassword'
-                                    placeholder="Salasana uudelleen"
-                                    value={confirmPassword}
-                                    onChange={onChangeHandler}
-                                    name="confirmPassword"
-                                />
-                            </div>
-                            {error && <p style={{ color: 'red' }}>{error}</p>}
-                            <button type="submit" className="btn-signup" onClick={onSubmitSignUp}>
-                                Rekisteröidy
-                            </button>
+                <h2 className="title">Sign Up</h2>
+                <form onSubmit={onSubmitSignUp}>
+                    <div className="form-container">
+                        <div className="form-field">
+                            <input
+                                type="text"
+                                autoComplete="off"
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Username"
+                            />
                         </div>
-                    </form>
-
-                    <div className="old-user">
-                        <h5 className="new">Onko sinulla jo tili? <Link to="/public/login">Kirjaudu sisään</Link></h5>
+                        <div className="form-field">
+                            <input
+                                type="email"
+                                autoComplete="off"
+                                name="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email"
+                            />
+                        </div>
+                        <div className="form-field">
+                            <input
+                                type="password"
+                                autoComplete="off"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Password"
+                            />
+                        </div>
+                        <div className="form-field">
+                            <input
+                                type="password"
+                                autoComplete="off"
+                                name="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Confirm Password"
+                            />
+                        </div>
+                        {error && <p className="error-message">{error}</p>}
+                        <button type="submit" className="btn-login">Sign Up</button>
                     </div>
+                </form>
+                <div className="old-user">
+                    <h5 className="new">Already have an account? <Link to="/login">Login</Link></h5>
                 </div>
             </div>
         </section>

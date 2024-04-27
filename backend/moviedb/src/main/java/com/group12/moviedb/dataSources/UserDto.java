@@ -157,31 +157,7 @@ public class UserDto {
             ", token='" + getToken() + "'" +
             "}";
     }
-    
 
-
-    public UserDto findByLogin(String login) {
-        Optional<User> userOptional = userRepository.findByLogin(login);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return userMapper.toUserDto(user);
-        } else {
-            // Handle the case where the user is not found
-            return null;
-        }
-    }
-
-
-    public UserDto findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        return userMapper.toUserDto(user);
-    }
-
-
-    public UserDto findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        return userMapper.toUserDto(user);
-    }
 
 
 }

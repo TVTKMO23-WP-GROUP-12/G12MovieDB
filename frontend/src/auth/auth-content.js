@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { request, setAuthHeader } from './auth-header.js';
+import { request, setAuthHeader } from './auth-headers.js'
 
 export default class AuthContent extends React.Component {
 
