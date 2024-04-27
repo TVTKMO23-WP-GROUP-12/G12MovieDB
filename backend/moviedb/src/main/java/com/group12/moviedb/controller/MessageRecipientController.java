@@ -87,24 +87,15 @@ public class MessageRecipientController {
     }
 
     @GetMapping("/message/recipients/read/user={user_id}")
-    public List<MessageRecipient> findReadMessageRecipientsByUserId(User userId) {
+    public List<MessageRecipient> findReadMessageRecipientsByUserId(Integer userId) {
         User recipient = userRepository.findById(userId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));
         if (recipient != null) {
-            return this.messageRecipientRepository.findByIsReadAndUser(true, userId);
+            return this.messageRecipientRepository.findByIsReadAndUserId(true, userId);
         }
         return this.messageRecipientRepository.findByIsReadAndUser(true, null);
     }
 
-    @GetMapping("/message/recipients/unread/user={user_id}")
-    public List<MessageRecipient> findUnreadMessageRecipientsByUserId(User userId) {
-        User recipient = userRepository.findById(userId)
-            .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (recipient != null) {
-            return this.messageRecipientRepository.findByIsReadAndUser(false, userId);
-        }
-        return this.messageRecipientRepository.findByIsReadAndUser(false, null);
-    }
 
    
      @GetMapping("/message/recipient/unread/message={message_id}")

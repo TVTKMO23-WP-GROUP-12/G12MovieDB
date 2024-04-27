@@ -15,8 +15,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-
-        const response = "POST"('http://localhost:8080/login', JSON.stringify({
+        const response = setAuthHeader.axios.post('http://localhost:8080/login', JSON.stringify({
         username: username,
         password: password
       }));
@@ -40,7 +39,7 @@ function LoginPage() {
         e.preventDefault(); // Prevent default form submission behavior
 
         try {
-            if (!login || !password) {
+            if (!username || !password) {
                 setError('Please enter both username and password.');
                 return;
             }
@@ -49,8 +48,7 @@ function LoginPage() {
         }
             // Perform login operation here
             console.log('Login successful');
-            localStorage.setItem('username', login);
-            isLoggedIn = true;
+            localStorage.setItem('username', username);
             history("/"); // Redirect to user page after successful login  
 
        
