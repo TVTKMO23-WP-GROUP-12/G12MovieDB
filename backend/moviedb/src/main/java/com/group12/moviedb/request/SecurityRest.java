@@ -8,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,19 +23,20 @@ public class SecurityRest<LoginInfo> {
      * Register user with request parameters
      */
      @CrossOrigin(origins = "http://localhost:3000") 
-     @PostMapping("signup")
+     @PostMapping("/signup")
      public ResponseEntity<String> signup(
          @RequestParam String username, 
-         @RequestParam String password)
+         @RequestParam String password,
+         @RequestParam String email)
      {
-         User us = securityService.signup(username, password);
-         return new ResponseEntity<>(us.getUsername(), HttpStatus.OK);
+         User user = securityService.signup(username, password, email);
+         return new ResponseEntity<>(user.getUsername(), HttpStatus.OK);
      }
     
 
     @CrossOrigin(origins = "http://localhost:3000") 
-    @PostMapping("login")
-    public ResponseEntity<Map<String,String>> login(
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(
         @RequestParam String username, 
         @RequestParam String password)
     {

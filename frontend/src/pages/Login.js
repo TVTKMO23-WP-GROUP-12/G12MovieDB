@@ -9,50 +9,41 @@ function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const history = useNavigate();
-  const[currentUser, setCurrentUser] = useState('')
+  const[currentUser, setCurrentUser] = useState('false')
+
  
   const onLoginSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-        const response = setAuthHeader.axios.post('http://localhost:8080/login', JSON.stringify({
+      if (!username || !password) {
+        setError('Please enter both username and password.');
+        return;
+      }
+  
+      const response = await axios.postForm('http://localhost:8080/login', {
         username: username,
         password: password
-      }));
+      });
+  
+      const token = response.data.token;
+      const userId = response.data.userId; // Extracting the user ID from the response
 
-      const token = response.data.token; // Assuming backend sends JWT token upon successful login
-      localStorage.setItem('token', token); // Store token in local storage
-      setAuthHeader(token); // Set JWT token as authorization header for future requests
+        localStorage.setItem('token', token);
+        localStorage.setItem('userId', userId); // Storing the user ID in local storage
 
+        setAuthHeader(token);
 
+  
+      // Reset error message and redirect user
       setError('');
       console.log('Login successful');
-      setCurrentUser(true);
-      history("/user/currentUser"); // Redirect user
+         history(`/user/${userId}`); // Redirect to user page after successful login  
     } catch (error) {
       setError('Invalid username or password');
       console.error('Login failed:', error);
     }
-};
-            // Redirect 
-    const onSubmitLogin = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-
-        try {
-            if (!username || !password) {
-                setError('Please enter both username and password.');
-                return;
-            }
-        } catch (error) {
-            setError('Invalid username or password');
-        }
-            // Perform login operation here
-            console.log('Login successful');
-            localStorage.setItem('username', username);
-            history("/"); // Redirect to user page after successful login  
-
-       
-    };
+  };
 
   return (
     <section className="main-content">

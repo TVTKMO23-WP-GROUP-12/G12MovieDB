@@ -157,5 +157,11 @@ public class UserDto {
     }
 
 
+    public static String createToken(String login2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createToken'");
+    }
+
+
 
 }

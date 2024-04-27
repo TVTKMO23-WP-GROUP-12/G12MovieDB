@@ -4,12 +4,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-
 import com.group12.moviedb.models.User;
 import com.group12.moviedb.repository.UserRepository;
 
 
 import jakarta.transaction.Transactional;
+
 
 
 @Service
@@ -38,4 +38,6 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
 }
