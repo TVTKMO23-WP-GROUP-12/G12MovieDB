@@ -25,6 +25,8 @@ function LoginPage() {
       localStorage.setItem('token', token); // Store token in local storage
       setAuthHeader(token); // Set JWT token as authorization header for future requests
 
+
+      setError('');
       console.log('Login successful');
       setCurrentUser(true);
       history("/user/currentUser"); // Redirect user
@@ -32,7 +34,27 @@ function LoginPage() {
       setError('Invalid username or password');
       console.error('Login failed:', error);
     }
-  };
+};
+            // Redirect 
+    const onSubmitLogin = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
+
+        try {
+            if (!login || !password) {
+                setError('Please enter both username and password.');
+                return;
+            }
+        } catch (error) {
+            setError('Invalid username or password');
+        }
+            // Perform login operation here
+            console.log('Login successful');
+            localStorage.setItem('username', login);
+            isLoggedIn = true;
+            history("/"); // Redirect to user page after successful login  
+
+       
+    };
 
   return (
     <section className="main-content">

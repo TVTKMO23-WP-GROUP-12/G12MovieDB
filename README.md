@@ -99,6 +99,11 @@ Kirjautumissivulla käyttäjät voivat kirjautua sisään antamalla käyttäjät
 
 Rekisteröitymissivulla uudet käyttäjät voivat luoda käyttäjätilin täyttämällä vaadittavat tiedot, kuten käyttäjänimi, sähköpostiosoite ja salasana. Rekisteröityminen mahdollistaa täyden pääsyn sivuston toiminnallisuuksiin.
 
+#### Ryhmäsivu (Group)
+
+Sivulla käyttäjät näkevät ryhmän perustiedot ja voivat tutustua ryhmän toimintaan liittyviin osioihin. Käyttöliittymässä on helppokäyttöiset välilehdet, joiden avulla voi selata ryhmän uutisia, jäsenlistoja, jaettua sisältöä, elokuvasuosituksia, ryhmäläisten elokuva-arvosteluja sekä tietoja Finnkinon elokuvanäytöksistä.
+
+
 ### Kirjautumisen takana olevat sivut:
 
 #### Ryhmäsivut
@@ -111,3 +116,5 @@ Rekisteröitymissivulla uudet käyttäjät voivat luoda käyttäjätilin täytt�
 The Movie Database (TMDB) 2024. About. Hakupäivä 23.4.2024. https://www.themoviedb.org/about.
 
 Sandoval, Kristopher 2018. Who Invented the API?. Hakupäivä 23.4.2024. https://nordicapis.com/who-invented-the-api/.
+
+Finnkino, XML-tietopalvelu. Saatavilla: https://www.finnkino.fi/xml
