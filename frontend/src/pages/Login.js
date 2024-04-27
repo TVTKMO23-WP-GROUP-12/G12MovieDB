@@ -40,9 +40,9 @@ function LoginPage() {
         }
             // Perform login operation here
             console.log('Login successful');
-
+            localStorage.setItem('username', login);
             isLoggedIn = true;
-            history("/user/{userId}"); // Redirect to user page after successful login  
+            history("/"); // Redirect to user page after successful login  
 
        
     };
