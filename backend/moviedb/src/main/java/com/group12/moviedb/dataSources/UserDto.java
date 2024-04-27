@@ -1,9 +1,7 @@
 package com.group12.moviedb.dataSources;
 
-import java.util.Optional;
 
 import com.group12.moviedb.mappers.UserMapper;
-import com.group12.moviedb.models.User;
 import com.group12.moviedb.repository.UserRepository;
 
 import lombok.AllArgsConstructor;

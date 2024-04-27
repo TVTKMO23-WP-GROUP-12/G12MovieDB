@@ -79,13 +79,17 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/public/showtimes" onClick={toggleMenu}>
             Näytösajat
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/public/search" onClick={toggleMenu}>
             Hakuportaali
           </Link>
         </li>
+        <li className="nav-item">
+          <Link to="/public/group" onClick={toggleMenu}>
             Ryhmät
           </Link>
         </li>
@@ -102,10 +106,10 @@ const NavBar = () => {
               <span>{username}</span>
             </li>
             <li className="nav-item">
-            <Link to={'user/userId'} onClick={toggleMenu}>
-              Oma sivu
-            </Link>
-          </li>
+              <Link to={'/user/userId'} onClick={toggleMenu}>
+                Oma sivu
+              </Link>
+            </li>
             <li className="nav-item">
               <button onClick={handleLogout}>Kirjaudu ulos</button>
             </li>
@@ -127,6 +131,4 @@ const NavBar = () => {
       </ul>
     </nav>
   );
-};
-
-export default NavBar;
+}
