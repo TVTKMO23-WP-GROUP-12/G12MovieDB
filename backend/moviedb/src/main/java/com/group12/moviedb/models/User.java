@@ -77,13 +77,20 @@ public class User {
     public User() {}
 
 
-    public User(Integer userId, String username, String email, String password, String userDescription) {
+    public User(Integer userId, String username, String password, String email, LocalDateTime created_at, LocalDateTime lastLogin, 
+    LocalDateTime updated_at, String userDescription, String profilePicture) {
         this.id = userId;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.lastLogin = lastLogin;
+        this.createdAt = created_at;
+        this.updatedAt = updated_at;
         this.userDescription = userDescription;
+        this.profilePicture = profilePicture;
     }
+
+
 
     public Integer getId(Integer UserId) {
     return this.id;
@@ -171,18 +178,6 @@ public class User {
         
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
-    }
-
-
-    public void addNewUser(String string, SignUpDto signUpDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addNewUser'");
-    }
-
-
-    public User orElse(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'orElse'");
     }
 
 
