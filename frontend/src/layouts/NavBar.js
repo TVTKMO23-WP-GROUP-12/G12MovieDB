@@ -79,17 +79,17 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to=<Showtimes/> onClick={toggleMenu}>
+          <Link to="/Showtimes" onClick={toggleMenu}>
             Näytösajat
           </Link>
         </li>
         <li className="nav-item">
-          <Link to=<Search/>  onClick={toggleMenu}>
+          <Link to="/Search"  onClick={toggleMenu}>
             Hakuportaali
           </Link>
         </li>
         <li className="nav-item">
-          <Link to= <Group/> onClick={toggleMenu}>
+          <Link to="Group" onClick={toggleMenu}>
             Ryhmät
           </Link>
         </li>

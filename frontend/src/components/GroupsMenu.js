@@ -12,7 +12,7 @@ export default function GroupsMenu() {
         // This is just a placeholder, replace it with the actual check
         setIsLoggedIn(/* check if the user is logged in */);
 
-        fetch('http://localhost:8080/group/')
+        fetch('http://localhost:8080/group')
             .then(response => response.json())
             .then(data => {
                 setGroups(data);
