@@ -7,12 +7,14 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.group12.moviedb.dataSources.SignUpDto;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="users")
+@JsonIgnoreProperties({"groups", "groupMembers"}) // FIXME Added here so group menu works. Does this break the code?
 public class User {
     @Id
     @Column(name="user_id")
