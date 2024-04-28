@@ -1,9 +1,10 @@
+
 import React from 'react';
-import useFetchUpcoming from '../hooks/useFetchUpcoming';
+import useFetchTopRated from '../hooks/useFetchTopRated';
 import './MovieSection.css';
 
-const Upcoming = () => {
-  const { movies, loading, error } = useFetchUpcoming();
+const TopRated = () => {
+  const { movies, loading, error } = useFetchTopRated();
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -28,4 +29,4 @@ const Upcoming = () => {
   );
 };
 
-export default Upcoming;
+export default TopRated;
