@@ -1,0 +1,57 @@
+.movie-section {
+  margin: 20px 5%;
+  overflow: hidden; /* Estetään leviäminen sivupalkkien alle */
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  color: #333;
+  text-align: left;
+}
+
+.movies-grid {
+  display: flex;
+  flex-wrap: nowrap; /* Estetään korttien kääntyminen rivin yli */
+  overflow-x: auto; /* Lisätään vaakasuuntainen vieritys tarvittaessa */
+  gap: 8px; /* Pienennetty korttien välistystä */
+  align-items: flex-start; /* Tiivistetään containeria pystysuunnassa */
+}
+
+.movie-card {
+  flex: 0 0 calc(20% - 8px); /* Jokainen kortti vie viidenneksen leveydestä (miinus välistys) */
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 150px; /* Rajataan kortin maksimileveys */
+}
+
+.movie-poster {
+  width: 100%;
+  max-height: 200px; /* Rajataan kuvien maksimikorkeus */
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 8px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Responsiivinen asettelu pienemmille näytöille */
+@media (max-width: 1024px) {
+  .movie-card {
+    flex: 0 0 calc(33.333% - 16px); /* Kolme korttia riviä kohti (miinus välistys) */
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    flex: 0 0 calc(50% - 16px); /* Kaksi korttia riviä kohti (miinus välistys) */
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-card {
+    flex: 0 0 calc(100% - 16px); /* Yksi kortti riviä kohti (miinus välistys) */
+  }
+}
