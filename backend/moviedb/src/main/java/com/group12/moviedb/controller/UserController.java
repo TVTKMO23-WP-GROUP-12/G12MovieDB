@@ -43,7 +43,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/users/{user_id}")
-    public ResponseEntity<?> findOneUser(@PathVariable Integer userId) {
+    public ResponseEntity<?> findOneUser(@PathVariable("user_id") Integer userId) {
     try {
         Optional<User> optionalUser = this.userRepository.findById(userId);
         return optionalUser.map(user -> ResponseEntity.ok(user))

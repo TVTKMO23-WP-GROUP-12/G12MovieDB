@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.group12.moviedb.dataSources.SignUpDto;
 
@@ -22,7 +23,8 @@ public class User {
     private Integer id;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-    private List<Group> groups;
+    @JsonIgnore
+    private List<Group> group;
 
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
@@ -49,7 +51,6 @@ public class User {
 
     @Column(name="email", unique = true, length = 128)
     private String email;
-
     
     @Column(name="password", length = 255)
     private String password;
@@ -119,7 +120,7 @@ public class User {
     }
 
     public List<Group> getGroups() {
-        return this.groups;
+        return this.group;
     }
 
     public List<Favorites> getFavorites() {
@@ -162,8 +163,8 @@ public class User {
         this.lastLogin = lastLogin;
     }
     
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroups(List<Group> group) {
+        this.group = group;
     }
 
     public void setFavorites(List<Favorites> favorites) {

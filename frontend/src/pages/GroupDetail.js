@@ -10,7 +10,7 @@ import useIsMobile from '../hooks/useIsMobile';
 
 function GroupDetail() {
   const { id } = useParams();
-  const [group, setGroup] = useState({ members: [] });
+  const [group, setGroup] = useState({ groupMembers: [] });
   const [selectedTab, setSelectedTab] = useState('News');
   const [selectedTabLeft, setSelectedTabLeft] = useState('News');
   const [selectedTabRight, setSelectedTabRight] = useState('Movies');
@@ -22,29 +22,40 @@ function GroupDetail() {
   //const { user: { id: userId } } = useAuth();// get user ID from auth context
 
   // Fetch group members and their reviews
-  
+
   useEffect(() => {
+    let groupData;  // Define a variable to hold the group data
     fetch(`http://localhost:8080/group/${id}`)
       .then(response => response.json())
-      .then(data => { 
+      .then(data => {
+        groupData = data;  // Assign the fetched data to groupData
         setGroup(prevGroup => ({ ...prevGroup, ...data, groupPicture: data.groupPicture || defaultGroupPicture }));
-        return fetch(`http://localhost:8080/group/members/${id}`)
-          .then(response => response.json());
+        return Promise.all(data.groupMembers.map(member =>
+          fetch(`http://localhost:8080/users/${member.id}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(userDetails => {
+              console.log(`User details for member ${member.id}:`, userDetails);  // Log the user details
+              return userDetails;
+            })
+        ));
       })
-      .then(members => {
-        setGroup(prevGroup => ({ ...prevGroup, members }));
-        const reviewsPromises = members.map(member => 
-          fetch(`http://localhost:8080/review/`)
-            .then(response => response.json())
-        );
-        return Promise.all(reviewsPromises);
-      })
-      .then(reviewsArrays => {
-        const reviews = [].concat(...reviewsArrays);
-        setReviews(reviews);
+      .then(userDetailsArray => {
+        const updatedGroupMembers = userDetailsArray.map((userDetails, index) => ({
+          ...groupData.groupMembers[index],  // Use groupData instead of data
+          user: userDetails
+        }));
+        setGroup(prevGroup => ({ ...prevGroup, groupMembers: updatedGroupMembers }));
       })
       .catch(error => console.error('Error:', error));
   }, [id]);
+  useEffect(() => {
+    console.log(group.groupMembers);  // Log the groupMembers property of the group state
+  }, [group]);  // This useEffect hook will run whenever `group` changes
 
   /* commented out because the useAuth hook is not yet implemented
   useEffect(() => {

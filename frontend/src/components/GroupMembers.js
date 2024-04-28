@@ -5,15 +5,15 @@ const GroupMembers = ({ group }) => {
   return (
     <div className="groupdetail-tabs-content">
       <h2>Jäsenet</h2>
-      {group.members.map(member => (
-        <div key={member.memberId}>
+      {group.groupMembers.map(member => (
+        <div key={member.id}>
           <p>
-            <Link to={`/users/${member.userId.userId}`}>
-              {member.userId.username}
+            <Link to={`/users/${member.id}`}>
+              {member.user.username}
               {member.isAdmin && <span> [ADMIN]</span>}
             </Link>
           </p>
-          <p>{member.userId.userDescription}</p>
+          <p>{member.userDescription}</p>
           <hr></hr>
         </div>
       ))}

@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -30,6 +31,7 @@ public class Group {
     private List<MessageRecipient> messageRecipient;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="user_id")
     private User user;
 
