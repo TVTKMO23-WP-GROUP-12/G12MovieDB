@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import './MovieReview.css';
 import useFetchUserReviewMovie from '../hooks/useFetchUserReviewMovie';
 import useFetchMovieId from '../hooks/useFetchMovieId';
 
 function MovieUserReview({ movieId, userId }) {
   const { data: userReview, loading, error } = useFetchUserReviewMovie(movieId, userId);
-  const [review, setReview] = useState(userReview ? userReview[0] : '');  // initialize state here
+  const [review, setReview] = useState(userReview ? userReview[0] : ''); 
   const [score, setScore] = useState(1);
   const movie = useFetchMovieId();
   console.log(localStorage.getItem('movieId'));
@@ -58,6 +59,7 @@ function MovieUserReview({ movieId, userId }) {
           placeholder="Kirjoita arvostelusi tähän..."
           onChange={(e) => setReview(e.target.value)}
         />
+        <div className="review-buttons">
         <select value={score} onChange={(e) => setScore(e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -66,6 +68,7 @@ function MovieUserReview({ movieId, userId }) {
           <option value="5">5</option>
         </select>
         <button onClick={postReview}>Tallenna arvostelu</button>
+      </div>
       </div>
     </div>
   );

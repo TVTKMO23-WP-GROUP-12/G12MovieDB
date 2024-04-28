@@ -21,3 +21,42 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+
+  .review {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .review-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .review button {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size:x-small;
+    width: 100px;
+    color: var(--primary-text-color);
+  }
+
+  .review select {
+    width: 3vh;
+    height: 2vh;
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size:x-small;
+    width: 100px;
+    color: var(--primary-text-color);
+  }

@@ -44,21 +44,21 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/public/movie/{movieId}")
-    public String getMovieDetails(@PathVariable String movieId) {
-        return movieDetailsService.getMovieDetails(movieId);
+    @GetMapping("/public/tmdb/{tmdbId}")
+    public String getMovieDetails(@PathVariable String tmdbId) {
+        return movieDetailsService.getMovieDetails(tmdbId);
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/public/movie/tmdb=?{tmdbId}")
-    public Movie findOneMovieByTmdbId(@PathVariable("tmdbId") Integer tmdbId) {
-        return this.movieRepository.findByTmdbId(tmdbId).orElse(null);
+    @GetMapping("/public/movie/{movieId}")
+    public Movie findOneMovieByTmdbId(@PathVariable("movieId") Integer movieId) {
+        return this.movieRepository.findByTmdbId(movieId).orElse(null);
     }
     
     @CrossOrigin(origins = "*")
-    @GetMapping("/public/movie/{movieId}/credits")
-    public String getMovieCredits(@PathVariable String movieId) {
-        return movieCreditsService.getMovieCredits(movieId);
+    @GetMapping("/public/movie/tmdb/{tmdbId}/credits")
+    public String getMovieCredits(@PathVariable String tmdbId) {
+        return movieCreditsService.getMovieCredits(tmdbId);
     }
 
     @CrossOrigin(origins = "*")
