@@ -21,16 +21,16 @@ export default function GroupsMenu() {
                 console.error('Error fetching groups:', error);
             });
     }, []); 
-
+    
     return (
         <div className="groupsmenu-container">
             <div className="groupsmenu-box">
-                <h2>Groups</h2>
+                <h2>Ryhmät</h2>
                 <div className="groupsmenu-list">
-                {groups.map(group => (
-                    <div key={group.groupId}>
-                        <h3><Link to={`group/${group.groupId}`}>{group.groupName}</Link></h3>
-                        <p>{group.groupDescription}</p>
+                {groups.map(groups => (
+                    <div key={groups.groupId}>
+                        <h3><Link to={`/group/${groups.id}`}>{groups.groupName}</Link></h3>
+                        <p>{groups.groupDescription}</p>
                     </div>
                 ))}
                 </div>

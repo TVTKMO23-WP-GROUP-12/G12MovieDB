@@ -16,6 +16,9 @@ function GroupDetail() {
   const [selectedTabRight, setSelectedTabRight] = useState('Movies');
   const [reviews, setReviews] = useState([]);
   const isMobile = useIsMobile();
+  localStorage.setItem('groupId', id)
+  console.log("Id is " + localStorage.getItem('groupId'))
+  const groupId = localStorage.getItem('groupId')
 
   //const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
   //const { id: groupId } = useParams(); // get group ID from URL parameter
@@ -23,17 +26,17 @@ function GroupDetail() {
 
   // Fetch group members and their reviews
   useEffect(() => {
-    fetch(`http://localhost:8080/group/${id}`)
+    fetch(`http://localhost:8080/group/${groupId}`)
       .then(response => response.json())
       .then(data => { 
         setGroup(prevGroup => ({ ...prevGroup, ...data, groupPicture: data.groupPicture || defaultGroupPicture }));
-        return fetch(`http://localhost:8080/group/members/group=${id}`)
+        return fetch(`http://localhost:8080/group/members/${groupId}`)
           .then(response => response.json());
       })
       .then(members => {
         setGroup(prevGroup => ({ ...prevGroup, members }));
         const reviewsPromises = members.map(member => 
-          fetch(`http://localhost:8080/review/user=${member.userId.id}`)
+          fetch(`http://localhost:8080/review/`)
             .then(response => response.json())
         );
         return Promise.all(reviewsPromises);
@@ -43,7 +46,7 @@ function GroupDetail() {
         setReviews(reviews);
       })
       .catch(error => console.error('Error:', error));
-  }, [id]);
+  }, [groupId]);
 
   /* commented out because the useAuth hook is not yet implemented
   useEffect(() => {

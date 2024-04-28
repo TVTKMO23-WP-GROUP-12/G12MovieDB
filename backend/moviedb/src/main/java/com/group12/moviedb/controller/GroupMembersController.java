@@ -44,8 +44,8 @@ public class GroupMembersController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/group/members/group={group_id}")
-    public List<GroupMembers> findGroupMembersByGroupId(@PathVariable Integer groupId) {
+    @GetMapping("/group/members/{group_id}")
+    public List<GroupMembers> findGroupMembersByGroupId(@PathVariable("group_id") int groupId) {
         Group group = groupRepository.findById(groupId)
             .orElseThrow(() -> new NoSuchElementException("Group not found"));
         if (group != null) {
@@ -66,7 +66,7 @@ public class GroupMembersController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/group/members/{member_id}")
+    @GetMapping("/group/members/member/{member_id}")
     public GroupMembers findGroupMember(@PathVariable Integer memberId) {
         return this.groupMembersRepository.findById(memberId)
             .orElseThrow(() -> new NoSuchElementException("User not found"));

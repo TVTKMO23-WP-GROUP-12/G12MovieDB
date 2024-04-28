@@ -3,7 +3,10 @@ package com.group12.moviedb.controller;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +41,13 @@ public class GroupController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/group/{group_id}")
-    public Group findOneGroup(@PathVariable Integer groupId) {
-        return this.groupRepository.findById(groupId).orElse(null);
+    public ResponseEntity<Group> findOneGroup(@PathVariable("group_id") Integer groupId) {
+        Optional<Group> group = this.groupRepository.findById(groupId);
+        if (group.isPresent()) {
+            return new ResponseEntity<>(group.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     
     @CrossOrigin(origins = "*")
@@ -57,7 +65,7 @@ public class GroupController {
     
     @CrossOrigin(origins = "*")
     @PatchMapping("/group/{group_id}")
-    public Group updateOneGroup(@PathVariable Integer groupId, @RequestBody Map<String, Object> updates) {
+    public Group updateOneGroup(@PathVariable("group_id") Integer groupId, @RequestBody Map<String, Object> updates) {
         Group group = this.groupRepository.findById(groupId).orElse(null);
         updates.forEach((key, value) -> {
                 switch (key) {
