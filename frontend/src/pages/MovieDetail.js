@@ -13,10 +13,9 @@ function MovieDetail() {
   const { id } = useParams();
   const movie = useFetchMovie(id);
   const credits = useFetchMovieCredits(id);
-  const reviews = useFetchMovieReviews(id);
-  const [selectedTab, setSelectedTab] = useState('Cast');
-  console.log(id);
-  usePostMovie(id);
+  const [selectedTab, setSelectedTab] = useState('Reviews');
+
+  usePostMovie();
 
   return movie ? (
     <>
@@ -42,7 +41,7 @@ function MovieDetail() {
       <MovieCredits credits={credits} />
     )}
     {selectedTab === 'Reviews' && (
-      <MovieReviews reviews={reviews} />
+      <MovieReviews movieId={id} />
     )}
     </div>
     </>

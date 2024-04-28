@@ -4,6 +4,7 @@ import noImageAvailable from '../media/noImageAvailable.png';
 import { Link } from 'react-router-dom';
 
 function MovieCredits({ credits }) {
+
     const [currentPage, setCurrentPage] = useState(0);
     const actorsPerPage = 5;
 

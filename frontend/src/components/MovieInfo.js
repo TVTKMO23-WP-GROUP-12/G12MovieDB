@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MovieInfo.css';
 import noImageAvailable from '../media/noImageAvailable.png';
 import { Link } from 'react-router-dom';
 
 function MovieInfo({ movie }) {
     const releaseDate = movie.release_date.split('-').reverse().join('/');
+
+    useEffect(() => {
+        if (movie) {
+          localStorage.setItem('movieTmdb', movie.id);
+          localStorage.setItem('movieTitle', movie.title);
+        }
+      }, [movie]);
+
+      const postMovie = () => {
+        const movieData = {
+          tmdbId: localStorage.getItem('movieTmdb'),
+          title: localStorage.getItem('movieTitle'),
+        };
+    
+        fetch('http://localhost:8080/public/movie', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(movieData),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+      };
 
     return (
         <><div className="movie-container">
@@ -29,6 +54,7 @@ function MovieInfo({ movie }) {
                 <div className="movie-container-rating">
                     <p><b>Arvosana: </b>{movie.vote_average} ({movie.vote_count} ääntä)</p>
                     <p></p>
+                    <button onClick={postMovie}>Lisää tietokantaan</button>
                 </div>
             </div>
         </div>

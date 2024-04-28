@@ -6,7 +6,7 @@ function useFetchUserReviewMovie(userId, movieId) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/review/user=${userId}&movie=${movieId}`)
+    fetch(`http://localhost:8080/review/user=${userId}/movie=${movieId}`)
       .then(response => {
         if (response.ok) {
           return response.json();
