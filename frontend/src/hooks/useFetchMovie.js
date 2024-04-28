@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 function useFetchMovie(movieId) {
   const [movie, setMovie] = useState(null);
-  console.log(movieId);
+
   useEffect(() => {
-    fetch(`http://localhost:8080/public/movie/${movieId}`)
+    fetch(`http://localhost:8080/public/tmdb/${movieId}`)
       .then(response => response.blob())
       .then(blob => {
         const reader = new FileReader();

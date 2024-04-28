@@ -1,0 +1,23 @@
+.movie-reviews-content {
+    margin: 0em;
+    width: 100%; 
+    overflow-y: auto;
+    padding: 40px;
+    background-color: var(--secondary-color); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    border-radius: 0px;
+    color: var(--primary-text-color); 
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .review textarea {
+    width: 50vh;
+    height: 10vh;
+  }
+
+  .movie-reviews-content h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }

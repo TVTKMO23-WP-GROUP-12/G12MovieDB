@@ -1,25 +1,42 @@
 import { useEffect } from 'react';
 
-function usePostMovie(tmdbId) {
+function usePostMovie() {
+  const movieId = localStorage.getItem('movieId');
+  const movieTitle = localStorage.getItem('movieTitle');
+  const getMovieUrl = `http://localhost:8080/public/movie/tmdb/${movieId}`;
+  const postMovieUrl = 'http://localhost:8080/public/movie';
+  
   useEffect(() => {
-    // Check if the movie is in the database
-    fetch(`http://localhost:8080/public/movie/tmdb=?${tmdbId}`)
+    if (!movieId) {
+      return;
+    }
+
+    fetch(getMovieUrl)
       .then(response => {
-        if (!response.ok) {
-          // If the movie is not in the database, add it
-          fetch('http://localhost:8080/public/movie', {
+        return response.json();
+      })      
+      .then(data => {
+        if (data === null) {
+          const movieData = {
+            tmdbId: movieId,
+            title: movieTitle,
+          };
+          console.log(movieData);
+          return fetch(postMovieUrl, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              title: tmdbId.title,
-              tmdbId: tmdbId.id,
-            }),
+            body: JSON.stringify(movieData),
           });
         }
-      });
-  }, [tmdbId]);
+      })
+      .then(response => {
+        return response.json();
+      })
+      .then(postResponse => console.log(postResponse))
+      .catch(error => console.error('Error:', error));
+  }, [movieId, movieTitle]);
 }
 
 export default usePostMovie;

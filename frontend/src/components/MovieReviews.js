@@ -1,29 +1,27 @@
 import React from 'react';
-import './MovieInfo.css';
+import './MovieReview.css';
 import noImageAvailable from '../media/noImageAvailable.png';
+import MovieUserReview from '../components/MovieUserReview';
 import useFetchUserId from '../hooks/useFetchUserId';
 import useFetchMovieReviews from '../hooks/useFetchMovieReviews';
 import useFetchUserReviewMovie from '../hooks/useFetchUserReviewMovie';
 import { Link } from 'react-router-dom';
 
-const MovieReviews = ({ movieId, UserId }) => {
-    console.log(movieId);
-    const { userId } = useFetchUserId(localStorage.getItem('username'));
+const MovieReviews = ({ movieId }) => {
+    const userId  = localStorage.getItem('userId');
     const movieReviews = useFetchMovieReviews(movieId);
-    const userReview = useFetchUserReviewMovie(movieId, userId);
+    const userReview = useFetchUserReviewMovie(userId, movieId );
 
     return(
-        <div className="movie-tabs-content">
-            <h2>Arvostelut</h2>
+        <div className="movie-reviews-content">
             <div>
                 <h3>Sinun arvostelusi:</h3>
-                <useFetchUserReviewMovie movieId={movieId} userId={userId} />
+                <MovieUserReview movieId={movieId} userId={userId} />
             </div>
-            <div className="movie-reviews">
+            <div className="movie-reviews-content">
                 
             </div>
         </div>
-
     );
 };
 

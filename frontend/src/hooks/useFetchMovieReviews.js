@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 function useFetchMovieReviews(movieId) {
   const [reviews, setReviews] = useState(null);
-  console.log(movieId);
   useEffect(() => {
     fetch(`http://localhost:8080/public/review/movie=${movieId}`)
       .then(response => response.json())
