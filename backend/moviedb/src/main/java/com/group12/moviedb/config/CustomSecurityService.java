@@ -31,16 +31,20 @@ public class CustomSecurityService {
     /**
      * Register new user or update existing one
      */
-    public User signup(String username, String password, String email){
+    public User signup(String username, String password, String email) {
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
         
-    LocalDateTime currentTime = LocalDateTime.now();
-    String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(10));
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(hashedPassword);
+        user.setEmail(email);
+        user.setLastLogin(LocalDateTime.now()); // Set the login time to the current time
+        user.setUserDescription(""); 
     
-    User user = new User(null, username, hashedPassword, email, currentTime, currentTime, currentTime, hashedPassword, hashedPassword);
-    repo.save(user);
-    
-    return user;
-}
+        repo.save(user);
+        
+        return user;
+    }
 
     /**
      * Login user. Return JWT token or null if not found or wrong password.

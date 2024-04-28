@@ -6,7 +6,7 @@ import useFetchMovieReviews from '../hooks/useFetchMovieReviews';
 import useFetchUserReviewMovie from '../hooks/useFetchUserReviewMovie';
 import { Link } from 'react-router-dom';
 
-const MovieReviews = ({ movieId }) => {
+const MovieReviews = ({ movieId, UserId }) => {
     console.log(movieId);
     const { userId } = useFetchUserId(localStorage.getItem('username'));
     const movieReviews = useFetchMovieReviews(movieId);
