@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.group12.moviedb.dataSources.SignUpDto;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
@@ -77,23 +76,20 @@ public class User {
     public User() {}
 
 
-    public User(Integer userId, String username, String password, String email, LocalDateTime created_at, LocalDateTime lastLogin, 
-    LocalDateTime updated_at, String userDescription, String profilePicture) {
+    public User(Integer userId, String username, String email, String password, String userDescription) {
         this.id = userId;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.lastLogin = lastLogin;
-        this.createdAt = created_at;
-        this.updatedAt = updated_at;
         this.userDescription = userDescription;
-        this.profilePicture = profilePicture;
     }
-
-
 
     public Integer getId(Integer UserId) {
     return this.id;
+    }
+
+    public Integer getId() {
+        return this.id;
     }
 
     public String getUsername() {
@@ -181,7 +177,10 @@ public class User {
     }
 
 
-
+    public void addNewUser(String string, SignUpDto signUpDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addNewUser'");
+    }
 
 
 }

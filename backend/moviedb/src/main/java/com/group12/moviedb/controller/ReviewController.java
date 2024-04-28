@@ -62,6 +62,18 @@ public class ReviewController {
     }
 
     @CrossOrigin(origins = "*")
+    @GetMapping("/review/user={user_id}/movie={movie_id}")
+    public List<Review> findReviewsByUserIdAndMovieId(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
+        Optional<User> user = userRepository.findById(userId);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (user.isPresent() && movie != null) {
+            return reviewRepository.findByUserIdAndMovie(userId, movie);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/review/{review_id}")
     public Review findReviewById(@PathVariable Integer reviewId) {
         return this.reviewRepository.findById(reviewId).orElse(null);

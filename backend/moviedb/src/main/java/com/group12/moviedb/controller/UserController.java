@@ -54,6 +54,22 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/users/username/{username}")
+    public ResponseEntity<?> findOneUsername(@PathVariable String username) {
+        try {
+            User user = this.userRepository.findByUsername(username);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("An error occurred while fetching the user.");
+        }
+    }
+
     @CrossOrigin(origins = "*") 
     @PostMapping("/users")
     public User addOneUser(@RequestBody User user) {
