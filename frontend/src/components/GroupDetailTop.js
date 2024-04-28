@@ -38,7 +38,7 @@ const GroupDetailTop = ({ group }) => {
         // Get the admin of the group and add a [ADMIN] tag after their name
         }
         <div className="groupdetail-admin">
-          {group.members.map(member => { 
+          { Array.isArray(group.members) && group.members.map(member => { 
             if (member.isAdmin) {
               return (
                 <React.Fragment key={member.userId.userId}>

@@ -16,13 +16,14 @@ function GroupDetail() {
   const [selectedTabRight, setSelectedTabRight] = useState('Movies');
   const [reviews, setReviews] = useState([]);
   const isMobile = useIsMobile();
-
+  
   //const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
   //const { id: groupId } = useParams(); // get group ID from URL parameter
   //const { user: { id: userId } } = useAuth();// get user ID from auth context
 
   // Fetch group members and their reviews
   useEffect(() => {
+    console.log(id);
     fetch(`http://localhost:8080/group/${id}`)
       .then(response => response.json())
       .then(data => { 
