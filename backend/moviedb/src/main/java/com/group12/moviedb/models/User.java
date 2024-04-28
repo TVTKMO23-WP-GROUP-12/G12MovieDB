@@ -70,7 +70,7 @@ public class User {
 
     @Column(name = "user_description", nullable = true, length = 255)
     private String userDescription;
-    @Column(name ="profilePicture, nullable = true", length = 64)
+    @Column(name ="profilePicture", nullable = true, length = 64)
     private String profilePicture;
 
     public User() {}
