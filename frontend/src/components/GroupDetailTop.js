@@ -7,7 +7,7 @@ const GroupDetailTop = ({ group }) => {
 
   // Function to update the group description
   const submitDescription = () => {
-    fetch(`http://localhost:8080/group/${group.groupId}`, {
+    fetch(`http://localhost:8080/group/${group.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -33,12 +33,12 @@ const GroupDetailTop = ({ group }) => {
       </div>
       <div></div>
       <div className="groupdetail-bio">
-        <h2><Link to={`/group/${group.groupId}`}>{group.groupName}</Link></h2>
+        <h2><Link to={`/group/${group.id}`}>{group.groupName}</Link></h2>
         {
         // Get the admin of the group and add a [ADMIN] tag after their name
         }
         <div className="groupdetail-admin">
-          { Array.isArray(group.members) && group.members.map(member => { 
+          {Array.isArray(group.members) && group.members.map(member => { 
             if (member.isAdmin) {
               return (
                 <React.Fragment key={member.userId.userId}>

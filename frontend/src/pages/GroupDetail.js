@@ -16,25 +16,25 @@ function GroupDetail() {
   const [selectedTabRight, setSelectedTabRight] = useState('Movies');
   const [reviews, setReviews] = useState([]);
   const isMobile = useIsMobile();
-  
+
   //const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
   //const { id: groupId } = useParams(); // get group ID from URL parameter
   //const { user: { id: userId } } = useAuth();// get user ID from auth context
 
   // Fetch group members and their reviews
+  
   useEffect(() => {
-    console.log(id);
     fetch(`http://localhost:8080/group/${id}`)
       .then(response => response.json())
       .then(data => { 
         setGroup(prevGroup => ({ ...prevGroup, ...data, groupPicture: data.groupPicture || defaultGroupPicture }));
-        return fetch(`http://localhost:8080/group/members/group=${id}`)
+        return fetch(`http://localhost:8080/group/members/${id}`)
           .then(response => response.json());
       })
       .then(members => {
         setGroup(prevGroup => ({ ...prevGroup, members }));
         const reviewsPromises = members.map(member => 
-          fetch(`http://localhost:8080/review/user=${member.userId.id}`)
+          fetch(`http://localhost:8080/review/`)
             .then(response => response.json())
         );
         return Promise.all(reviewsPromises);

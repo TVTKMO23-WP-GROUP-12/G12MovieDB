@@ -70,140 +70,141 @@ export default function Search() {
           />
           <button className="search-button" onClick={handleSearch}>Hae</button>
         </div>
-
-        <div className="check-movie-tv-container">
-          <div className="movie-tv-checkbox">
-            <input
-              type="checkbox"
-              id="moviesCheckbox"
-              checked={showMovies}
-              onChange={() => handleCheckboxChange('movies')}
-            />
-            <label className="checkbox-label" htmlFor="moviesCheckbox">Näytä elokuvat</label>
+        <div className="check-filter-container">
+          <div className="check-movie-tv-container">
+            <div className="movie-tv-checkbox">
+              <input
+                type="checkbox"
+                id="moviesCheckbox"
+                checked={showMovies}
+                onChange={() => handleCheckboxChange('movies')}
+              />
+              <label className="checkbox-label" htmlFor="moviesCheckbox">Näytä elokuvat</label>
+            </div>
+            <div className="movie-tv-checkbox">
+              <input
+                type="checkbox"
+                id="tvShowsCheckbox"
+                checked={showTVShows}
+                onChange={() => handleCheckboxChange('tvShows')}
+              />
+              <label className="checkbox-label" htmlFor="tvShowsCheckbox">Näytä TV-sarjat</label>
+            </div>
           </div>
-          <div className="movie-tv-checkbox">
-            <input
-              type="checkbox"
-              id="tvShowsCheckbox"
-              checked={showTVShows}
-              onChange={() => handleCheckboxChange('tvShows')}
-            />
-            <label className="checkbox-label" htmlFor="tvShowsCheckbox">Näytä TV-sarjat</label>
+          
+          <div className="filter-container">
+            <div className="filter-checkbox">
+              <input
+                type="checkbox"
+                id="filterCheckbox"
+                checked={isFilterActive}
+                onChange={() => setIsFilterActive(!isFilterActive)}
+              />
+              <label className="checkbox-label" htmlFor="filterCheckbox">Käytä suodattimia</label>
+            </div>
+            {isFilterActive && (
+              <>
+                <div className="filter-section">
+                  <label className="filter-label" htmlFor="genre">Genre:</label>
+                  <select className="select-filter" id="movieGenre" value={movieGenre} onChange={(e) => setMovieGenre(e.target.value)}>
+                    <option value="">Elokuvat</option>
+                    <option value="28">Action</option>
+                    <option value="12">Adventure</option>
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="14">Fantasy</option>
+                    <option value="36">History</option>
+                    <option value="27">Horror</option>
+                    <option value="10402">Music</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10749">Romance</option>
+                    <option value="878">Science Fiction</option>
+                    <option value="10770">TV Movie</option>
+                    <option value="53">Thriller</option>
+                    <option value="10752">War</option>
+                    <option value="37">Western</option>
+                  </select>
+                  <select className="select-filter" id="tvGenre" value={tvGenre} onChange={(e) => setTvGenre(e.target.value)}>
+                    <option value="">TV-sarjat</option>
+                    <option value="10759">Action & Adventure</option>
+                    <option value="16">Animation</option>
+                    <option value="35">Comedy</option>
+                    <option value="80">Crime</option>
+                    <option value="99">Documentary</option>
+                    <option value="18">Drama</option>
+                    <option value="10751">Family</option>
+                    <option value="10762">Kids</option>
+                    <option value="9648">Mystery</option>
+                    <option value="10763">News</option>
+                    <option value="10764">Reality</option>
+                    <option value="10765">Sci-Fi & Fantasy</option>
+                    <option value="10766">Soap</option>
+                    <option value="10767">Talk</option>
+                    <option value="10768">War & Politics</option>
+                    <option value="37">Western</option>
+                  </select>
+                </div>
+                <div className="filter-section">
+                  <label className="filter-label" htmlFor="releaseYear">Julkaisuaika:</label>
+                  <select
+                    className="select-filter"
+                    id="minReleaseYear"
+                    value={releaseYear.min}
+                    onChange={(e) => setReleaseYear({ ...releaseYear, min: e.target.value })}
+                  >
+                    <option value="">Min</option>
+                    {[...Array(16)].map((_, index) => {
+                      const decade = 1880 + index * 10;
+                      return <option key={decade} value={decade}>{decade}</option>;
+                    })}
+                  </select>
+                  <select
+                    className="select-filter"
+                    id="maxReleaseYear"
+                    value={releaseYear.max}
+                    onChange={(e) => setReleaseYear({ ...releaseYear, max: e.target.value })}
+                  >
+                    <option value="">Max</option>
+                    {[...Array(16)].map((_, index) => {
+                      const decade = 1880 + index * 10;
+                      return <option key={decade} value={decade}>{decade}</option>;
+                    })}
+                  </select>
+                </div>
+
+                <div className="filter-section">
+                  <label className="filter-label" htmlFor="rating">Arvosana:</label>
+                  <select
+                    className="select-filter"
+                    id="rating"
+                    value={rating.min}
+                    onChange={(e) => setRating({ ...rating, min: parseInt(e.target.value) })}
+                  >
+                    <option value="">Kaikki</option>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
+                      <option key={value} value={value}>{value}</option>
+                    ))}
+                  </select>
+                  <select
+                    className="select-filter"
+                    id="rating"
+                    value={rating.max}
+                    onChange={(e) => setRating({ ...rating, max: parseInt(e.target.value) })}
+                  >
+                    <option value="">Kaikki</option>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
+                      <option key={value} value={value}>{value}</option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
+
           </div>
-        </div>
-
-        <div className="filter-container">
-          <div className="filter-checkbox">
-            <input
-              type="checkbox"
-              id="filterCheckbox"
-              checked={isFilterActive}
-              onChange={() => setIsFilterActive(!isFilterActive)}
-            />
-            <label className="checkbox-label" htmlFor="filterCheckbox">Käytä suodattimia</label>
-          </div>
-          {isFilterActive && (
-            <>
-              <div className="filter-section">
-                <label className="filter-label" htmlFor="genre">Genre:</label>
-                <select className="select-filter" id="movieGenre" value={movieGenre} onChange={(e) => setMovieGenre(e.target.value)}>
-                  <option value="">Elokuvat</option>
-                  <option value="28">Action</option>
-                  <option value="12">Adventure</option>
-                  <option value="16">Animation</option>
-                  <option value="35">Comedy</option>
-                  <option value="80">Crime</option>
-                  <option value="99">Documentary</option>
-                  <option value="18">Drama</option>
-                  <option value="10751">Family</option>
-                  <option value="14">Fantasy</option>
-                  <option value="36">History</option>
-                  <option value="27">Horror</option>
-                  <option value="10402">Music</option>
-                  <option value="9648">Mystery</option>
-                  <option value="10749">Romance</option>
-                  <option value="878">Science Fiction</option>
-                  <option value="10770">TV Movie</option>
-                  <option value="53">Thriller</option>
-                  <option value="10752">War</option>
-                  <option value="37">Western</option>
-                </select>
-                <select className="select-filter" id="tvGenre" value={tvGenre} onChange={(e) => setTvGenre(e.target.value)}>
-                  <option value="">TV-sarjat</option>
-                  <option value="10759">Action & Adventure</option>
-                  <option value="16">Animation</option>
-                  <option value="35">Comedy</option>
-                  <option value="80">Crime</option>
-                  <option value="99">Documentary</option>
-                  <option value="18">Drama</option>
-                  <option value="10751">Family</option>
-                  <option value="10762">Kids</option>
-                  <option value="9648">Mystery</option>
-                  <option value="10763">News</option>
-                  <option value="10764">Reality</option>
-                  <option value="10765">Sci-Fi & Fantasy</option>
-                  <option value="10766">Soap</option>
-                  <option value="10767">Talk</option>
-                  <option value="10768">War & Politics</option>
-                  <option value="37">Western</option>
-                </select>
-              </div>
-              <div className="filter-section">
-                <label className="filter-label" htmlFor="releaseYear">Julkaisuaika:</label>
-                <select
-                  className="select-filter"
-                  id="minReleaseYear"
-                  value={releaseYear.min}
-                  onChange={(e) => setReleaseYear({ ...releaseYear, min: e.target.value })}
-                >
-                  <option value="">Min</option>
-                  {[...Array(16)].map((_, index) => {
-                    const decade = 1880 + index * 10;
-                    return <option key={decade} value={decade}>{decade}</option>;
-                  })}
-                </select>
-                <select
-                  className="select-filter"
-                  id="maxReleaseYear"
-                  value={releaseYear.max}
-                  onChange={(e) => setReleaseYear({ ...releaseYear, max: e.target.value })}
-                >
-                  <option value="">Max</option>
-                  {[...Array(16)].map((_, index) => {
-                    const decade = 1880 + index * 10;
-                    return <option key={decade} value={decade}>{decade}</option>;
-                  })}
-                </select>
-              </div>
-
-              <div className="filter-section">
-                <label className="filter-label" htmlFor="rating">Arvosana:</label>
-                <select
-                  className="select-filter"
-                  id="rating"
-                  value={rating.min}
-                  onChange={(e) => setRating({ ...rating, min: parseInt(e.target.value) })}
-                >
-                  <option value="">Kaikki</option>
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
-                    <option key={value} value={value}>{value}</option>
-                  ))}
-                </select>
-                <select
-                  className="select-filter"
-                  id="rating"
-                  value={rating.max}
-                  onChange={(e) => setRating({ ...rating, max: parseInt(e.target.value) })}
-                >
-                  <option value="">Kaikki</option>
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
-                    <option key={value} value={value}>{value}</option>
-                  ))}
-                </select>
-              </div>
-            </>
-          )}
-
         </div>
       </div>
       <div className="results-container">

@@ -88,11 +88,6 @@ const NavBar = () => {
             Hakuportaali
           </Link>
         </li>
-        <li className="nav-item">
-          <Link to="/public/group" onClick={toggleMenu}>
-            Ryhmät
-          </Link>
-        </li>
         {isAuthenticated ? (
           <>
             <li className="nav-item user-info">
