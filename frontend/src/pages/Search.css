@@ -22,15 +22,10 @@
   text-align: left;
 }
 
-.check-movie-tv-container {
-  width: 15%;
-  height: 200px;
-  padding: var(--gutter-large);
-  background-color: var(--secondary-color);
-}
-
-.filter-container {
-  width: 55%;
+.check-filter-container {
+  display: flex;
+  align-items: row;
+  width: 70%;
   height: 200px;
   padding: var(--gutter-large);
   background-color: var(--secondary-color);
@@ -68,7 +63,8 @@
 
 .check-movie-tv-container,
 .filter-container {
-  padding-top: 70px;
+  padding-top: 50px;
+  padding-right: var(--gutter-large);
 }
 
 .filter-checkbox,
@@ -161,4 +157,41 @@ img {
   font-size: 18px;
   color: var(--secondary-text-color);
   margin-bottom: var(--gutter-small);
+}
+
+ @media (max-width: 800px) {
+  .input-filter-container {
+    flex-direction: column;
+  }
+
+  .input-container {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .check-filter-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    padding: var(--gutter-large) var(--gutter-large) var(--gutter-large) 50px ;
+  }
+
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    padding: 0 var(--gutter-large) 0 var(--gutter-large) ;
+  }
+  
+  .input-container {
+    margin-bottom: var(--gutter-tiny);
+  }
+
+  .check-movie-tv-container {
+    padding-top: 0;
+    width: 250px; 
+  }
 }
