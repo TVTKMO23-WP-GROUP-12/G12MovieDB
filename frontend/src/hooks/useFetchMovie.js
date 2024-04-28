@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 function useFetchMovie(movieId) {
   const [movie, setMovie] = useState(null);
-
+  console.log(movieId);
   useEffect(() => {
     fetch(`http://localhost:8080/public/movie/${movieId}`)
       .then(response => response.blob())

@@ -42,11 +42,17 @@ public class MovieController {
     public Movie findOneMovie(@PathVariable Integer movieId) {
         return this.movieRepository.findById(movieId).orElse(null);
     }
+
     @CrossOrigin(origins = "*")
     @GetMapping("/public/movie/{movieId}")
     public String getMovieDetails(@PathVariable String movieId) {
         return movieDetailsService.getMovieDetails(movieId);
+    }
 
+    @CrossOrigin(origins = "*")
+    @GetMapping("/public/movie/tmdb=?{tmdbId}")
+    public Movie findOneMovieByTmdbId(@PathVariable("tmdbId") Integer tmdbId) {
+        return this.movieRepository.findByTmdbId(tmdbId).orElse(null);
     }
     
     @CrossOrigin(origins = "*")
@@ -56,7 +62,7 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @PostMapping("/movie")
+    @PostMapping("/public/movie")
     public Movie createOneMovie(@RequestBody Movie movie) {
         return this.movieRepository.save(movie);
     }
@@ -72,6 +78,9 @@ public class MovieController {
                     break;
                 case "title":
                     movie.setTitle((String) value);
+                    break;
+                case "tmdbId":
+                    movie.setTmdbId((Integer) value);
                     break;
                 default:
                     break;

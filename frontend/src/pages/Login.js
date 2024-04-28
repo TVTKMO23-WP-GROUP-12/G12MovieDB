@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginSignUp.css';
 import { setAuthHeader } from '../auth/authContent';
+import useFetchUserId from '../hooks/useFetchUserId';
 
 function LoginPage() {
   const [error, setError] = useState('');
@@ -10,6 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const history = useNavigate();
   const[currentUser, setCurrentUser] = useState('false')
+  const { userId } = useFetchUserId(localStorage.getItem('username'));
 
  
   const onLoginSubmit = async (e) => {
@@ -25,15 +27,12 @@ function LoginPage() {
         username: username,
         password: password
       });
-  
       const token = response.data.token;
-      const userId = response.data.userId; // Extracting the user ID from the response
 
         localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId); // Storing the user ID in local storage
-
+        localStorage.setItem('username', username); // Storing the username in local storage
+        setUsername(username);
         setAuthHeader(token);
-
   
       // Reset error message and redirect user
       setError('');

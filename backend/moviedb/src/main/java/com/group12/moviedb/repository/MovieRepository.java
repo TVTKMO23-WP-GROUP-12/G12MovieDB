@@ -13,5 +13,5 @@ import com.group12.moviedb.models.Movie;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Movie findByTitle(String group_name);
     Optional<Movie> findById(Integer movieId);
-   
+    Optional<Movie> findByTmdbId(Integer tmdbId);
 }
