@@ -9,7 +9,7 @@ function useFetchMovieCredits(tmdbId) {
       .then(data => setCredits(data))
       .catch(error => console.error('Error:', error));
   }, [tmdbId]);
-  console.log(credits);
+  
   return credits;
 }
 

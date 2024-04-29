@@ -24,7 +24,6 @@ function useFetchUserReviewMovie(userId) {
         setLoading(false);
       });
   }, [userId, movieId]);
-  console.log(data);
   return { data, loading, error };
 }
 

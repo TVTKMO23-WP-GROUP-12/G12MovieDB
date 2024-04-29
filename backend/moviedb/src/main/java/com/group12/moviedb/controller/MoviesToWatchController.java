@@ -49,10 +49,12 @@ public class MoviesToWatchController {
         return moviesToWatchRepository.findByUser(user);
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/movies_to_watch/movie/{movie_id}")
     public List<MoviesToWatch> getMoviesToWatchByMovieId(@PathVariable("movie_id") Integer movieId) {
-        Movie movie = new Movie(movieId, null, movieId);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) {
+            return null;
+        }
         return moviesToWatchRepository.findByMovie(movie);
     }
 

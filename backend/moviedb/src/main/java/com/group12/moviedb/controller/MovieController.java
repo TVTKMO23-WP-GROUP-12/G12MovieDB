@@ -8,6 +8,7 @@ import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.repository.MovieRepository;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,9 +52,9 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/public/movie/{movieId}")
-    public Movie findOneMovieByTmdbId(@PathVariable("movieId") Integer movieId) {
-        return this.movieRepository.findByTmdbId(movieId).orElse(null);
+    @GetMapping("/public/movie/tmdb/{tmdbId}")
+    public Movie findOneMovieByTmdbId(@PathVariable("tmdbId") Integer tmdbId) {
+        return this.movieRepository.findByTmdbId(tmdbId).orElse(null);
     }
     
     @CrossOrigin(origins = "*")
@@ -66,6 +67,20 @@ public class MovieController {
     @PostMapping("/public/movie")
     public Movie createOneMovie(@RequestBody Movie movie) {
         return this.movieRepository.save(movie);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/public/movie/{tmdbId}/{title}")
+    public Movie createOneMovieWithTmdbIdAndTitle(@PathVariable Integer tmdbId, @PathVariable String title) {
+        Optional<Movie> existingMovie = this.movieRepository.findByTmdbId(tmdbId);
+        if (existingMovie.isPresent()) {
+            return existingMovie.get();
+        } else {
+            Movie movie = new Movie();
+            movie.setTmdbId(tmdbId);
+            movie.setTitle(title);
+            return this.movieRepository.save(movie);
+        }
     }
     
     @CrossOrigin(origins = "*")

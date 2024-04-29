@@ -17,8 +17,6 @@ function MovieInfo({ movie }) {
         }
       }, [movie]);
 
-      usePostMovie();
-
       const postMovie = () => {
         const movieData = {
           movieId: parseInt(movieId),

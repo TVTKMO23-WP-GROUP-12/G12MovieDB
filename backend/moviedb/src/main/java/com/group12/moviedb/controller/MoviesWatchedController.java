@@ -19,6 +19,7 @@ import com.group12.moviedb.repository.MovieRepository;
 import com.group12.moviedb.repository.MoviesWatchedRepository;
 import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.models.Movie;
+import com.group12.moviedb.models.MoviesToWatch;
 import com.group12.moviedb.models.MoviesWatched;
 import com.group12.moviedb.models.User;
 
@@ -48,10 +49,12 @@ public class MoviesWatchedController {
         return moviesWatchedRepository.findByUser(user);
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/movie/{movie_id}")
     public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") Integer movieId) {
-        Movie movie = new Movie(movieId, null, movieId);
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) {
+            return null;
+        }
         return moviesWatchedRepository.findByMovie(movie);
     }
 
