@@ -17,6 +17,7 @@ import useIsMobile from '../hooks/useIsMobile';
 function UserDetail() {
   const { id } = useParams();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const userDetails = useFetchUser(id, setUser);
   const reviews = useFetchReviews(id);
   const favorites = useFetchFavorites(id);
@@ -27,9 +28,16 @@ function UserDetail() {
   const [selectedTabRight, setSelectedTabRight] = useState('Reviews');
   const isMobile = useIsMobile();
 
+  useEffect(() => {
+    if (userDetails && reviews && favorites && watchedMovies && toWatchMovies) {
+      setLoading(false);
+    }
+  }, [userDetails, reviews, favorites, watchedMovies, toWatchMovies]);
+
+
   return user ? (
     <div>  
-        <User id={id} />
+        <User />
     <div className="user-tabs-container">
     <div className="user-tabs-left">
           <Link className={isMobile ? (selectedTab === 'News' ? 'active' : '') : (selectedTabLeft === 'News' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('News') : setSelectedTabLeft('News')}><p>Uutiset</p></Link>
@@ -66,7 +74,7 @@ function UserDetail() {
           //Fetch a list of groups the user is a member of and display them.
           }
           {selectedTab === 'Groups' && (
-            <Groups user={user}/>
+            <Groups />
           )}
           {
           //call the Favorites component and pass the userId as a prop

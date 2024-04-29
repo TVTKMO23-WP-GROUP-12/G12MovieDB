@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
 public class MovieController {
@@ -32,20 +33,20 @@ public class MovieController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/movie")
+    @GetMapping("/public/movie")
     public Iterable<Movie> findAllMovies() {
         return this.movieRepository.findAll();
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/movie/{movie_id}")
-    public Movie findOneMovie(@PathVariable Integer movieId) {
+    @GetMapping("/public/movie/{movie_id}")
+    public Movie findOneMovie(@PathVariable("movie_id") Integer movieId) {
         return this.movieRepository.findById(movieId).orElse(null);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/public/tmdb/{tmdbId}")
-    public String getMovieDetails(@PathVariable String tmdbId) {
+    public String getMovieDetails(@PathVariable("tmdbId") String tmdbId) {
         return movieDetailsService.getMovieDetails(tmdbId);
     }
 

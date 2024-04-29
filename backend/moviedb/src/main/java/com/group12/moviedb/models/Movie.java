@@ -2,6 +2,9 @@ package com.group12.moviedb.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -15,19 +18,24 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
-
+    
+    @JsonBackReference
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<MoviesToWatch> moviesToWatch;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> review;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<MovieScore> movieScores;
 
     @Column(name = "title")
@@ -38,13 +46,12 @@ public class Movie {
 
     public Movie() {}
 
-    public Movie(Integer movieId, String title, Integer tmdbId) {
-        this.id = movieId;
+    public Movie(String title, Integer tmdbId) {
         this.title = title;
         this.tmdbId = tmdbId;
     }
 
-    public Integer getmovieId(Integer movieId) {
+    public Integer getmovieId() {
         return this.id;
     }
 

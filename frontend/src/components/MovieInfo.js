@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MovieInfo.css';
 import noImageAvailable from '../media/noImageAvailable.png';
 import { Link } from 'react-router-dom';
+import usePostMovie from '../hooks/usePostMovie';
 
 function MovieInfo({ movie }) {
     const releaseDate = movie.release_date.split('-').reverse().join('/');
+    const movieId = localStorage.getItem('movieId');
+    const userId = localStorage.getItem('userId');
+    const [note, setNote] = useState('');
 
     useEffect(() => {
         if (movie) {
@@ -13,13 +17,55 @@ function MovieInfo({ movie }) {
         }
       }, [movie]);
 
+      usePostMovie();
+
       const postMovie = () => {
         const movieData = {
-          tmdbId: localStorage.getItem('movieTmdb'),
-          title: localStorage.getItem('movieTitle'),
+          movieId: parseInt(movieId),
+          userId: parseInt(userId),
+          createdAt: new Date(),
+          updatedAt: new Date()
         };
     
-        fetch('http://localhost:8080/public/movie', {
+        fetch('http://localhost:8080/favorites', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(movieData),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+      };
+
+      const postWatched = (note) => {
+        const movieData = {
+          movieId: parseInt(movieId),
+          userId: parseInt(userId),
+          note: note
+        };
+      
+        fetch('http://localhost:8080/movies_watched', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(movieData),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+      };
+      
+      const postToWatch = (note) => {
+        const movieData = {
+          movieId: parseInt(movieId),
+          userId: parseInt(userId),
+          note: note
+        };
+      
+        fetch('http://localhost:8080/movies_to_watch', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -54,7 +100,10 @@ function MovieInfo({ movie }) {
                 <div className="movie-container-rating">
                     <p><b>Arvosana: </b>{movie.vote_average} ({movie.vote_count} ääntä)</p>
                     <p></p>
-                    <button onClick={postMovie}>Lisää tietokantaan</button>
+                    <input type="text" value={note} onChange={e => setNote(e.target.value)} />
+                    <button onClick={postMovie}>Lisää Suosikiksi</button>
+                    <button onClick={() => { postWatched(note); setNote(''); }}>Lisää katsotuksi</button>
+                    <button onClick={() => { postToWatch(note); setNote(''); }}>Lisää katsottaviin</button>
                 </div>
             </div>
         </div>

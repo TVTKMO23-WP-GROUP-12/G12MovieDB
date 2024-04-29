@@ -24,11 +24,11 @@ function GroupDetail() {
   // Fetch group members and their reviews
 
   useEffect(() => {
-    let groupData;  // Define a variable to hold the group data
+    let groupData; 
     fetch(`http://localhost:8080/group/${id}`)
       .then(response => response.json())
       .then(data => {
-        groupData = data;  // Assign the fetched data to groupData
+        groupData = data;  
         setGroup(prevGroup => ({ ...prevGroup, ...data, groupPicture: data.groupPicture || defaultGroupPicture }));
         return Promise.all(data.groupMembers.map(member =>
           fetch(`http://localhost:8080/users/${member.id}`)
@@ -46,7 +46,7 @@ function GroupDetail() {
       })
       .then(userDetailsArray => {
         const updatedGroupMembers = userDetailsArray.map((userDetails, index) => ({
-          ...groupData.groupMembers[index],  // Use groupData instead of data
+          ...groupData.groupMembers[index],  
           user: userDetails
         }));
         setGroup(prevGroup => ({ ...prevGroup, groupMembers: updatedGroupMembers }));

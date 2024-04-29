@@ -1,6 +1,8 @@
 package com.group12.moviedb.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +30,12 @@ public class MoviesWatchedController {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private MoviesWatchedRepository MoviesWatchedRepository;
+    private MoviesWatchedRepository moviesWatchedRepository;
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched")
     public List<MoviesWatched> getMoviesWatched() {
-        return MoviesWatchedRepository.findAll();
+        return moviesWatchedRepository.findAll();
     }
 
     @CrossOrigin(origins = "*")
@@ -43,14 +45,14 @@ public class MoviesWatchedController {
         if (user == null) {
             return null;
         }
-        return MoviesWatchedRepository.findByUser(user);
+        return moviesWatchedRepository.findByUser(user);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/movies_watched/movie/{movie_id}")
     public List<MoviesWatched> getMoviesWatchedByMovieId(@PathVariable("movie_id") Integer movieId) {
         Movie movie = new Movie(movieId, null, movieId);
-        return MoviesWatchedRepository.findByMovie(movie);
+        return moviesWatchedRepository.findByMovie(movie);
     }
 
     @CrossOrigin(origins = "*")
@@ -61,13 +63,19 @@ public class MoviesWatchedController {
         if (user == null || movie == null) {
             return null;
         }
-        return MoviesWatchedRepository.findByUserAndMovie(user, movie);
+        return moviesWatchedRepository.findByUserAndMovie(user, movie);
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_watched")
-    public MoviesWatched addMoviesWatched(@RequestBody MoviesWatched MoviesWatched) {
-        return MoviesWatchedRepository.save(MoviesWatched);
+    public MoviesWatched addMoviesWatched(@RequestBody Map<String, Object> moviesWatched) {
+        User user = userRepository.findById((Integer) moviesWatched.get("userId")).orElseThrow();
+        Movie movie = movieRepository.findById((Integer) moviesWatched.get("movieId")).orElseThrow();
+        String note = (String) moviesWatched.get("note");
+
+        MoviesWatched newMoviesWatched = new MoviesWatched(user, movie, note, LocalDateTime.now(), LocalDateTime.now());
+
+        return this.moviesWatchedRepository.save(newMoviesWatched);
     }
 
     @CrossOrigin(origins = "*")
@@ -78,7 +86,7 @@ public class MoviesWatchedController {
             return null;
         }
         MoviesWatched.setUser(user);
-        return MoviesWatchedRepository.save(MoviesWatched);
+        return moviesWatchedRepository.save(MoviesWatched);
     }
 
     @CrossOrigin(origins = "*")
@@ -91,7 +99,7 @@ public class MoviesWatchedController {
         }
         MoviesWatched.setUser(user);
         MoviesWatched.setMovie(movie);
-        return MoviesWatchedRepository.save(MoviesWatched);
+        return moviesWatchedRepository.save(MoviesWatched);
     }
     
     @PatchMapping("/movies_watched/user/{user_id}")
@@ -102,7 +110,7 @@ public class MoviesWatchedController {
             return null;
         }
         MoviesWatched.setUser(user);
-        return MoviesWatchedRepository.save(MoviesWatched);
+        return moviesWatchedRepository.save(MoviesWatched);
     }
     
     @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
@@ -118,7 +126,7 @@ public class MoviesWatchedController {
         }
         MoviesWatched.setUser(user);
         MoviesWatched.setMovie(movie);
-        return MoviesWatchedRepository.save(MoviesWatched);
+        return moviesWatchedRepository.save(MoviesWatched);
     }
     
     @PatchMapping("/movies_watched/user/{user_id}/movie/{movie_id}/note/{note}")
@@ -136,7 +144,7 @@ public class MoviesWatchedController {
         MoviesWatched.setUser(user);
         MoviesWatched.setMovie(movie);
         MoviesWatched.setNote(note);
-        return MoviesWatchedRepository.save(MoviesWatched);
+        return moviesWatchedRepository.save(MoviesWatched);
     }
     
     @DeleteMapping("/movies_watched/user/{user_id}")
@@ -145,7 +153,7 @@ public class MoviesWatchedController {
         if (user == null) {
             return;
         }
-        MoviesWatchedRepository.deleteByUser(user);
+        moviesWatchedRepository.deleteByUser(user);
     }
     
     @DeleteMapping("/movies_watched/user/{user_id}/movie/{movie_id}")
@@ -156,6 +164,6 @@ public class MoviesWatchedController {
         if (user == null || movie == null) {
             return;
         }
-        MoviesWatchedRepository.deleteByUserAndMovie(user, movie);
+        moviesWatchedRepository.deleteByUserAndMovie(user, movie);
     }
 }

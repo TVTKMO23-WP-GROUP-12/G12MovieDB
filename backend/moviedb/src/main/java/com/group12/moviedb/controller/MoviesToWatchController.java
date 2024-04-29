@@ -1,7 +1,9 @@
 package com.group12.moviedb.controller;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +20,7 @@ import com.group12.moviedb.repository.MoviesToWatchRepository;
 import com.group12.moviedb.repository.UserRepository;
 import com.group12.moviedb.models.Movie;
 import com.group12.moviedb.models.MoviesToWatch;
+import com.group12.moviedb.models.MoviesWatched;
 import com.group12.moviedb.models.User;
 
 @RestController
@@ -66,8 +69,14 @@ public class MoviesToWatchController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/movies_to_watch")
-    public MoviesToWatch addMoviesToWatch(@RequestBody MoviesToWatch moviesToWatch) {
-        return moviesToWatchRepository.save(moviesToWatch);
+    public MoviesToWatch addMoviesToWatch(@RequestBody Map<String, Object> moviesToWatch) {
+        User user = userRepository.findById((Integer) moviesToWatch.get("userId")).orElseThrow();
+        Movie movie = movieRepository.findById((Integer) moviesToWatch.get("movieId")).orElseThrow();
+        String note = (String) moviesToWatch.get("note");
+
+        MoviesToWatch newMoviesToWatch = new MoviesToWatch(user, movie, note, LocalDateTime.now(), LocalDateTime.now());
+
+        return this.moviesToWatchRepository.save(newMoviesToWatch);
     }
 
     @CrossOrigin(origins = "*")

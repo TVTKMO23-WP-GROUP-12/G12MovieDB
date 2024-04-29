@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 
-function useFetchUserReviewMovie(userId) {
+function useFetchMovie() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const movieId = localStorage.getItem('movieId');
 
   useEffect(() => {
-    fetch(`http://localhost:8080/review/user=${userId}/movie=${movieId}`)
+    fetch(`http://localhost:8080/movie/${movieId}`)
       .then(response => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Error: ' + response.status);
+          throw new Error('Error fetching movie data');
         }
       })
       .then(data => {
@@ -23,9 +23,10 @@ function useFetchUserReviewMovie(userId) {
         setError(error);
         setLoading(false);
       });
-  }, [userId, movieId]);
-  console.log(data);
-  return { data, loading, error };
+  }, [movieId]);  // re-run the effect when movieId changes
+  console.log (data);
+  return { data };
+  
 }
 
-export default useFetchUserReviewMovie;
+export default useFetchMovie;

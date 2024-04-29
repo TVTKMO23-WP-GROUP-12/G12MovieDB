@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -22,10 +23,12 @@ public class MovieScore {
     private Integer id;
 
     @OneToMany(mappedBy = "movieScoreId", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Review> review;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonBackReference
     @JsonIgnoreProperties("favorites")
     private Movie movie;
 

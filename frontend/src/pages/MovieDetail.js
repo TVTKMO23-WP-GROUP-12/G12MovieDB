@@ -5,17 +5,13 @@ import MovieInfo from '../components/MovieInfo';
 import MovieCredits from '../components/MovieCredits';
 import MovieReviews from '../components/MovieReviews';
 import useFetchMovie from '../hooks/useFetchMovie';
-import usePostMovie from '../hooks/usePostMovie';
 import useFetchMovieCredits from '../hooks/useFetchMovieCredits';
-import useFetchMovieReviews from '../hooks/useFetchMovieReviews';
 
 function MovieDetail() {
   const { id } = useParams();
   const movie = useFetchMovie(id);
   const credits = useFetchMovieCredits(id);
   const [selectedTab, setSelectedTab] = useState('Reviews');
-
-  usePostMovie();
 
   return movie ? (
     <>

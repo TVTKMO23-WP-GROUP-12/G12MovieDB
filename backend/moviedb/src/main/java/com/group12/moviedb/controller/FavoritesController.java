@@ -1,5 +1,7 @@
 package com.group12.moviedb.controller;
 
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,14 +41,22 @@ public class FavoritesController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/favorites/{user_id}")
-    public Favorites findOneFavoriteByUser(Integer userId) {
-        return this.favoritesRepository.findByUser(null);
+    public List<Favorites> findOneFavoriteByUser(@PathVariable("user_id") Integer userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        return this.favoritesRepository.findByUser(user);
     }
 
     @CrossOrigin(origins = "*")
     @PostMapping("/favorites")
-    public Favorites addOneFavorite(@RequestBody Favorites favorite) {
-        return this.favoritesRepository.save(favorite);
+    public Favorites addOneFavorite(@RequestBody Map<String, Object> favorite) {
+        User user = userRepository.findById((Integer) favorite.get("userId")).orElseThrow();
+        Movie movie = movieRepository.findById((Integer) favorite.get("movieId")).orElseThrow();
+    
+        Favorites newFavorite = new Favorites();
+        newFavorite.setUser(user);
+        newFavorite.setMovie(movie);
+    
+        return this.favoritesRepository.save(newFavorite);
     }
 
     @CrossOrigin(origins = "*")

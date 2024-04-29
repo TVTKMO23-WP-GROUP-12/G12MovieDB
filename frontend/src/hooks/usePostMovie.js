@@ -1,43 +1,37 @@
 import { useEffect } from 'react';
 
 function usePostMovie() {
-  const movieId = localStorage.getItem('movieId');
-  const movieTitle = localStorage.getItem('movieTitle');
-  const getMovieUrl = `http://localhost:8080/public/movie/${movieId}`;
-  const postMovieUrl = 'http://localhost:8080/public/movie';
-  
-  useEffect(() => {
-    if (!movieId) {
-      return;
-    }
+  const tmdbId = localStorage.getItem('movieTmdb');
+  const title = localStorage.getItem('movieTitle');
 
-    fetch(getMovieUrl)
-      .then(response => {
+  fetch(`http://localhost:8080/public/movie/${parseInt(tmdbId)}`)
+    .then(response => {
+      if (response.ok) {
         return response.json();
-      })      
-      .then(data => {
-        if (data === null) {
-          const movieData = {
-            tmdbId: movieId,
-            title: movieTitle,
-          };
-          console.log(movieData);
-          fetch(postMovieUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movieData),
-          })
-          .then(response => {
-            return response.json();
-          })
-          .then(postResponse => console.log(postResponse))
-          .catch(error => console.error('Error:', error));
-        }
+      } else {
+        throw new Error('Movie not found');
+      }
+    })
+    .then(movie => {
+      console.log('Movie found:', movie);
+    })
+    .catch(error => {
+      console.log('Movie not found, adding new movie:', error);
+      const newMovie = {
+        title: title,
+        tmdbId: parseInt(tmdbId)
+      };
+      fetch('http://localhost:8080/public/movie', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newMovie),
       })
+      .then(response => response.json())
+      .then(data => console.log('New movie added:', data))
       .catch(error => console.error('Error:', error));
-  }, [movieId, movieTitle]);
+    });
 }
 
 export default usePostMovie;

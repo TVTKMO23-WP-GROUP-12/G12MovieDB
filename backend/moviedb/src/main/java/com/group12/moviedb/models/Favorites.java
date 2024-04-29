@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -16,11 +18,13 @@ import lombok.NoArgsConstructor;
 public class Favorites implements Serializable {
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_id")
     private User user;
 
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "movie_id")
     private Movie movie;
 

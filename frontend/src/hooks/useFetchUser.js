@@ -11,15 +11,9 @@ useEffect(() => {
       const userDataResponse = await fetch(`http://localhost:8080/users/${userId}`);
       const userData = await userDataResponse.json();
       setUser(userData);
-
-      const profilePictureResponse = await fetch(`http://localhost:8080/users/${userId}/profile-picture`);
-      if (profilePictureResponse.ok) {
-        const profilePictureData = await profilePictureResponse.json();
-        setProfilePicture(profilePictureData.url);
-      } else {
-        // Use default profile picture if the user does not have one
-        setProfilePicture(defaultProfilePicture);
-      }
+     // Use default profile picture
+      setProfilePicture(defaultProfilePicture);
+      
     } catch (error) {
       console.error('Error fetching user data:', error);
     }

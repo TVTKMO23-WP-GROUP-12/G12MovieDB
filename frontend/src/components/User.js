@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
 
-function User({ userId }) {
+function User({ }) {
+  const userId = localStorage.getItem('userId');
   const { user, profilePicture } = useFetchUser(userId);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');

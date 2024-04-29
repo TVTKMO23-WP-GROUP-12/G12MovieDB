@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.group12.moviedb.dataSources.SignUpDto;
@@ -29,12 +30,15 @@ public class User {
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
 
+    @JsonBackReference
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<Favorites> favorites;
 
+    @JsonBackReference
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesWatched> moviesWatched;
-
+    
+    @JsonBackReference
     @OneToMany(mappedBy="user", cascade = CascadeType.ALL)
     private List<MoviesToWatch> moviesToWatch;
 
@@ -70,21 +74,22 @@ public class User {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
-
     @Column(name = "user_description", nullable = true, length = 255)
     private String userDescription;
+
     @Column(name ="profilePicture", nullable = true, length = 64)
     private String profilePicture;
 
     public User() {}
 
 
-    public User(Integer userId, String username, String email, String password, String userDescription) {
+    public User(Integer userId, String username, String email, String password, String userDescription, String profilePicture) {
         this.id = userId;
         this.username = username;
         this.email = email;
         this.password = password;
         this.userDescription = userDescription;
+        this.profilePicture = profilePicture;
     }
 
     public Integer getId(Integer UserId) {
@@ -121,6 +126,10 @@ public class User {
 
     public List<Group> getGroups() {
         return this.group;
+    }
+
+    public String profilepicture() {
+        return this.profilePicture;
     }
 
     public List<Favorites> getFavorites() {

@@ -1,6 +1,8 @@
 package com.group12.moviedb.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -17,11 +19,13 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name="movie_id")
+    @JsonBackReference
     @JsonIgnoreProperties("favorites")
     private Movie movie;
 
     @ManyToOne
     @JoinColumn(name="movie_score_id")
+    @JsonManagedReference
     private MovieScore movieScoreId;
 
     @Column(name="content", nullable = false)

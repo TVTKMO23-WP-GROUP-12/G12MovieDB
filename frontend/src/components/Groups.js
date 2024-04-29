@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 // On: 
 // - UserDetail
 
-const Groups = ({ user }) => {
+const Groups = ({ }) => {
+  const user = localStorage.getItem('userId');
   const groups = user.groups;
 
   if (!groups) {

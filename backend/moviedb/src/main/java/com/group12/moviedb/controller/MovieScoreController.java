@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -20,6 +22,7 @@ import com.group12.moviedb.repository.MovieScoreRepository;
 @RestController
 public class MovieScoreController {
     
+    @Autowired
     private final MovieScoreRepository movieScoreRepository;
 
     public MovieScoreController(MovieScoreRepository movieScoreRepository) {
@@ -31,6 +34,7 @@ public class MovieScoreController {
         return this.movieScoreRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/movie_scores/movie={movie_score_id}")
     public ResponseEntity<MovieScore> findOneMovieScoreByMovieId(@PathVariable("movieScoreId") Integer movieScoreId) {
         MovieScore movieScore = this.movieScoreRepository.findByMovieId(movieScoreId);
@@ -41,12 +45,14 @@ public class MovieScoreController {
         }
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/movie_scores/{movie_score_id}")
     public ResponseEntity<MovieScore> findOneMovieScoreById(@PathVariable("movie_score_id") Integer movieScoreId) {
         Optional<MovieScore> optionalMovieScore = this.movieScoreRepository.findById(movieScoreId);
         return optionalMovieScore.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-
+    
+    @CrossOrigin(origins = "*")
     @PostMapping("/movie_scores")
     public MovieScore addOneMovieScore(@RequestBody MovieScore movieScore) {
         return this.movieScoreRepository.save(movieScore);
