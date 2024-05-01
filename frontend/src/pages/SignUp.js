@@ -37,7 +37,7 @@ function SignUpPage() {
   return (
     <section className="main-content">
       <div className="content">
-        <h2 className="title">Sign Up</h2>
+        <h2 className="title">Rekisteröidy</h2>
         <form onSubmit={onSignUpSubmit}>
           <div className="form-container">
             <div className="form-field">
@@ -47,7 +47,7 @@ function SignUpPage() {
                 name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
+                placeholder="Käyttäjätunnus"
               />
             </div>
             <div className="form-field">
@@ -57,7 +57,7 @@ function SignUpPage() {
                 name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                placeholder="Sähköposti"
               />
             </div>
             <div className="form-field">
@@ -67,7 +67,7 @@ function SignUpPage() {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+                placeholder="Salasana"
               />
             </div>
             <div className="form-field">
@@ -77,18 +77,18 @@ function SignUpPage() {
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm Password"
+                placeholder="Salasana uudelleen"
               />
             </div>
             {error && <p className="error-message">{error}</p>}
             <button type="submit" className="btn-login">
-              Sign Up
+              Rekisteröidy
             </button>
           </div>
         </form>
         <div className="old-user">
           <h5 className="new">
-            Already have an account? <Link to="/login">Login</Link>
+            Onko sinulla jo tili? <Link to="/login">Kirjaudu sisään</Link>
           </h5>
         </div>
       </div>
