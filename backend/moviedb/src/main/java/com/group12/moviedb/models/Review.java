@@ -46,6 +46,10 @@ public class Review {
         return this.id;
     }
 
+    public Integer getReviewId() {
+        return this.id;
+    }
+
     public Integer getUser() {
         return this.userId;
     }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './MovieReview.css';
 
-const MovieReviews = () => {
+const MovieOtherReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [users, setUsers] = useState({});
-
+  
   useEffect(() => {
     const movieId = localStorage.getItem('movieId');
     const currentUserId = Number(localStorage.getItem('userId'));
@@ -39,4 +39,4 @@ const MovieReviews = () => {
   );
 };
 
-export default MovieReviews;
+export default MovieOtherReviews;

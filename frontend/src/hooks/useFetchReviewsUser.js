@@ -8,8 +8,19 @@ const useFetchReviews = (id, onReviewsLoaded) => {
       fetch(`http://localhost:8080/review/user=${id}`)
         .then(response => response.json())
         .then(data => {
-          setReviews(data);
-          // Call the callback function when data fetching is complete
+          const promises = data.map(review =>
+            fetch(`http://localhost:8080/public/tmdb/${review.movie.tmdbId}`)
+              .then(response => response.json())
+              .then(movieDetails => ({ 
+                ...review, 
+                movieDetails, 
+                poster_path: movieDetails.poster_path 
+              }))
+          );
+          return Promise.all(promises);
+        })
+        .then(reviewsWithDetails => {
+          setReviews(reviewsWithDetails);
           if (onReviewsLoaded) {
             onReviewsLoaded();
           }
@@ -18,7 +29,6 @@ const useFetchReviews = (id, onReviewsLoaded) => {
     }
   }, [id, onReviewsLoaded]);
   return reviews;
-
 };
 
 export default useFetchReviews;

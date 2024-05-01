@@ -4,7 +4,6 @@ function usePostMovie() {
   useEffect(() => {
     const tmdbId = parseInt(localStorage.getItem('movieTmdb'));
     const title = localStorage.getItem('movieTitle');
-
     fetch(`http://localhost:8080/public/movie/tmdb/${parseInt(tmdbId)}`)
       .then(response => {
         if (response.ok) {
@@ -15,6 +14,7 @@ function usePostMovie() {
       })
       .then(movie => {
         console.log('Movie found:', movie);
+        localStorage.setItem('movieId', movie.id);
       })
       .catch(error => {
         console.log('Movie not found, adding new movie:', title);

@@ -38,8 +38,8 @@ function MovieCredits({ credits }) {
             ))}
         </div>
         <div className="movie-cast-pagination">
-            <button className="credits-button" onClick={handlePrevClick}>Edellinen</button>
-            <button className="credits-button" onClick={handleNextClick}>Seuraava</button>
+            <button className="button" onClick={handlePrevClick}>Edellinen</button>
+            <button className="button" onClick={handleNextClick}>Seuraava</button>
         </div>
     </div>
     )

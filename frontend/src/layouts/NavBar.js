@@ -18,6 +18,7 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const history = useNavigate();
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -79,6 +80,11 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to={`/user/${userId}`} onClick={toggleMenu}>
+            Oma sivu
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/public/showtimes" onClick={toggleMenu}>
             Näytösajat
           </Link>
@@ -100,17 +106,14 @@ const NavBar = () => {
               </div>
               <span>{username}</span>
             </li>
-            <li className="nav-item">
-              <Link to={'/user/userId'} onClick={toggleMenu}>
-                Oma sivu
-              </Link>
-            </li>
+
             <li className="nav-item">
               <button onClick={handleLogout}>Kirjaudu ulos</button>
             </li>
           </>
         ) : (
           <>
+          <hr></hr>
             <li className="nav-item">
               <Link to="/login" onClick={toggleMenu}>
                 Kirjaudu sisään

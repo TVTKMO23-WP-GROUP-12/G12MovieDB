@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -55,12 +56,11 @@ public class GroupMembersController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/group/members/user={user_id}")
-    public List<GroupMembers> findGroupMembersByUserId(@PathVariable Integer userId) {
-        User user = userRepository.findById(userId)
-            .orElseThrow(() -> new NoSuchElementException("User not found"));
-        if (user != null) {
-            return this.groupMembersRepository.findByUser(user);
+    @GetMapping("/group/members/user/{user_id}")
+    public List<GroupMembers> findGroupMembersByUserId(@PathVariable("user_id") Integer userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            return this.groupMembersRepository.findByUser(userOptional.get());
         }
         return Collections.emptyList();
     }

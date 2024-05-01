@@ -1,10 +1,15 @@
 package com.group12.moviedb.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,9 +46,25 @@ public class FavoritesController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/favorites/{user_id}")
-    public List<Favorites> findOneFavoriteByUser(@PathVariable("user_id") Integer userId) {
+    public ResponseEntity<List<Favorites>> findOneFavoriteByUser(@PathVariable("user_id") Integer userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        User user = userOptional.get();
+        List<Favorites> favorites = this.favoritesRepository.findByUser(user);
+        
+        return new ResponseEntity<>(favorites, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/favorites/{user_id}/{movie_id}")
+    public List<Favorites> findOneFavoriteByUserAndMovie(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
         User user = userRepository.findById(userId).orElseThrow();
-        return this.favoritesRepository.findByUser(user);
+        Movie movie = movieRepository.findById(movieId).orElseThrow();
+        return this.favoritesRepository.findByUserAndMovie(user, movie);
     }
 
     @CrossOrigin(origins = "*")
@@ -80,5 +101,18 @@ public class FavoritesController {
     
         // Save and return the updated favorite
         return this.favoritesRepository.save(existingFavorite);
+    }
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/favorites/{user_id}/{movie_id}")
+    public ResponseEntity<Void> deleteOneFavorite(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
+        Movie movie = movieRepository.findById(movieId)
+            .orElseThrow(() -> new NoSuchElementException("Movie not found"));
+        LocalDateTime now = LocalDateTime.now();
+        Favorites favorite = new Favorites(user, movie, now, now);
+        favoritesRepository.delete(favorite);
+        return ResponseEntity.noContent().build();
     }
 }

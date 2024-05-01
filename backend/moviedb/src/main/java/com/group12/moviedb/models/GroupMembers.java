@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -24,10 +25,10 @@ public class GroupMembers {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
-
+    
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "group_id")
-    @JsonBackReference
     private Group group;
 
     @Column(name = "is_admin")

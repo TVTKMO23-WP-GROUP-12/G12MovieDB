@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
 
-function User({ }) {
+function User({ user, profilePicture }) {
   const userId = localStorage.getItem('userId');
-  const { user, profilePicture } = useFetchUser(userId);
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
   const [userData, setUserData] = useState ('');
-
   const joinedAt = user ? new Date(user.createdAt) : null;
   const formattedDate = joinedAt ? `${("0" + joinedAt.getDate()).slice(-2)}.${("0" + (joinedAt.getMonth() + 1)).slice(-2)}.${joinedAt.getFullYear()}` : '';
+
 
   // Update the user description
   const submitDescription = () => {
@@ -20,21 +19,17 @@ function User({ }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userDescription: editedDescription,
+        description: editedDescription,
       }),
     })
-      .then(response => response.json())
-      .then(data => {
-        // Update user state
-        setUserData(prevUser => ({ ...prevUser, userDescription: data.userDescription }));
-        setEditedDescription("");
-      })
-      .catch(error => console.error('Error:', error));
+    .then(response => response.json())
+    .then(data => {
+      // Update user state
+      setUserData(prevUser => ({ ...prevUser, description: data.description })); // and this line
+      setEditedDescription("");
+    })
+    .catch(error => console.error('Error:', error));
   };
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="userdetail-container">
@@ -52,7 +47,6 @@ function User({ }) {
       <div className="user-bio">
         <p className="use-bio-text">{user.userDescription}</p>
       </div>
-
       <div className="user-update-description">
         {isEditing ? (
           <>
@@ -69,6 +63,7 @@ function User({ }) {
         ) : (
           <button onClick={() => {
             setIsEditing(true);
+            console.log(user);
             setEditedDescription(user.userDescription);
           }}>Muokkaa</button>
         )}

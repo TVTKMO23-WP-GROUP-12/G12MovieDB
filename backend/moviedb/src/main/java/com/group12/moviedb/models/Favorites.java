@@ -36,7 +36,6 @@ public class Favorites implements Serializable {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-
     public Favorites(User user, Movie movie, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.user = user;
         this.movie = movie;

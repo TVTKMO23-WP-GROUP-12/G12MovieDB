@@ -156,7 +156,7 @@
     background-color: var(--primary-color); 
   }
 
-  .credits-button {
+  .button {
     background-color: var(--background-color);
     border: 1px solid var(--primary-text-color);
     border-radius: 5px;
@@ -165,6 +165,18 @@
     text-transform: uppercase;
     font-size:x-small;
     width: 100px;
+    color: var(--primary-text-color);
+  }
+
+  .FAbutton {
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-size:large;
+    width: 50px;
     color: var(--primary-text-color);
   }
 

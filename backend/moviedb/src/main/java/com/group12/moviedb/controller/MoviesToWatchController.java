@@ -4,8 +4,10 @@ package com.group12.moviedb.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +50,8 @@ public class MoviesToWatchController {
         }
         return moviesToWatchRepository.findByUser(user);
     }
-
+    
+    @CrossOrigin(origins = "*")
     @GetMapping("/movies_to_watch/movie/{movie_id}")
     public List<MoviesToWatch> getMoviesToWatchByMovieId(@PathVariable("movie_id") Integer movieId) {
         Movie movie = movieRepository.findById(movieId).orElse(null);
@@ -59,13 +62,10 @@ public class MoviesToWatchController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
+    @GetMapping("/movies_to_watch/{user_id}/{movie_id}")
     public List<MoviesToWatch> getMoviesToWatchByIds(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
         User user = userRepository.findById(userId).orElse(null);
         Movie movie = movieRepository.findById(movieId).orElse(null);
-        if (user == null || movie == null) {
-            return null;
-        }
         return moviesToWatchRepository.findByUserAndMovie(user, movie);
     }
 
@@ -155,14 +155,16 @@ public class MoviesToWatchController {
         moviesToWatchRepository.deleteByUser(user);
     }
     
-    @DeleteMapping("/movies_to_watch/user/{user_id}/movie/{movie_id}")
-    public void deleteMoviesToWatchByIds(@PathVariable("user_id") Integer userId,
-                                          @PathVariable("movie_id") Integer movieId) {
-        User user = userRepository.findById(userId).orElse(null);
-        Movie movie = movieRepository.findById(movieId).orElse(null);
-        if (user == null || movie == null) {
-            return;
-        }
-        moviesToWatchRepository.deleteByUserAndMovie(user, movie);
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/movies_to_watch/{user_id}/{movie_id}")
+    public ResponseEntity<Void> deleteOneMovieToWatch(@PathVariable("user_id") Integer userId, @PathVariable("movie_id") Integer movieId) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new NoSuchElementException("User not found"));
+        Movie movie = movieRepository.findById(movieId)
+            .orElseThrow(() -> new NoSuchElementException("Movie not found"));
+        LocalDateTime now = LocalDateTime.now();
+        MoviesToWatch movieToWatch = new MoviesToWatch(user, movie, "", now, now);
+        moviesToWatchRepository.delete(movieToWatch);
+        return ResponseEntity.noContent().build();
     }
 }

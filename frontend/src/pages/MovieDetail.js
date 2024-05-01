@@ -9,6 +9,7 @@ import useFetchMovieCredits from '../hooks/useFetchMovieCredits';
 
 function MovieDetail() {
   const { id } = useParams();
+  localStorage.setItem('movieTmdb', id);
   const movie = useFetchMovie(id);
   const credits = useFetchMovieCredits(id);
   const [selectedTab, setSelectedTab] = useState('Reviews');

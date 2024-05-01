@@ -3,12 +3,105 @@ import './MovieInfo.css';
 import noImageAvailable from '../media/noImageAvailable.png';
 import { Link } from 'react-router-dom';
 import usePostMovie from '../hooks/usePostMovie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as regularStar} from '@fortawesome/free-regular-svg-icons';
+import { faEye as solidEye } from '@fortawesome/free-solid-svg-icons';
+import { faEye as regularEye} from '@fortawesome/free-regular-svg-icons';
+import { faVideo as solidVideo } from '@fortawesome/free-solid-svg-icons';
+import { faVideoSlash as regularVideo } from '@fortawesome/free-solid-svg-icons';
+
 
 function MovieInfo({ movie }) {
     const releaseDate = movie.release_date.split('-').reverse().join('/');
     const movieId = localStorage.getItem('movieId');
     const userId = localStorage.getItem('userId');
     const [note, setNote] = useState('');
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [isToWatch, setIsToWatch] = useState(false);
+    const [isWatched, setIsWatched] = useState(false);
+
+      const fetchLists = async () => {
+        const favoritesResponse = await fetch(`http://localhost:8080/favorites/${userId}/${movieId}`);
+        const toWatchResponse = await fetch(`http://localhost:8080/movies_to_watch/${userId}/${movieId}`);
+        const watchedResponse = await fetch(`http://localhost:8080/movies_watched/${userId}/${movieId}`);
+    
+        const favoritesData = await favoritesResponse.json();
+        const toWatchData = await toWatchResponse.json();
+        const watchedData = await watchedResponse.json();
+    
+        setIsFavorite(favoritesData.length > 0);
+        setIsToWatch(toWatchData.length > 0);
+        setIsWatched(watchedData.length > 0);
+    };
+    
+    const handleFavoriteClick = async () => {
+      const wasFavorite = isFavorite;
+      setIsFavorite(!wasFavorite);
+  
+      try {
+          if (wasFavorite) {
+              await removeFavoriteMovie();
+          } else {
+              await postMovie();
+          }
+          await fetchLists();
+      } catch (error) {
+          console.error(error);
+          setIsFavorite(wasFavorite);
+      }
+    };
+    
+    const handleWatchedClick = async () => {
+        if (isWatched) {
+            await removeWatchedMovie();
+        } else {
+            await postWatched(note);
+        }
+        setNote('');
+        fetchLists();
+    };
+    
+    const handleToWatchClick = async () => {
+        if (isToWatch) {
+            await removeToWatchMovie();
+        } else {
+            await postToWatch(note);
+        }
+        setNote('');
+        fetchLists();
+    };
+
+    const removeFavoriteMovie = async () => {
+      const response = await fetch(`http://localhost:8080/favorites/${userId}/${movieId}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to remove movie from favorites');
+        }
+    };
+    
+    const removeWatchedMovie = async () => {
+        const response = await fetch(`http://localhost:8080/movies_watched/${userId}/${movieId}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to remove movie from watched list');
+        }
+    };
+    
+    const removeToWatchMovie = async () => {
+        const response = await fetch(`http://localhost:8080/movies_to_watch/${userId}/${movieId}`, {
+            method: 'DELETE',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to remove movie from to watch list');
+        }
+    };
+
+    useEffect(() => {
+      fetchLists();
+    }, [userId, movieId]);
 
     useEffect(() => {
         if (movie) {
@@ -41,7 +134,7 @@ function MovieInfo({ movie }) {
         const movieData = {
           movieId: parseInt(movieId),
           userId: parseInt(userId),
-          note: note
+          note: "note"
         };
       
         fetch('http://localhost:8080/movies_watched', {
@@ -60,7 +153,7 @@ function MovieInfo({ movie }) {
         const movieData = {
           movieId: parseInt(movieId),
           userId: parseInt(userId),
-          note: note
+          note: "note"
         };
       
         fetch('http://localhost:8080/movies_to_watch', {
@@ -98,10 +191,15 @@ function MovieInfo({ movie }) {
                 <div className="movie-container-rating">
                     <p><b>Arvosana: </b>{movie.vote_average} ({movie.vote_count} ääntä)</p>
                     <p></p>
-                    <input type="text" value={note} onChange={e => setNote(e.target.value)} />
-                    <button onClick={postMovie}>Lisää Suosikiksi</button>
-                    <button onClick={() => { postWatched(note); setNote(''); }}>Lisää katsotuksi</button>
-                    <button onClick={() => { postToWatch(note); setNote(''); }}>Lisää katsottaviin</button>
+                    <button className="FAbutton" onClick={handleFavoriteClick}>
+                        <FontAwesomeIcon icon={isFavorite ? solidStar : regularStar} />
+                    </button>
+                    <button className="FAbutton" onClick={handleWatchedClick}>
+                        <FontAwesomeIcon icon={isWatched ? solidEye : regularEye} />
+                    </button>
+                    <button className="FAbutton" onClick={handleToWatchClick}>
+                        <FontAwesomeIcon icon={isToWatch ? solidVideo : regularVideo} />
+                    </button>
                 </div>
             </div>
         </div>

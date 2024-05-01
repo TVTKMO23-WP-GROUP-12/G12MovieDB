@@ -67,12 +67,20 @@ public class ReviewController {
     
     @CrossOrigin(origins = "*")
     @GetMapping("/review/user={user_id}")
-    public List<Review> findReviewsByUserId(@PathVariable("user_id") Integer userId) {
+    public ResponseEntity<List<Map<String, Object>>> findReviewsByUserId(@PathVariable("user_id") Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
-            return reviewRepository.findByUserId(userId);
+            List<Review> reviews = reviewRepository.findByUserId(userId);
+            List<Map<String, Object>> responseList = new ArrayList<>();
+            for (Review review : reviews) {
+                Map<String, Object> response = new HashMap<>();
+                response.put("review", review);
+                response.put("movie", review.getMovie()); // get the Movie from the Review
+                responseList.add(response);
+            }
+            return ResponseEntity.ok(responseList);
         } else {
-            return Collections.emptyList();
+            return ResponseEntity.notFound().build();
         }
     }
     
@@ -109,40 +117,43 @@ public class ReviewController {
 
     @CrossOrigin(origins = "*")
     @PostMapping("/review")
-    public Review addOneReview(@RequestBody Review review) {
-        // Save the MovieScore to the database
-        MovieScore movieScore = review.getMovieScore();
-        movieScoreRepository.save(movieScore);
-        // Update the MovieScore in the Review
-        review.setMovieScoreId(movieScore);
-        // Save the Review to the database
+    public Review addOneReview(@RequestBody Map<String, Object> reviewData) {
+        // Extract data from the request body
+        Map<String, Object> movieData = (Map<String, Object>) reviewData.get("movie");
+        Map<String, Object> movieScoreData = (Map<String, Object>) reviewData.get("movieScore");
+        String content = (String) reviewData.get("content");
+        Integer userId = (Integer) reviewData.get("user");
+        Movie movie = new Movie();
+            movie.setId((Integer) movieData.get("id"));
+            movie.setTmdbId((Integer) movieData.get("tmdbId"));
+            movie.setTitle((String) movieData.get("title"));
+            movieRepository.save(movie);
+        MovieScore movieScore = new MovieScore();
+            movieScore.setScore((Integer) movieScoreData.get("score"));
+            movieScore.setMovie(movie); 
+            movieScoreRepository.save(movieScore);
+        Review review = new Review();
+            review.setMovie(movie);
+            review.setMovieScoreId(movieScore);
+            review.setContent(content);
+            review.setUserId(userId);
         return reviewRepository.save(review);
     }
-    
 
+    @CrossOrigin(origins = "*")
     @PatchMapping("/review/{review_id}")
-    public Review updateOneReview(@PathVariable Integer reviewId, @RequestBody Map<String, Object> updates) {
+    public Review updateOneReview(@PathVariable("review_id") Integer reviewId, @RequestBody Map<String, Object> updates) {
         Review review = this.reviewRepository.findById(reviewId).orElse(null);
-        if (review != null) {
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "review_id":
-                        review.setReviewId((Integer) value);
-                        break;
-                    case "content":
-                        review.setContent((String) value);
-                        break;
-                    case "user_id":
-                        review.setUserId((Integer) value);
-                        break; // Add break statement here
-                    default:
-                        break;
-                }
-            });
-            return this.reviewRepository.save(review);
-        } else {
+        if (review == null) {
             return null;
         }
+        String content = (String) updates.get("content");
+        Map<String, Object> movieScoreData = (Map<String, Object>) updates.get("movieScore");
+        MovieScore movieScore = review.getMovieScore();
+        movieScore.setScore((Integer) movieScoreData.get("score"));
+        movieScoreRepository.save(movieScore);
+        review.setContent(content);
+        return reviewRepository.save(review);
     }
 
 

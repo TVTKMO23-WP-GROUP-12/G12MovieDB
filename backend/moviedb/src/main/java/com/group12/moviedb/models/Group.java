@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -23,7 +24,8 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="group_id")
     private Integer id;
-
+    
+    @JsonBackReference
     @OneToMany(mappedBy="group", cascade = CascadeType.ALL)
     private List<GroupMembers> groupMembers;
 

@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
+import useFetchGroups from '../hooks/useFetchGroups';
 
 // On: 
 // - UserDetail
 
-const Groups = ({ }) => {
-  const user = localStorage.getItem('userId');
-  const groups = user.groups;
+const Groups = ({ id }) => {
+  const groups= useFetchGroups(id);
 
   if (!groups) {
     return <div>Loading...</div>;
@@ -17,10 +17,10 @@ const Groups = ({ }) => {
       <ul>
         {groups.map(group => (  
         <div key={group.groupId}>
-          <p>
-            <Link to={`/public/group/${group.groupId}`}>{group.groupName}</Link>
-          </p>
-          <p>{group.groupDescription}</p>
+          <h3>
+            <Link to={`/public/group/${group.group.id}`}>{group.group.groupName}</Link>
+          </h3>
+          <p>{group.group.groupDescription}</p>
           <hr></hr>
         </div>
       ))}

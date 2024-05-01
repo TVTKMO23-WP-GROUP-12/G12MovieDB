@@ -24,6 +24,7 @@
 .user-tabs-content p{
   margin-top: 5px; 
   margin-bottom: 10px;
+  
 }
 
 .user-tabs-content h1{
@@ -96,6 +97,20 @@
 
 .active {
   background-color: var(--primary-color); 
+}
+
+.review-image img{
+  width: 100px;
+  margin-right: 20px;
+}
+
+.review-content p{
+  margin-top: 5px; 
+  margin-bottom: 10px;
+}
+
+.review-content h3{
+  text-transform: uppercase;
 }
 
 @media (max-width: 800px) {

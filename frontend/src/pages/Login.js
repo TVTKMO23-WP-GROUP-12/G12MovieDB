@@ -37,7 +37,7 @@ function LoginPage() {
       // Reset error message and redirect user
       setError('');
       console.log('Login successful');
-         history(`/user/${userId}`); // Redirect to user page after successful login  
+         history(`/`); // Redirect to user page after successful login  
     } catch (error) {
       setError('Invalid username or password');
       console.error('Login failed:', error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './UserDetail.css';
 import { Link, useParams } from 'react-router-dom';
 import Reviews from '../components/Reviews';
@@ -13,31 +13,21 @@ import useFetchUser from '../hooks/useFetchUser';
 import useFetchWatched from '../hooks/useFetchWatched';
 import useFetchToWatch from '../hooks/useFetchToWatch';
 import useIsMobile from '../hooks/useIsMobile';
+import useFetchMovie from '../hooks/useFetchMovie';
 
 function UserDetail() {
   const { id } = useParams();
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const userDetails = useFetchUser(id, setUser);
-  const reviews = useFetchReviews(id);
-  const favorites = useFetchFavorites(id);
-  const watchedMovies = useFetchWatched(id);
-  const toWatchMovies = useFetchToWatch(id);
+  const { user, profilePicture } = useFetchUser(id);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState('News');
   const [selectedTabLeft, setSelectedTabLeft] = useState('News');
   const [selectedTabRight, setSelectedTabRight] = useState('Reviews');
   const isMobile = useIsMobile();
+ localStorage.setItem('userGroup', id);
 
-  useEffect(() => {
-    if (userDetails && reviews && favorites && watchedMovies && toWatchMovies) {
-      setLoading(false);
-    }
-  }, [userDetails, reviews, favorites, watchedMovies, toWatchMovies]);
-
-
-  return user ? (
+  return user ?  (
     <div>  
-        <User />
+          <User user={user} profilePicture={profilePicture} />
     <div className="user-tabs-container">
     <div className="user-tabs-left">
           <Link className={isMobile ? (selectedTab === 'News' ? 'active' : '') : (selectedTabLeft === 'News' ? 'active' : '')} onClick={() => isMobile ? setSelectedTab('News') : setSelectedTabLeft('News')}><p>Uutiset</p></Link>
@@ -74,13 +64,13 @@ function UserDetail() {
           //Fetch a list of groups the user is a member of and display them.
           }
           {selectedTab === 'Groups' && (
-            <Groups />
+            <Groups id={id}/>
           )}
           {
           //call the Favorites component and pass the userId as a prop
           }
           {selectedTab === 'Favorites' && (
-            <Favorites favorites={favorites} />
+            <Favorites id={id}/>
           )}
           {
           //call the Reviews component and pass the userId as a prop
@@ -123,7 +113,7 @@ function UserDetail() {
           //Fetch a list of groups that the user is in and displays them.
           }
           {selectedTabLeft === 'Groups' && (
-            <Groups user={user}/>
+            <Groups id={id}/>
           )}
           {
           //call the Favorites component and pass the userId as a prop
@@ -161,7 +151,7 @@ function UserDetail() {
       </div>
     </div>
   ) : (
-    <div>Loading...</div>
+    <div>Loading... </div>
   );
 }
 

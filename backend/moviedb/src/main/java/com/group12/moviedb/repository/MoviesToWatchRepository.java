@@ -17,5 +17,5 @@ public interface MoviesToWatchRepository extends JpaRepository<MoviesToWatch, Mo
     List<MoviesToWatch> findByUserAndMovie(User user, Movie movie);
     void deleteByUser(User user);
     void deleteByMovie(Movie movie);
-    void deleteByUserAndMovie(User user, Movie movie);
+    void deleteByUserAndMovie(User user, Movie movie);  
 }

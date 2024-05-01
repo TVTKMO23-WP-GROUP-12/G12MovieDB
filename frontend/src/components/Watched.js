@@ -6,25 +6,27 @@ import useFetchWatched from '../hooks/useFetchWatched';
 
 const Watched = ({ id }) => {
   const watchedMovie = useFetchWatched(id);
-
+  
   return (
     <div className="user-tabs-content">
       <h2>On katsonut</h2>
-      {watchedMovie.map((watchedMovie, index) => (
-        <div key={index}>
-          <p>
-            <Link to={`/movie/${watchedMovie.movieId.id}`}>
-              {watchedMovie.movieId.title}
-            </Link>
-          </p>
-          <div className="note">
-            <span className="note-heading">Muistiinpano:</span>
-            <p>{watchedMovie.note}</p>
-          </div>
-          <hr></hr>
-          </div>
-      ))}
-    </div>
+        <ul>
+          {watchedMovie.map((watchedMovie, index) => (
+            <div key={index} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <div className="review-image">
+                <img src={`https://image.tmdb.org/t/p/w500/${watchedMovie.poster_path}`} alt={watchedMovie.movie.title} />
+              </div>
+              <div className="review-content">
+                <h3>
+                  <Link to={`/public/movie/${watchedMovie.movie.tmdbId}`}>
+                    {watchedMovie.movie.title}
+                  </Link>
+                </h3>
+              </div>
+            </div>
+          ))}
+        </ul>
+      </div>
   );
 }
 

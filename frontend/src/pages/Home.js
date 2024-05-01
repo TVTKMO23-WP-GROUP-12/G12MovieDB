@@ -4,8 +4,12 @@ import GroupsMenu from '../components/GroupsMenu';
 import Upcoming from '../components/Upcoming';
 import TopRated from '../components/TopRated';
 import Popular from '../components/Popular';
+import useFetchUserId from '../hooks/useFetchUserId';
 
 export default function Home() {
+  const { username } = useFetchUserId(localStorage.getItem('username'));
+  useFetchUserId(username);
+
   return (
     <div className="home-container">
       <div className="sidebar">

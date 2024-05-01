@@ -80,34 +80,14 @@ public class UserController {
     
     @CrossOrigin(origins = "*")
     @PatchMapping("/users/{user_id}")
-    public ResponseEntity<?> updateOneUser(@PathVariable Integer userId, @RequestBody Map<String, Object> updates) {
-        try {
-            Optional<User> optionalUser = this.userRepository.findById(userId);
-            if (optionalUser.isPresent()) {
-                User user = optionalUser.get();
-                updates.forEach((key, value) -> {
-                    switch (key) {
-                        case "username":
-                            user.setUsername((String) value);
-                            break;
-                        case "email":
-                            user.setEmail((String) value);
-                            break;
-                        case "password":
-                            user.setPassword((String) value);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-                return ResponseEntity.ok(this.userRepository.save(user));
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("An error occurred while updating the user.");
+    public User updateOneUser(@PathVariable("user_id") Integer userId, @RequestBody Map<String, Object> updates) {
+        User user = this.userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return null;
         }
+        String userDescription = (String) updates.get("description");
+        user.setUserDescription(userDescription);
+        return userRepository.save(user);
     }
     
 
