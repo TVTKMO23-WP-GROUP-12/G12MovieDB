@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
 import DeleteUser from '../components/DeleteUser';
+import ShareUser from '../components/ShareUser';
 
 
 function User({ user, profilePicture }) {
@@ -64,6 +65,7 @@ function User({ user, profilePicture }) {
               value={editedDescription}
               onChange={e => setEditedDescription(e.target.value)} 
             />
+            
             <button onClick={() => {
               setIsEditing(false);
               submitDescription();
@@ -76,9 +78,11 @@ function User({ user, profilePicture }) {
             setEditedDescription(user.userDescription);
           }}>Muokkaa</button>
         )}
+        <ShareUser userId={userId} />
         <DeleteUser userId={userId}/>
         <button onClick={handleAddGroup}>Lisää uusi ryhmä</button>
       </div>
+   
     </div>
   );
 }
