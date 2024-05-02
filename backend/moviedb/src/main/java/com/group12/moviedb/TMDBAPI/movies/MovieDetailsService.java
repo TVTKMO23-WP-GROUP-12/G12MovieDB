@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 public class MovieDetailsService {
     private final OkHttpClient client = new OkHttpClient();
 
-    public String getMovieDetails(String movieId) {
+    public String getMovieDetails(Integer tmdbId) {
         String apiKey = ApiKeyReader.readApiKey();
 
         Request request = new Request.Builder()
-            .url("https://api.themoviedb.org/3/movie/" + movieId + "?language=fi-FI")
+            .url("https://api.themoviedb.org/3/movie/" + tmdbId + "?language=fi-FI")
             .get()
             .addHeader("accept", "application/json")
             .addHeader("Authorization", "Bearer " + apiKey)
@@ -29,5 +29,10 @@ public class MovieDetailsService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getMovieDetails(String tmdbId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getMovieDetails'");
     }
 }

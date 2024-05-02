@@ -17,6 +17,7 @@ import NotFound from './pages/NotFound';
 import ReactDOM from 'react-dom'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import CreateGroupComponent from './components/CreateGroup';
 
 library.add(fas)
 console.log(localStorage.getItem('userId'));
@@ -35,7 +36,9 @@ function App() {
         <Route path='/public/movie/:id' element={<MovieDetail />} />
         <Route path='/public/movie' element={<Movie />} />
         <Route path='/public/showtimes' element={<Showtimes />} />
+        <Route path='/add-new-group' element={<CreateGroupComponent/>} />
         <Route path='*' element={<NotFound />} />
+
       </Routes>
     </Layout>
   );

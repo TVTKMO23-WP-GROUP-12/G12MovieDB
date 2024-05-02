@@ -47,7 +47,7 @@ public class MovieController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/public/tmdb/{tmdbId}")
-    public String getMovieDetails(@PathVariable("tmdbId") String tmdbId) {
+    public String getMovieDetails(@PathVariable("tmdbId") Integer tmdbId) {
         return movieDetailsService.getMovieDetails(tmdbId);
     }
 

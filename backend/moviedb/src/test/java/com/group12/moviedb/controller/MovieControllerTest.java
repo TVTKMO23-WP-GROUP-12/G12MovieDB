@@ -144,24 +144,21 @@ public class MovieControllerTest {
         assertEquals(tmdbId, retrievedMovieOptional.get().getId());
     }
 
-    
-
     @Test
     void testShouldSuccessfullyGetMovieCredits() {
-        // Given
-        Integer tmdbId = 123;
-        Integer credits = 10;
-    
-        when(movieCreditsService.getMovieCredits(tmdbId)).thenReturn(credits);
-    
-        // When
-        Integer retrievedCredits = movieCreditsService.getMovieCredits(tmdbId);
-    
-        // Then
-        assertNotNull(retrievedCredits);
-        assertEquals(credits, retrievedCredits);
-    }
+    // Given
+    String tmdbId = "123";
+    String credits = "credits";
 
+    // Mock the movieCreditsService to return the expected credits when called with tmdbId
+    when(movieCreditsService.getMovieCredits(tmdbId)).thenReturn(credits);
+
+    // When
+    String retrievedCredits = movieCreditsService.getMovieCredits(tmdbId);
+
+    // Then
+    assertEquals(credits, retrievedCredits);
+}
 
     @Test
     void testShouldSuccessfullyGetMovieDetails() {
@@ -169,13 +166,13 @@ public class MovieControllerTest {
         Integer tmdbId = 123;
         String details = "details";
     
+        // Mock the movieDetailsService to return the expected details when called with tmdbId
         when(movieDetailsService.getMovieDetails(tmdbId)).thenReturn(details);
     
         // When
         String retrievedDetails = movieDetailsService.getMovieDetails(tmdbId);
     
         // Then
-        assertNotNull(retrievedDetails);
         assertEquals(details, retrievedDetails);
     }
 

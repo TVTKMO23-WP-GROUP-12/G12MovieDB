@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import useFetchUser from '../hooks/useFetchUser';
 import './User.css';
+import DeleteUser from '../components/DeleteUser';
+
 
 function User({ user, profilePicture }) {
   const userId = localStorage.getItem('userId');
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
   const [userData, setUserData] = useState ('');
+
   const joinedAt = user ? new Date(user.createdAt) : null;
   const formattedDate = joinedAt ? `${("0" + joinedAt.getDate()).slice(-2)}.${("0" + (joinedAt.getMonth() + 1)).slice(-2)}.${joinedAt.getFullYear()}` : '';
+
 
 
   // Update the user description
@@ -31,6 +35,11 @@ function User({ user, profilePicture }) {
     .catch(error => console.error('Error:', error));
   };
 
+    // Handle adding a new group
+    const handleAddGroup = () => {
+      window.location.href = '/add-new-group';
+    };
+  
   return (
     <div className="userdetail-container">
       <div className="user-info">
@@ -67,6 +76,8 @@ function User({ user, profilePicture }) {
             setEditedDescription(user.userDescription);
           }}>Muokkaa</button>
         )}
+        <DeleteUser userId={userId}/>
+        <button onClick={handleAddGroup}>Lisää uusi ryhmä</button>
       </div>
     </div>
   );
