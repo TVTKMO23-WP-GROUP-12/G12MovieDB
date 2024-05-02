@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const GroupDetailTop = ({ group }) => {
+const GroupDetailTop = ({ group, userId, memberId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
 
@@ -19,10 +19,20 @@ const GroupDetailTop = ({ group }) => {
       .then(response => response.json())
       .then(data => {
         group.groupDescription = data.groupDescription;
-        // Clear the editedDescription state
         setEditedDescription("");
       })
       .catch(error => console.error('Error:', error));
+  };
+
+  // Function to handle joining or leaving the group
+  const handleJoinLeaveGroup = () => { 
+    if (userId === memberId) {
+      // Leave group
+      console.log('Leave group');
+    } else {
+      // Join group
+      console.log('Join group');
+    }
   };
 
   return (
@@ -34,27 +44,26 @@ const GroupDetailTop = ({ group }) => {
       <div></div>
       <div className="groupdetail-bio">
         <h2><Link to={`/group/${group.id}`}>{group.groupName}</Link></h2>
-        {
-        // Get the admin of the group and add a [ADMIN] tag after their name
-        }
         <div className="groupdetail-admin">
-          {Array.isArray(group.members) && group.members.map(member => { 
-            if (member.isAdmin) {
-              return (
-                <React.Fragment key={member.userId.userId}>
-                  <p>
-                    Admin: <Link to={`/users/${member.userId.userId}`}>{member.userId.username}</Link>
-                  </p>
-                  {/* Below finished link when useAuth is implemented. Remove comment and curly brackets to use
-                  <Link to="#" onClick={handleJoinLeaveGroup}>{isMember ? 'Poistu ryhmästä' : 'Liity ryhmään'}</Link>
-                  */} 
-                </React.Fragment>
-              );
-            }      
-            return null;
-          })}
+          {Array.isArray(group.members) && group.members.map(member => (
+            member.isAdmin && (
+              <React.Fragment key={member.userId.userId}>
+                <p>
+                  Admin: <Link to={`/users/${member.userId.userId}`}>{member.userId.username}</Link>
+                </p>
+                {/* Conditional rendering for join/leave link */}
+                {userId && memberId ? (
+                  userId === memberId ? (
+                    <Link to="#" onClick={handleJoinLeaveGroup}>Poistu ryhmästä</Link>
+                  ) : (
+                    <Link to="#" onClick={handleJoinLeaveGroup}>Liity ryhmään</Link>
+                  )
+                ) : null}
+              </React.Fragment>
+            )
+          ))}
         </div>
-        <div className= "groupdetail-update-description">
+        <div className="groupdetail-update-description">
           {isEditing ? (
             <>
               <input

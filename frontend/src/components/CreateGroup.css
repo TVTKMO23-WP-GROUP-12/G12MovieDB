@@ -1,0 +1,54 @@
+/* CSS */
+.groupAdd {
+    top: 50%;
+    left: 50%;
+    margin: 0 auto;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 800px;
+  }
+h2 {
+    color: white;
+    padding-bottom: 10px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 600px;
+}
+   
+label {
+    color: white;
+    font-weight: bold;
+    display: block;
+    width: 150px;
+    float: left;
+    padding: 5px;
+    }
+    label:after { content: ": " }
+   
+input {
+    width:100%;
+    border: 5px solid #95bf47;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+button {
+    padding: var(--gutter-tiny) var(--gutter-small) var(--gutter-tiny) var(--gutter-small);
+    margin-right: var(--gutter-small);
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--button-text-color);
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    width: 100%;
+    margin-top: 12px; 
+    }
+    
+  

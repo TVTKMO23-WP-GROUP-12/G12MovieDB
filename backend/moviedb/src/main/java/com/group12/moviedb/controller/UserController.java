@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -93,7 +93,7 @@ public class UserController {
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("/users/{user_id}")
-      public void deleteUser(@PathVariable Integer userId) {
+      public void deleteUser(@PathVariable("user_id") Integer userId) {
       userService.deleteUser(userId);
   }
 }

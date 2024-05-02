@@ -10,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +54,7 @@ public class GroupController {
     
     @CrossOrigin(origins = "*")
     @PostMapping("/group")
-    public Group addOneGroup(@RequestBody Group group, @RequestParam("userId") Integer userId) {
+    public Group addOneGroup(@ModelAttribute Group group, @RequestParam("userId") Integer userId) {
         group.setCreatedAt(LocalDateTime.now());
         group.setUpdatedAt(LocalDateTime.now());
         User user = userRepository.findById(userId)
@@ -85,6 +87,7 @@ public class GroupController {
         group.setUpdatedAt(LocalDateTime.now());
         return this.groupRepository.save(group);
     }
+
 
     @CrossOrigin(origins = "*")
     @DeleteMapping("group/{group_id}")

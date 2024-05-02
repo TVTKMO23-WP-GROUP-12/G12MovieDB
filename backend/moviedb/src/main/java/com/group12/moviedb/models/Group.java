@@ -86,6 +86,7 @@ public class Group {
         return this.user;
     }
 
+
     public void setGroupId(Integer groupId) {
         this.id = groupId;
     }

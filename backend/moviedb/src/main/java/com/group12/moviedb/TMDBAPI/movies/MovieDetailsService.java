@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class MovieDetailsService {
     private final OkHttpClient client = new OkHttpClient();
 
-    public String getMovieDetails(String movieId) {
+    public String getMovieDetails(Integer movieId) {
         String apiKey = ApiKeyReader.readApiKey();
 
         Request request = new Request.Builder()

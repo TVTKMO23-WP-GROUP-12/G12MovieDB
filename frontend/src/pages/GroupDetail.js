@@ -17,10 +17,11 @@ function GroupDetail() {
   const [reviews, setReviews] = useState([]);
   const isMobile = useIsMobile();
 
-  //const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
+  const [isMember, setIsMember] = useState(false); //This is for checking if one is already a member of a group
   //const { id: groupId } = useParams(); // get group ID from URL parameter
   //const { user: { id: userId } } = useAuth();// get user ID from auth context
-
+  const [memberId, setMemberId] = useState(null);
+  const [groupId, setgroupId] = useState(null);
   // Fetch group members and their reviews
 
   useEffect(() => {
@@ -56,20 +57,25 @@ function GroupDetail() {
   useEffect(() => {
     console.log(group.groupMembers);  // Log the groupMembers property of the group state
   }, [group]);  // This useEffect hook will run whenever `group` changes
-
-  /* commented out because the useAuth hook is not yet implemented
   useEffect(() => {
     // Check if the user is a member of the group
+    const userId = localStorage.getItem('userId');
     fetch(`http://localhost:8080/group/members/user=${userId}`)
       .then(response => response.json())
       .then(memberships => {
-        const isMember = memberships.some(membership => membership.group.id === id);
+        const isMember = memberships.some(membership => membership.group.id === userId);
         setIsMember(isMember);
       })
       .catch(error => console.error('Error:', error));
-  }, [userId, id]);
+  }, []);
 
 const handleJoinLeaveGroup = () => {
+  const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
+
+  if (!userId) {
+    console.error('User ID not found in localStorage');
+    return;
+  }
   if (isMember) {
     // Leave group
     fetch(`http://localhost:8080/group/members/${memberId}`, {
@@ -78,7 +84,8 @@ const handleJoinLeaveGroup = () => {
       .then(() => setIsMember(false))
       .catch(error => console.error('Error:', error));
   } else {
-    // Join group
+    //Join group
+    if(groupId && userId) {
     fetch('http://localhost:8080/group/members', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -88,8 +95,9 @@ const handleJoinLeaveGroup = () => {
       .then(() => setIsMember(true))
       .catch(error => console.error('Error:', error));
   }
+}
 };
-  */
+  
 
   //Main content of the page
   return group ? (
