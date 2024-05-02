@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import DeleteMember from '../components/DeleteMember';
+
+
 
 const GroupDetailTop = ({ group, userId, memberId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedDescription, setEditedDescription] = useState('');
+
 
   // Function to update the group description
   const submitDescription = () => {
@@ -40,6 +44,7 @@ const GroupDetailTop = ({ group, userId, memberId }) => {
       <div className="groupdetail-picture">
         <img src={group.groupPicture} alt="Profile" />
         <Link><p className='groupdetail-join-button'>Liity Ryhmään</p></Link>
+        {memberId && <DeleteMember memberId={memberId} />}
       </div>
       <div></div>
       <div className="groupdetail-bio">

@@ -163,7 +163,7 @@ public class MovieControllerTest {
     @Test
     void testShouldSuccessfullyGetMovieDetails() {
         // Given
-        String tmdbId = "123";
+        Integer tmdbId = 123;
         String details = "details";
     
         // Mock the movieDetailsService to return the expected details when called with tmdbId
