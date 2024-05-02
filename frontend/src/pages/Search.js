@@ -226,7 +226,7 @@ export default function Search() {
                       <div className="info">
                         <span>Nimi: {movie.title}</span>
                         <span>Kieli: {translateLanguage(movie.original_language)}</span>
-                        <span>Julkaistu: {formatDate(movie.release_date)}</span>
+                        {movie.release_date === "" ? <span>Julkaistu: Ei tiedossa</span> : <span>Julkaistu: {formatDate(movie.release_date)}</span>}
                         {movie.vote_count === 0 ? <span>Arvosana: Ei arvosteluja</span> : <span>Arvosana: {formatRating(movie.vote_average)}/10</span>}
                       </div>
                     </div>
