@@ -9,6 +9,7 @@
 	- [Tietokanta](#tietokanta) 
 	- [TMDB API](#tmdb_api) 
 - [Sovelluksen rakenne](#sovellus)
+- [Lisenssi](#lisenssi)
 - [Lähteet](#lähteet)
 
 ## <a name ="jasenet"></a> Ryhmän jäsenet
@@ -84,7 +85,7 @@ TMDB:n rajapinnasta haetaan sovellukseen muun muassa elokuvien ja tv-sarjojen ti
 Web-sovellus koostuu kotisivusta (kuva 2) sekä useista sen alasivuista. Sovelluksen eri osiot ovat näkyvissä riippuen siitä, että onko käyttäjä kirjautunut vai ei. Lisäksi sovellus on responsiivinen, eli se skaalautuu tietokoneen näytöltä erikokoisille kädessä pidettäville laitteille.
 
 ![KUVA 2. Kotisivu.](https://github.com/TVTKMO23-WP-GROUP-12/G12MovieDB/blob/main/documents/Homepage.png?raw=true)
-KUVA 2. Kotisivu.
+*KUVA 2. Kotisivu.*
 
 
 ### Julkiset sivut:
@@ -98,14 +99,14 @@ Näytösajat-sivu (kuva 3) tarjoaa käyttäjille mahdollisuuden tutustua Finnkin
 XML-tietojen käsittelyyn ja parsimiseen käytämme selaimen `DOMParser`-objektia, joka mahdollistaa XML-dokumenttien tehokkaan käsittelyn ja datan uuttamisen tarpeidemme mukaisesti. Tämä toiminnallisuus tarjoaa käyttäjillemme pääsyn ajankohtaisiin tietoihin elokuvanäytöksistä, teatterien sijainneista ja elokuvien genreistä suoraan Finnkinon tietokannoista (Finnkino Oy, 2024). Tämä parantaa merkittävästi sovelluksemme käyttäjäkokemusta.
 
 ![KUVA 3. Näytösajat-sivu.](https://github.com/TVTKMO23-WP-GROUP-12/G12MovieDB/blob/main/documents/Showtimes%20page.png?raw=true)
-KUVA 3. Näytösajat-sivu.
+*KUVA 3. Näytösajat-sivu.*
 
 #### Hakuportaali
 
 Hakuportaali-sivulla (kuva 4) käyttäjät voivat etsiä eri elokuvia ja TV-sarjoja. Käyttäjät voivat suodattaa hakutuloksia arvosanan, genrejen tai julkaisuvuoden perusteella löytääkseen kiinnostavaa sisältöä.
 
 ![KUVA 4. Hakuportaali-sivu.](https://github.com/TVTKMO23-WP-GROUP-12/G12MovieDB/blob/main/documents/Searchportal%20page.png?raw=true)
-KUVA 4. Hakuportaali-sivu.
+*KUVA 4. Hakuportaali-sivu.*
 
 #### Elokuva-sivu (uloskirjautunut käyttäjä)
 
@@ -133,19 +134,38 @@ Rekisteröityminen ja kirjautuminen sovellukseen avaa käyttäjälle tiettyjä l
 Kaikille avointen ominaisuuksien lisäksi kirjautuneelle käyttäjälle avautuu muutamia lisäominaisuuksia elokuvasivulle. Kirjautunut käyttäjä voi lisätä elokuvia ja TV-sarjoja omiksi suosikeikseen sekä katsottujen listalle ja katsottavien listalle. Kirjautunut käyttäjä voi myös kirjoittaa omia arvosteluitaan elokuvan ja TV-sarjan yhteyteen. Kuvassa 5 näkyy kaikki kirjautuneelle käyttäjälle avoimet ominaisuudet.
 
 ![KUVA 5. Elokuvasivu (kirjautunut käyttäjä).](https://github.com/TVTKMO23-WP-GROUP-12/G12MovieDB/blob/main/documents/Movie%20page.png?raw=true)
-KUVA 5. Elokuvasivu (kirjautunut käyttäjä).
+*KUVA 5. Elokuvasivu (kirjautunut käyttäjä)*.
 
 #### Ryhmäsivu (kirjautunut käyttäjä)
 
 Ryhmäsivulla (kuva 6) kirjautunut käyttäjä näkee koko ryhmän oman näkymän. Käyttöliittymässä on helppokäyttöiset välilehdet, joiden avulla voi selata ryhmän uutisia, jäsenlistoja, jaettua sisältöä, elokuvasuosituksia, ryhmäläisten elokuva-arvosteluja sekä tietoja Finnkinon elokuvanäytöksistä. Käyttäjä voi jakaa oman suosikkilistansa ryhmäsivulle, jolloin se tulee näkyviin ryhmän jaetut-osioon.
 
 ![KUVA 6. Ryhmäsivu (kirjautunut käyttäjä).](https://github.com/TVTKMO23-WP-GROUP-12/G12MovieDB/blob/main/documents/Group%20page.png?raw=true)
-KUVA 6. Ryhmäsivu (kirjautunut käyttäjä).
+*KUVA 6. Ryhmäsivu (kirjautunut käyttäjä).*
 
 #### Oma sivu
 
 Rekisteröitynyt käyttäjä saa oman sivun, jonne hän voi lisätä eri sisältöä. Oman sivun välilehdillä käyttäjälle näkyy uutiset, omat ryhmät ja omat arvostelut. Näiden lisäksi käyttäjälle näkyy myös omat suosikit sekä omat katsotut ja katsottavat elokuvat ja TV-sarjat. Käyttäjä voi muokata omaa profiiliaan haluamakseen vaihtamalla profiilikuvan ja luomalla kuvauksen.
 
+## <a name ="lisenssi"></a> Lisenssi
+
+Lisenssinä käytämme MIT-lisenssiä, jolla käyttäjä saa vapaat oikeudet muokata, kopioida ja käyttää teosta omassa projektissaan. Ehtona käytölle on, että lisenssin teksti säilyy lähdekoodissa. Lisenssi on kirjoitettu englanniksi, jotta kansainvälisetkään käyttäjät eivät tee virhetulkintoja sen sisällössä.
+
+```
+Copyright (c) 2024 Pasi Honka, Henri Laukka, Lari Lepistö & Sanna Mäki
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
 
 ## <a name ="lähteet"></a> Lähteet
 Finnkino Oy 2024. XML Services. Hakupäivä 27.4.2024. https://www.finnkino.fi/xml.
